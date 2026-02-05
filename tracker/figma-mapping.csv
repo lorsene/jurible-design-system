@@ -1,0 +1,73 @@
+Nom Figma actuel,Nouveau nom (ID),Catégorie,Dossier cible,Node ID Figma,Action
+⚫ TOKEN (foundations),—— SEPARATEUR ——,Séparateur,—,6935:528,Conserver tel quel
+Colors 🎨,T01-colors,Token,01-tokens,6342:442,Renommer
+Spacing ☄️,T02-spacing,Token,01-tokens,6362:1983,Renommer
+Typography ✒️,T03-typography,Token,01-tokens,6342:17848,Renommer
+Foundation,T04-foundation,Token,01-tokens,6920:357,Renommer
+Shadows 👻,T05-shadows,Token,01-tokens,6350:91,Renommer
+Medias,T06-medias,Token,01-tokens,6951:1878,Renommer
+⚫ ATOMS (composants de base),—— SEPARATEUR ——,Séparateur,—,6935:570,Conserver tel quel
+Divider,A01-divider,Atom,02-atoms,6974:3695,Renommer
+Buttons 🔘,A02-buttons,Atom,02-atoms,6350:16657,Renommer
+Icones,A03-icones-emojis,Atom,02-atoms,6362:1948,Renommer
+Inputs 🔗,A04-inputs,Atom,02-atoms,6362:1134,Renommer
+⚫ MOLECULES (Combinaisons d'atomes),—— SEPARATEUR ——,Séparateur,—,6935:1425,Conserver tel quel
+Alerts 📌,M01-alerts,Molecule,03-molecules,6362:736,Renommer
+Breadcrumb,M02-breadcrumb,Molecule,03-molecules,6921:702,Renommer
+Pagination,M03-pagination,Molecule,03-molecules,6921:776,Renommer
+Tabs,M04-tabs,Molecule,03-molecules,6392:4100,Renommer
+Progress indicator 🛟,M05-progress-indicator,Molecule,03-molecules,6392:4651,Renommer
+⚫ ORGANISMS (composants complexes),—— SEPARATEUR ——,Séparateur,—,6935:1474,Conserver tel quel
+Header,O01-header,Organism,04-organisms,6392:8639,Renommer
+Footer,O02-footer,Organism,04-organisms,6936:3149,Renommer
+Blog component,O03-blog-components,Organism,04-organisms,6941:2108,Renommer
+Modals,O04-modals,Organism,04-organisms,6933:3022,Renommer
+Prose,O05-prose,Organism,04-organisms,6941:1592,Renommer
+Cards (a refaire),—— À SUPPRIMER ——,Obsolète,—,6520:762,Supprimer (doublon)
+⚫ CARDS,—— SEPARATEUR ——,Séparateur,—,6979:8522,Conserver tel quel
+📎 CTA,C01-cta,Card,05-cards,6953:71,Renommer
+📎 Cards widgets blog,C02-widget-blog,Card,05-cards,7024:15044,Renommer
+📎 Cards article blog,C03-article-blog,Card,05-cards,6989:8142,Renommer
+📎 Cards bio auteur / prof,C04-bio-auteur,Card,05-cards,6989:8204,Renommer
+🆕 Cards enseignants,C05-enseignants,Card,05-cards,6989:8138,Renommer
+📎 Cards réassurance,C06-reassurance,Card,05-cards,7016:12270,Renommer
+📎 Cards FAQ,C07-faq-accordeon,Card,05-cards,6989:8137,Renommer
+Cards fonctionnalité,C08-fonctionnalite,Card,05-cards,6989:8139,Renommer
+cards contenu,C09-contenu-cours,Card,05-cards,7006:9646,Renommer
+Cards solution / benefices,C10-solution,Card,05-cards,6989:8140,Renommer
+Cards pain points,C11-pain-points,Card,05-cards,7002:6982,Renommer
+Cards pricing - Fiches,C12-pricing-fiches,Card,05-cards,7001:1051,Renommer
+🆕 cards pricing - prepa,C13-pricing-prepa,Card,05-cards,7123:3136,Renommer
+Cards pricing - produits comparatif,C14-pricing-comparatif,Card,05-cards,6996:713,Renommer
+Cards pricing - Suite IA,C15-pricing-suite-ia,Card,05-cards,6998:167,Renommer
+Cards pricing - formule reussite,C16-pricing-formule-reussite,Card,05-cards,6992:8740,Renommer
+Cards pricing - selecteur durée,C17-pricing-selecteur-duree,Card,05-cards,6984:8136,Renommer
+cards testimonial,C18-testimonial,Card,05-cards,6983:6922,Renommer
+cards catalogue cours,C19-catalogue-cours,Card,05-cards,6980:87,Renommer
+📎 ⚫ HERO,—— SEPARATEUR ——,Séparateur,—,6943:2777,Renommer en "⚫ HERO"
+Hero conversion,H01-hero-conversion,Hero,06-hero,7047:9386,Renommer
+Hero archive,H02-hero-archive,Hero,06-hero,7087:1462,Renommer
+Hero produit,H03-hero-produit,Hero,06-hero,7048:9813,Renommer
+Hero simple,H04-hero-simple,Hero,06-hero,7088:1935,Renommer
+hero article blog 1 (simple),H05-hero-article-blog-v1,Hero,06-hero,7089:2686,Renommer
+hero article blog 2 (gradient),H06-hero-article-blog-v2,Hero,06-hero,7091:2874,Renommer
+⚫ PATTERNS,—— SEPARATEUR ——,Séparateur,—,7046:9385,Conserver tel quel
+🆕 Paragraphe simple,P01-paragraphe,Pattern,07-patterns,7122:2834,Renommer
+🆕 Bloc texte + image/video,P02-bloc-texte-image,Pattern,07-patterns,7118:1699,Renommer
+🆕 Bloc offre Suite IA,P03-offre-suite-ia,Pattern,07-patterns,7116:1213,Renommer
+🆕 Bloc cta academie page fiche,P04-cta-academie,Pattern,07-patterns,7115:844,Renommer
+🆕 Bloc quelle offre choisir,P05-quelle-offre-choisir,Pattern,07-patterns,7112:9772,Renommer
+🆕 Bloc produits complemtaires,P06-produits-complementaires,Pattern,07-patterns,7108:8074,Renommer
+🆕 Pricing académie + features,P07-pricing-academie,Pattern,07-patterns,7105:6943,Renommer
+🆕 Bloc methode,P08-bloc-methode,Pattern,07-patterns,7103:6191,Renommer
+📎 Logos universités,P09-logos,Pattern,07-patterns,7093:3715,Renommer
+📎 Section CTA final,P10-cta-final,Pattern,07-patterns,7039:4658,Renommer
+📎 Section comparaison,P11-comparaison,Pattern,07-patterns,7037:217,Renommer
+📎 Section Features,P12-features,Pattern,07-patterns,7034:1686,Renommer
+📎 section stats,P13-stats,Pattern,07-patterns,7031:689,Renommer
+📎 Section steps,P14-steps,Pattern,07-patterns,7032:176,Renommer
+Grid system,P15-grid,Pattern,07-patterns,6943:2776,Renommer
+Forms,P16-forms,Pattern,07-patterns,6944:2,Renommer
+⚫ VISUELS,—— SEPARATEUR ——,Séparateur,—,6943:3955,Conserver tel quel
+Branding 🩷,V01-branding,Visuel,08-visuels,6362:1888,Renommer
+Illustrations,V02-illustrations,Visuel,08-visuels,6424:2701,Renommer
