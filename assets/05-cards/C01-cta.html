@@ -1,0 +1,908 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jurible Design System — CTA</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --color-primary: #B0001D;
+            --color-primary-light: rgba(176, 0, 29, 0.1);
+            --color-secondary: #7C3AED;
+            --color-text-dark: #1A1A1A;
+            --color-text-gray: #4A4A4A;
+            --color-text-muted: #9CA3AF;
+            --color-background: #FFFFFF;
+            --color-muted: #F3F4F6;
+            --color-border: #E5E7EB;
+
+            --space-xs: 8px;
+            --space-sm: 16px;
+            --space-md: 24px;
+            --space-lg: 32px;
+            --space-xl: 48px;
+            --space-2xl: 64px;
+
+            --radius-sm: 6px;
+            --radius-md: 8px;
+            --radius-lg: 12px;
+            --radius-xl: 16px;
+            --radius-full: 9999px;
+
+            --font-family: 'Poppins', sans-serif;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: var(--font-family);
+            background: var(--color-background);
+            color: var(--color-text-dark);
+            padding: var(--space-xl) 80px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .page-header { margin-bottom: var(--space-xl); }
+        .page-title { font-size: 48px; font-weight: 700; margin-bottom: var(--space-xs); }
+        .page-divider { height: 3px; width: 120px; background: linear-gradient(90deg, #B0001D 0%, #DC2626 50%, #7C3AED 100%); border-radius: var(--radius-full); }
+
+        .section { margin-bottom: var(--space-xl); }
+        .section-title { font-size: 24px; font-weight: 600; margin-bottom: var(--space-xs); }
+        .section-subtitle { font-size: 14px; color: var(--color-text-muted); margin-bottom: var(--space-md); }
+        .section-divider { height: 1px; background: var(--color-border); margin: var(--space-xl) 0; }
+
+        .component-label { font-size: 11px; color: var(--color-text-muted); text-transform: uppercase; letter-spacing: 0.5px; font-weight: 600; margin-bottom: var(--space-sm); display: inline-block; background: var(--color-muted); padding: 4px 8px; border-radius: 4px; }
+
+        .preview-box { background: var(--color-muted); border-radius: var(--radius-lg); padding: var(--space-lg); margin-bottom: var(--space-md); }
+        .preview-dark { background: #1A1A1A; }
+
+        /* ==================== 1. CTA GRADIENT (Full width) ==================== */
+        .cta-gradient {
+            background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 100%);
+            padding: var(--space-2xl) var(--space-xl);
+            text-align: center;
+            color: white;
+        }
+
+        .cta-gradient__title {
+            font-size: 36px;
+            font-weight: 800;
+            margin-bottom: var(--space-sm);
+            line-height: 1.2;
+        }
+
+        .cta-gradient__subtitle {
+            font-size: 16px;
+            opacity: 0.9;
+            margin-bottom: var(--space-lg);
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .cta-gradient__buttons {
+            display: flex;
+            gap: var(--space-sm);
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: var(--space-md);
+        }
+
+        .cta-gradient__benefits {
+            display: flex;
+            gap: var(--space-lg);
+            justify-content: center;
+            flex-wrap: wrap;
+            font-size: 14px;
+            opacity: 0.9;
+        }
+
+        .cta-gradient__benefit {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .cta-gradient__benefit::before {
+            content: "✓";
+            font-weight: 600;
+        }
+
+        /* Buttons for gradient CTA */
+        .btn-cta-primary {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 14px 32px;
+            font-family: var(--font-family);
+            font-size: 15px;
+            font-weight: 600;
+            background: white;
+            color: var(--color-primary);
+            border: none;
+            border-radius: var(--radius-md);
+            cursor: pointer;
+            transition: all 0.15s ease;
+        }
+
+        .btn-cta-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+        }
+
+        .btn-cta-secondary {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 14px 32px;
+            font-family: var(--font-family);
+            font-size: 15px;
+            font-weight: 600;
+            background: transparent;
+            color: white;
+            border: 2px solid rgba(255,255,255,0.5);
+            border-radius: var(--radius-md);
+            cursor: pointer;
+            transition: all 0.15s ease;
+        }
+
+        .btn-cta-secondary:hover {
+            background: rgba(255,255,255,0.1);
+            border-color: white;
+        }
+
+        /* ==================== 2. CTA CARD (Blog / Article) ==================== */
+        .cta-card {
+            background: var(--color-muted);
+            border-radius: var(--radius-lg);
+            padding: var(--space-lg);
+            text-align: center;
+        }
+
+        .cta-card--bordered {
+            background: white;
+            border: 2px solid var(--color-border);
+        }
+
+        .cta-card--gradient {
+            background: linear-gradient(135deg, var(--color-primary-light) 0%, rgba(124, 58, 237, 0.1) 100%);
+            border: 1px solid rgba(176, 0, 29, 0.2);
+        }
+
+        .cta-card__icon {
+            font-size: 40px;
+            margin-bottom: var(--space-sm);
+        }
+
+        .cta-card__title {
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: var(--space-xs);
+            color: var(--color-text-dark);
+        }
+
+        .cta-card__subtitle {
+            font-size: 14px;
+            color: var(--color-text-gray);
+            margin-bottom: var(--space-md);
+        }
+
+        .cta-card__btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 12px 24px;
+            font-family: var(--font-family);
+            font-size: 14px;
+            font-weight: 600;
+            background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 100%);
+            color: white;
+            border: none;
+            border-radius: var(--radius-md);
+            cursor: pointer;
+            transition: all 0.15s ease;
+        }
+
+        .cta-card__btn:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(176, 0, 29, 0.3);
+        }
+
+        /* ==================== 3. CTA BANNER (Newsletter / Promo) ==================== */
+        .cta-banner {
+            background: var(--color-text-dark);
+            padding: var(--space-md) var(--space-lg);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: var(--space-md);
+            border-radius: var(--radius-lg);
+            color: white;
+        }
+
+        .cta-banner--gradient {
+            background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 100%);
+        }
+
+        .cta-banner__content {
+            flex: 1;
+        }
+
+        .cta-banner__title {
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+
+        .cta-banner__subtitle {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+
+        .cta-banner__form {
+            display: flex;
+            gap: var(--space-xs);
+        }
+
+        .cta-banner__input {
+            padding: 12px 16px;
+            font-family: var(--font-family);
+            font-size: 14px;
+            border: none;
+            border-radius: var(--radius-md);
+            width: 280px;
+            outline: none;
+        }
+
+        .cta-banner__btn {
+            padding: 12px 24px;
+            font-family: var(--font-family);
+            font-size: 14px;
+            font-weight: 600;
+            background: white;
+            color: var(--color-primary);
+            border: none;
+            border-radius: var(--radius-md);
+            cursor: pointer;
+            white-space: nowrap;
+            transition: all 0.15s ease;
+        }
+
+        .cta-banner__btn:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+        }
+
+        /* ==================== 4. CTA MODAL (Lead Magnet) ==================== */
+        .cta-modal {
+            background: white;
+            border-radius: var(--radius-xl);
+            padding: var(--space-lg);
+            max-width: 480px;
+            text-align: center;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            position: relative;
+        }
+
+        .cta-modal__close {
+            position: absolute;
+            top: var(--space-sm);
+            right: var(--space-sm);
+            width: 32px;
+            height: 32px;
+            border: none;
+            background: var(--color-muted);
+            border-radius: var(--radius-full);
+            cursor: pointer;
+            font-size: 16px;
+            color: var(--color-text-muted);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.15s ease;
+        }
+
+        .cta-modal__close:hover {
+            background: var(--color-border);
+            color: var(--color-text-dark);
+        }
+
+        .cta-modal__header {
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: var(--space-md);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: var(--space-xs);
+        }
+
+        .cta-modal__image {
+            width: 200px;
+            height: 140px;
+            background: var(--color-muted);
+            border-radius: var(--radius-md);
+            margin: 0 auto var(--space-md);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--color-text-muted);
+            font-size: 13px;
+        }
+
+        .cta-modal__title {
+            font-size: 16px;
+            color: var(--color-text-dark);
+            margin-bottom: var(--space-xs);
+        }
+
+        .cta-modal__title strong {
+            font-weight: 700;
+        }
+
+        .cta-modal__subtitle {
+            font-size: 14px;
+            color: var(--color-text-muted);
+            font-style: italic;
+            margin-bottom: var(--space-md);
+        }
+
+        .cta-modal__form {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-sm);
+        }
+
+        .cta-modal__input,
+        .cta-modal__select {
+            width: 100%;
+            padding: 14px 16px;
+            font-family: var(--font-family);
+            font-size: 14px;
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-md);
+            background: var(--color-muted);
+            outline: none;
+            transition: all 0.15s ease;
+        }
+
+        .cta-modal__input:focus,
+        .cta-modal__select:focus {
+            border-color: var(--color-primary);
+            background: white;
+        }
+
+        .cta-modal__btn {
+            width: 100%;
+            padding: 16px 24px;
+            font-family: var(--font-family);
+            font-size: 16px;
+            font-weight: 600;
+            background: var(--color-primary);
+            color: white;
+            border: none;
+            border-radius: var(--radius-md);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: var(--space-xs);
+            transition: all 0.15s ease;
+            margin-top: var(--space-xs);
+        }
+
+        .cta-modal__btn:hover {
+            background: #9A0019;
+            transform: translateY(-1px);
+        }
+
+        .cta-modal__disclaimer {
+            font-size: 12px;
+            color: var(--color-text-muted);
+            font-style: italic;
+            margin-top: var(--space-sm);
+            line-height: 1.5;
+        }
+
+        /* ==================== 5. CTA STICKY BAR (Promo) ==================== */
+        .cta-sticky {
+            background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 100%);
+            padding: 12px var(--space-lg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: var(--space-md);
+            color: white;
+            position: relative;
+        }
+
+        .cta-sticky--dark {
+            background: var(--color-text-dark);
+        }
+
+        .cta-sticky--top {
+            /* Pour usage réel: position: fixed; top: 0; left: 0; right: 0; z-index: 1000; */
+        }
+
+        .cta-sticky--bottom {
+            /* Pour usage réel: position: fixed; bottom: 0; left: 0; right: 0; z-index: 1000; */
+        }
+
+        .cta-sticky__content {
+            display: flex;
+            align-items: center;
+            gap: var(--space-sm);
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .cta-sticky__badge {
+            background: rgba(255,255,255,0.2);
+            padding: 4px 10px;
+            border-radius: var(--radius-full);
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .cta-sticky__text {
+            font-size: 14px;
+        }
+
+        .cta-sticky__code {
+            background: rgba(255,255,255,0.2);
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-family: 'SF Mono', monospace;
+            font-weight: 600;
+        }
+
+        .cta-sticky__btn {
+            padding: 8px 20px;
+            font-family: var(--font-family);
+            font-size: 13px;
+            font-weight: 600;
+            background: white;
+            color: var(--color-primary);
+            border: none;
+            border-radius: var(--radius-sm);
+            cursor: pointer;
+            white-space: nowrap;
+            transition: all 0.15s ease;
+        }
+
+        .cta-sticky__btn:hover {
+            transform: scale(1.05);
+        }
+
+        .cta-sticky__close {
+            position: absolute;
+            right: var(--space-sm);
+            width: 28px;
+            height: 28px;
+            border: none;
+            background: rgba(255,255,255,0.1);
+            color: white;
+            border-radius: var(--radius-full);
+            cursor: pointer;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.15s ease;
+        }
+
+        .cta-sticky__close:hover {
+            background: rgba(255,255,255,0.2);
+        }
+
+        .cta-sticky--mobile {
+            padding: 10px var(--space-sm);
+            gap: var(--space-sm);
+        }
+
+        .cta-sticky--mobile .cta-sticky__text {
+            font-size: 13px;
+        }
+
+        .cta-sticky--mobile .cta-sticky__btn {
+            padding: 6px 14px;
+            font-size: 12px;
+        }
+
+        .cta-sticky--mobile .cta-sticky__close {
+            position: relative;
+            right: auto;
+            width: 24px;
+            height: 24px;
+        }
+
+        /* ==================== MOBILE VARIANTS ==================== */
+        .mobile-frame {
+            max-width: 375px;
+            border: 2px solid var(--color-border);
+            border-radius: var(--radius-xl);
+            overflow: hidden;
+        }
+
+        .cta-gradient--mobile {
+            padding: var(--space-lg) var(--space-md);
+        }
+
+        .cta-gradient--mobile .cta-gradient__title {
+            font-size: 24px;
+        }
+
+        .cta-gradient--mobile .cta-gradient__subtitle {
+            font-size: 14px;
+        }
+
+        .cta-gradient--mobile .cta-gradient__buttons {
+            flex-direction: column;
+        }
+
+        .cta-gradient--mobile .cta-gradient__benefits {
+            flex-direction: column;
+            gap: var(--space-xs);
+        }
+
+        .cta-banner--mobile {
+            flex-direction: column;
+            text-align: center;
+            padding: var(--space-md);
+        }
+
+        .cta-banner--mobile .cta-banner__form {
+            flex-direction: column;
+            width: 100%;
+        }
+
+        .cta-banner--mobile .cta-banner__input {
+            width: 100%;
+        }
+
+        /* ==================== SPECS ==================== */
+        .specs-table { width: 100%; border-collapse: collapse; font-size: 13px; margin-top: var(--space-md); }
+        .specs-table th { text-align: left; font-size: 11px; font-weight: 600; color: white; text-transform: uppercase; letter-spacing: 0.5px; padding: 12px var(--space-sm); background: var(--color-text-dark); }
+        .specs-table th:first-child { border-radius: var(--radius-md) 0 0 0; }
+        .specs-table th:last-child { border-radius: 0 var(--radius-md) 0 0; }
+        .specs-table td { padding: 12px var(--space-sm); border-bottom: 1px solid var(--color-border); }
+        .specs-table tr:last-child td { border-bottom: none; }
+        .specs-table code { font-family: 'SF Mono', monospace; font-size: 11px; background: var(--color-muted); padding: 2px 6px; border-radius: 4px; }
+
+        .info-box { background: var(--color-muted); border-radius: var(--radius-lg); padding: var(--space-md); margin-top: var(--space-md); }
+        .info-box__title { font-size: 14px; font-weight: 600; margin-bottom: var(--space-sm); }
+        .info-box ul { font-size: 13px; color: var(--color-text-gray); line-height: 1.8; padding-left: 20px; }
+
+        .usage-tag { display: inline-block; font-size: 11px; font-weight: 600; padding: 4px 10px; border-radius: var(--radius-full); margin-right: var(--space-xs); margin-bottom: var(--space-xs); }
+        .usage-tag--academie { background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 100%); color: white; }
+        .usage-tag--fiches { background: #FEF3C7; color: #92400E; }
+        .usage-tag--ia { background: #EDE9FE; color: #5B21B6; }
+        .usage-tag--prepa { background: #DCFCE7; color: #166534; }
+        .usage-tag--newsletter { background: var(--color-muted); color: var(--color-text-gray); }
+    </style>
+</head>
+<body>
+
+<div class="page-header">
+    <h1 class="page-title">cta</h1>
+    <div class="page-divider"></div>
+</div>
+
+<!-- 1. CTA GRADIENT -->
+<div class="section">
+    <h2 class="section-title">1. CTA Gradient (Full width)</h2>
+    <p class="section-subtitle">Section principale avant footer — forte visibilité</p>
+    <span class="usage-tag usage-tag--academie">Académie</span>
+    <span class="usage-tag usage-tag--fiches">Fiches PDF</span>
+    <span class="usage-tag usage-tag--ia">Suite IA</span>
+    <span class="usage-tag usage-tag--prepa">Prépa</span>
+
+    <span class="component-label">Desktop</span>
+    <div class="preview-box" style="padding: 0; overflow: hidden; border-radius: var(--radius-lg);">
+        <div class="cta-gradient">
+            <h2 class="cta-gradient__title">Prêt à réussir votre licence de droit ?</h2>
+            <p class="cta-gradient__subtitle">Rejoignez les 25 000+ étudiants qui ont déjà transformé leur façon d'apprendre le droit.</p>
+            <div class="cta-gradient__buttons">
+                <button class="btn-cta-primary">Commencer maintenant</button>
+                <button class="btn-cta-secondary">Voir les cours</button>
+            </div>
+            <div class="cta-gradient__benefits">
+                <span class="cta-gradient__benefit">Sans engagement</span>
+                <span class="cta-gradient__benefit">Annulable en 1 clic</span>
+                <span class="cta-gradient__benefit">Accès immédiat</span>
+            </div>
+        </div>
+    </div>
+
+    <span class="component-label">Mobile</span>
+    <div class="preview-box" style="padding: var(--space-md);">
+        <div class="mobile-frame">
+            <div class="cta-gradient cta-gradient--mobile">
+                <h2 class="cta-gradient__title">Prêt à réussir votre licence ?</h2>
+                <p class="cta-gradient__subtitle">Rejoignez les 25 000+ étudiants qui ont déjà transformé leur façon d'apprendre.</p>
+                <div class="cta-gradient__buttons">
+                    <button class="btn-cta-primary" style="width: 100%;">Commencer maintenant</button>
+                    <button class="btn-cta-secondary" style="width: 100%;">Voir les cours</button>
+                </div>
+                <div class="cta-gradient__benefits">
+                    <span class="cta-gradient__benefit">Sans engagement</span>
+                    <span class="cta-gradient__benefit">Annulable en 1 clic</span>
+                    <span class="cta-gradient__benefit">Accès immédiat</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="section-divider"></div>
+
+<!-- 2. CTA CARD -->
+<div class="section">
+    <h2 class="section-title">2. CTA Card (Blog / Article)</h2>
+    <p class="section-subtitle">Encart dans le contenu pour promouvoir un produit</p>
+
+    <span class="component-label">Académie</span>
+    <div class="preview-box preview-white" style="max-width: 480px;">
+        <div class="cta-card cta-card--gradient">
+            <div class="cta-card__icon">🎓</div>
+            <h3 class="cta-card__title">Envie d'aller plus loin ?</h3>
+            <p class="cta-card__subtitle">Accédez à tous nos cours, fiches et QCM avec l'Académie Jurible.</p>
+            <button class="cta-card__btn">Découvrir l'Académie →</button>
+        </div>
+    </div>
+
+    <span class="component-label">Fiches PDF</span>
+    <div class="preview-box preview-white" style="max-width: 480px;">
+        <div class="cta-card cta-card--bordered">
+            <div class="cta-card__icon">📚</div>
+            <h3 class="cta-card__title">Téléchargez nos fiches de révision</h3>
+            <p class="cta-card__subtitle">+200 fiches synthétiques pour réviser efficacement.</p>
+            <button class="cta-card__btn">Voir les fiches →</button>
+        </div>
+    </div>
+
+    <span class="component-label">Suite IA</span>
+    <div class="preview-box preview-white" style="max-width: 480px;">
+        <div class="cta-card">
+            <div class="cta-card__icon">🤖</div>
+            <h3 class="cta-card__title">Boostez vos révisions avec l'IA</h3>
+            <p class="cta-card__subtitle">Générez des QCM, flashcards et résumés en 1 clic.</p>
+            <button class="cta-card__btn">Essayer gratuitement →</button>
+        </div>
+    </div>
+
+    <span class="component-label">Prépa</span>
+    <div class="preview-box preview-white" style="max-width: 480px;">
+        <div class="cta-card cta-card--gradient">
+            <div class="cta-card__icon">🏆</div>
+            <h3 class="cta-card__title">Préparez vos examens sereinement</h3>
+            <p class="cta-card__subtitle">Programme intensif avec corrections personnalisées.</p>
+            <button class="cta-card__btn">Découvrir la Prépa →</button>
+        </div>
+    </div>
+</div>
+
+<div class="section-divider"></div>
+
+<!-- 3. CTA BANNER -->
+<div class="section">
+    <h2 class="section-title">3. CTA Banner (Newsletter / Promo)</h2>
+    <p class="section-subtitle">Bandeau horizontal pour inscription newsletter ou promo</p>
+    <span class="usage-tag usage-tag--newsletter">Newsletter</span>
+
+    <span class="component-label">Desktop — Dark</span>
+    <div class="preview-box" style="padding: 0;">
+        <div class="cta-banner">
+            <div class="cta-banner__content">
+                <h3 class="cta-banner__title">📬 Recevez nos conseils chaque semaine</h3>
+                <p class="cta-banner__subtitle">Astuces, méthodes et actualités juridiques pour réussir vos études.</p>
+            </div>
+            <div class="cta-banner__form">
+                <input type="email" class="cta-banner__input" placeholder="Votre email">
+                <button class="cta-banner__btn">S'inscrire</button>
+            </div>
+        </div>
+    </div>
+
+    <span class="component-label">Desktop — Gradient</span>
+    <div class="preview-box" style="padding: 0;">
+        <div class="cta-banner cta-banner--gradient">
+            <div class="cta-banner__content">
+                <h3 class="cta-banner__title">🎁 -20% sur l'Académie cette semaine</h3>
+                <p class="cta-banner__subtitle">Offre limitée — Code : JURIBLE20</p>
+            </div>
+            <button class="cta-banner__btn">En profiter →</button>
+        </div>
+    </div>
+
+    <span class="component-label">Mobile</span>
+    <div class="preview-box" style="padding: var(--space-md);">
+        <div class="mobile-frame" style="padding: 0;">
+            <div class="cta-banner cta-banner--mobile">
+                <div class="cta-banner__content">
+                    <h3 class="cta-banner__title">📬 Newsletter Jurible</h3>
+                    <p class="cta-banner__subtitle">Conseils et astuces chaque semaine.</p>
+                </div>
+                <div class="cta-banner__form">
+                    <input type="email" class="cta-banner__input" placeholder="Votre email">
+                    <button class="cta-banner__btn" style="width: 100%;">S'inscrire</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="section-divider"></div>
+
+<!-- 4. CTA MODAL -->
+<div class="section">
+    <h2 class="section-title">4. CTA Modal (Lead Magnet)</h2>
+    <p class="section-subtitle">Popup pour téléchargement guide gratuit</p>
+    <span class="usage-tag usage-tag--newsletter">Guide gratuit</span>
+
+    <span class="component-label">Desktop</span>
+    <div class="preview-box preview-dark" style="padding: var(--space-xl); display: flex; justify-content: center;">
+        <div class="cta-modal">
+            <button class="cta-modal__close">✕</button>
+            <div class="cta-modal__header">🎁 Un cadeau pour vous !</div>
+            <div class="cta-modal__image">Image mascotte + guide</div>
+            <p class="cta-modal__title">Téléchargez gratuitement votre <strong>Plan d'action pour exceller à la fac de droit</strong></p>
+            <p class="cta-modal__subtitle">33 pages de conseils inédits !</p>
+            <form class="cta-modal__form">
+                <input type="email" class="cta-modal__input" placeholder="Votre Email">
+                <select class="cta-modal__select">
+                    <option value="" disabled selected>Votre année</option>
+                    <option>L1 Droit</option>
+                    <option>L2 Droit</option>
+                    <option>L3 Droit</option>
+                    <option>Capacité</option>
+                </select>
+                <button type="submit" class="cta-modal__btn">⬇ Télécharger</button>
+            </form>
+            <p class="cta-modal__disclaimer">En vous inscrivant, vous recevez des conseils et astuces pour réussir vos études de droit. Vous pouvez vous désinscrire à tout moment !</p>
+        </div>
+    </div>
+
+    <span class="component-label">Mobile</span>
+    <div class="preview-box preview-dark" style="padding: var(--space-md); display: flex; justify-content: center;">
+        <div class="cta-modal" style="max-width: 340px; padding: var(--space-md);">
+            <button class="cta-modal__close">✕</button>
+            <div class="cta-modal__header" style="font-size: 18px;">🎁 Un cadeau pour vous !</div>
+            <div class="cta-modal__image" style="width: 160px; height: 100px;">Image</div>
+            <p class="cta-modal__title" style="font-size: 14px;">Téléchargez votre <strong>Plan d'action</strong></p>
+            <p class="cta-modal__subtitle" style="font-size: 13px;">33 pages de conseils !</p>
+            <form class="cta-modal__form">
+                <input type="email" class="cta-modal__input" placeholder="Votre Email">
+                <select class="cta-modal__select">
+                    <option value="" disabled selected>Votre année</option>
+                </select>
+                <button type="submit" class="cta-modal__btn" style="font-size: 14px;">⬇ Télécharger</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="section-divider"></div>
+
+<!-- 5. CTA STICKY BAR -->
+<div class="section">
+    <h2 class="section-title">5. CTA Sticky Bar (Promo)</h2>
+    <p class="section-subtitle">Bandeau fixe en haut ou bas du site pour promos exceptionnelles</p>
+    <span class="usage-tag usage-tag--academie">Promo</span>
+    <span class="usage-tag usage-tag--fiches">Black Friday</span>
+    <span class="usage-tag usage-tag--prepa">Lancement</span>
+
+    <span class="component-label">Top bar — Gradient</span>
+    <div class="preview-box" style="padding: 0; overflow: hidden; border-radius: var(--radius-lg);">
+        <div class="cta-sticky cta-sticky--top">
+            <div class="cta-sticky__content">
+                <span class="cta-sticky__badge">🔥 PROMO</span>
+                <span class="cta-sticky__text"><strong>-30% sur l'Académie</strong> jusqu'à dimanche — Code : <span class="cta-sticky__code">JURIBLE30</span></span>
+            </div>
+            <button class="cta-sticky__btn">En profiter →</button>
+            <button class="cta-sticky__close">✕</button>
+        </div>
+    </div>
+
+    <span class="component-label">Top bar — Dark</span>
+    <div class="preview-box" style="padding: 0; overflow: hidden; border-radius: var(--radius-lg);">
+        <div class="cta-sticky cta-sticky--top cta-sticky--dark">
+            <div class="cta-sticky__content">
+                <span class="cta-sticky__badge">⏰ DERNIÈRES HEURES</span>
+                <span class="cta-sticky__text">Les inscriptions à la <strong>Prépa Jurible</strong> ferment ce soir à minuit</span>
+            </div>
+            <button class="cta-sticky__btn">S'inscrire maintenant</button>
+            <button class="cta-sticky__close">✕</button>
+        </div>
+    </div>
+
+    <span class="component-label">Bottom bar — Gradient</span>
+    <div class="preview-box" style="padding: 0; overflow: hidden; border-radius: var(--radius-lg);">
+        <div class="cta-sticky cta-sticky--bottom">
+            <div class="cta-sticky__content">
+                <span class="cta-sticky__text">🎁 <strong>Guide gratuit :</strong> 33 conseils pour réussir ta licence de droit</span>
+            </div>
+            <button class="cta-sticky__btn">Télécharger</button>
+            <button class="cta-sticky__close">✕</button>
+        </div>
+    </div>
+
+    <span class="component-label">Mobile</span>
+    <div class="preview-box" style="padding: var(--space-md);">
+        <div class="mobile-frame" style="padding: 0;">
+            <div class="cta-sticky cta-sticky--top cta-sticky--mobile">
+                <div class="cta-sticky__content">
+                    <span class="cta-sticky__text">🔥 <strong>-30%</strong> avec le code <span class="cta-sticky__code">JURIBLE30</span></span>
+                </div>
+                <button class="cta-sticky__btn">Profiter →</button>
+                <button class="cta-sticky__close">✕</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="section-divider"></div>
+
+<!-- 6. RÉCAPITULATIF -->
+<div class="section">
+    <h2 class="section-title">📋 Récapitulatif</h2>
+
+    <table class="specs-table">
+        <thead>
+            <tr>
+                <th>Type</th>
+                <th>Classe CSS</th>
+                <th>Usage</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr><td>Gradient (full)</td><td><code>.cta-gradient</code></td><td>Avant footer, page d'accueil, page de vente</td></tr>
+            <tr><td>Card</td><td><code>.cta-card</code></td><td>Dans articles/blog, sidebar</td></tr>
+            <tr><td>Banner</td><td><code>.cta-banner</code></td><td>Newsletter, promo inline</td></tr>
+            <tr><td>Modal</td><td><code>.cta-modal</code></td><td>Lead magnet, guide gratuit</td></tr>
+            <tr><td>Sticky bar</td><td><code>.cta-sticky</code></td><td>Promo exceptionnelle, urgence (top/bottom fixe)</td></tr>
+        </tbody>
+    </table>
+
+    <table class="specs-table" style="margin-top: var(--space-md);">
+        <thead>
+            <tr>
+                <th>Produit</th>
+                <th>CTA recommandé</th>
+                <th>Icône</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr><td>Académie</td><td>Gradient, Card gradient, Sticky</td><td>🎓</td></tr>
+            <tr><td>Fiches PDF</td><td>Card bordered</td><td>📚</td></tr>
+            <tr><td>Suite IA</td><td>Card neutral</td><td>🤖</td></tr>
+            <tr><td>Prépa</td><td>Card gradient, Sticky</td><td>🏆</td></tr>
+            <tr><td>Newsletter</td><td>Banner</td><td>📬</td></tr>
+            <tr><td>Guide gratuit</td><td>Modal, Sticky bottom</td><td>🎁</td></tr>
+            <tr><td>Promo / Black Friday</td><td>Sticky top</td><td>🔥</td></tr>
+        </tbody>
+    </table>
+
+    <div class="info-box" style="margin-top: var(--space-md);">
+        <p class="info-box__title">💡 Bonnes pratiques</p>
+        <ul>
+            <li><strong>1 seul CTA principal</strong> par page — éviter la surcharge</li>
+            <li><strong>Gradient</strong> → réserver pour les conversions importantes (inscription, achat)</li>
+            <li><strong>Card</strong> → dans le flux de lecture, après 2-3 paragraphes</li>
+            <li><strong>Banner</strong> → en haut ou bas de page, non-intrusif</li>
+            <li><strong>Modal</strong> → déclencher après scroll 50% ou intention de sortie</li>
+            <li><strong>Sticky bar</strong> → uniquement pour promos exceptionnelles, avec bouton fermer, max 1-2 semaines</li>
+            <li><strong>Mobile</strong> → toujours tester avec les variantes <code>--mobile</code></li>
+        </ul>
+    </div>
+</div>
+
+</body>
+</html>

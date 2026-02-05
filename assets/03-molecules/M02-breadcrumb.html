@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jurible Design System — Breadcrumb</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --color-primary: #B0001D;
+            --color-text-dark: #1A1A1A;
+            --color-text-gray: #4A4A4A;
+            --color-text-muted: #9CA3AF;
+            --color-background: #FFFFFF;
+            --color-muted: #F3F4F6;
+            --color-border: #E5E7EB;
+            --font-family: 'Poppins', sans-serif;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: var(--font-family);
+            background: var(--color-background);
+            color: var(--color-text-dark);
+            padding: 48px 80px;
+            max-width: 1280px;
+            margin: 0 auto;
+        }
+
+        .page-header { margin-bottom: 48px; }
+
+        .page-title {
+            font-size: 48px;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .page-divider {
+            height: 3px;
+            width: 120px;
+            background: linear-gradient(90deg, #B0001D 0%, #DC2626 50%, #7C3AED 100%);
+            border-radius: 9999px;
+        }
+
+        .section {
+            margin-bottom: 48px;
+        }
+
+        .section-title {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 24px;
+            color: var(--color-text-dark);
+        }
+
+        .section-divider {
+            height: 1px;
+            background: var(--color-border);
+            margin: 48px 0;
+        }
+
+        .component-label {
+            font-size: 12px;
+            color: var(--color-text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-weight: 500;
+            margin-bottom: 16px;
+        }
+
+        /* ==================== BREADCRUMB ==================== */
+        .breadcrumb {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 14px;
+        }
+
+        .breadcrumb-item {
+            color: var(--color-text-muted);
+            text-decoration: none;
+            transition: color 0.15s ease;
+        }
+
+        .breadcrumb-item:hover {
+            color: var(--color-primary);
+        }
+
+        .breadcrumb-item.active {
+            color: var(--color-text-dark);
+            font-weight: 500;
+            pointer-events: none;
+        }
+
+        .breadcrumb-separator {
+            color: var(--color-text-muted);
+        }
+
+        /* With icons */
+        .breadcrumb-item--icon {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        /* ==================== DEMO BOX ==================== */
+        .demo-box {
+            border: 1px solid var(--color-border);
+            border-radius: 12px;
+            padding: 32px;
+            margin-bottom: 24px;
+            background: white;
+        }
+
+        /* ==================== TABLES ==================== */
+        .specs-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 13px;
+        }
+
+        .specs-table th {
+            text-align: left;
+            font-size: 11px;
+            font-weight: 600;
+            color: white;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            padding: 12px 16px;
+            background: var(--color-text-dark);
+        }
+
+        .specs-table th:first-child { border-radius: 8px 0 0 0; }
+        .specs-table th:last-child { border-radius: 0 8px 0 0; }
+
+        .specs-table td {
+            padding: 12px 16px;
+            border-bottom: 1px solid var(--color-border);
+            vertical-align: middle;
+        }
+
+        .specs-table tr:last-child td { border-bottom: none; }
+
+        .specs-table code {
+            font-family: 'SF Mono', monospace;
+            font-size: 11px;
+            background: var(--color-muted);
+            padding: 2px 6px;
+            border-radius: 4px;
+        }
+
+        /* ==================== INFO BOX ==================== */
+        .info-box {
+            background: var(--color-muted);
+            border-radius: 12px;
+            padding: 24px;
+            margin-top: 24px;
+        }
+
+        .info-title {
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 12px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="page-header">
+    <h1 class="page-title">breadcrumb</h1>
+    <div class="page-divider"></div>
+</div>
+
+<!-- ==================== DEFAULT ==================== -->
+<div class="section">
+    <h2 class="section-title">Default</h2>
+    
+    <div class="demo-box">
+        <nav class="breadcrumb">
+            <a href="#" class="breadcrumb-item">Accueil</a>
+            <span class="breadcrumb-separator">›</span>
+            <a href="#" class="breadcrumb-item">Cours</a>
+            <span class="breadcrumb-separator">›</span>
+            <a href="#" class="breadcrumb-item">Droit civil</a>
+            <span class="breadcrumb-separator">›</span>
+            <span class="breadcrumb-item active">Chapitre 3</span>
+        </nav>
+    </div>
+</div>
+
+<div class="section-divider"></div>
+
+<!-- ==================== AVEC ICÔNE HOME ==================== -->
+<div class="section">
+    <h2 class="section-title">Avec icône Home</h2>
+    
+    <div class="demo-box">
+        <nav class="breadcrumb">
+            <a href="#" class="breadcrumb-item breadcrumb-item--icon">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                    <polyline points="9 22 9 12 15 12 15 22"></polyline>
+                </svg>
+            </a>
+            <span class="breadcrumb-separator">›</span>
+            <a href="#" class="breadcrumb-item">Cours</a>
+            <span class="breadcrumb-separator">›</span>
+            <a href="#" class="breadcrumb-item">Droit civil</a>
+            <span class="breadcrumb-separator">›</span>
+            <span class="breadcrumb-item active">Chapitre 3</span>
+        </nav>
+    </div>
+</div>
+
+<div class="section-divider"></div>
+
+<!-- ==================== SÉPARATEURS ==================== -->
+<div class="section">
+    <h2 class="section-title">Variantes de séparateurs</h2>
+    
+    <p class="component-label">Chevron (default)</p>
+    <div class="demo-box">
+        <nav class="breadcrumb">
+            <a href="#" class="breadcrumb-item">Accueil</a>
+            <span class="breadcrumb-separator">›</span>
+            <a href="#" class="breadcrumb-item">Cours</a>
+            <span class="breadcrumb-separator">›</span>
+            <span class="breadcrumb-item active">Droit civil</span>
+        </nav>
+    </div>
+
+    <p class="component-label">Slash</p>
+    <div class="demo-box">
+        <nav class="breadcrumb">
+            <a href="#" class="breadcrumb-item">Accueil</a>
+            <span class="breadcrumb-separator">/</span>
+            <a href="#" class="breadcrumb-item">Cours</a>
+            <span class="breadcrumb-separator">/</span>
+            <span class="breadcrumb-item active">Droit civil</span>
+        </nav>
+    </div>
+
+    <p class="component-label">Arrow</p>
+    <div class="demo-box">
+        <nav class="breadcrumb">
+            <a href="#" class="breadcrumb-item">Accueil</a>
+            <span class="breadcrumb-separator">→</span>
+            <a href="#" class="breadcrumb-item">Cours</a>
+            <span class="breadcrumb-separator">→</span>
+            <span class="breadcrumb-item active">Droit civil</span>
+        </nav>
+    </div>
+</div>
+
+<div class="section-divider"></div>
+
+<!-- ==================== ÉTATS ==================== -->
+<div class="section">
+    <h2 class="section-title">États</h2>
+    
+    <table class="specs-table" style="max-width: 500px;">
+        <thead>
+            <tr>
+                <th>État</th>
+                <th>Style</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><strong>Default (lien)</strong></td>
+                <td><code>color: #9CA3AF</code></td>
+            </tr>
+            <tr>
+                <td><strong>Hover</strong></td>
+                <td><code>color: #B0001D</code></td>
+            </tr>
+            <tr>
+                <td><strong>Active (page courante)</strong></td>
+                <td><code>color: #1A1A1A; font-weight: 500</code></td>
+            </tr>
+            <tr>
+                <td><strong>Separator</strong></td>
+                <td><code>color: #9CA3AF</code></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<div class="section-divider"></div>
+
+<!-- ==================== SPECS ==================== -->
+<div class="section">
+    <h2 class="section-title">📋 Specifications</h2>
+    
+    <table class="specs-table" style="max-width: 500px;">
+        <thead>
+            <tr>
+                <th>Property</th>
+                <th>Value</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr><td>Font Size</td><td><code>14px</code></td></tr>
+            <tr><td>Font Weight (links)</td><td><code>400</code></td></tr>
+            <tr><td>Font Weight (active)</td><td><code>500</code></td></tr>
+            <tr><td>Gap</td><td><code>8px</code></td></tr>
+            <tr><td>Icon Size</td><td><code>16px</code></td></tr>
+            <tr><td>Transition</td><td><code>color 0.15s ease</code></td></tr>
+        </tbody>
+    </table>
+
+    <div class="info-box">
+        <p class="info-title">💡 Bonnes pratiques</p>
+        <ul style="font-size: 13px; color: var(--color-text-gray); line-height: 1.8; padding-left: 20px;">
+            <li>Maximum <strong>4-5 niveaux</strong>. Au-delà, tronquer avec "..."</li>
+            <li>La page courante n'est <strong>pas cliquable</strong></li>
+            <li>Toujours commencer par <strong>Accueil</strong> ou une icône Home</li>
+            <li>Utiliser le séparateur <strong>›</strong> par défaut (chevron)</li>
+        </ul>
+    </div>
+</div>
+
+</body>
+</html>

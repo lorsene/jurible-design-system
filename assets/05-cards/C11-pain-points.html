@@ -1,0 +1,941 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cards Pain Points — Uniformisées</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* ===== DESIGN SYSTEM TOKENS ===== */
+        :root {
+            --color-primary: #B0001D;
+            --color-secondary: #7C3AED;
+            --color-black: #1A1A1A;
+            --color-white: #FFFFFF;
+            --color-gray-50: #F9FAFB;
+            --color-gray-100: #F3F4F6;
+            --color-gray-200: #E5E7EB;
+            --color-gray-400: #9CA3AF;
+            --color-gray-600: #4B5563;
+            --color-success: #10B981;
+            --color-success-light: #ECFDF5;
+            --color-success-dark: #065F46;
+            --color-warning: #F59E0B;
+            --color-warning-light: #FEF3C7;
+            --color-warning-dark: #92400E;
+            --color-secondary-light: #EDE9FE;
+            --color-secondary-dark: #5B21B6;
+            --gradient-primary: linear-gradient(135deg, #B0001D 0%, #7C3AED 100%);
+            --space-xs: 8px;
+            --space-sm: 16px;
+            --space-md: 24px;
+            --space-lg: 32px;
+            --space-xl: 48px;
+            --space-2xl: 64px;
+            --radius-sm: 6px;
+            --radius-md: 8px;
+            --radius-lg: 12px;
+            --radius-xl: 16px;
+            --radius-full: 9999px;
+            --shadow-sm: 0 1px 3px rgba(0,0,0,0.1), 0 1px 2px rgba(0,0,0,0.06);
+            --shadow-md: 0 4px 6px rgba(0,0,0,0.1), 0 2px 4px rgba(0,0,0,0.06);
+            --transition: all 150ms ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: var(--color-gray-100);
+            padding: var(--space-xl);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--color-black);
+            margin-bottom: var(--space-xs);
+        }
+
+        .subtitle {
+            color: var(--color-gray-400);
+            margin-bottom: var(--space-xl);
+        }
+
+        .section {
+            margin-bottom: var(--space-2xl);
+        }
+
+        .section-label {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: var(--color-gray-200);
+            color: var(--color-gray-600);
+            padding: 6px 14px;
+            border-radius: var(--radius-full);
+            font-size: 13px;
+            font-weight: 500;
+            margin-bottom: var(--space-md);
+        }
+
+        .page-label {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: var(--color-secondary);
+            color: var(--color-white);
+            padding: 6px 14px;
+            border-radius: var(--radius-full);
+            font-size: 12px;
+            font-weight: 600;
+            margin-bottom: var(--space-md);
+        }
+
+        /* ===== SECTION PAIN POINTS (UNIFORMISÉE) ===== */
+        .pain-section {
+            background: var(--color-white);
+            border-radius: var(--radius-xl);
+            padding: var(--space-xl);
+            box-shadow: var(--shadow-sm);
+        }
+
+        /* Header section */
+        .pain-section__header {
+            text-align: center;
+            margin-bottom: var(--space-lg);
+        }
+
+        /* Badge UNIFORMISÉ : toujours "Le constat" violet */
+        .pain-section__badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 6px 14px;
+            border-radius: var(--radius-full);
+            font-size: 12px;
+            font-weight: 600;
+            margin-bottom: var(--space-sm);
+            background: var(--color-secondary-light);
+            color: var(--color-secondary);
+        }
+
+        /* Titre section */
+        .pain-section__title {
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--color-black);
+            margin-bottom: var(--space-sm);
+            line-height: 1.3;
+        }
+
+        /* Mot-clé en violet (gradient text) */
+        .pain-section__title .highlight {
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* Sous-titre */
+        .pain-section__subtitle {
+            font-size: 15px;
+            color: var(--color-gray-600);
+            max-width: 700px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+        /* ===== GRILLE 6 PAIN POINTS (Pages longues) ===== */
+        .pain-grid-6 {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: var(--space-md);
+        }
+
+        /* ===== GRILLE 4 PAIN POINTS (Pages courtes) ===== */
+        .pain-grid-4 {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: var(--space-md);
+        }
+
+        /* ===== CARD PAIN POINT (UNIFORMISÉE) ===== */
+        .pain-card {
+            background: var(--color-white);
+            border: 1px solid var(--color-gray-200);
+            border-radius: var(--radius-lg);
+            padding: var(--space-md);
+            transition: var(--transition);
+        }
+
+        .pain-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-md);
+        }
+
+        /* Icône sur fond GRIS CLAIR (uniformisé) */
+        .pain-card__icon {
+            width: 48px;
+            height: 48px;
+            background: var(--color-gray-100);
+            border-radius: var(--radius-md);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            margin-bottom: var(--space-sm);
+        }
+
+        .pain-card__title {
+            font-size: 15px;
+            font-weight: 600;
+            color: var(--color-black);
+            margin-bottom: var(--space-xs);
+        }
+
+        .pain-card__description {
+            font-size: 13px;
+            color: var(--color-gray-600);
+            line-height: 1.5;
+        }
+
+        /* ===== BANDEAU PRÉ-SOLUTION (TOUJOURS GRADIENT) ===== */
+        .pain-banner {
+            margin-top: var(--space-lg);
+            padding: var(--space-md) var(--space-lg);
+            border-radius: var(--radius-lg);
+            text-align: center;
+            background: var(--gradient-primary);
+            color: var(--color-white);
+        }
+
+        .pain-banner__title {
+            font-size: 16px;
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+
+        .pain-banner__text {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 1000px) {
+            .pain-grid-6 {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .pain-grid-4 {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 600px) {
+            body {
+                padding: var(--space-sm);
+            }
+
+            .pain-section {
+                padding: var(--space-md);
+            }
+
+            .pain-grid-6,
+            .pain-grid-4 {
+                grid-template-columns: 1fr;
+            }
+
+            .pain-section__title {
+                font-size: 22px;
+            }
+        }
+
+        /* ===== SÉPARATEUR EXEMPLES ===== */
+        .examples-divider {
+            text-align: center;
+            margin: var(--space-2xl) 0;
+            padding: var(--space-lg) 0;
+            border-top: 2px solid var(--color-gray-200);
+            border-bottom: 2px solid var(--color-gray-200);
+        }
+
+        .examples-divider h2 {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--color-black);
+            margin-bottom: var(--space-xs);
+        }
+
+        .examples-divider p {
+            color: var(--color-gray-400);
+        }
+
+        /* ===== DOCUMENTATION ===== */
+        .docs {
+            margin-top: var(--space-xl);
+            padding-top: var(--space-xl);
+            border-top: 1px solid var(--color-gray-200);
+        }
+
+        .docs h2 {
+            font-size: 20px;
+            font-weight: 600;
+            color: var(--color-black);
+            margin-bottom: var(--space-md);
+        }
+
+        .docs h3 {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--color-black);
+            margin: var(--space-md) 0 var(--space-sm);
+        }
+
+        .specs-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 13px;
+            background: var(--color-white);
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            box-shadow: var(--shadow-sm);
+            margin-bottom: var(--space-md);
+        }
+
+        .specs-table th {
+            background: var(--color-gray-100);
+            font-weight: 600;
+            text-align: left;
+            padding: 12px 16px;
+            color: var(--color-black);
+        }
+
+        .specs-table td {
+            padding: 12px 16px;
+            border-bottom: 1px solid var(--color-gray-200);
+        }
+
+        .specs-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .checklist {
+            list-style: none;
+            padding: 0;
+        }
+
+        .checklist li {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 0;
+            font-size: 14px;
+            color: var(--color-gray-600);
+        }
+
+        .checklist li::before {
+            content: '✓';
+            color: var(--color-success);
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Cards Pain Points — Uniformisées</h1>
+        <p class="subtitle">2 variantes (6 et 4 pain points) + exemples par page</p>
+
+        <!-- ═══════════════════════════════════════════════════════════════ -->
+        <!-- VARIANTE 6 PAIN POINTS -->
+        <!-- ═══════════════════════════════════════════════════════════════ -->
+        <div class="section">
+            <span class="section-label">📋 Variante 6 pain points — Pages longues (Académie, Prépa)</span>
+
+            <div class="pain-section">
+                <div class="pain-section__header">
+                    <span class="pain-section__badge">🚨 Le constat</span>
+                    <h2 class="pain-section__title">Un étudiant sur deux n'obtient pas <span class="highlight">sa Licence</span></h2>
+                    <p class="pain-section__subtitle">Les études de droit sont exigeantes. Voici les difficultés que rencontrent la plupart des étudiants.</p>
+                </div>
+
+                <div class="pain-grid-6">
+                    <div class="pain-card">
+                        <div class="pain-card__icon">📚</div>
+                        <h3 class="pain-card__title">Charge de travail énorme</h3>
+                        <p class="pain-card__description">Des milliers de pages de cours, de la jurisprudence, des définitions... Tu es vite submergé par la quantité d'informations.</p>
+                    </div>
+
+                    <div class="pain-card">
+                        <div class="pain-card__icon">❓</div>
+                        <h3 class="pain-card__title">Problèmes de méthode</h3>
+                        <p class="pain-card__description">Fiches d'arrêt, cas pratiques, dissertations, commentaires... Ces exercices juridiques sont difficiles à maîtriser.</p>
+                    </div>
+
+                    <div class="pain-card">
+                        <div class="pain-card__icon">🧍</div>
+                        <h3 class="pain-card__title">Grande autonomie</h3>
+                        <p class="pain-card__description">Contrairement au lycée, personne ne te suit. Tu dois te débrouiller seul pour rattraper les cours manqués.</p>
+                    </div>
+
+                    <div class="pain-card">
+                        <div class="pain-card__icon">😰</div>
+                        <h3 class="pain-card__title">Stress et peur de l'échec</h3>
+                        <p class="pain-card__description">L'idée d'échouer et de décevoir ta famille est difficile à gérer. Le stress peut te paralyser.</p>
+                    </div>
+
+                    <div class="pain-card">
+                        <div class="pain-card__icon">📝</div>
+                        <h3 class="pain-card__title">Cours incomplets</h3>
+                        <p class="pain-card__description">Les manuels sont trop détaillés, les cours magistraux incomplets, les fiches en ligne peu fiables.</p>
+                    </div>
+
+                    <div class="pain-card">
+                        <div class="pain-card__icon">😔</div>
+                        <h3 class="pain-card__title">Découragement</h3>
+                        <p class="pain-card__description">Avoir l'impression de bien faire tout en ayant de mauvaises notes peut te faire envisager d'abandonner.</p>
+                    </div>
+                </div>
+
+                <div class="pain-banner">
+                    <p class="pain-banner__title">L'Académie Jurible t'accompagne pour surmonter ces obstacles</p>
+                    <p class="pain-banner__text">Rejoins les 25 000+ étudiants qui ont transformé leurs résultats avec notre méthode.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- ═══════════════════════════════════════════════════════════════ -->
+        <!-- VARIANTE 4 PAIN POINTS -->
+        <!-- ═══════════════════════════════════════════════════════════════ -->
+        <div class="section">
+            <span class="section-label">⚡ Variante 4 pain points — Pages courtes (Homepage, Minos, Fiches...)</span>
+
+            <div class="pain-section">
+                <div class="pain-section__header">
+                    <span class="pain-section__badge">🚨 Le constat</span>
+                    <h2 class="pain-section__title">Vous perdez des heures sur chaque <span class="highlight">fiche d'arrêt</span> ?</h2>
+                    <p class="pain-section__subtitle">En tant qu'étudiant en droit, vous devez analyser plusieurs fiches d'arrêt chaque semaine pour vos TD...</p>
+                </div>
+
+                <div class="pain-grid-4">
+                    <div class="pain-card">
+                        <div class="pain-card__icon">😤</div>
+                        <h3 class="pain-card__title">3-4 heures par fiche</h3>
+                        <p class="pain-card__description">Un temps précieux perdu sur l'analyse de chaque décision.</p>
+                    </div>
+
+                    <div class="pain-card">
+                        <div class="pain-card__icon">🤯</div>
+                        <h3 class="pain-card__title">Éléments clés flous</h3>
+                        <p class="pain-card__description">Difficulté à identifier ce qui est vraiment important dans l'arrêt.</p>
+                    </div>
+
+                    <div class="pain-card">
+                        <div class="pain-card__icon">😰</div>
+                        <h3 class="pain-card__title">Stress de la structure</h3>
+                        <p class="pain-card__description">Peur de mal organiser sa fiche et de perdre des points.</p>
+                    </div>
+
+                    <div class="pain-card">
+                        <div class="pain-card__icon">⏰</div>
+                        <h3 class="pain-card__title">Pas le temps de réviser</h3>
+                        <p class="pain-card__description">Trop de temps sur les fiches, pas assez sur la mémorisation.</p>
+                    </div>
+                </div>
+
+                <div class="pain-banner">
+                    <p class="pain-banner__title">Notre générateur révolutionne votre façon de travailler</p>
+                    <p class="pain-banner__text">Gagnez 95% de temps sur vos fiches d'arrêt et concentrez-vous sur ce qui compte vraiment.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- ═══════════════════════════════════════════════════════════════ -->
+        <!-- EXEMPLES PAR PAGE -->
+        <!-- ═══════════════════════════════════════════════════════════════ -->
+        <div class="examples-divider">
+            <h2>📄 Exemples par page</h2>
+            <p>Contenu spécifique pour chaque landing page Jurible</p>
+        </div>
+
+        <!-- HOMEPAGE -->
+        <div class="section">
+            <span class="page-label">🏠 Homepage</span>
+
+            <div class="pain-section">
+                <div class="pain-section__header">
+                    <span class="pain-section__badge">🚨 Le constat</span>
+                    <h2 class="pain-section__title">Les études de droit, c'est <span class="highlight">compliqué</span></h2>
+                    <p class="pain-section__subtitle">Chaque année, des milliers d'étudiants abandonnent faute de méthode et d'accompagnement.</p>
+                </div>
+
+                <div class="pain-grid-4">
+                    <div class="pain-card">
+                        <div class="pain-card__icon">📚</div>
+                        <h3 class="pain-card__title">Trop de contenu</h3>
+                        <p class="pain-card__description">Milliers de pages à assimiler chaque semestre.</p>
+                    </div>
+                    <div class="pain-card">
+                        <div class="pain-card__icon">❓</div>
+                        <h3 class="pain-card__title">Méthode floue</h3>
+                        <p class="pain-card__description">Personne pour t'expliquer comment réussir les exercices.</p>
+                    </div>
+                    <div class="pain-card">
+                        <div class="pain-card__icon">😰</div>
+                        <h3 class="pain-card__title">Stress permanent</h3>
+                        <p class="pain-card__description">Peur de l'échec et pression familiale.</p>
+                    </div>
+                    <div class="pain-card">
+                        <div class="pain-card__icon">🧍</div>
+                        <h3 class="pain-card__title">Solitude</h3>
+                        <p class="pain-card__description">Livré à toi-même sans accompagnement.</p>
+                    </div>
+                </div>
+
+                <div class="pain-banner">
+                    <p class="pain-banner__title">Jurible t'accompagne de la L1 à la L3</p>
+                    <p class="pain-banner__text">Cours vidéo, fiches, QCM, flashcards et outils IA pour réussir tes études de droit.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- ACADÉMIE -->
+        <div class="section">
+            <span class="page-label">🎓 Académie</span>
+
+            <div class="pain-section">
+                <div class="pain-section__header">
+                    <span class="pain-section__badge">🚨 Le constat</span>
+                    <h2 class="pain-section__title">Un étudiant sur deux n'obtient pas <span class="highlight">sa Licence</span></h2>
+                    <p class="pain-section__subtitle">Les études de droit sont exigeantes. Voici les difficultés que rencontrent la plupart des étudiants.</p>
+                </div>
+
+                <div class="pain-grid-6">
+                    <div class="pain-card">
+                        <div class="pain-card__icon">📚</div>
+                        <h3 class="pain-card__title">Charge de travail énorme</h3>
+                        <p class="pain-card__description">Des milliers de pages de cours, de la jurisprudence, des définitions... Tu es vite submergé.</p>
+                    </div>
+                    <div class="pain-card">
+                        <div class="pain-card__icon">❓</div>
+                        <h3 class="pain-card__title">Problèmes de méthode</h3>
+                        <p class="pain-card__description">Fiches d'arrêt, cas pratiques, dissertations... Ces exercices sont difficiles à maîtriser.</p>
+                    </div>
+                    <div class="pain-card">
+                        <div class="pain-card__icon">🧍</div>
+                        <h3 class="pain-card__title">Grande autonomie</h3>
+                        <p class="pain-card__description">Contrairement au lycée, personne ne te suit. Tu dois te débrouiller seul.</p>
+                    </div>
+                    <div class="pain-card">
+                        <div class="pain-card__icon">😰</div>
+                        <h3 class="pain-card__title">Stress et peur de l'échec</h3>
+                        <p class="pain-card__description">L'idée d'échouer et de décevoir ta famille est difficile à gérer.</p>
+                    </div>
+                    <div class="pain-card">
+                        <div class="pain-card__icon">📝</div>
+                        <h3 class="pain-card__title">Cours incomplets</h3>
+                        <p class="pain-card__description">Les manuels sont trop détaillés, les cours magistraux incomplets.</p>
+                    </div>
+                    <div class="pain-card">
+                        <div class="pain-card__icon">😔</div>
+                        <h3 class="pain-card__title">Découragement</h3>
+                        <p class="pain-card__description">De mauvaises notes malgré tes efforts peuvent te faire abandonner.</p>
+                    </div>
+                </div>
+
+                <div class="pain-banner">
+                    <p class="pain-banner__title">L'Académie Jurible t'accompagne pour surmonter ces obstacles</p>
+                    <p class="pain-banner__text">Rejoins les 25 000+ étudiants qui ont transformé leurs résultats.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- MINOS (Suite IA) -->
+        <div class="section">
+            <span class="page-label">🤖 Minos (Suite IA)</span>
+
+            <div class="pain-section">
+                <div class="pain-section__header">
+                    <span class="pain-section__badge">🚨 Le constat</span>
+                    <h2 class="pain-section__title">Vous perdez des heures sur chaque <span class="highlight">exercice juridique</span> ?</h2>
+                    <p class="pain-section__subtitle">Fiches d'arrêt, dissertations, cas pratiques... Ces exercices prennent un temps fou à préparer.</p>
+                </div>
+
+                <div class="pain-grid-4">
+                    <div class="pain-card">
+                        <div class="pain-card__icon">⏱️</div>
+                        <h3 class="pain-card__title">Temps perdu</h3>
+                        <p class="pain-card__description">3-4 heures par exercice en moyenne.</p>
+                    </div>
+                    <div class="pain-card">
+                        <div class="pain-card__icon">🤯</div>
+                        <h3 class="pain-card__title">Structure complexe</h3>
+                        <p class="pain-card__description">Difficile de savoir par où commencer.</p>
+                    </div>
+                    <div class="pain-card">
+                        <div class="pain-card__icon">😰</div>
+                        <h3 class="pain-card__title">Peur de se tromper</h3>
+                        <p class="pain-card__description">Stress de mal structurer son travail.</p>
+                    </div>
+                    <div class="pain-card">
+                        <div class="pain-card__icon">📅</div>
+                        <h3 class="pain-card__title">Deadlines serrées</h3>
+                        <p class="pain-card__description">Plusieurs exercices à rendre chaque semaine.</p>
+                    </div>
+                </div>
+
+                <div class="pain-banner">
+                    <p class="pain-banner__title">Minos génère vos exercices en quelques secondes</p>
+                    <p class="pain-banner__text">Fiche d'arrêt, dissertation, cas pratique, commentaire... Gagnez 95% de temps.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- FICHES PDF (Page générale) -->
+        <div class="section">
+            <span class="page-label">📄 Fiches PDF (Page générale)</span>
+
+            <div class="pain-section">
+                <div class="pain-section__header">
+                    <span class="pain-section__badge">🚨 Le constat</span>
+                    <h2 class="pain-section__title">Réviser sur écran, c'est <span class="highlight">épuisant</span></h2>
+                    <p class="pain-section__subtitle">Beaucoup d'étudiants préfèrent réviser sur papier mais n'ont pas le temps de faire leurs propres fiches.</p>
+                </div>
+
+                <div class="pain-grid-4">
+                    <div class="pain-card">
+                        <div class="pain-card__icon">👀</div>
+                        <h3 class="pain-card__title">Fatigue visuelle</h3>
+                        <p class="pain-card__description">Des heures sur écran qui épuisent les yeux.</p>
+                    </div>
+                    <div class="pain-card">
+                        <div class="pain-card__icon">⏱️</div>
+                        <h3 class="pain-card__title">Pas le temps</h3>
+                        <p class="pain-card__description">Faire ses propres fiches prend trop de temps.</p>
+                    </div>
+                    <div class="pain-card">
+                        <div class="pain-card__icon">❓</div>
+                        <h3 class="pain-card__title">Fiches incomplètes</h3>
+                        <p class="pain-card__description">Peur d'oublier des notions importantes.</p>
+                    </div>
+                    <div class="pain-card">
+                        <div class="pain-card__icon">🌐</div>
+                        <h3 class="pain-card__title">Sources peu fiables</h3>
+                        <p class="pain-card__description">Les fiches en ligne sont souvent obsolètes.</p>
+                    </div>
+                </div>
+
+                <div class="pain-banner">
+                    <p class="pain-banner__title">Nos fiches PDF sont prêtes à imprimer</p>
+                    <p class="pain-banner__text">Rédigées par des enseignants en droit, complètes et à jour. Accès à vie.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- FICHES MATIÈRE -->
+        <div class="section">
+            <span class="page-label">📄 Fiches par matière (ex: Droit Constitutionnel)</span>
+
+            <div class="pain-section">
+                <div class="pain-section__header">
+                    <span class="pain-section__badge">🚨 Le constat</span>
+                    <h2 class="pain-section__title">Le Droit constitutionnel : une matière <span class="highlight">redoutée</span></h2>
+                    <p class="pain-section__subtitle">Pourquoi est-ce si difficile d'obtenir de bonnes notes ?</p>
+                </div>
+
+                <div class="pain-grid-4">
+                    <div class="pain-card">
+                        <div class="pain-card__icon">🧠</div>
+                        <h3 class="pain-card__title">Concepts abstraits</h3>
+                        <p class="pain-card__description">Histoire constitutionnelle complexe et théories nombreuses.</p>
+                    </div>
+                    <div class="pain-card">
+                        <div class="pain-card__icon">📚</div>
+                        <h3 class="pain-card__title">Volume important</h3>
+                        <p class="pain-card__description">2 semestres d'étude intense avec centaines de notions.</p>
+                    </div>
+                    <div class="pain-card">
+                        <div class="pain-card__icon">✍️</div>
+                        <h3 class="pain-card__title">Dissertations exigeantes</h3>
+                        <p class="pain-card__description">Attendus méthodologiques très précis.</p>
+                    </div>
+                    <div class="pain-card">
+                        <div class="pain-card__icon">🎓</div>
+                        <h3 class="pain-card__title">Culture générale</h3>
+                        <p class="pain-card__description">Nécessite des connaissances hors programme.</p>
+                    </div>
+                </div>
+
+                <div class="pain-banner">
+                    <p class="pain-banner__title">Nos fiches couvrent tout le programme de Droit constitutionnel</p>
+                    <p class="pain-banner__text">50 pages + 5 mindmaps pour maîtriser la matière. PDF téléchargeable.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- COURS PAR NIVEAU -->
+        <div class="section">
+            <span class="page-label">📚 Cours par niveau (ex: L1 Droit)</span>
+
+            <div class="pain-section">
+                <div class="pain-section__header">
+                    <span class="pain-section__badge">🚨 Le constat</span>
+                    <h2 class="pain-section__title">La première année de droit : jusqu'à <span class="highlight">65% d'échec</span></h2>
+                    <p class="pain-section__subtitle">Vous entrez en L1 droit ? Félicitations ! Mais sans préparation, beaucoup abandonnent dès le premier semestre.</p>
+                </div>
+
+                <div class="pain-grid-4">
+                    <div class="pain-card">
+                        <div class="pain-card__icon">📉</div>
+                        <h3 class="pain-card__title">Taux d'échec élevé</h3>
+                        <p class="pain-card__description">La L1 droit est l'une des années les plus sélectives.</p>
+                    </div>
+                    <div class="pain-card">
+                        <div class="pain-card__icon">⚡</div>
+                        <h3 class="pain-card__title">Rythme intense</h3>
+                        <p class="pain-card__description">Le semestre 1 passe vite avec des TD exigeants.</p>
+                    </div>
+                    <div class="pain-card">
+                        <div class="pain-card__icon">🔄</div>
+                        <h3 class="pain-card__title">Changement brutal</h3>
+                        <p class="pain-card__description">La fac demande une autonomie que le lycée ne prépare pas.</p>
+                    </div>
+                    <div class="pain-card">
+                        <div class="pain-card__icon">🎯</div>
+                        <h3 class="pain-card__title">Enjeux importants</h3>
+                        <p class="pain-card__description">Ta L1 compte pour ton dossier Master.</p>
+                    </div>
+                </div>
+
+                <div class="pain-banner">
+                    <p class="pain-banner__title">Maîtrise 60% du programme avant la rentrée</p>
+                    <p class="pain-banner__text">Rejoins les 35% d'étudiants qui passent en L2 facilement grâce à notre préparation.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- COURS PAR MATIÈRE -->
+        <div class="section">
+            <span class="page-label">📖 Cours par matière (ex: Droit des Obligations)</span>
+
+            <div class="pain-section">
+                <div class="pain-section__header">
+                    <span class="pain-section__badge">🚨 Le constat</span>
+                    <h2 class="pain-section__title">Le Droit des obligations : la matière qui fait <span class="highlight">trembler</span></h2>
+                    <p class="pain-section__subtitle">Considérée comme l'une des plus difficiles, elle est pourtant essentielle pour la suite de tes études.</p>
+                </div>
+
+                <div class="pain-grid-4">
+                    <div class="pain-card">
+                        <div class="pain-card__icon">🔗</div>
+                        <h3 class="pain-card__title">Notions interconnectées</h3>
+                        <p class="pain-card__description">Chaque concept dépend d'un autre. Impossible de faire l'impasse.</p>
+                    </div>
+                    <div class="pain-card">
+                        <div class="pain-card__icon">⚖️</div>
+                        <h3 class="pain-card__title">Jurisprudence dense</h3>
+                        <p class="pain-card__description">Des dizaines d'arrêts à connaître par cœur.</p>
+                    </div>
+                    <div class="pain-card">
+                        <div class="pain-card__icon">📝</div>
+                        <h3 class="pain-card__title">Cas pratiques complexes</h3>
+                        <p class="pain-card__description">Qualification juridique et raisonnement rigoureux exigés.</p>
+                    </div>
+                    <div class="pain-card">
+                        <div class="pain-card__icon">🎓</div>
+                        <h3 class="pain-card__title">Coefficient élevé</h3>
+                        <p class="pain-card__description">Une matière qui pèse lourd dans ta moyenne.</p>
+                    </div>
+                </div>
+
+                <div class="pain-banner">
+                    <p class="pain-banner__title">Notre cours vidéo rend les obligations accessibles</p>
+                    <p class="pain-banner__text">Explications claires + fiches + QCM pour maîtriser chaque notion.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- MANUEL MÉTHODOLOGIE -->
+        <div class="section">
+            <span class="page-label">📕 Manuel Méthodologie</span>
+
+            <div class="pain-section">
+                <div class="pain-section__header">
+                    <span class="pain-section__badge">🚨 Le constat</span>
+                    <h2 class="pain-section__title">Vous reconnaissez-vous dans ces <span class="highlight">difficultés</span> ?</h2>
+                    <p class="pain-section__subtitle">La méthode juridique n'est enseignée nulle part... mais elle fait toute la différence aux examens.</p>
+                </div>
+
+                <div class="pain-grid-4">
+                    <div class="pain-card">
+                        <div class="pain-card__icon">😣</div>
+                        <h3 class="pain-card__title">Idées mal articulées</h3>
+                        <p class="pain-card__description">Tu comprends mais tu n'arrives pas à structurer un plan.</p>
+                    </div>
+                    <div class="pain-card">
+                        <div class="pain-card__icon">🤔</div>
+                        <h3 class="pain-card__title">Qualification difficile</h3>
+                        <p class="pain-card__description">Du mal à formuler les problèmes de droit.</p>
+                    </div>
+                    <div class="pain-card">
+                        <div class="pain-card__icon">📋</div>
+                        <h3 class="pain-card__title">Organisation chaotique</h3>
+                        <p class="pain-card__description">Difficultés avant et pendant les partiels.</p>
+                    </div>
+                    <div class="pain-card">
+                        <div class="pain-card__icon">😤</div>
+                        <h3 class="pain-card__title">Efforts non récompensés</h3>
+                        <p class="pain-card__description">Un écart entre ton travail et tes notes.</p>
+                    </div>
+                </div>
+
+                <div class="pain-banner">
+                    <p class="pain-banner__title">Ce manuel te donne toutes les clés méthodologiques</p>
+                    <p class="pain-banner__text">Dissertation, cas pratique, commentaire, fiche d'arrêt... Maîtrise chaque exercice.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- ═══════════════════════════════════════════════════════════════ -->
+        <!-- DOCUMENTATION -->
+        <!-- ═══════════════════════════════════════════════════════════════ -->
+        <div class="docs">
+            <h2>📋 Spécifications uniformisées</h2>
+
+            <h3>Règles uniformes (toutes les pages)</h3>
+            <table class="specs-table">
+                <tr>
+                    <th>Élément</th>
+                    <th>Valeur</th>
+                </tr>
+                <tr>
+                    <td>Badge section</td>
+                    <td>🚨 Le constat — Violet light #EDE9FE</td>
+                </tr>
+                <tr>
+                    <td>Mot-clé H2</td>
+                    <td>Gradient bordeaux→violet (text gradient)</td>
+                </tr>
+                <tr>
+                    <td>Fond icône emoji</td>
+                    <td>Gris clair #F3F4F6</td>
+                </tr>
+                <tr>
+                    <td>Fond carte</td>
+                    <td>Blanc #FFFFFF</td>
+                </tr>
+                <tr>
+                    <td>Bandeau pré-solution</td>
+                    <td>Gradient bordeaux→violet</td>
+                </tr>
+                <tr>
+                    <td>Border-radius section</td>
+                    <td>16px</td>
+                </tr>
+                <tr>
+                    <td>Border-radius cards</td>
+                    <td>12px</td>
+                </tr>
+            </table>
+
+            <h3>Choix de variante par page</h3>
+            <table class="specs-table">
+                <tr>
+                    <th>Page</th>
+                    <th>Variante</th>
+                    <th>Nb pain points</th>
+                </tr>
+                <tr>
+                    <td>Homepage</td>
+                    <td>4 pain points</td>
+                    <td>4 colonnes</td>
+                </tr>
+                <tr>
+                    <td>Académie</td>
+                    <td>6 pain points</td>
+                    <td>3 colonnes × 2 lignes</td>
+                </tr>
+                <tr>
+                    <td>Prépa</td>
+                    <td>6 pain points</td>
+                    <td>3 colonnes × 2 lignes</td>
+                </tr>
+                <tr>
+                    <td>Minos (Suite IA)</td>
+                    <td>4 pain points</td>
+                    <td>4 colonnes</td>
+                </tr>
+                <tr>
+                    <td>Fiches PDF (générale)</td>
+                    <td>4 pain points</td>
+                    <td>4 colonnes</td>
+                </tr>
+                <tr>
+                    <td>Fiches par matière</td>
+                    <td>4 pain points</td>
+                    <td>4 colonnes</td>
+                </tr>
+                <tr>
+                    <td>Cours par niveau</td>
+                    <td>4 pain points</td>
+                    <td>4 colonnes</td>
+                </tr>
+                <tr>
+                    <td>Cours par matière</td>
+                    <td>4 pain points</td>
+                    <td>4 colonnes</td>
+                </tr>
+                <tr>
+                    <td>Manuel méthodologie</td>
+                    <td>4 pain points</td>
+                    <td>4 colonnes</td>
+                </tr>
+            </table>
+
+            <h3>✅ Design System respecté</h3>
+            <ul class="checklist">
+                <li>Badge "Le constat" toujours violet light</li>
+                <li>Mot-clé H2 en gradient (pas juste violet)</li>
+                <li>Fond emoji gris clair (pas rose)</li>
+                <li>Bandeau toujours gradient (pas vert)</li>
+                <li>Emojis (pas d'icônes SVG)</li>
+                <li>Hover : translateY(-4px) + shadow</li>
+            </ul>
+
+            <h3>📱 Responsive</h3>
+            <table class="specs-table">
+                <tr>
+                    <th>Breakpoint</th>
+                    <th>6 pain points</th>
+                    <th>4 pain points</th>
+                </tr>
+                <tr>
+                    <td>> 1000px</td>
+                    <td>3 colonnes</td>
+                    <td>4 colonnes</td>
+                </tr>
+                <tr>
+                    <td>600-1000px</td>
+                    <td>2 colonnes</td>
+                    <td>2 colonnes</td>
+                </tr>
+                <tr>
+                    <td>< 600px</td>
+                    <td>1 colonne</td>
+                    <td>1 colonne</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</body>
+</html>

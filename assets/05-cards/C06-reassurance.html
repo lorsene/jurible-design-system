@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bloc Réassurance — Design System Jurible</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* ===== DESIGN SYSTEM TOKENS ===== */
+        :root {
+            --color-primary: #B0001D;
+            --color-secondary: #7C3AED;
+            --color-black: #1A1A1A;
+            --color-white: #FFFFFF;
+            --color-gray-50: #F9FAFB;
+            --color-gray-100: #F3F4F6;
+            --color-gray-200: #E5E7EB;
+            --color-gray-400: #9CA3AF;
+            --color-gray-600: #4B5563;
+            --color-success: #10B981;
+            --color-warning: #F59E0B;
+            --color-secondary-light: #EDE9FE;
+            --gradient-primary: linear-gradient(135deg, #B0001D 0%, #7C3AED 100%);
+            --space-xs: 8px;
+            --space-sm: 16px;
+            --space-md: 24px;
+            --space-lg: 32px;
+            --space-xl: 48px;
+            --space-2xl: 64px;
+            --radius-sm: 6px;
+            --radius-md: 8px;
+            --radius-lg: 12px;
+            --radius-xl: 16px;
+            --radius-full: 9999px;
+            --shadow-sm: 0 1px 3px rgba(0,0,0,0.1), 0 1px 2px rgba(0,0,0,0.06);
+            --shadow-md: 0 4px 6px rgba(0,0,0,0.1), 0 2px 4px rgba(0,0,0,0.06);
+            --transition: all 150ms ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: var(--color-gray-100);
+            padding: var(--space-xl);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--color-black);
+            margin-bottom: var(--space-xs);
+        }
+
+        .subtitle {
+            color: var(--color-gray-400);
+            margin-bottom: var(--space-xl);
+        }
+
+        .section {
+            margin-bottom: var(--space-2xl);
+        }
+
+        .section-label {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: var(--color-gray-200);
+            color: var(--color-gray-600);
+            padding: 6px 14px;
+            border-radius: var(--radius-full);
+            font-size: 13px;
+            font-weight: 500;
+            margin-bottom: var(--space-md);
+        }
+
+        /* ═══════════════════════════════════════════════════════════════ */
+        /* VERSION COMPLÈTE (2 LIGNES)                                     */
+        /* ═══════════════════════════════════════════════════════════════ */
+        .reassurance-full {
+            background: var(--color-white);
+            border-radius: var(--radius-xl);
+            padding: var(--space-lg) var(--space-xl);
+            box-shadow: var(--shadow-sm);
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-md);
+        }
+
+        .reassurance-full__row {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: var(--space-xl);
+            flex-wrap: wrap;
+        }
+
+        .reassurance-full__divider {
+            width: 100%;
+            height: 1px;
+            background: var(--color-gray-200);
+        }
+
+        /* Items */
+        .reassurance-full__item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            gap: var(--space-xs);
+        }
+
+        .reassurance-full__icon {
+            width: 48px;
+            height: 48px;
+            background: var(--color-gray-100);
+            border-radius: var(--radius-full);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+        }
+
+        .reassurance-full__title {
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--color-black);
+        }
+
+        /* Séparateur vertical */
+        .reassurance-full__separator {
+            width: 1px;
+            height: 50px;
+            background: var(--color-gray-200);
+        }
+
+        /* Avis (étoiles) */
+        .reassurance-full__rating {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .reassurance-full__stars {
+            display: flex;
+            gap: 2px;
+        }
+
+        .reassurance-full__star {
+            color: var(--color-warning);
+            font-size: 16px;
+        }
+
+        .reassurance-full__rating-text {
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--color-black);
+        }
+
+        .reassurance-full__rating-count {
+            font-size: 11px;
+            color: var(--color-gray-400);
+        }
+
+        /* Partenaires */
+        .reassurance-full__partners {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: var(--space-xl);
+        }
+
+        .reassurance-full__partner {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .reassurance-full__partner-text {
+            font-size: 10px;
+            color: var(--color-gray-400);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .reassurance-full__partner-logo {
+            height: 28px;
+            width: auto;
+            opacity: 0.8;
+            transition: var(--transition);
+        }
+
+        .reassurance-full__partner-logo:hover {
+            opacity: 1;
+        }
+
+        /* Placeholder pour démo */
+        .reassurance-full__partner-placeholder {
+            height: 28px;
+            padding: 0 var(--space-sm);
+            background: var(--color-gray-100);
+            border-radius: var(--radius-sm);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 11px;
+            font-weight: 600;
+            color: var(--color-gray-600);
+        }
+
+        /* ═══════════════════════════════════════════════════════════════ */
+        /* VERSION MINIMALISTE (INLINE)                                    */
+        /* ═══════════════════════════════════════════════════════════════ */
+        .reassurance-minimal {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: var(--space-lg);
+            flex-wrap: wrap;
+            padding: var(--space-sm) 0;
+        }
+
+        .reassurance-minimal__item {
+            display: flex;
+            align-items: center;
+            gap: var(--space-xs);
+        }
+
+        .reassurance-minimal__icon {
+            font-size: 16px;
+        }
+
+        .reassurance-minimal__text {
+            font-size: 12px;
+            font-weight: 500;
+            color: var(--color-gray-600);
+        }
+
+        /* ═══════════════════════════════════════════════════════════════ */
+        /* RESPONSIVE                                                      */
+        /* ═══════════════════════════════════════════════════════════════ */
+        @media (max-width: 900px) {
+            .reassurance-full__row {
+                gap: var(--space-lg);
+            }
+
+            .reassurance-full__separator {
+                display: none;
+            }
+        }
+
+        @media (max-width: 600px) {
+            body {
+                padding: var(--space-sm);
+            }
+
+            .reassurance-full {
+                padding: var(--space-md);
+            }
+
+            .reassurance-full__row {
+                flex-direction: column;
+                gap: var(--space-md);
+            }
+
+            .reassurance-full__partners {
+                flex-direction: column;
+                gap: var(--space-md);
+            }
+
+            .reassurance-minimal {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: var(--space-sm);
+            }
+        }
+
+        /* ===== DOCUMENTATION ===== */
+        .docs {
+            margin-top: var(--space-xl);
+            padding-top: var(--space-xl);
+            border-top: 1px solid var(--color-gray-200);
+        }
+
+        .docs h2 {
+            font-size: 20px;
+            font-weight: 600;
+            color: var(--color-black);
+            margin-bottom: var(--space-md);
+        }
+
+        .docs h3 {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--color-black);
+            margin: var(--space-md) 0 var(--space-sm);
+        }
+
+        .specs-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 13px;
+            background: var(--color-white);
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            box-shadow: var(--shadow-sm);
+            margin-bottom: var(--space-md);
+        }
+
+        .specs-table th {
+            background: var(--color-gray-100);
+            font-weight: 600;
+            text-align: left;
+            padding: 12px 16px;
+            color: var(--color-black);
+        }
+
+        .specs-table td {
+            padding: 12px 16px;
+            border-bottom: 1px solid var(--color-gray-200);
+        }
+
+        .specs-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .checklist {
+            list-style: none;
+            padding: 0;
+        }
+
+        .checklist li {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 0;
+            font-size: 14px;
+            color: var(--color-gray-600);
+        }
+
+        .checklist li::before {
+            content: '✓';
+            color: var(--color-success);
+            font-weight: 600;
+        }
+
+        .code-note {
+            background: var(--color-gray-50);
+            border-left: 3px solid var(--color-secondary);
+            padding: var(--space-sm);
+            font-size: 13px;
+            color: var(--color-gray-600);
+            margin: var(--space-md) 0;
+            border-radius: 0 var(--radius-md) var(--radius-md) 0;
+        }
+
+        .code-note code {
+            background: var(--color-white);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 12px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Bloc Réassurance — Design System Jurible</h1>
+        <p class="subtitle">Éléments de confiance — 2 versions</p>
+
+        <!-- ═══════════════════════════════════════════════════════════════ -->
+        <!-- VERSION COMPLÈTE                                                -->
+        <!-- ═══════════════════════════════════════════════════════════════ -->
+        <div class="section">
+            <span class="section-label">🌟 Version Complète — Homepage, pages stratégiques</span>
+
+            <div class="reassurance-full">
+                <!-- Ligne 1 : Éléments de réassurance -->
+                <div class="reassurance-full__row">
+                    <div class="reassurance-full__rating">
+                        <div class="reassurance-full__stars">
+                            <span class="reassurance-full__star">★</span>
+                            <span class="reassurance-full__star">★</span>
+                            <span class="reassurance-full__star">★</span>
+                            <span class="reassurance-full__star">★</span>
+                            <span class="reassurance-full__star">★</span>
+                        </div>
+                        <div class="reassurance-full__rating-text">4.8/5</div>
+                        <div class="reassurance-full__rating-count">+500 avis</div>
+                    </div>
+
+                    <div class="reassurance-full__separator"></div>
+
+                    <div class="reassurance-full__item">
+                        <div class="reassurance-full__icon">👥</div>
+                        <div class="reassurance-full__title">+25 000 étudiants</div>
+                    </div>
+
+                    <div class="reassurance-full__separator"></div>
+
+                    <div class="reassurance-full__item">
+                        <div class="reassurance-full__icon">🔒</div>
+                        <div class="reassurance-full__title">Paiement sécurisé</div>
+                    </div>
+
+                    <div class="reassurance-full__separator"></div>
+
+                    <div class="reassurance-full__item">
+                        <div class="reassurance-full__icon">✅</div>
+                        <div class="reassurance-full__title">Programme officiel</div>
+                    </div>
+                </div>
+
+                <!-- Séparateur horizontal -->
+                <div class="reassurance-full__divider"></div>
+
+                <!-- Ligne 2 : Logos partenaires -->
+                <div class="reassurance-full__partners">
+                    <div class="reassurance-full__partner">
+                        <span class="reassurance-full__partner-text">Soutenu par</span>
+                        <!-- Remplacer par : <img src="bpi-france-logo.svg" alt="BPI France" class="reassurance-full__partner-logo"> -->
+                        <div class="reassurance-full__partner-placeholder">BPI France</div>
+                    </div>
+
+                    <div class="reassurance-full__partner">
+                        <span class="reassurance-full__partner-text">Incubé par</span>
+                        <!-- Remplacer par : <img src="assas-lab-logo.svg" alt="Assas Lab" class="reassurance-full__partner-logo"> -->
+                        <div class="reassurance-full__partner-placeholder">Assas Lab</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ═══════════════════════════════════════════════════════════════ -->
+        <!-- VERSION MINIMALISTE                                             -->
+        <!-- ═══════════════════════════════════════════════════════════════ -->
+        <div class="section">
+            <span class="section-label">✨ Version Minimaliste — Sous pricing, CTA</span>
+
+            <div class="reassurance-minimal">
+                <div class="reassurance-minimal__item">
+                    <span class="reassurance-minimal__icon">🔒</span>
+                    <span class="reassurance-minimal__text">Paiement sécurisé</span>
+                </div>
+
+                <div class="reassurance-minimal__item">
+                    <span class="reassurance-minimal__icon">✅</span>
+                    <span class="reassurance-minimal__text">Conforme au programme</span>
+                </div>
+
+                <div class="reassurance-minimal__item">
+                    <span class="reassurance-minimal__icon">⚡</span>
+                    <span class="reassurance-minimal__text">Accès immédiat</span>
+                </div>
+
+                <div class="reassurance-minimal__item">
+                    <span class="reassurance-minimal__icon">⭐</span>
+                    <span class="reassurance-minimal__text">4.8/5 (500+ avis)</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- ═══════════════════════════════════════════════════════════════ -->
+        <!-- EXEMPLE CONTEXTUALISÉ                                           -->
+        <!-- ═══════════════════════════════════════════════════════════════ -->
+        <div class="section">
+            <span class="section-label">📍 Exemple — Sous un bloc pricing</span>
+
+            <div style="background: var(--color-white); border-radius: var(--radius-xl); padding: var(--space-xl); box-shadow: var(--shadow-sm);">
+                <!-- Fake pricing card -->
+                <div style="text-align: center; padding-bottom: var(--space-lg); border-bottom: 1px solid var(--color-gray-200); margin-bottom: var(--space-md);">
+                    <div style="font-size: 14px; color: var(--color-gray-400); margin-bottom: 4px;">À partir de</div>
+                    <div style="font-size: 36px; font-weight: 700; color: var(--color-black);">9,90€<span style="font-size: 16px; font-weight: 400; color: var(--color-gray-400);">/mois</span></div>
+                    <button style="margin-top: var(--space-md); background: var(--gradient-primary); color: white; border: none; padding: 12px 32px; border-radius: var(--radius-full); font-weight: 600; cursor: pointer;">Commencer maintenant</button>
+                </div>
+
+                <!-- Réassurance minimaliste -->
+                <div class="reassurance-minimal">
+                    <div class="reassurance-minimal__item">
+                        <span class="reassurance-minimal__icon">🔒</span>
+                        <span class="reassurance-minimal__text">Paiement sécurisé</span>
+                    </div>
+                    <div class="reassurance-minimal__item">
+                        <span class="reassurance-minimal__icon">✅</span>
+                        <span class="reassurance-minimal__text">Conforme au programme</span>
+                    </div>
+                    <div class="reassurance-minimal__item">
+                        <span class="reassurance-minimal__icon">⚡</span>
+                        <span class="reassurance-minimal__text">Accès immédiat</span>
+                    </div>
+                    <div class="reassurance-minimal__item">
+                        <span class="reassurance-minimal__icon">⭐</span>
+                        <span class="reassurance-minimal__text">4.8/5 (500+ avis)</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ═══════════════════════════════════════════════════════════════ -->
+        <!-- DOCUMENTATION                                                   -->
+        <!-- ═══════════════════════════════════════════════════════════════ -->
+        <div class="docs">
+            <h2>📋 Spécifications — Bloc Réassurance</h2>
+
+            <h3>2 Versions</h3>
+            <table class="specs-table">
+                <tr>
+                    <th>Version</th>
+                    <th>Éléments</th>
+                    <th>Usage</th>
+                </tr>
+                <tr>
+                    <td><strong>Complète</strong></td>
+                    <td>⭐ Avis | 👥 Étudiants | 🔒 Paiement | ✅ Programme + Logos BPI & Assas</td>
+                    <td>Homepage, Prépa</td>
+                </tr>
+                <tr>
+                    <td><strong>Minimaliste</strong></td>
+                    <td>🔒 Paiement | ✅ Programme | ⚡ Accès immédiat | ⭐ Avis</td>
+                    <td>Sous pricing, CTA</td>
+                </tr>
+            </table>
+
+            <h3>Version Complète — Structure</h3>
+            <table class="specs-table">
+                <tr>
+                    <th>Ligne</th>
+                    <th>Contenu</th>
+                </tr>
+                <tr>
+                    <td>Ligne 1</td>
+                    <td>⭐ 4.8/5 (500 avis) | 👥 +25 000 étudiants | 🔒 Paiement sécurisé | ✅ Programme officiel</td>
+                </tr>
+                <tr>
+                    <td>Ligne 2</td>
+                    <td>Logo BPI France | Logo Assas Lab</td>
+                </tr>
+            </table>
+
+            <div class="code-note">
+                💡 <strong>Logos partenaires :</strong> Remplacer les placeholders par :<br>
+                <code>&lt;img src="bpi-france.svg" alt="BPI France" class="reassurance-full__partner-logo"&gt;</code>
+            </div>
+
+            <h3>Placement recommandé</h3>
+            <table class="specs-table">
+                <tr>
+                    <th>Page</th>
+                    <th>Version</th>
+                    <th>Position</th>
+                </tr>
+                <tr>
+                    <td>Homepage</td>
+                    <td>Complète</td>
+                    <td>Après Hero ou avant CTA final</td>
+                </tr>
+                <tr>
+                    <td>Prépa</td>
+                    <td>Complète</td>
+                    <td>Sous le pricing</td>
+                </tr>
+                <tr>
+                    <td>Académie</td>
+                    <td>Minimaliste</td>
+                    <td>Sous le pricing</td>
+                </tr>
+                <tr>
+                    <td>Fiches PDF</td>
+                    <td>Minimaliste</td>
+                    <td>Sous le pricing</td>
+                </tr>
+                <tr>
+                    <td>Minos</td>
+                    <td>Minimaliste</td>
+                    <td>Sous le pricing</td>
+                </tr>
+                <tr>
+                    <td>Cours matière</td>
+                    <td>Minimaliste</td>
+                    <td>Sous le pricing</td>
+                </tr>
+            </table>
+
+            <h3>✅ Design System respecté</h3>
+            <ul class="checklist">
+                <li>Emojis (pas d'icônes SVG)</li>
+                <li>Étoiles jaunes #F59E0B</li>
+                <li>Séparateurs verticaux (desktop)</li>
+                <li>Responsive : empile en mobile</li>
+                <li>Fond blanc + shadow (Complète)</li>
+                <li>Fond transparent (Minimaliste)</li>
+            </ul>
+        </div>
+    </div>
+</body>
+</html>

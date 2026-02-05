@@ -1,0 +1,963 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jurible Design System — WYSIWYG / Prose</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --color-primary: #B0001D;
+            --color-secondary: #7C3AED;
+            --color-text-dark: #1A1A1A;
+            --color-text-gray: #4A4A4A;
+            --color-text-muted: #9CA3AF;
+            --color-background: #FFFFFF;
+            --color-muted: #F3F4F6;
+            --color-border: #E5E7EB;
+
+            /* Bloc colors - exact from platform */
+            --color-definition: #7C3AED;
+            --color-definition-bg: #F3EEFF;
+            
+            --color-example: #F59E0B;
+            --color-example-bg: #FEF9E7;
+            
+            --color-retenir: #10B981;
+            --color-retenir-bg: #ECFDF5;
+            
+            --color-attention: #EF4444;
+            --color-attention-bg: #FEF2F2;
+            
+            --color-astuce: #F97316;
+            --color-astuce-bg: #FFF7ED;
+            
+            --color-important: #EC4899;
+            --color-important-bg: #FDF2F8;
+
+            --space-xs: 8px;
+            --space-sm: 16px;
+            --space-md: 24px;
+            --space-lg: 32px;
+            --space-xl: 48px;
+
+            --radius-sm: 6px;
+            --radius-md: 8px;
+            --radius-lg: 12px;
+            --radius-xl: 16px;
+            --radius-full: 9999px;
+
+            --font-family: 'Poppins', sans-serif;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: var(--font-family);
+            background: var(--color-background);
+            color: var(--color-text-dark);
+            padding: var(--space-xl) 80px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        /* ==================== PAGE HEADER ==================== */
+        .page-header { margin-bottom: var(--space-xl); }
+        .page-title { font-size: 48px; font-weight: 700; margin-bottom: var(--space-xs); }
+        .page-divider { height: 3px; width: 120px; background: linear-gradient(90deg, #B0001D 0%, #DC2626 50%, #7C3AED 100%); border-radius: var(--radius-full); }
+
+        .section { margin-bottom: var(--space-xl); }
+        .section-title { font-size: 24px; font-weight: 600; margin-bottom: var(--space-xs); }
+        .section-subtitle { font-size: 14px; color: var(--color-text-muted); margin-bottom: var(--space-md); }
+        .section-divider { height: 1px; background: var(--color-border); margin: var(--space-xl) 0; }
+
+        .component-label { font-size: 11px; color: var(--color-text-muted); text-transform: uppercase; letter-spacing: 0.5px; font-weight: 600; margin-bottom: var(--space-sm); display: inline-block; background: var(--color-muted); padding: 4px 8px; border-radius: 4px; }
+
+        .preview-box {
+            background: var(--color-muted);
+            border-radius: var(--radius-lg);
+            padding: var(--space-lg);
+            margin-bottom: var(--space-md);
+        }
+
+        .preview-white {
+            background: white;
+            border: 1px solid var(--color-border);
+        }
+
+        .preview-row {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: var(--space-lg);
+        }
+
+        /* ==================== PROSE CONTAINER ==================== */
+        .prose {
+            max-width: 720px;
+            font-size: 16px;
+            line-height: 1.7;
+            color: var(--color-text-gray);
+        }
+
+        /* ==================== HEADINGS ==================== */
+        .prose h1 {
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--color-text-dark);
+            line-height: 1.3;
+            margin-bottom: var(--space-md);
+        }
+
+        .prose h2 {
+            font-size: 22px;
+            font-weight: 700;
+            color: var(--color-text-dark);
+            line-height: 1.3;
+            margin-top: var(--space-lg);
+            margin-bottom: var(--space-xs);
+            display: inline-block;
+        }
+
+        /* H2 avec soulignement gradient */
+        .prose h2::after {
+            content: "";
+            display: block;
+            width: 80px;
+            height: 3px;
+            background: linear-gradient(90deg, #B0001D 0%, #7C3AED 100%);
+            border-radius: 2px;
+            margin-top: 8px;
+            margin-bottom: var(--space-md);
+        }
+
+        .prose h3 {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--color-text-dark);
+            line-height: 1.4;
+            margin-top: var(--space-md);
+            margin-bottom: var(--space-sm);
+        }
+
+        .prose h4 {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--color-text-dark);
+            line-height: 1.4;
+            margin-top: var(--space-sm);
+            margin-bottom: var(--space-xs);
+        }
+
+        /* ==================== PARAGRAPHS ==================== */
+        .prose p {
+            margin-bottom: var(--space-sm);
+        }
+
+        .prose strong {
+            font-weight: 600;
+            color: var(--color-text-dark);
+        }
+
+        .prose em {
+            font-style: italic;
+        }
+
+        .prose a {
+            color: var(--color-primary);
+            text-decoration: underline;
+            text-underline-offset: 3px;
+        }
+
+        .prose a:hover {
+            color: var(--color-secondary);
+        }
+
+        /* ==================== LISTS ==================== */
+        .prose ul,
+        .prose ol {
+            padding-left: 1.5em;
+            margin-bottom: var(--space-sm);
+        }
+
+        .prose ul li::marker,
+        .prose ol li::marker {
+            color: var(--color-text-dark);
+        }
+
+        .prose li {
+            margin-bottom: 6px;
+            padding-left: 4px;
+        }
+
+        /* ==================== BLOCKQUOTE / CITATION ==================== */
+        .bloc-citation {
+            background: var(--color-muted);
+            border-radius: var(--radius-lg);
+            padding: var(--space-lg);
+            margin: var(--space-md) 0;
+        }
+
+        .bloc-citation__inner {
+            border-left: 3px solid var(--color-primary);
+            padding-left: var(--space-md);
+        }
+
+        .bloc-citation__text {
+            font-size: 16px;
+            font-style: italic;
+            color: var(--color-text-dark);
+            line-height: 1.6;
+            margin-bottom: var(--space-sm);
+        }
+
+        .bloc-citation__source {
+            font-size: 14px;
+            color: var(--color-text-muted);
+        }
+
+        /* ==================== DIVIDER ==================== */
+        .prose hr {
+            border: none;
+            height: 1px;
+            background: var(--color-border);
+            margin: var(--space-md) 0;
+        }
+
+        /* ==================== CONTENT BLOCKS ==================== */
+        .bloc {
+            border-radius: var(--radius-lg);
+            padding: var(--space-md);
+            margin: var(--space-md) 0;
+        }
+
+        .bloc__label {
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: var(--space-xs);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .bloc__content {
+            font-size: 15px;
+            color: var(--color-text-dark);
+            line-height: 1.6;
+        }
+
+        .bloc__content strong {
+            font-weight: 600;
+        }
+
+        /* Définition */
+        .bloc--definition {
+            background: var(--color-definition-bg);
+        }
+        .bloc--definition .bloc__label {
+            color: var(--color-definition);
+        }
+
+        /* Exemple */
+        .bloc--exemple {
+            background: var(--color-example-bg);
+        }
+        .bloc--exemple .bloc__label {
+            color: var(--color-example);
+        }
+
+        /* À retenir */
+        .bloc--retenir {
+            background: var(--color-retenir-bg);
+        }
+        .bloc--retenir .bloc__label {
+            color: var(--color-retenir);
+        }
+
+        /* Attention */
+        .bloc--attention {
+            background: var(--color-attention-bg);
+        }
+        .bloc--attention .bloc__label {
+            color: var(--color-attention);
+        }
+
+        /* Astuce */
+        .bloc--astuce {
+            background: var(--color-astuce-bg);
+        }
+        .bloc--astuce .bloc__label {
+            color: var(--color-astuce);
+        }
+
+        /* Important */
+        .bloc--important {
+            background: var(--color-important-bg);
+        }
+        .bloc--important .bloc__label {
+            color: var(--color-important);
+        }
+
+        /* ==================== BLOC EN SAVOIR PLUS ==================== */
+        .bloc-cta {
+            background: linear-gradient(135deg, #B0001D 0%, #7C3AED 100%);
+            border-radius: var(--radius-lg);
+            padding: var(--space-md);
+            margin: var(--space-md) 0;
+        }
+
+        .bloc-cta__label {
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: var(--space-xs);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .bloc-cta__content {
+            font-size: 15px;
+            color: white;
+            line-height: 1.6;
+            margin-bottom: var(--space-sm);
+        }
+
+        .bloc-cta__button {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 10px 20px;
+            background: white;
+            color: var(--color-secondary);
+            font-size: 14px;
+            font-weight: 600;
+            border-radius: var(--radius-md);
+            text-decoration: none;
+            transition: all 0.15s ease;
+        }
+
+        .bloc-cta__button:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        /* ==================== BLOC RESSOURCES ==================== */
+        .bloc-ressources {
+            background: white;
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-lg);
+            padding: var(--space-md);
+            margin: var(--space-md) 0;
+        }
+
+        .bloc-ressources__title {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--color-text-dark);
+            margin-bottom: var(--space-sm);
+            display: flex;
+            align-items: center;
+            gap: var(--space-xs);
+        }
+
+        .bloc-ressources__list {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-xs);
+        }
+
+        .bloc-ressources__item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: var(--space-sm);
+            background: var(--color-muted);
+            border-radius: var(--radius-md);
+            text-decoration: none;
+            color: var(--color-text-dark);
+            transition: background 0.15s ease;
+        }
+
+        .bloc-ressources__item:hover {
+            background: var(--color-border);
+        }
+
+        .bloc-ressources__item-left {
+            display: flex;
+            align-items: center;
+            gap: var(--space-sm);
+        }
+
+        .bloc-ressources__item-icon {
+            font-size: 20px;
+        }
+
+        .bloc-ressources__item-text {
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .bloc-ressources__item-arrow {
+            font-size: 14px;
+            color: var(--color-secondary);
+        }
+
+        /* ==================== VIDEO EMBED ==================== */
+        .video-embed {
+            position: relative;
+            width: 100%;
+            padding-bottom: 56.25%;
+            background: #1A1A1A;
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            margin: var(--space-md) 0;
+        }
+
+        .video-embed__placeholder {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .video-embed__play {
+            width: 64px;
+            height: 64px;
+            background: white;
+            border-radius: var(--radius-full);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .video-embed__play:hover {
+            transform: scale(1.1);
+        }
+
+        .video-embed__play svg {
+            width: 24px;
+            height: 24px;
+            fill: var(--color-text-dark);
+            margin-left: 3px;
+        }
+
+        /* ==================== SOMMAIRE ==================== */
+        .bloc-sommaire {
+            background: var(--color-muted);
+            border-radius: var(--radius-lg);
+            padding: var(--space-md);
+            margin: var(--space-md) 0;
+        }
+
+        .bloc-sommaire__title {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--color-text-dark);
+            margin-bottom: var(--space-sm);
+            display: flex;
+            align-items: center;
+            gap: var(--space-xs);
+        }
+
+        .bloc-sommaire__list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .bloc-sommaire__item {
+            font-size: 14px;
+            color: var(--color-text-gray);
+            padding: 6px 0;
+        }
+
+        .bloc-sommaire__item a {
+            color: var(--color-text-gray);
+            text-decoration: none;
+            transition: color 0.15s ease;
+        }
+
+        .bloc-sommaire__item a:hover {
+            color: var(--color-primary);
+        }
+
+        /* ==================== TABLE ==================== */
+        .prose table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: var(--space-md) 0;
+            font-size: 14px;
+        }
+
+        .prose table th {
+            text-align: left;
+            font-weight: 600;
+            color: var(--color-text-dark);
+            padding: 12px var(--space-sm);
+            background: var(--color-muted);
+            border-bottom: 2px solid var(--color-border);
+        }
+
+        .prose table th:first-child {
+            border-radius: var(--radius-md) 0 0 0;
+        }
+
+        .prose table th:last-child {
+            border-radius: 0 var(--radius-md) 0 0;
+        }
+
+        .prose table td {
+            padding: 12px var(--space-sm);
+            border-bottom: 1px solid var(--color-border);
+            color: var(--color-text-gray);
+        }
+
+        /* ==================== SPECS TABLE ==================== */
+        .specs-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 13px;
+            margin-top: var(--space-md);
+        }
+
+        .specs-table th {
+            text-align: left;
+            font-size: 11px;
+            font-weight: 600;
+            color: white;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            padding: 12px var(--space-sm);
+            background: var(--color-text-dark);
+        }
+
+        .specs-table th:first-child { border-radius: var(--radius-md) 0 0 0; }
+        .specs-table th:last-child { border-radius: 0 var(--radius-md) 0 0; }
+
+        .specs-table td { padding: 12px var(--space-sm); border-bottom: 1px solid var(--color-border); }
+        .specs-table tr:last-child td { border-bottom: none; }
+        .specs-table code { font-family: 'SF Mono', monospace; font-size: 11px; background: var(--color-muted); padding: 2px 6px; border-radius: 4px; }
+
+        .info-box { background: var(--color-muted); border-radius: var(--radius-lg); padding: var(--space-md); margin-top: var(--space-md); }
+        .info-box__title { font-size: 14px; font-weight: 600; margin-bottom: var(--space-sm); }
+        .info-box ul { font-size: 13px; color: var(--color-text-gray); line-height: 1.8; padding-left: 20px; }
+
+        /* Color swatches */
+        .color-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: var(--space-sm);
+            margin: var(--space-md) 0;
+        }
+
+        .color-swatch {
+            display: flex;
+            align-items: center;
+            gap: var(--space-sm);
+            padding: var(--space-sm);
+            background: white;
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-md);
+        }
+
+        .color-swatch__preview {
+            width: 40px;
+            height: 40px;
+            border-radius: var(--radius-sm);
+        }
+
+        .color-swatch__info {
+            flex: 1;
+        }
+
+        .color-swatch__name {
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--color-text-dark);
+        }
+
+        .color-swatch__hex {
+            font-size: 11px;
+            color: var(--color-text-muted);
+            font-family: 'SF Mono', monospace;
+        }
+    </style>
+</head>
+<body>
+
+<div class="page-header">
+    <h1 class="page-title">wysiwyg / prose</h1>
+    <div class="page-divider"></div>
+</div>
+
+<!-- ==================== 1. HEADINGS ==================== -->
+<div class="section">
+    <h2 class="section-title">1. Titres (Headings)</h2>
+    <p class="section-subtitle">Hiérarchie des titres pour leçons et articles de blog</p>
+    
+    <div class="preview-box preview-white">
+        <div class="prose">
+            <h1>1. Définition de la règle de droit</h1>
+        </div>
+    </div>
+
+    <div class="preview-box preview-white">
+        <div class="prose">
+            <h2>II. Analyser le sujet</h2>
+            <p>L'analyse du sujet est l'étape la plus importante. Une mauvaise compréhension du sujet conduit inévitablement au hors-sujet.</p>
+        </div>
+    </div>
+
+    <div class="preview-box preview-white">
+        <div class="prose">
+            <h3>A. Identifier les termes clés</h3>
+            <p>Commencez par souligner et définir chaque terme du sujet.</p>
+        </div>
+    </div>
+</div>
+
+<div class="section-divider"></div>
+
+<!-- ==================== 2. PARAGRAPHS & TEXT ==================== -->
+<div class="section">
+    <h2 class="section-title">2. Paragraphes & Texte</h2>
+    <p class="section-subtitle">Styles de texte pour le contenu</p>
+    
+    <div class="preview-box preview-white">
+        <div class="prose">
+            <p>La règle de droit présente plusieurs caractères essentiels qu'il convient d'étudier en détail. Elle est <strong>générale</strong>, <em>abstraite</em> et obligatoire.</p>
+            <p>Les <a href="#">liens hypertextes</a> permettent de naviguer vers d'autres ressources.</p>
+        </div>
+    </div>
+</div>
+
+<div class="section-divider"></div>
+
+<!-- ==================== 3. LISTS ==================== -->
+<div class="section">
+    <h2 class="section-title">3. Listes</h2>
+    <p class="section-subtitle">Listes à puces et numérotées (marqueurs noirs)</p>
+    
+    <div class="preview-row">
+        <div>
+            <span class="component-label">Liste à puces</span>
+            <div class="preview-box preview-white">
+                <div class="prose">
+                    <ul>
+                        <li>Premier élément de la liste</li>
+                        <li>Deuxième élément de la liste</li>
+                        <li>Troisième élément de la liste</li>
+                        <li>Quatrième élément de la liste</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div>
+            <span class="component-label">Liste numérotée</span>
+            <div class="preview-box preview-white">
+                <div class="prose">
+                    <ol>
+                        <li>Première étape du processus</li>
+                        <li>Deuxième étape à suivre</li>
+                        <li>Troisième étape importante</li>
+                        <li>Quatrième étape finale</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="section-divider"></div>
+
+<!-- ==================== 4. BLOC CITATION ==================== -->
+<div class="section">
+    <h2 class="section-title">4. Bloc Citation / Article de loi</h2>
+    <p class="section-subtitle">Citation avec barre latérale bordeaux sur fond gris</p>
+    
+    <div class="preview-box preview-white">
+        <div class="bloc-citation">
+            <div class="bloc-citation__inner">
+                <p class="bloc-citation__text">« Tout fait quelconque de l'homme, qui cause à autrui un dommage, oblige celui par la faute duquel il est arrivé à le réparer. »</p>
+                <p class="bloc-citation__source">— Article 1240 du Code civil</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="section-divider"></div>
+
+<!-- ==================== 5. BLOCS COLORÉS ==================== -->
+<div class="section">
+    <h2 class="section-title">5. Blocs colorés</h2>
+    <p class="section-subtitle">Encadrés pour mettre en valeur des informations importantes</p>
+    
+    <div class="color-grid">
+        <div class="color-swatch">
+            <div class="color-swatch__preview" style="background: var(--color-definition-bg);"></div>
+            <div class="color-swatch__info">
+                <div class="color-swatch__name">Définition</div>
+                <div class="color-swatch__hex">#F3EEFF</div>
+            </div>
+        </div>
+        <div class="color-swatch">
+            <div class="color-swatch__preview" style="background: var(--color-example-bg);"></div>
+            <div class="color-swatch__info">
+                <div class="color-swatch__name">Exemple</div>
+                <div class="color-swatch__hex">#FEF9E7</div>
+            </div>
+        </div>
+        <div class="color-swatch">
+            <div class="color-swatch__preview" style="background: var(--color-retenir-bg);"></div>
+            <div class="color-swatch__info">
+                <div class="color-swatch__name">À retenir</div>
+                <div class="color-swatch__hex">#ECFDF5</div>
+            </div>
+        </div>
+        <div class="color-swatch">
+            <div class="color-swatch__preview" style="background: var(--color-attention-bg);"></div>
+            <div class="color-swatch__info">
+                <div class="color-swatch__name">Attention</div>
+                <div class="color-swatch__hex">#FEF2F2</div>
+            </div>
+        </div>
+        <div class="color-swatch">
+            <div class="color-swatch__preview" style="background: var(--color-astuce-bg);"></div>
+            <div class="color-swatch__info">
+                <div class="color-swatch__name">Astuce</div>
+                <div class="color-swatch__hex">#FFF7ED</div>
+            </div>
+        </div>
+        <div class="color-swatch">
+            <div class="color-swatch__preview" style="background: var(--color-important-bg);"></div>
+            <div class="color-swatch__info">
+                <div class="color-swatch__name">Important</div>
+                <div class="color-swatch__hex">#FDF2F8</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Définition -->
+    <span class="component-label">Définition (violet)</span>
+    <div class="bloc bloc--definition">
+        <p class="bloc__label">📖 DÉFINITION</p>
+        <p class="bloc__content"><strong>Règle de droit</strong> : Règle de conduite sociale dont le respect est assuré par l'autorité publique.</p>
+    </div>
+
+    <!-- Exemple -->
+    <span class="component-label">Exemple (jaune)</span>
+    <div class="bloc bloc--exemple">
+        <p class="bloc__label">📝 EXEMPLE</p>
+        <p class="bloc__content">L'article 1240 du Code civil s'applique à toute personne qui cause un dommage à autrui, quelle que soit son identité.</p>
+    </div>
+
+    <!-- À retenir -->
+    <span class="component-label">À retenir (vert)</span>
+    <div class="bloc bloc--retenir">
+        <p class="bloc__label">⭐ À RETENIR</p>
+        <p class="bloc__content">La règle de droit est générale, abstraite, obligatoire et sanctionnée par l'État.</p>
+    </div>
+
+    <!-- Attention -->
+    <span class="component-label">Attention (rouge)</span>
+    <div class="bloc bloc--attention">
+        <p class="bloc__label">⚠️ ATTENTION</p>
+        <p class="bloc__content">Ne confondez pas le droit objectif et les droits subjectifs !</p>
+    </div>
+
+    <!-- Astuce -->
+    <span class="component-label">Astuce (orange)</span>
+    <div class="bloc bloc--astuce">
+        <p class="bloc__label">💡 ASTUCE</p>
+        <p class="bloc__content">Utilisez l'acronyme GAOC pour retenir les caractères : Générale, Abstraite, Obligatoire, Coercitive.</p>
+    </div>
+
+    <!-- Important -->
+    <span class="component-label">Important (rose)</span>
+    <div class="bloc bloc--important">
+        <p class="bloc__label">⭐ IMPORTANT</p>
+        <p class="bloc__content">Cette notion est fréquemment demandée en examen.</p>
+    </div>
+</div>
+
+<div class="section-divider"></div>
+
+<!-- ==================== 6. BLOC EN SAVOIR PLUS ==================== -->
+<div class="section">
+    <h2 class="section-title">6. Bloc En savoir plus</h2>
+    <p class="section-subtitle">CTA gradient avec lien vers un autre cours</p>
+    
+    <div class="preview-box preview-white">
+        <div class="bloc-cta">
+            <p class="bloc-cta__label">🔗 EN SAVOIR PLUS</p>
+            <p class="bloc-cta__content">Consultez notre cours complet sur les sources du droit pour approfondir cette notion fondamentale et découvrir la hiérarchie des normes.</p>
+            <a href="#" class="bloc-cta__button">Voir le cours →</a>
+        </div>
+    </div>
+</div>
+
+<div class="section-divider"></div>
+
+<!-- ==================== 7. BLOC RESSOURCES ==================== -->
+<div class="section">
+    <h2 class="section-title">7. Bloc Ressources</h2>
+    <p class="section-subtitle">Liste de ressources complémentaires (PDF, liens, vidéos)</p>
+    
+    <div class="preview-box preview-white">
+        <div class="bloc-ressources">
+            <h4 class="bloc-ressources__title">📚 Pour approfondir</h4>
+            <div class="bloc-ressources__list">
+                <a href="#" class="bloc-ressources__item">
+                    <span class="bloc-ressources__item-left">
+                        <span class="bloc-ressources__item-icon">📄</span>
+                        <span class="bloc-ressources__item-text">Fiche de révision PDF</span>
+                    </span>
+                    <span class="bloc-ressources__item-arrow">↓</span>
+                </a>
+                <a href="#" class="bloc-ressources__item">
+                    <span class="bloc-ressources__item-left">
+                        <span class="bloc-ressources__item-icon">🔗</span>
+                        <span class="bloc-ressources__item-text">Article Dalloz sur la règle de droit</span>
+                    </span>
+                    <span class="bloc-ressources__item-arrow">→</span>
+                </a>
+                <a href="#" class="bloc-ressources__item">
+                    <span class="bloc-ressources__item-left">
+                        <span class="bloc-ressources__item-icon">🎬</span>
+                        <span class="bloc-ressources__item-text">Vidéo complémentaire YouTube</span>
+                    </span>
+                    <span class="bloc-ressources__item-arrow">→</span>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="section-divider"></div>
+
+<!-- ==================== 8. VIDEO EMBED ==================== -->
+<div class="section">
+    <h2 class="section-title">8. Vidéo intégrée</h2>
+    <p class="section-subtitle">Player vidéo avec bouton play blanc</p>
+    
+    <div class="preview-box preview-white">
+        <div class="video-embed">
+            <div class="video-embed__placeholder">
+                <div class="video-embed__play">
+                    <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="section-divider"></div>
+
+<!-- ==================== 9. SOMMAIRE ==================== -->
+<div class="section">
+    <h2 class="section-title">9. Sommaire</h2>
+    <p class="section-subtitle">Table des matières de la leçon</p>
+    
+    <div class="preview-box preview-white">
+        <div class="bloc-sommaire">
+            <h4 class="bloc-sommaire__title">📑 Sommaire</h4>
+            <ul class="bloc-sommaire__list">
+                <li class="bloc-sommaire__item"><a href="#">I. Distinction droit objectif / droits subjectifs</a></li>
+                <li class="bloc-sommaire__item"><a href="#">II. Les caractères de la règle de droit</a></li>
+                <li class="bloc-sommaire__item"><a href="#">III. Les sources du droit</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<div class="section-divider"></div>
+
+<!-- ==================== 10. TABLE ==================== -->
+<div class="section">
+    <h2 class="section-title">10. Tableau</h2>
+    <p class="section-subtitle">Tableaux comparatifs</p>
+    
+    <div class="preview-box preview-white">
+        <div class="prose">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Critère</th>
+                        <th>Droit objectif</th>
+                        <th>Droits subjectifs</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Définition</td>
+                        <td>Ensemble des règles de droit</td>
+                        <td>Prérogatives individuelles</td>
+                    </tr>
+                    <tr>
+                        <td>Exemple</td>
+                        <td>Le Code civil</td>
+                        <td>Le droit de propriété</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<div class="section-divider"></div>
+
+<!-- ==================== RÉCAPITULATIF ==================== -->
+<div class="section">
+    <h2 class="section-title">📋 Récapitulatif</h2>
+    
+    <table class="specs-table">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Élément</th>
+                <th>Classe CSS</th>
+                <th>Usage</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr><td>1</td><td>H2 souligné</td><td><code>prose h2</code></td><td>Titres de section avec gradient</td></tr>
+            <tr><td>2</td><td>Définition</td><td><code>.bloc--definition</code></td><td>Notions clés à retenir</td></tr>
+            <tr><td>3</td><td>Exemple</td><td><code>.bloc--exemple</code></td><td>Illustrations concrètes</td></tr>
+            <tr><td>4</td><td>À retenir</td><td><code>.bloc--retenir</code></td><td>Points essentiels</td></tr>
+            <tr><td>5</td><td>Attention</td><td><code>.bloc--attention</code></td><td>Pièges à éviter</td></tr>
+            <tr><td>6</td><td>Astuce</td><td><code>.bloc--astuce</code></td><td>Conseils méthodologiques</td></tr>
+            <tr><td>7</td><td>Important</td><td><code>.bloc--important</code></td><td>Points cruciaux examen</td></tr>
+            <tr><td>8</td><td>En savoir plus</td><td><code>.bloc-cta</code></td><td>Lien vers autre cours</td></tr>
+            <tr><td>9</td><td>Ressources</td><td><code>.bloc-ressources</code></td><td>PDF, liens, vidéos</td></tr>
+            <tr><td>10</td><td>Citation</td><td><code>.bloc-citation</code></td><td>Articles de loi</td></tr>
+        </tbody>
+    </table>
+
+    <div class="info-box" style="margin-top: var(--space-md);">
+        <p class="info-box__title">✅ Éléments fidèles à la plateforme</p>
+        <ul>
+            <li><strong>H2 avec soulignement gradient</strong> bordeaux → violet (80px)</li>
+            <li><strong>Blocs sans border-left</strong>, juste fond coloré + coins arrondis</li>
+            <li><strong>Labels en uppercase</strong> avec emoji + couleur assortie</li>
+            <li><strong>Bloc CTA gradient</strong> bordeaux → violet avec bouton blanc</li>
+            <li><strong>Bloc Ressources</strong> avec icônes et flèches</li>
+            <li><strong>Citation</strong> avec barre bordeaux sur fond gris</li>
+            <li><strong>Puces et numéros noirs</strong></li>
+        </ul>
+    </div>
+</div>
+
+</body>
+</html>

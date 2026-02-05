@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jurible DS — Bloc Paragraphe Simple (PARA-SIMPLE-01)</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <style>
+        /* ═══════════════════════════════════════
+           JURIBLE DESIGN SYSTEM — TOKENS
+           ═══════════════════════════════════════ */
+        :root {
+            /* Colors */
+            --color-bordeaux: #B0001D;
+            --color-violet: #7C3AED;
+            --color-violet-light-bg: #EDE9FE;
+            --color-text-dark: #1A1A1A;
+            --color-text-gray: #4A4A4A;
+            --color-text-muted: #9CA3AF;
+            --color-bg-light: #F9FAFB;
+            --color-border: #E5E7EB;
+            --color-gray-100: #F3F4F6;
+            --gradient-jurible: linear-gradient(135deg, #B0001D, #7C3AED);
+
+            /* Spacing */
+            --spacing-xs: 8px;
+            --spacing-sm: 16px;
+            --spacing-md: 24px;
+            --spacing-lg: 32px;
+            --spacing-xl: 48px;
+            --spacing-2xl: 64px;
+
+            /* Radius */
+            --radius-sm: 6px;
+            --radius-md: 8px;
+            --radius-lg: 12px;
+            --radius-full: 9999px;
+
+            /* Shadows */
+            --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+
+            /* Typography */
+            --font-family: 'Poppins', sans-serif;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: var(--font-family);
+            background: var(--color-bg-light);
+            color: var(--color-text-dark);
+            padding: var(--spacing-xl);
+        }
+
+        /* ═══════════════════════════════════════
+           COMPOSANT : BLOC PARAGRAPHE SIMPLE
+           ID : PARA-SIMPLE-01
+           ═══════════════════════════════════════ */
+
+        .bloc-para-simple {
+            max-width: 800px;
+            margin: 0 auto var(--spacing-2xl);
+        }
+
+        /* — Label / Badge (optionnel) — */
+        .bloc-para-simple__label {
+            display: inline-block;
+            font-size: 12px;
+            font-weight: 500;
+            line-height: 1.4;
+            letter-spacing: 0.5px;
+            color: var(--color-violet);
+            background: var(--color-violet-light-bg);
+            padding: 4px 12px;
+            border-radius: var(--radius-full);
+            margin-bottom: var(--spacing-sm);
+        }
+
+        /* — Titre H2 — */
+        .bloc-para-simple__title {
+            font-size: 40px;
+            font-weight: 700;
+            line-height: 1.2;
+            letter-spacing: -0.5px;
+            color: var(--color-text-dark);
+            margin-bottom: var(--spacing-md);
+        }
+
+        .bloc-para-simple__title .gradient-text {
+            background: var(--gradient-jurible);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* — Sous-titre (optionnel) — */
+        .bloc-para-simple__subtitle {
+            font-size: 18px;
+            font-weight: 400;
+            line-height: 1.6;
+            color: var(--color-text-gray);
+            margin-bottom: var(--spacing-md);
+        }
+
+        /* — Paragraphe Body Regular — */
+        .bloc-para-simple__text {
+            font-size: 16px;
+            font-weight: 400;
+            line-height: 1.6;
+            color: var(--color-text-dark);
+            margin-bottom: var(--spacing-sm);
+        }
+
+        .bloc-para-simple__text:last-child {
+            margin-bottom: 0;
+        }
+
+        /* — Texte accentué — */
+        .bloc-para-simple__text strong {
+            font-weight: 700;
+            color: var(--color-text-dark);
+        }
+
+        .bloc-para-simple__text a {
+            color: var(--color-violet);
+            text-decoration: underline;
+            text-underline-offset: 2px;
+            transition: color 200ms ease;
+        }
+
+        .bloc-para-simple__text a:hover {
+            color: var(--color-bordeaux);
+        }
+
+        /* — Liste à puces (emoji) — */
+        .bloc-para-simple__list {
+            list-style: none;
+            padding: 0;
+            margin: var(--spacing-sm) 0;
+        }
+
+        .bloc-para-simple__list li {
+            font-size: 16px;
+            font-weight: 400;
+            line-height: 1.6;
+            color: var(--color-text-dark);
+            padding: 6px 0;
+            padding-left: 28px;
+            position: relative;
+        }
+
+        .bloc-para-simple__list li .emoji-bullet {
+            position: absolute;
+            left: 0;
+            top: 6px;
+        }
+
+        /* — Citation / Blockquote (optionnel) — */
+        .bloc-para-simple__quote {
+            font-size: 16px;
+            font-weight: 700;
+            line-height: 1.6;
+            color: var(--color-text-gray);
+            font-style: italic;
+            border-left: 3px solid var(--color-bordeaux);
+            padding-left: var(--spacing-md);
+            margin: var(--spacing-md) 0;
+        }
+
+        /* — Séparateur — */
+        .bloc-para-simple__divider {
+            border: none;
+            height: 1px;
+            background: var(--color-border);
+            margin: var(--spacing-lg) 0;
+        }
+
+        /* — CTA inline (optionnel) — */
+        .bloc-para-simple__cta {
+            display: inline-flex;
+            align-items: center;
+            gap: var(--spacing-xs);
+            font-family: var(--font-family);
+            font-size: 14px;
+            font-weight: 500;
+            line-height: 1.4;
+            letter-spacing: 0.5px;
+            color: #fff;
+            background: var(--gradient-jurible);
+            padding: 10px 20px;
+            border-radius: var(--radius-md);
+            border: none;
+            cursor: pointer;
+            text-decoration: none;
+            margin-top: var(--spacing-md);
+            transition: opacity 200ms ease, transform 200ms ease;
+            box-shadow: 0 4px 15px rgba(176, 0, 29, 0.3);
+        }
+
+        .bloc-para-simple__cta:hover {
+            opacity: 0.9;
+            transform: translateY(-1px);
+        }
+
+        /* — Caption / Note de bas — */
+        .bloc-para-simple__caption {
+            font-size: 12px;
+            font-weight: 400;
+            line-height: 1.4;
+            color: var(--color-text-muted);
+            margin-top: var(--spacing-sm);
+        }
+
+        /* ═══════════════════════════════════════
+           VARIANTES DE FOND
+           ═══════════════════════════════════════ */
+
+        /* Fond blanc (par défaut — pas de classe) */
+
+        /* Fond gris clair */
+        .bloc-para-simple--bg-gray {
+            background: var(--color-gray-100);
+            padding: var(--spacing-lg);
+            border-radius: var(--radius-lg);
+        }
+
+        /* Fond avec bordure card */
+        .bloc-para-simple--card {
+            background: #fff;
+            padding: var(--spacing-lg);
+            border-radius: var(--radius-lg);
+            border: 1px solid var(--color-border);
+            box-shadow: var(--shadow-sm);
+        }
+
+        /* ═══════════════════════════════════════
+           RESPONSIVE
+           ═══════════════════════════════════════ */
+        @media (max-width: 768px) {
+            body {
+                padding: var(--spacing-md);
+            }
+
+            .bloc-para-simple__title {
+                font-size: 28px;
+            }
+
+            .bloc-para-simple__subtitle {
+                font-size: 16px;
+            }
+
+            .bloc-para-simple--bg-gray,
+            .bloc-para-simple--card {
+                padding: var(--spacing-md);
+            }
+        }
+
+        /* ═══════════════════════════════════════
+           PAGE DÉMO
+           ═══════════════════════════════════════ */
+        .demo-page-title {
+            font-size: 14px;
+            font-weight: 500;
+            line-height: 1.4;
+            color: var(--color-text-muted);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            text-align: center;
+            margin-bottom: var(--spacing-xl);
+        }
+
+        .demo-variant-label {
+            font-size: 12px;
+            font-weight: 500;
+            line-height: 1.4;
+            color: var(--color-text-muted);
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            margin-bottom: var(--spacing-sm);
+            padding-bottom: var(--spacing-xs);
+            border-bottom: 1px dashed var(--color-border);
+        }
+    </style>
+</head>
+<body>
+
+    <p class="demo-page-title">Jurible Design System — Bloc Paragraphe Simple (PARA-SIMPLE-01)</p>
+
+    <!-- ═══════════════════════════════════════════════
+         VARIANTE 1 : Fond transparent (standard)
+         Titre + sous-titre + paragraphes + liste + CTA
+         ═══════════════════════════════════════════════ -->
+    <p class="demo-variant-label">Variante 1 — Fond transparent (standard)</p>
+
+    <div class="bloc-para-simple">
+        <span class="bloc-para-simple__label">📚 Méthodologie</span>
+        <h2 class="bloc-para-simple__title">Réussir ses <span class="gradient-text">examens de droit</span></h2>
+        <p class="bloc-para-simple__subtitle">Les clés pour aborder sereinement vos partiels et décrocher la moyenne.</p>
+        <p class="bloc-para-simple__text">Réussir en droit ne relève pas du talent inné. C'est avant tout une question de <strong>méthode</strong>, de <strong>régularité</strong> et de compréhension des attentes de vos correcteurs. Trop d'étudiants se perdent dans l'apprentissage par cœur sans comprendre la logique juridique derrière chaque notion.</p>
+        <p class="bloc-para-simple__text">Chez Jurible, nous avons accompagné plus de 25 000 étudiants en droit. Voici les principes fondamentaux qui reviennent systématiquement chez ceux qui réussissent :</p>
+        <ul class="bloc-para-simple__list">
+            <li><span class="emoji-bullet">✅</span> Comprendre avant d'apprendre — la mémorisation vient naturellement quand le raisonnement est clair</li>
+            <li><span class="emoji-bullet">✅</span> S'entraîner avec des cas pratiques et des exercices corrigés chaque semaine</li>
+            <li><span class="emoji-bullet">✅</span> Utiliser les fiches d'arrêt pour ancrer les grands principes jurisprudentiels</li>
+            <li><span class="emoji-bullet">✅</span> Réviser régulièrement avec des QCM et des flashcards pour tester ses connaissances</li>
+        </ul>
+        <a href="#" class="bloc-para-simple__cta">Découvrir nos ressources →</a>
+    </div>
+
+    <hr class="bloc-para-simple__divider" style="max-width: 800px; margin: 48px auto;">
+
+    <!-- ═══════════════════════════════════════════════
+         VARIANTE 2 : Fond gris clair
+         Titre + paragraphe + blockquote
+         ═══════════════════════════════════════════════ -->
+    <p class="demo-variant-label" style="max-width: 800px; margin: 0 auto var(--spacing-sm);">Variante 2 — Fond gris clair</p>
+
+    <div class="bloc-para-simple bloc-para-simple--bg-gray">
+        <span class="bloc-para-simple__label">🎯 Notre mission</span>
+        <h2 class="bloc-para-simple__title">Démocratiser la <span class="gradient-text">réussite en droit</span></h2>
+        <p class="bloc-para-simple__text">Jurible est né d'un constat simple : trop d'étudiants brillants échouent en droit, non pas par manque de capacités, mais par manque d'accompagnement adapté. Les cours magistraux ne suffisent pas, les TD sont souvent surpeuplés, et les ressources de qualité restent rares et coûteuses.</p>
+        <blockquote class="bloc-para-simple__quote">
+            « Nous croyons que chaque étudiant en droit mérite un accompagnement personnalisé, accessible et moderne. »
+        </blockquote>
+        <p class="bloc-para-simple__text">C'est pourquoi nous avons créé une plateforme qui combine <strong>cours vidéo structurés</strong>, <strong>outils d'IA juridique</strong> et <strong>exercices corrigés</strong> pour offrir à chacun les meilleures chances de réussir.</p>
+    </div>
+
+    <hr class="bloc-para-simple__divider" style="max-width: 800px; margin: 48px auto;">
+
+    <!-- ═══════════════════════════════════════════════
+         VARIANTE 3 : Fond card (bordure + shadow)
+         Titre seul + paragraphes simples + caption
+         ═══════════════════════════════════════════════ -->
+    <p class="demo-variant-label" style="max-width: 800px; margin: 0 auto var(--spacing-sm);">Variante 3 — Style card (bordure + shadow)</p>
+
+    <div class="bloc-para-simple bloc-para-simple--card">
+        <h2 class="bloc-para-simple__title">Comment fonctionne <span class="gradient-text">l'Académie Jurible</span> ?</h2>
+        <p class="bloc-para-simple__text">L'Académie Jurible vous donne accès à l'ensemble de nos ressources pédagogiques : cours vidéo par matière, fiches de révision complètes, exercices corrigés, flashcards, QCM et outils d'intelligence artificielle pour automatiser vos fiches d'arrêt et cas pratiques.</p>
+        <p class="bloc-para-simple__text">Chaque matière est structurée par semestre et par chapitre, avec une progression logique qui suit le programme universitaire. Vous pouvez avancer à votre rythme, revenir sur les notions complexes, et tester vos connaissances à chaque étape.</p>
+        <p class="bloc-para-simple__text">Notre équipe pédagogique, composée de juristes diplômés et d'enseignants, met à jour les contenus en continu pour refléter les dernières évolutions législatives et jurisprudentielles.</p>
+        <p class="bloc-para-simple__caption">💡 Accès illimité à toutes les matières avec l'abonnement Académie.</p>
+    </div>
+
+    <hr class="bloc-para-simple__divider" style="max-width: 800px; margin: 48px auto;">
+
+    <!-- ═══════════════════════════════════════════════
+         VARIANTE 4 : Minimal — juste titre + texte
+         ═══════════════════════════════════════════════ -->
+    <p class="demo-variant-label" style="max-width: 800px; margin: 0 auto var(--spacing-sm);">Variante 4 — Minimal (titre + texte uniquement)</p>
+
+    <div class="bloc-para-simple">
+        <h2 class="bloc-para-simple__title">Conditions générales d'utilisation</h2>
+        <p class="bloc-para-simple__text">Les présentes conditions générales d'utilisation régissent l'accès et l'utilisation de la plateforme Jurible, accessible à l'adresse <a href="https://jurible.com">jurible.com</a> et <a href="https://ecole.jurible.com">ecole.jurible.com</a>. En accédant à nos services, vous acceptez sans réserve les présentes conditions.</p>
+        <p class="bloc-para-simple__text">Jurible est édité par ATD Formation, société par actions simplifiée au capital de 10 000 euros, dont le siège social est situé à Paris. La plateforme propose des contenus pédagogiques en droit sous forme de cours vidéo, fiches, exercices et outils numériques.</p>
+    </div>
+
+
+    <!-- ═══════════════════════════════════════════════
+         SPECS FIGMA EXPORT
+         ═══════════════════════════════════════════════ -->
+    <hr class="bloc-para-simple__divider" style="max-width: 800px; margin: 64px auto 32px;">
+
+    <div style="max-width: 800px; margin: 0 auto; font-size: 12px; color: var(--color-text-muted); line-height: 1.6;">
+        <p style="font-weight: 600; font-size: 11px; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 16px;">📐 SPECS PARA-SIMPLE-01 — Export Figma</p>
+
+        <p style="margin-bottom: 12px;"><strong style="color: var(--color-text-dark);">Structure :</strong> Bloc max-width 800px, centré. Éléments enfants tous optionnels (label, titre, sous-titre, paragraphes, liste, blockquote, CTA, caption).</p>
+
+        <p style="margin-bottom: 12px;"><strong style="color: var(--color-text-dark);">Typography :</strong></p>
+        <p style="margin-bottom: 4px;">— Label : 12px / Medium 500 / 140% / spacing 0.5px / #7C3AED sur #EDE9FE / radius-full</p>
+        <p style="margin-bottom: 4px;">— Titre H2 : 40px / Bold 700 / 120% / letter-spacing -0.5px / #1A1A1A (mobile 28px) / gradient-text optionnel</p>
+        <p style="margin-bottom: 4px;">— Sous-titre : 18px (Body Large) / Regular 400 / 160% / #4A4A4A</p>
+        <p style="margin-bottom: 4px;">— Body : 16px / Regular 400 / 160% / #1A1A1A / strong = 700</p>
+        <p style="margin-bottom: 4px;">— Liste : 16px / Regular 400 / 160% / puces emoji (✅, 📌, 👉, etc.)</p>
+        <p style="margin-bottom: 4px;">— Blockquote : 16px / Bold 700 / 160% / #4A4A4A italic / barre gauche 3px #B0001D / padding-left 24px</p>
+        <p style="margin-bottom: 4px;">— CTA : 14px / Medium 500 / 140% / spacing 0.5px / #fff sur gradient 135° / padding 10px 20px (MD) / radius 8px / shadow CTA</p>
+        <p style="margin-bottom: 4px;">— Caption : 12px / Regular 400 / 140% / #9CA3AF</p>
+
+        <p style="margin-bottom: 12px; margin-top: 16px;"><strong style="color: var(--color-text-dark);">Variantes de fond :</strong></p>
+        <p style="margin-bottom: 4px;">— Transparent : pas de fond, pas de padding additionnel</p>
+        <p style="margin-bottom: 4px;">— Gris clair : fond #F3F4F6 / padding 32px / radius 12px</p>
+        <p style="margin-bottom: 4px;">— Card : fond #fff / padding 32px / radius 12px / border 1px #E5E7EB / shadow-sm</p>
+
+        <p style="margin-bottom: 12px; margin-top: 16px;"><strong style="color: var(--color-text-dark);">Spacing interne :</strong></p>
+        <p style="margin-bottom: 4px;">— Label → titre : 16px (sm)</p>
+        <p style="margin-bottom: 4px;">— Titre → sous-titre/body : 24px (md)</p>
+        <p style="margin-bottom: 4px;">— Body → body : 16px (sm)</p>
+        <p style="margin-bottom: 4px;">— Body → liste : 16px (sm)</p>
+        <p style="margin-bottom: 4px;">— Blockquote : margin 24px top/bottom</p>
+        <p style="margin-bottom: 4px;">— CTA : margin-top 24px (md)</p>
+
+        <p style="margin-bottom: 12px; margin-top: 16px;"><strong style="color: var(--color-text-dark);">Liens :</strong> couleur #7C3AED, underline offset 2px, hover → #B0001D</p>
+
+        <p style="margin-bottom: 12px;"><strong style="color: var(--color-text-dark);">Responsive :</strong> breakpoint 768px — H2 passe à 28px, sous-titre à 16px, padding variantes à 24px</p>
+    </div>
+
+</body>
+</html>

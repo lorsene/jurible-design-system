@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jurible Design System — Hero Article (Type E)</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --color-primary: #B0001D;
+            --color-secondary: #7C3AED;
+            --color-text-dark: #1A1A1A;
+            --color-text-gray: #4A4A4A;
+            --color-text-muted: #9CA3AF;
+            --color-background: #FFFFFF;
+            --color-muted: #F3F4F6;
+            --color-border: #E5E7EB;
+            --gradient-jurible: linear-gradient(135deg, #B0001D 0%, #DC2626 50%, #7C3AED 100%);
+            --gradient-hero-bg: linear-gradient(180deg, #FFFFFF 0%, #FAFAFE 50%, #F5F3FF 100%);
+            --space-xs: 8px; --space-sm: 16px; --space-md: 24px; --space-lg: 32px;
+            --space-xl: 48px; --space-3xl: 80px;
+            --radius-sm: 6px; --radius-md: 8px; --radius-lg: 12px; --radius-xl: 16px; --radius-full: 9999px;
+            --shadow-sm: 0 1px 2px rgba(0,0,0,0.05);
+            --shadow-card: 0 8px 30px rgba(0,0,0,0.08);
+            --font-family: 'Poppins', sans-serif;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: var(--font-family); background: var(--color-background); color: var(--color-text-dark); line-height: 1.5; }
+        .page-container { max-width: 1400px; margin: 0 auto; padding: var(--space-xl); }
+        .page-header { margin-bottom: var(--space-xl); }
+        .page-title { font-size: 42px; font-weight: 700; margin-bottom: var(--space-xs); }
+        .page-divider { height: 3px; width: 120px; background: var(--gradient-jurible); border-radius: var(--radius-full); }
+        .section { margin-bottom: var(--space-3xl); }
+        .section-header { margin-bottom: var(--space-lg); }
+        .section-title { font-size: 24px; font-weight: 600; margin-bottom: 4px; }
+        .section-subtitle { font-size: 14px; color: var(--color-text-muted); }
+        .section-divider { height: 1px; background: var(--color-border); margin: var(--space-3xl) 0; }
+        .component-label { font-size: 11px; color: var(--color-text-muted); text-transform: uppercase; letter-spacing: 0.5px; font-weight: 600; display: inline-block; background: var(--color-muted); padding: 4px 10px; border-radius: 4px; }
+        .preview-row { display: flex; flex-direction: column; gap: var(--space-lg); }
+        .preview-desktop { border: 1px solid var(--color-border); border-radius: var(--radius-lg); overflow: hidden; background: white; }
+        .preview-mobile { width: 375px; border: 1px solid var(--color-border); border-radius: var(--radius-lg); overflow: hidden; background: white; }
+
+        /* ==================== HERO E — ARTICLE ==================== */
+        .hero-e {
+            background: var(--gradient-hero-bg);
+            padding: var(--space-xl) var(--space-xl) var(--space-lg);
+            text-align: center;
+        }
+
+        .hero-e__container { max-width: 720px; margin: 0 auto; }
+
+        /* Badge catégorie */
+        .hero-e__badge {
+            display: inline-flex; align-items: center; gap: 6px;
+            background: rgba(124,58,237,0.1); border: 1px solid rgba(124,58,237,0.2);
+            color: var(--color-secondary); font-size: 13px; font-weight: 600;
+            padding: 5px 14px; border-radius: var(--radius-full); margin-bottom: var(--space-sm);
+            animation: fadeInUp .5s ease both; animation-delay: .05s;
+        }
+
+        /* Titre */
+        .hero-e__title {
+            font-size: 34px; font-weight: 800; line-height: 1.2;
+            color: var(--color-text-dark); margin-bottom: var(--space-sm);
+            max-width: 640px; margin-left: auto; margin-right: auto;
+            animation: fadeInUp .5s ease both; animation-delay: .1s;
+        }
+
+        /* Méta : date + temps de lecture */
+        .hero-e__meta {
+            display: flex; align-items: center; justify-content: center;
+            gap: var(--space-sm); font-size: 13px; color: var(--color-text-muted);
+            margin-bottom: var(--space-md);
+            animation: fadeInUp .5s ease both; animation-delay: .15s;
+        }
+
+        .hero-e__meta-separator { color: var(--color-border); }
+
+        /* Auteur */
+        .hero-e__author {
+            display: inline-flex; align-items: center; gap: var(--space-sm);
+            margin-bottom: var(--space-md);
+            animation: fadeInUp .5s ease both; animation-delay: .2s;
+        }
+
+        .hero-e__author-avatar {
+            width: 40px; height: 40px; border-radius: var(--radius-full);
+            background: var(--color-secondary);
+            display: flex; align-items: center; justify-content: center;
+            color: white; font-weight: 700; font-size: 15px;
+        }
+
+        .hero-e__author-info { text-align: left; }
+        .hero-e__author-name { font-size: 14px; font-weight: 600; color: var(--color-text-dark); }
+        .hero-e__author-role { font-size: 12px; color: var(--color-text-muted); }
+
+        /* Image à la une */
+        .hero-e__image {
+            width: 100%; aspect-ratio: 16/9;
+            background: var(--color-muted); border-radius: var(--radius-xl);
+            overflow: hidden; box-shadow: var(--shadow-card);
+            display: flex; align-items: center; justify-content: center;
+            color: var(--color-text-muted); font-size: 14px;
+            margin-bottom: var(--space-md);
+            animation: fadeInUp .5s ease both; animation-delay: .25s;
+        }
+
+        /* CTA discret */
+        .hero-e__cta-bar {
+            display: inline-flex; align-items: center; gap: var(--space-xs);
+            background: rgba(124,58,237,0.05); border: 1px solid rgba(124,58,237,0.12);
+            border-radius: var(--radius-full); padding: 8px 20px;
+            font-size: 13px; color: var(--color-text-gray);
+            animation: fadeInUp .5s ease both; animation-delay: .3s;
+        }
+
+        .hero-e__cta-link {
+            color: var(--color-secondary); font-weight: 600;
+            text-decoration: none; transition: color .2s ease;
+        }
+
+        .hero-e__cta-link:hover { color: #6D28D9; text-decoration: underline; }
+
+        /* Mobile */
+        .hero-e--mobile { padding: var(--space-md) var(--space-sm) var(--space-sm); }
+        .hero-e--mobile .hero-e__title { font-size: 22px; }
+        .hero-e--mobile .hero-e__meta { font-size: 12px; gap: var(--space-xs); }
+        .hero-e--mobile .hero-e__badge { font-size: 12px; }
+        .hero-e--mobile .hero-e__image { border-radius: var(--radius-lg); }
+        .hero-e--mobile .hero-e__cta-bar { font-size: 12px; padding: 7px 14px; }
+        .hero-e--mobile .hero-e__author-avatar { width: 36px; height: 36px; font-size: 13px; }
+
+        @keyframes fadeInUp { from{opacity:0;transform:translateY(12px)} to{opacity:1;transform:translateY(0)} }
+        @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration: 0.01ms !important; } }
+    </style>
+</head>
+<body>
+<div class="page-container">
+    <header class="page-header">
+        <h1 class="page-title">Hero Article (Type E)</h1>
+        <div class="page-divider"></div>
+        <p style="margin-top:12px;font-size:14px;color:var(--color-text-muted);">Template unique — Badge catégorie + Titre + Date/Temps + Auteur + Image à la une · Avec ou sans CTA discret</p>
+    </header>
+
+    <!-- ================================================================ -->
+    <!-- E — AVEC CTA DISCRET                                              -->
+    <!-- ================================================================ -->
+    <section class="section">
+        <div class="section-header">
+            <h2 class="section-title">E — Article avec CTA discret</h2>
+            <p class="section-subtitle">Exemple : article méthodologique renvoyant vers l'Académie</p>
+        </div>
+        <div class="preview-row">
+            <div class="preview-desktop">
+                <span class="component-label" style="margin:16px;">Desktop</span>
+                <div class="hero-e">
+                    <div class="hero-e__container">
+                        <span class="hero-e__badge">📝 Méthodologie</span>
+                        <h1 class="hero-e__title">Comment rédiger une fiche d'arrêt parfaite en 6 étapes</h1>
+                        <div class="hero-e__meta">
+                            <span>12 janvier 2026</span>
+                            <span class="hero-e__meta-separator">·</span>
+                            <span>8 min de lecture</span>
+                        </div>
+                        <div class="hero-e__author">
+                            <div class="hero-e__author-avatar">R</div>
+                            <div class="hero-e__author-info">
+                                <div class="hero-e__author-name">Raphaël Briguet-Lamarre</div>
+                                <div class="hero-e__author-role">Ex-avocat, chargé d'enseignement à l'université</div>
+                            </div>
+                        </div>
+                        <div class="hero-e__image">[Image à la une — 16:9]</div>
+                        <div class="hero-e__cta-bar">
+                            Envie d'aller plus loin ?
+                            <a href="#" class="hero-e__cta-link">Rejoindre l'Académie · 29€/mois</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="preview-mobile">
+                <span class="component-label" style="margin:12px;">Mobile 375px</span>
+                <div class="hero-e hero-e--mobile">
+                    <div class="hero-e__container">
+                        <span class="hero-e__badge">📝 Méthodologie</span>
+                        <h1 class="hero-e__title">Comment rédiger une fiche d'arrêt parfaite en 6 étapes</h1>
+                        <div class="hero-e__meta">
+                            <span>12 janv. 2026</span>
+                            <span class="hero-e__meta-separator">·</span>
+                            <span>8 min</span>
+                        </div>
+                        <div class="hero-e__author">
+                            <div class="hero-e__author-avatar">R</div>
+                            <div class="hero-e__author-info">
+                                <div class="hero-e__author-name">Raphaël Briguet-Lamarre</div>
+                                <div class="hero-e__author-role">Ex-avocat, enseignant</div>
+                            </div>
+                        </div>
+                        <div class="hero-e__image">[Image à la une]</div>
+                        <div class="hero-e__cta-bar">
+                            <a href="#" class="hero-e__cta-link">Rejoindre l'Académie · 29€/mois</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="section-divider"></div>
+
+    <!-- ================================================================ -->
+    <!-- E — SANS CTA DISCRET                                              -->
+    <!-- ================================================================ -->
+    <section class="section">
+        <div class="section-header">
+            <h2 class="section-title">E — Article sans CTA discret</h2>
+            <p class="section-subtitle">Exemple : article actualité juridique, pas de renvoi commercial</p>
+        </div>
+        <div class="preview-row">
+            <div class="preview-desktop">
+                <span class="component-label" style="margin:16px;">Desktop</span>
+                <div class="hero-e">
+                    <div class="hero-e__container">
+                        <span class="hero-e__badge">⚖️ Actualités</span>
+                        <h1 class="hero-e__title">Réforme du droit des contrats 2026 : ce qui change pour les étudiants</h1>
+                        <div class="hero-e__meta">
+                            <span>3 février 2026</span>
+                            <span class="hero-e__meta-separator">·</span>
+                            <span>12 min de lecture</span>
+                        </div>
+                        <div class="hero-e__author">
+                            <div class="hero-e__author-avatar">R</div>
+                            <div class="hero-e__author-info">
+                                <div class="hero-e__author-name">Raphaël Briguet-Lamarre</div>
+                                <div class="hero-e__author-role">Ex-avocat, chargé d'enseignement à l'université</div>
+                            </div>
+                        </div>
+                        <div class="hero-e__image">[Image à la une — 16:9]</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="preview-mobile">
+                <span class="component-label" style="margin:12px;">Mobile 375px</span>
+                <div class="hero-e hero-e--mobile">
+                    <div class="hero-e__container">
+                        <span class="hero-e__badge">⚖️ Actualités</span>
+                        <h1 class="hero-e__title">Réforme du droit des contrats 2026 : ce qui change pour les étudiants</h1>
+                        <div class="hero-e__meta">
+                            <span>3 fév. 2026</span>
+                            <span class="hero-e__meta-separator">·</span>
+                            <span>12 min</span>
+                        </div>
+                        <div class="hero-e__author">
+                            <div class="hero-e__author-avatar">R</div>
+                            <div class="hero-e__author-info">
+                                <div class="hero-e__author-name">Raphaël Briguet-Lamarre</div>
+                                <div class="hero-e__author-role">Ex-avocat, enseignant</div>
+                            </div>
+                        </div>
+                        <div class="hero-e__image">[Image à la une]</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="section-divider"></div>
+
+    <!-- RÉCAPITULATIF -->
+    <section class="section">
+        <div class="section-header"><h2 class="section-title">📋 Récapitulatif Type E</h2></div>
+
+        <div style="background:rgba(124,58,237,0.05);border:1px solid rgba(124,58,237,0.2);border-radius:var(--radius-lg);padding:var(--space-md);margin-bottom:var(--space-lg);">
+            <p style="font-weight:600;margin-bottom:12px;">🔑 Template unique — CTA optionnel</p>
+            <table style="width:100%;border-collapse:collapse;font-size:13px;">
+                <thead>
+                    <tr style="background:var(--color-muted);">
+                        <th style="padding:10px;text-align:left;border:1px solid var(--color-border);">Variante</th>
+                        <th style="padding:10px;text-align:left;border:1px solid var(--color-border);">Usage</th>
+                        <th style="padding:10px;text-align:left;border:1px solid var(--color-border);">Éléments</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td style="padding:10px;border:1px solid var(--color-border);font-weight:600;">Avec CTA</td>
+                        <td style="padding:10px;border:1px solid var(--color-border);">Articles méthodo, conseils, fiches d'arrêt (lien vers Académie ou produit)</td>
+                        <td style="padding:10px;border:1px solid var(--color-border);">Badge + Titre + Date/Temps + Auteur + Image + CTA discret</td>
+                    </tr>
+                    <tr>
+                        <td style="padding:10px;border:1px solid var(--color-border);font-weight:600;">Sans CTA</td>
+                        <td style="padding:10px;border:1px solid var(--color-border);">Articles actualités, analyses, contenus informatifs</td>
+                        <td style="padding:10px;border:1px solid var(--color-border);">Badge + Titre + Date/Temps + Auteur + Image</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div style="background:var(--color-muted);border-radius:var(--radius-lg);padding:var(--space-md);">
+            <p style="font-weight:600;margin-bottom:8px;">📐 Anatomie du template</p>
+            <p style="font-size:13px;color:var(--color-text-gray);line-height:1.8;">
+                1. <strong>Badge catégorie</strong> — emoji + label (Méthodologie, Actualités, Conseils…)<br>
+                2. <strong>Titre</strong> — h1, 34px desktop / 22px mobile, max-width 640px<br>
+                3. <strong>Méta</strong> — date de publication · temps de lecture<br>
+                4. <strong>Auteur</strong> — avatar + nom + rôle<br>
+                5. <strong>Image à la une</strong> — 16:9, coins arrondis, shadow<br>
+                6. <strong>CTA discret</strong> (optionnel) — bandeau vers Académie ou produit lié
+            </p>
+        </div>
+    </section>
+</div>
+</body>
+</html>

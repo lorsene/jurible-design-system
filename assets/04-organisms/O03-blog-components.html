@@ -1,0 +1,1584 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jurible Design System - Blog Widgets</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* =====================================================
+           JURIBLE DESIGN SYSTEM - VARIABLES
+           ===================================================== */
+        :root {
+            /* Colors */
+            --color-primary: #B0001D;
+            --color-primary-hover: #8B0016;
+            --color-secondary: #7C3AED;
+            --color-secondary-hover: #6D28D9;
+            
+            /* Gradient Jurible */
+            --gradient-jurible: linear-gradient(135deg, #B0001D 0%, #DC2626 50%, #7C3AED 100%);
+            
+            /* Text Colors */
+            --text-dark: #1A1A1A;
+            --text-gray: #4A4A4A;
+            --text-muted: #6B7280;
+            --text-light: #9CA3AF;
+            --text-contrast: #FFFFFF;
+            
+            /* Background Colors */
+            --bg-white: #FFFFFF;
+            --bg-light: #F9FAFB;
+            --bg-gray: #F3F4F6;
+            --bg-border: #E5E7EB;
+            
+            /* Shadows */
+            --shadow-xs: 0 1px 2px rgba(0,0,0,0.05);
+            --shadow-sm: 0 1px 3px rgba(0,0,0,0.1), 0 1px 2px rgba(0,0,0,0.06);
+            --shadow-md: 0 4px 6px rgba(0,0,0,0.07);
+            --shadow-lg: 0 10px 15px rgba(0,0,0,0.1), 0 4px 6px rgba(0,0,0,0.05);
+            
+            /* Button Shadows */
+            --shadow-btn-primary: 0 2px 8px rgba(176,0,29,0.25);
+            --shadow-btn-primary-hover: 0 4px 12px rgba(176,0,29,0.35);
+            
+            /* Spacing */
+            --spacing-xs: 8px;
+            --spacing-sm: 12px;
+            --spacing-md: 16px;
+            --spacing-lg: 24px;
+            --spacing-xl: 32px;
+            
+            /* Border Radius */
+            --radius-sm: 4px;
+            --radius-md: 8px;
+            --radius-lg: 12px;
+            --radius-xl: 16px;
+            --radius-full: 9999px;
+            
+            /* Transitions */
+            --transition-fast: 150ms ease;
+            --transition-normal: 200ms ease;
+        }
+
+        /* =====================================================
+           BASE STYLES
+           ===================================================== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: var(--bg-light);
+            color: var(--text-dark);
+            line-height: 1.5;
+            padding: 40px;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        /* =====================================================
+           DOCUMENTATION LAYOUT
+           ===================================================== */
+        .doc-container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .doc-header {
+            text-align: center;
+            margin-bottom: 60px;
+            padding-bottom: 40px;
+            border-bottom: 2px solid var(--bg-border);
+        }
+
+        .doc-header h1 {
+            font-size: 32px;
+            font-weight: 700;
+            color: var(--color-primary);
+            margin-bottom: 8px;
+        }
+
+        .doc-header p {
+            font-size: 16px;
+            color: var(--text-gray);
+        }
+
+        .doc-section {
+            margin-bottom: 80px;
+        }
+
+        .doc-section-title {
+            font-size: 24px;
+            font-weight: 600;
+            color: var(--text-dark);
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .doc-section-title::before {
+            content: '';
+            width: 4px;
+            height: 28px;
+            background: var(--gradient-jurible);
+            border-radius: 2px;
+        }
+
+        .doc-section-desc {
+            font-size: 14px;
+            color: var(--text-muted);
+            margin-bottom: 32px;
+            margin-left: 16px;
+        }
+
+        .components-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 32px;
+            align-items: flex-start;
+        }
+
+        .component-wrapper {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .state-label {
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: var(--text-muted);
+            padding: 4px 10px;
+            background: var(--bg-gray);
+            border-radius: var(--radius-sm);
+            width: fit-content;
+        }
+
+        /* =====================================================
+           BOUTONS - DESIGN SYSTEM JURIBLE (8 TYPES)
+           Font: Poppins 14px Medium 500
+           Letter-spacing: 0.5px
+           Radius: 8px
+           Tailles: SM (16px/8px), MD (20px/10px), LG (24px/12px)
+           ===================================================== */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 14px;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            border: none;
+            border-radius: var(--radius-md);
+            cursor: pointer;
+            transition: all var(--transition-normal);
+        }
+
+        /* Taille MD (default) */
+        .btn--md {
+            padding: 10px 20px;
+        }
+
+        /* Taille LG */
+        .btn--lg {
+            padding: 12px 24px;
+        }
+
+        /* =====================================================
+           1. BUTTON PRIMARY - Gradient rouge → violet
+           Usage: CTA principal (S'abonner, Commencer)
+           ===================================================== */
+        .btn--primary {
+            background: var(--gradient-jurible);
+            color: var(--text-contrast);
+            padding: 12px 24px;
+            box-shadow: var(--shadow-btn-primary);
+        }
+
+        .btn--primary:hover {
+            box-shadow: var(--shadow-btn-primary-hover);
+            transform: translateY(-1px);
+        }
+
+        /* =====================================================
+           2. BUTTON SECONDARY - Bordure noire
+           Usage: CTA secondaire (Découvrir, Voir les cours)
+           ===================================================== */
+        .btn--secondary {
+            background: transparent;
+            color: var(--text-dark);
+            padding: 12px 24px;
+            border: 2px solid var(--text-dark);
+        }
+
+        .btn--secondary:hover {
+            background: var(--text-dark);
+            color: var(--text-contrast);
+        }
+
+        /* =====================================================
+           3. BUTTON OUTLINE PRIMARY - Bordure rouge
+           Usage: Actions sur cards (Voir le cours)
+           ===================================================== */
+        .btn--outline-primary {
+            background: transparent;
+            color: var(--color-primary);
+            padding: 12px 24px;
+            border: 2px solid var(--color-primary);
+        }
+
+        .btn--outline-primary:hover {
+            background: var(--color-primary);
+            color: var(--text-contrast);
+        }
+
+        /* =====================================================
+           4. BUTTON GHOST - Transparent
+           Usage: Actions discrètes (Annuler, Fermer)
+           ===================================================== */
+        .btn--ghost {
+            background: transparent;
+            color: var(--text-dark);
+            padding: 12px 24px;
+        }
+
+        .btn--ghost:hover {
+            background: var(--bg-gray);
+        }
+
+        /* =====================================================
+           5. BUTTON LINK - Texte souligné + →
+           Usage: Liens vers détails (En savoir plus →)
+           ===================================================== */
+        .btn--link {
+            background: transparent;
+            color: var(--color-primary);
+            padding: 0;
+            text-decoration: underline;
+            text-underline-offset: 2px;
+        }
+
+        .btn--link:hover {
+            text-decoration-thickness: 2px;
+        }
+
+        /* =====================================================
+           6. BUTTON SECONDARY GRAY - Fond gris
+           Usage: Actions neutres (Télécharger, Partager)
+           ===================================================== */
+        .btn--secondary-gray {
+            background: var(--bg-gray);
+            color: var(--text-dark);
+            padding: 12px 24px;
+        }
+
+        .btn--secondary-gray:hover {
+            background: var(--bg-border);
+        }
+
+        /* =====================================================
+           7. BUTTON DESTRUCTIVE - Rouge vif
+           Usage: Suppression, danger (Supprimer)
+           ===================================================== */
+        .btn--destructive {
+            background: #EF4444;
+            color: var(--text-contrast);
+            padding: 12px 24px;
+        }
+
+        .btn--destructive:hover {
+            background: #DC2626;
+        }
+
+        /* =====================================================
+           8. BUTTON ACCENT - Violet
+           Usage: Promos, essai gratuit, IA
+           ===================================================== */
+        .btn--accent {
+            background: var(--color-secondary);
+            color: var(--text-contrast);
+            padding: 12px 24px;
+        }
+
+        .btn--accent:hover {
+            background: var(--color-secondary-hover);
+        }
+
+        /* =====================================================
+           BUTTON WHITE (sur fond coloré/gradient)
+           ===================================================== */
+        .btn--white {
+            background: var(--bg-white);
+            color: var(--color-primary);
+            padding: 12px 24px;
+        }
+
+        .btn--white:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        /* Full width variant */
+        .btn--full {
+            width: 100%;
+        }
+
+        /* =====================================================
+           1. WIDGET SOMMAIRE (Sidebar)
+           ===================================================== */
+        .widget-sommaire {
+            width: 320px;
+            background: var(--bg-white);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-sm);
+            padding: var(--spacing-lg);
+        }
+
+        .widget-sommaire__header {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 20px;
+        }
+
+        .widget-sommaire__icon {
+            font-size: 18px;
+        }
+
+        .widget-sommaire__title {
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--text-dark);
+        }
+
+        .widget-sommaire__list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 0;
+        }
+
+        .widget-sommaire__item {
+            position: relative;
+            padding: 12px 16px;
+            font-size: 14px;
+            font-weight: 400;
+            color: var(--text-gray);
+            cursor: pointer;
+            transition: all var(--transition-fast);
+            border-left: 3px solid transparent;
+        }
+
+        .widget-sommaire__item:hover {
+            color: var(--color-primary);
+            background: rgba(176, 0, 29, 0.05);
+        }
+
+        .widget-sommaire__item--active {
+            color: var(--color-primary);
+            font-weight: 500;
+            background: rgba(176, 0, 29, 0.08);
+            border-left-color: var(--color-primary);
+        }
+
+        /* =====================================================
+           2. WIDGET CTA RECOMMANDÉ (Sidebar)
+           ===================================================== */
+        .widget-cta-recommend {
+            width: 320px;
+            background: var(--gradient-jurible);
+            border-radius: var(--radius-xl);
+            padding: var(--spacing-lg);
+            color: white;
+        }
+
+        .widget-cta-recommend__badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 6px 12px;
+            border-radius: var(--radius-full);
+            font-size: 12px;
+            font-weight: 600;
+            margin-bottom: 16px;
+        }
+
+        .widget-cta-recommend__title {
+            font-size: 18px;
+            font-weight: 700;
+            line-height: 1.3;
+            margin-bottom: 8px;
+        }
+
+        .widget-cta-recommend__desc {
+            font-size: 14px;
+            font-weight: 400;
+            opacity: 0.9;
+            line-height: 1.5;
+            margin-bottom: 20px;
+        }
+
+        /* =====================================================
+           2b. WIDGET CTA ALLER + LOIN (Sidebar) - Fond noir
+           ===================================================== */
+        .widget-cta-dark {
+            width: 320px;
+            background: var(--text-dark);
+            border-radius: var(--radius-xl);
+            padding: var(--spacing-lg);
+            color: white;
+        }
+
+        .widget-cta-dark__badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: rgba(255, 255, 255, 0.15);
+            padding: 6px 12px;
+            border-radius: var(--radius-full);
+            font-size: 12px;
+            font-weight: 600;
+            margin-bottom: 16px;
+        }
+
+        .widget-cta-dark__title {
+            font-size: 18px;
+            font-weight: 700;
+            line-height: 1.3;
+            margin-bottom: 8px;
+        }
+
+        .widget-cta-dark__desc {
+            font-size: 14px;
+            font-weight: 400;
+            opacity: 0.85;
+            line-height: 1.5;
+            margin-bottom: 20px;
+        }
+
+        /* =====================================================
+           3. WIDGET NEWSLETTER (Sidebar)
+           ===================================================== */
+        .widget-newsletter {
+            width: 320px;
+            background: var(--bg-white);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-sm);
+            padding: var(--spacing-lg);
+        }
+
+        .widget-newsletter__icon {
+            font-size: 32px;
+            margin-bottom: 16px;
+        }
+
+        .widget-newsletter__title {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 8px;
+        }
+
+        .widget-newsletter__desc {
+            font-size: 14px;
+            font-weight: 400;
+            color: var(--text-gray);
+            line-height: 1.5;
+            margin-bottom: 20px;
+        }
+
+        .widget-newsletter__input {
+            width: 100%;
+            padding: 12px 16px;
+            border: 1px solid var(--bg-border);
+            border-radius: var(--radius-md);
+            font-family: inherit;
+            font-size: 14px;
+            color: var(--text-dark);
+            margin-bottom: 12px;
+            transition: all var(--transition-fast);
+        }
+
+        .widget-newsletter__input::placeholder {
+            color: var(--text-light);
+        }
+
+        .widget-newsletter__input:focus {
+            outline: none;
+            border-color: var(--color-primary);
+            box-shadow: 0 0 0 3px rgba(176, 0, 29, 0.1);
+        }
+
+        /* =====================================================
+           4. WIDGET ARTICLES LIÉS (Sidebar)
+           ===================================================== */
+        .widget-articles {
+            width: 320px;
+            background: var(--bg-white);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-sm);
+            padding: var(--spacing-lg);
+        }
+
+        .widget-articles__header {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 20px;
+        }
+
+        .widget-articles__icon {
+            font-size: 18px;
+        }
+
+        .widget-articles__title {
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--text-dark);
+        }
+
+        .widget-articles__list {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .widget-articles__item {
+            display: flex;
+            gap: 12px;
+            cursor: pointer;
+            transition: all var(--transition-fast);
+        }
+
+        .widget-articles__item:hover .widget-articles__item-title {
+            color: var(--color-primary);
+        }
+
+        .widget-articles__item-image {
+            width: 64px;
+            height: 64px;
+            min-width: 64px;
+            background: var(--bg-gray);
+            border-radius: var(--radius-sm);
+            overflow: hidden;
+        }
+
+        .widget-articles__item-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .widget-articles__item-title {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--text-dark);
+            line-height: 1.4;
+            margin-bottom: 4px;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            transition: color var(--transition-fast);
+        }
+
+        .widget-articles__item-meta {
+            font-size: 13px;
+            font-weight: 400;
+            color: var(--text-muted);
+        }
+
+        /* =====================================================
+           5. CTA HORIZONTAL (Contenu) - Barre VIOLET
+           ===================================================== */
+        .cta-horizontal {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            background: var(--bg-white);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-sm);
+            padding: var(--spacing-lg);
+            border-left: 4px solid var(--color-secondary);
+            max-width: 700px;
+        }
+
+        .cta-horizontal__icon {
+            width: 56px;
+            height: 56px;
+            min-width: 56px;
+            background: linear-gradient(135deg, #FEE2E2 0%, #EDE9FE 100%);
+            border-radius: var(--radius-md);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+        }
+
+        .cta-horizontal__content {
+            flex: 1;
+        }
+
+        .cta-horizontal__title {
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 4px;
+        }
+
+        .cta-horizontal__desc {
+            font-size: 14px;
+            font-weight: 400;
+            color: var(--text-gray);
+            line-height: 1.5;
+        }
+
+        /* =====================================================
+           6. CTA GRADIENT FULL (Contenu)
+           ===================================================== */
+        .cta-gradient {
+            background: var(--gradient-jurible);
+            border-radius: var(--radius-lg);
+            padding: var(--spacing-lg);
+            color: white;
+            max-width: 700px;
+        }
+
+        .cta-gradient__header {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 12px;
+        }
+
+        .cta-gradient__icon {
+            font-size: 18px;
+        }
+
+        .cta-gradient__label {
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .cta-gradient__text {
+            font-size: 16px;
+            font-weight: 400;
+            line-height: 1.6;
+            opacity: 0.95;
+            margin-bottom: 20px;
+        }
+
+        /* =====================================================
+           7. BLOC TAGS - Design System
+           Types: Filled / Outline / Borderless
+           Sizes: SM (6px/2px), MD (8px/4px), LG (12px/6px)
+           ===================================================== */
+        .bloc-tags {
+            max-width: 700px;
+        }
+
+        .bloc-tags__title {
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 12px;
+        }
+
+        .bloc-tags__list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        /* Tag Base */
+        .tag {
+            display: inline-block;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 500;
+            transition: all var(--transition-fast);
+        }
+
+        /* Tag Size MD (default) */
+        .tag--md {
+            padding: 4px 8px;
+            font-size: 12px;
+            border-radius: 6px;
+        }
+
+        /* Tag Filled Primary */
+        .tag--filled-primary {
+            background: var(--color-primary);
+            color: var(--text-contrast);
+            padding: 4px 8px;
+            font-size: 12px;
+            border-radius: 6px;
+        }
+
+        .tag--filled-primary:hover {
+            background: var(--color-primary-hover);
+        }
+
+        /* Tag Outline Primary */
+        .tag--outline-primary {
+            background: transparent;
+            color: var(--color-primary);
+            border: 1.5px solid var(--color-primary);
+            padding: 4px 8px;
+            font-size: 12px;
+            border-radius: 6px;
+        }
+
+        .tag--outline-primary:hover {
+            background: rgba(176, 0, 29, 0.08);
+        }
+
+        /* =====================================================
+           8. BLOC PARTAGE (Contenu)
+           ===================================================== */
+        .bloc-share {
+            max-width: 700px;
+        }
+
+        .bloc-share__header {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 12px;
+        }
+
+        .bloc-share__icon {
+            font-size: 16px;
+        }
+
+        .bloc-share__title {
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--text-dark);
+        }
+
+        .bloc-share__list {
+            display: flex;
+            gap: 8px;
+        }
+
+        .bloc-share__btn {
+            width: 44px;
+            height: 44px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--bg-white);
+            border: 1px solid var(--bg-border);
+            border-radius: var(--radius-md);
+            color: var(--text-gray);
+            transition: all var(--transition-fast);
+        }
+
+        .bloc-share__btn:hover {
+            border-color: var(--color-primary);
+            color: var(--color-primary);
+            background: rgba(176, 0, 29, 0.05);
+        }
+
+        .bloc-share__btn svg {
+            width: 20px;
+            height: 20px;
+        }
+
+        /* =====================================================
+           SECTION COMMENTAIRES
+           ===================================================== */
+        .comments-section {
+            width: 100%;
+        }
+
+        .comments-section__header {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 24px;
+        }
+
+        .comments-section__icon {
+            font-size: 20px;
+        }
+
+        .comments-section__title {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--text-dark);
+            text-decoration: underline;
+            text-underline-offset: 4px;
+        }
+
+        /* Formulaire commentaire */
+        .comments-form {
+            background: var(--bg-light);
+            border-radius: var(--radius-lg);
+            padding: var(--spacing-lg);
+            margin-bottom: 32px;
+        }
+
+        .comments-form__title {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--text-dark);
+            margin-bottom: 16px;
+        }
+
+        .comments-form__row {
+            display: flex;
+            gap: 16px;
+            margin-bottom: 16px;
+        }
+
+        .comments-form__input {
+            flex: 1;
+            padding: 12px 16px;
+            border: 1px solid var(--bg-border);
+            border-radius: var(--radius-md);
+            font-family: inherit;
+            font-size: 14px;
+            color: var(--text-dark);
+            background: var(--bg-white);
+            transition: all var(--transition-fast);
+        }
+
+        .comments-form__input::placeholder,
+        .comments-form__textarea::placeholder {
+            color: var(--text-light);
+        }
+
+        .comments-form__input:focus,
+        .comments-form__textarea:focus {
+            outline: none;
+            border-color: var(--color-primary);
+            box-shadow: 0 0 0 3px rgba(176, 0, 29, 0.1);
+        }
+
+        .comments-form__textarea {
+            width: 100%;
+            min-height: 120px;
+            padding: 12px 16px;
+            border: 1px solid var(--bg-border);
+            border-radius: var(--radius-md);
+            font-family: inherit;
+            font-size: 14px;
+            color: var(--text-dark);
+            background: var(--bg-white);
+            resize: vertical;
+            margin-bottom: 16px;
+            transition: all var(--transition-fast);
+        }
+
+        /* Liste des commentaires */
+        .comments-list {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .comment {
+            display: flex;
+            gap: 16px;
+            padding: 24px 0;
+            border-bottom: 1px solid var(--bg-border);
+        }
+
+        .comment:last-child {
+            border-bottom: none;
+        }
+
+        .comment--reply {
+            margin-top: 20px;
+            padding: 16px 0 0 0;
+            border-bottom: none;
+            border-top: none;
+        }
+
+        .comment__avatar {
+            width: 48px;
+            height: 48px;
+            min-width: 48px;
+            background: var(--bg-gray);
+            border-radius: var(--radius-full);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--text-muted);
+        }
+
+        .comment__avatar--small {
+            width: 40px;
+            height: 40px;
+            min-width: 40px;
+            font-size: 14px;
+        }
+
+        .comment__content {
+            flex: 1;
+        }
+
+        .comment__header {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 8px;
+        }
+
+        .comment__author {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--text-dark);
+        }
+
+        .comment__badge {
+            font-size: 11px;
+            font-weight: 600;
+            color: var(--color-secondary);
+            background: rgba(124, 58, 237, 0.1);
+            padding: 2px 8px;
+            border-radius: var(--radius-sm);
+        }
+
+        .comment__date {
+            font-size: 13px;
+            font-weight: 400;
+            color: var(--text-muted);
+        }
+
+        .comment__text {
+            font-size: 14px;
+            font-weight: 400;
+            color: var(--text-gray);
+            line-height: 1.6;
+            margin-bottom: 12px;
+        }
+
+        .comment__reply-btn {
+            background: none;
+            border: none;
+            font-family: inherit;
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--color-primary);
+            cursor: pointer;
+            padding: 0;
+            transition: color var(--transition-fast);
+        }
+
+        .comment__reply-btn:hover {
+            color: var(--color-primary-hover);
+        }
+
+        /* =====================================================
+           SPECS TABLE
+           ===================================================== */
+        .specs-section {
+            background: var(--bg-white);
+            border: 1px solid var(--bg-border);
+            border-radius: var(--radius-md);
+            padding: var(--spacing-xl);
+            margin-top: 60px;
+        }
+
+        .specs-section h3 {
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--text-dark);
+            margin-bottom: 20px;
+        }
+
+        .specs-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 14px;
+        }
+
+        .specs-table th,
+        .specs-table td {
+            padding: 12px 16px;
+            text-align: left;
+            border-bottom: 1px solid var(--bg-border);
+        }
+
+        .specs-table th {
+            font-weight: 600;
+            color: var(--text-dark);
+            background: var(--bg-light);
+        }
+
+        .specs-table td {
+            color: var(--text-gray);
+        }
+
+        .specs-table code {
+            background: var(--bg-gray);
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-family: 'SF Mono', Monaco, monospace;
+            font-size: 12px;
+            color: var(--color-primary);
+        }
+    </style>
+</head>
+<body>
+    <div class="doc-container">
+        <!-- Header -->
+        <header class="doc-header">
+            <h1>Jurible Design System</h1>
+            <p>Blog Widgets — Sidebar & Éléments de contenu</p>
+        </header>
+
+        <!-- =====================================================
+             SECTION 1: WIDGETS SIDEBAR
+             ===================================================== -->
+        <section class="doc-section">
+            <h2 class="doc-section-title">Widgets Sidebar</h2>
+            <p class="doc-section-desc">Composants affichés dans la barre latérale des articles de blog.</p>
+
+            <div class="components-grid">
+                <!-- Widget Sommaire -->
+                <div class="component-wrapper">
+                    <span class="state-label">Sommaire</span>
+                    <div class="widget-sommaire">
+                        <div class="widget-sommaire__header">
+                            <span class="widget-sommaire__icon">📄</span>
+                            <h3 class="widget-sommaire__title">Sommaire</h3>
+                        </div>
+                        <ul class="widget-sommaire__list">
+                            <li class="widget-sommaire__item widget-sommaire__item--active">I. Comprendre l'exercice</li>
+                            <li class="widget-sommaire__item">II. Analyser le sujet</li>
+                            <li class="widget-sommaire__item">III. Trouver la problématique</li>
+                            <li class="widget-sommaire__item">IV. Construire le plan</li>
+                            <li class="widget-sommaire__item">V. Rédiger l'introduction</li>
+                            <li class="widget-sommaire__item">VI. Le développement</li>
+                            <li class="widget-sommaire__item">VII. Les erreurs à éviter</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Widget CTA Recommandé -->
+                <div class="component-wrapper">
+                    <span class="state-label">CTA Recommandé</span>
+                    <div class="widget-cta-recommend">
+                        <div class="widget-cta-recommend__badge">
+                            <span>⭐</span>
+                            <span>Recommandé</span>
+                        </div>
+                        <h3 class="widget-cta-recommend__title">Maîtrisez la dissertation avec l'Académie</h3>
+                        <p class="widget-cta-recommend__desc">Cours vidéo complets, exemples corrigés et exercices d'entraînement.</p>
+                        <button class="btn btn--white btn--full">Découvrir l'Académie</button>
+                    </div>
+                </div>
+
+                <!-- Widget CTA Aller + loin -->
+                <div class="component-wrapper">
+                    <span class="state-label">CTA Aller + loin</span>
+                    <div class="widget-cta-dark">
+                        <div class="widget-cta-dark__badge">
+                            <span>🚀</span>
+                            <span>Aller + loin</span>
+                        </div>
+                        <h3 class="widget-cta-dark__title">Approfondissez vos connaissances</h3>
+                        <p class="widget-cta-dark__desc">Accédez à nos cours complets et exercices corrigés pour maîtriser chaque notion.</p>
+                        <button class="btn btn--primary btn--full">Découvrir les cours</button>
+                    </div>
+                </div>
+
+                <!-- Widget Newsletter -->
+                <div class="component-wrapper">
+                    <span class="state-label">Newsletter</span>
+                    <div class="widget-newsletter">
+                        <div class="widget-newsletter__icon">✉️</div>
+                        <h3 class="widget-newsletter__title">Recevez nos conseils</h3>
+                        <p class="widget-newsletter__desc">Astuces méthodologiques et fiches de révision par email.</p>
+                        <input type="email" class="widget-newsletter__input" placeholder="Votre email">
+                        <button class="btn btn--primary btn--full">S'inscrire</button>
+                    </div>
+                </div>
+
+                <!-- Widget Articles liés -->
+                <div class="component-wrapper">
+                    <span class="state-label">Articles liés</span>
+                    <div class="widget-articles">
+                        <div class="widget-articles__header">
+                            <span class="widget-articles__icon">📚</span>
+                            <h3 class="widget-articles__title">Articles liés</h3>
+                        </div>
+                        <div class="widget-articles__list">
+                            <a href="#" class="widget-articles__item">
+                                <div class="widget-articles__item-image"></div>
+                                <div class="widget-articles__item-content">
+                                    <h4 class="widget-articles__item-title">Le commentaire d'arrêt : méthode complète</h4>
+                                    <span class="widget-articles__item-meta">10 min</span>
+                                </div>
+                            </a>
+                            <a href="#" class="widget-articles__item">
+                                <div class="widget-articles__item-image"></div>
+                                <div class="widget-articles__item-content">
+                                    <h4 class="widget-articles__item-title">5 erreurs dans le cas pratique</h4>
+                                    <span class="widget-articles__item-meta">8 min</span>
+                                </div>
+                            </a>
+                            <a href="#" class="widget-articles__item">
+                                <div class="widget-articles__item-image"></div>
+                                <div class="widget-articles__item-content">
+                                    <h4 class="widget-articles__item-title">Comment trouver une problématique</h4>
+                                    <span class="widget-articles__item-meta">6 min</span>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- =====================================================
+             SECTION 2: CTA CONTENU
+             ===================================================== -->
+        <section class="doc-section">
+            <h2 class="doc-section-title">CTA Contenu Article</h2>
+            <p class="doc-section-desc">Blocs d'appel à l'action intégrés dans le contenu des articles.</p>
+
+            <div class="components-grid" style="flex-direction: column; gap: 40px;">
+                <!-- CTA Horizontal -->
+                <div class="component-wrapper">
+                    <span class="state-label">CTA Horizontal (barre latérale violet)</span>
+                    <div class="cta-horizontal">
+                        <div class="cta-horizontal__icon">📚</div>
+                        <div class="cta-horizontal__content">
+                            <h3 class="cta-horizontal__title">Manuel de méthodologie juridique</h3>
+                            <p class="cta-horizontal__desc">Toutes les méthodes expliquées avec des exemples corrigés.</p>
+                        </div>
+                        <button class="btn btn--accent">Découvrir →</button>
+                    </div>
+                </div>
+
+                <!-- CTA Gradient -->
+                <div class="component-wrapper">
+                    <span class="state-label">CTA Gradient (En savoir plus)</span>
+                    <div class="cta-gradient">
+                        <div class="cta-gradient__header">
+                            <span class="cta-gradient__icon">💡</span>
+                            <span class="cta-gradient__label">En savoir plus</span>
+                        </div>
+                        <p class="cta-gradient__text">Consultez notre cours complet sur la méthodologie juridique pour approfondir chaque exercice avec des exemples corrigés.</p>
+                        <button class="btn btn--white">Voir le cours →</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- =====================================================
+             SECTION 3: TAGS & PARTAGE
+             ===================================================== -->
+        <section class="doc-section">
+            <h2 class="doc-section-title">Tags & Partage</h2>
+            <p class="doc-section-desc">Éléments affichés en bas des articles pour la navigation et le partage social.</p>
+
+            <div class="components-grid" style="flex-direction: column; gap: 40px;">
+                <!-- Bloc Tags -->
+                <div class="component-wrapper">
+                    <span class="state-label">Tags article</span>
+                    <div class="bloc-tags">
+                        <h4 class="bloc-tags__title">Tags</h4>
+                        <div class="bloc-tags__list">
+                            <a href="#" class="tag tag--filled-primary">Dissertation</a>
+                            <a href="#" class="tag tag--filled-primary">Méthodologie</a>
+                            <a href="#" class="tag tag--outline-primary">Droit</a>
+                            <a href="#" class="tag tag--outline-primary">Examens</a>
+                            <a href="#" class="tag tag--outline-primary">L1 Droit</a>
+                            <a href="#" class="tag tag--outline-primary">L2 Droit</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Bloc Partage -->
+                <div class="component-wrapper">
+                    <span class="state-label">Partage social</span>
+                    <div class="bloc-share">
+                        <div class="bloc-share__header">
+                            <span class="bloc-share__icon">🚀</span>
+                            <h4 class="bloc-share__title">Partager cet article</h4>
+                        </div>
+                        <div class="bloc-share__list">
+                            <!-- Facebook -->
+                            <a href="#" class="bloc-share__btn" title="Partager sur Facebook">
+                                <svg viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+                                </svg>
+                            </a>
+                            <!-- X (Twitter) -->
+                            <a href="#" class="bloc-share__btn" title="Partager sur X">
+                                <svg viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                                </svg>
+                            </a>
+                            <!-- LinkedIn -->
+                            <a href="#" class="bloc-share__btn" title="Partager sur LinkedIn">
+                                <svg viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                                </svg>
+                            </a>
+                            <!-- Copier le lien -->
+                            <a href="#" class="bloc-share__btn" title="Copier le lien">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" />
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- =====================================================
+             SECTION 4: COMMENTAIRES
+             ===================================================== -->
+        <section class="doc-section">
+            <h2 class="doc-section-title">Section Commentaires</h2>
+            <p class="doc-section-desc">Formulaire et liste des commentaires affichés en bas des articles.</p>
+
+            <div class="component-wrapper" style="max-width: 800px;">
+                <span class="state-label">Section complète</span>
+                
+                <!-- Section Commentaires -->
+                <div class="comments-section">
+                    <!-- Header -->
+                    <div class="comments-section__header">
+                        <span class="comments-section__icon">💬</span>
+                        <h3 class="comments-section__title">Commentaires (12)</h3>
+                    </div>
+
+                    <!-- Formulaire -->
+                    <div class="comments-form">
+                        <h4 class="comments-form__title">Laisser un commentaire</h4>
+                        <div class="comments-form__row">
+                            <input type="text" class="comments-form__input" placeholder="Votre nom">
+                            <input type="email" class="comments-form__input" placeholder="Votre email">
+                        </div>
+                        <textarea class="comments-form__textarea" placeholder="Votre commentaire..."></textarea>
+                        <button class="btn btn--primary">Publier le commentaire</button>
+                    </div>
+
+                    <!-- Liste des commentaires -->
+                    <div class="comments-list">
+                        <!-- Commentaire 1 -->
+                        <div class="comment">
+                            <div class="comment__avatar">T</div>
+                            <div class="comment__content">
+                                <div class="comment__header">
+                                    <span class="comment__author">Thomas L.</span>
+                                    <span class="comment__date">Il y a 2 jours</span>
+                                </div>
+                                <p class="comment__text">Super article ! J'ai enfin compris comment construire une vraie problématique. Merci pour les exemples concrets, ça aide vraiment à visualiser la méthode.</p>
+                                <button class="comment__reply-btn">Répondre</button>
+
+                                <!-- Réponse imbriquée -->
+                                <div class="comment comment--reply">
+                                    <div class="comment__avatar comment__avatar--small">J</div>
+                                    <div class="comment__content">
+                                        <div class="comment__header">
+                                            <span class="comment__author">Jurible</span>
+                                            <span class="comment__badge">Équipe</span>
+                                            <span class="comment__date">Il y a 1 jour</span>
+                                        </div>
+                                        <p class="comment__text">Merci Thomas ! Ravi que l'article t'ait été utile. N'hésite pas si tu as des questions sur d'autres points de méthodologie 🙂</p>
+                                        <button class="comment__reply-btn">Répondre</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Commentaire 2 -->
+                        <div class="comment">
+                            <div class="comment__avatar">E</div>
+                            <div class="comment__content">
+                                <div class="comment__header">
+                                    <span class="comment__author">Emma R.</span>
+                                    <span class="comment__date">Il y a 5 jours</span>
+                                </div>
+                                <p class="comment__text">Est-ce que cette méthode fonctionne aussi pour les dissertations en droit public ? J'ai l'impression que les attentes sont différentes selon les matières.</p>
+                                <button class="comment__reply-btn">Répondre</button>
+                            </div>
+                        </div>
+
+                        <!-- Commentaire 3 -->
+                        <div class="comment">
+                            <div class="comment__avatar">M</div>
+                            <div class="comment__content">
+                                <div class="comment__header">
+                                    <span class="comment__author">Mathieu P.</span>
+                                    <span class="comment__date">Il y a 1 semaine</span>
+                                </div>
+                                <p class="comment__text">Très clair ! J'aurais aimé avoir ce guide avant mon partiel de droit constitutionnel 😅</p>
+                                <button class="comment__reply-btn">Répondre</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- =====================================================
+             SPECS TABLE
+             ===================================================== -->
+        <div class="specs-section">
+            <h3>📋 Boutons Design System Jurible (8 types)</h3>
+            <table class="specs-table">
+                <thead>
+                    <tr>
+                        <th>Bouton</th>
+                        <th>Apparence</th>
+                        <th>Usage</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Primary</strong></td>
+                        <td><code>Gradient rouge → violet</code></td>
+                        <td>CTA principal</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Secondary</strong></td>
+                        <td><code>Bordure noire 2px</code></td>
+                        <td>CTA secondaire</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Outline Primary</strong></td>
+                        <td><code>Bordure rouge 2px</code></td>
+                        <td>Actions sur cards</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Ghost</strong></td>
+                        <td><code>Transparent</code></td>
+                        <td>Annuler, Fermer</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Link</strong></td>
+                        <td><code>Texte souligné + →</code></td>
+                        <td>Liens vers détails</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Secondary Gray</strong></td>
+                        <td><code>Fond #F3F4F6</code></td>
+                        <td>Actions neutres</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Destructive</strong></td>
+                        <td><code>Rouge #EF4444</code></td>
+                        <td>Suppression, danger</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Accent</strong></td>
+                        <td><code>Violet #7C3AED</code></td>
+                        <td>Promos, essai gratuit</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3 style="margin-top: 32px;">📋 Specs communes Boutons</h3>
+            <table class="specs-table">
+                <thead>
+                    <tr>
+                        <th>Propriété</th>
+                        <th>Valeur</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Police</td>
+                        <td><code>Poppins, 14px, Medium 500</code></td>
+                    </tr>
+                    <tr>
+                        <td>Letter-spacing</td>
+                        <td><code>0.5px</code></td>
+                    </tr>
+                    <tr>
+                        <td>Border-radius</td>
+                        <td><code>8px</code></td>
+                    </tr>
+                    <tr>
+                        <td>Taille SM</td>
+                        <td><code>padding: 8px 16px</code></td>
+                    </tr>
+                    <tr>
+                        <td>Taille MD</td>
+                        <td><code>padding: 10px 20px</code></td>
+                    </tr>
+                    <tr>
+                        <td>Taille LG</td>
+                        <td><code>padding: 12px 24px</code></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3 style="margin-top: 32px;">📋 Specs Tags</h3>
+            <table class="specs-table">
+                <thead>
+                    <tr>
+                        <th>Taille</th>
+                        <th>Padding H</th>
+                        <th>Padding V</th>
+                        <th>Font</th>
+                        <th>Radius</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>SM</td>
+                        <td><code>6px</code></td>
+                        <td><code>2px</code></td>
+                        <td><code>10px</code></td>
+                        <td><code>6px</code></td>
+                    </tr>
+                    <tr>
+                        <td>MD</td>
+                        <td><code>8px</code></td>
+                        <td><code>4px</code></td>
+                        <td><code>12px</code></td>
+                        <td><code>6px</code></td>
+                    </tr>
+                    <tr>
+                        <td>LG</td>
+                        <td><code>12px</code></td>
+                        <td><code>6px</code></td>
+                        <td><code>14px</code></td>
+                        <td><code>6px</code></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3 style="margin-top: 32px;">📋 Boutons utilisés dans ce fichier</h3>
+            <table class="specs-table">
+                <thead>
+                    <tr>
+                        <th>Widget</th>
+                        <th>Bouton</th>
+                        <th>Classe</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>CTA Recommandé</td>
+                        <td>White (sur gradient)</td>
+                        <td><code>.btn--white</code></td>
+                    </tr>
+                    <tr>
+                        <td>CTA Aller + loin</td>
+                        <td>Primary (gradient)</td>
+                        <td><code>.btn--primary</code></td>
+                    </tr>
+                    <tr>
+                        <td>Newsletter</td>
+                        <td>Primary</td>
+                        <td><code>.btn--primary</code></td>
+                    </tr>
+                    <tr>
+                        <td>CTA Horizontal</td>
+                        <td>Accent (violet)</td>
+                        <td><code>.btn--accent</code></td>
+                    </tr>
+                    <tr>
+                        <td>CTA Gradient</td>
+                        <td>White (sur gradient)</td>
+                        <td><code>.btn--white</code></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3 style="margin-top: 32px;">📋 Specs Section Commentaires</h3>
+            <table class="specs-table">
+                <thead>
+                    <tr>
+                        <th>Élément</th>
+                        <th>Propriété</th>
+                        <th>Valeur</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Formulaire</td>
+                        <td>Background</td>
+                        <td><code>#F9FAFB</code></td>
+                    </tr>
+                    <tr>
+                        <td>Formulaire</td>
+                        <td>Radius</td>
+                        <td><code>12px</code></td>
+                    </tr>
+                    <tr>
+                        <td>Formulaire</td>
+                        <td>Padding</td>
+                        <td><code>24px</code></td>
+                    </tr>
+                    <tr>
+                        <td>Input / Textarea</td>
+                        <td>Border</td>
+                        <td><code>1px solid #E5E7EB</code></td>
+                    </tr>
+                    <tr>
+                        <td>Input / Textarea</td>
+                        <td>Radius</td>
+                        <td><code>8px</code></td>
+                    </tr>
+                    <tr>
+                        <td>Avatar</td>
+                        <td>Size</td>
+                        <td><code>48px</code> (reply: 40px)</td>
+                    </tr>
+                    <tr>
+                        <td>Avatar</td>
+                        <td>Background</td>
+                        <td><code>#F3F4F6</code></td>
+                    </tr>
+                    <tr>
+                        <td>Auteur</td>
+                        <td>Font</td>
+                        <td><code>14px SemiBold</code></td>
+                    </tr>
+                    <tr>
+                        <td>Date</td>
+                        <td>Font</td>
+                        <td><code>13px Regular, #6B7280</code></td>
+                    </tr>
+                    <tr>
+                        <td>Texte</td>
+                        <td>Font</td>
+                        <td><code>14px Regular, #4A4A4A</code></td>
+                    </tr>
+                    <tr>
+                        <td>Répondre</td>
+                        <td>Color</td>
+                        <td><code>#B0001D</code></td>
+                    </tr>
+                    <tr>
+                        <td>Badge Équipe</td>
+                        <td>Style</td>
+                        <td><code>bg: rgba(124,58,237,0.1), color: #7C3AED</code></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+</html>

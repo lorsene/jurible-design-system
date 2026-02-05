@@ -1,0 +1,1122 @@
+<!--
+╔══════════════════════════════════════════════════════════════════════════════╗
+║  JURIBLE — SECTION "AIDE AU CHOIX" — FLIP CARDS                           ║
+║  Composant : AideChoix_FlipCards                                           ║
+║  Version : 1.0                                                             ║
+║  Dernière mise à jour : 05/02/2026                                         ║
+╚══════════════════════════════════════════════════════════════════════════════╝
+
+═══════════════════════════════════════════════════════════════════════════════
+ 1. DESCRIPTION
+═══════════════════════════════════════════════════════════════════════════════
+
+  Section interactive "Aide au choix" composée de 6 cartes retournables
+  au clic. Chaque carte présente un profil étudiant (recto) et révèle
+  la recommandation produit Jurible correspondante (verso).
+
+  Usage : Pages d'offres, page d'accueil, landing pages comparatives.
+
+═══════════════════════════════════════════════════════════════════════════════
+ 2. STRUCTURE HTML
+═══════════════════════════════════════════════════════════════════════════════
+
+  section.section-aide-choix
+  ├── div.section-header
+  │   ├── div.badge-aide          (badge violet "Aide au choix")
+  │   ├── h2                      ("Trouvez votre formule" — gradient)
+  │   └── p                       (sous-titre gris)
+  ├── div.cards-grid              (grille 3×2 → 2×3 → 2×3)
+  │   └── div.flip-card × 6
+  │       └── div.flip-card-inner
+  │           ├── div.flip-card-front
+  │           │   ├── div.front-emoji       (carré gris + emoji)
+  │           │   ├── div.front-title       (titre profil)
+  │           │   ├── div.front-desc        (description courte)
+  │           │   └── div.front-cta         ("Cliquez pour voir" + icône)
+  │           └── div.flip-card-back
+  │               ├── div.back-badge        (badge vert "Recommandation")
+  │               ├── div.back-product      (nom du produit)
+  │               ├── div.back-desc         (description produit)
+  │               ├── a.back-cta            (bouton CTA vers la page produit)
+  │               └── div.back-flip-hint    ("Retourner" discret)
+  └── div.reset-wrapper
+      └── button.reset-btn        ("Réinitialiser les cartes")
+
+═══════════════════════════════════════════════════════════════════════════════
+ 3. COMPORTEMENT / INTERACTIONS
+═══════════════════════════════════════════════════════════════════════════════
+
+  FLIP (retournement) :
+  • Déclencheur      : clic sur la carte (desktop ET mobile)
+  • Animation         : rotateY(180deg), durée 0.6s, cubic-bezier(0.4, 0, 0.2, 1)
+  • Mécanisme         : classList.toggle('flipped') sur .flip-card
+  • Backface          : hidden (les deux faces)
+  • Perspective       : 1000px sur .flip-card
+  • Re-clic           : retourne la carte à son état initial (toggle)
+
+  CTA (bouton verso) :
+  • Le clic sur le CTA ne retourne PAS la carte (event.stopPropagation)
+  • Le CTA redirige vers la page produit correspondante
+  • Hover CTA : translateY(-1px) + shadow renforcée
+
+  HOVER carte :
+  • Shadow passe de shadow-sm à shadow-lg (200ms ease)
+  • "Cliquez pour voir" : animation pulse subtile (opacité 0.7↔1, 2.5s)
+  • Icône flèche du front-cta : rotation 90° au hover
+
+  RESET :
+  • Bouton "Réinitialiser les cartes" : retourne toutes les cartes au recto
+  • Hover : fond violet-light + texte violet
+
+  ANIMATION ENTRÉE :
+  • Chaque carte apparaît en fadeInUp (translateY 20px → 0, opacity 0 → 1)
+  • Stagger : +50ms par carte (carte 1 = 50ms, carte 6 = 300ms)
+  • Durée : 0.5s ease
+
+  FIGMA :
+  • Utiliser "Smart Animate" pour le flip (rotateY)
+  • Créer 2 variants par carte : "State=Recto" / "State=Verso"
+  • Interaction : On Click → Change to "State=Verso" (Smart Animate, 600ms, Ease In Out)
+  • Le CTA est un composant bouton indépendant (pas d'interaction flip)
+
+═══════════════════════════════════════════════════════════════════════════════
+ 4. DESIGN SYSTEM TOKENS UTILISÉS
+═══════════════════════════════════════════════════════════════════════════════
+
+  COULEURS :
+  • Bordeaux         : #B0001D
+  • Violet           : #7C3AED
+  • Violet light     : #EDE9FE
+  • Gradient         : linear-gradient(135deg, #B0001D, #7C3AED)
+  • Success          : #10B981
+  • Success light    : #ECFDF5
+  • Text dark        : #1A1A1A
+  • Text secondary   : #4A4A4A
+  • Text muted       : #9CA3AF
+  • Background       : #F9FAFB
+  • Gray 100         : #F3F4F6  (fond carrés emoji)
+  • Gray 200         : #E5E7EB  (border cards)
+
+  TYPOGRAPHIE :
+  • Font             : Poppins
+  • H2               : 32px / 800
+  • Produit (verso)  : 20px / 800
+  • Titre (recto)    : 16px / 700
+  • Description      : 13px / 400
+  • Badge            : 13px / 600
+  • CTA              : 13px / 600
+  • Hint             : 11px / 400
+
+  RADIUS :
+  • Cards            : 12px (radius-lg)
+  • Carrés emoji     : 8px (radius-md)
+  • Badges           : 9999px (radius-full)
+  • CTA boutons      : 8px (radius-md)
+
+  SHADOWS :
+  • Default          : shadow-sm → 0 1px 3px rgba(0,0,0,0.1), 0 1px 2px rgba(0,0,0,0.06)
+  • Hover            : shadow-lg → 0 10px 15px rgba(0,0,0,0.1), 0 4px 6px rgba(0,0,0,0.05)
+  • CTA gradient     : 0 2px 8px rgba(176,0,29,0.25) → hover 0 4px 12px rgba(176,0,29,0.35)
+
+  SPACING :
+  • xs: 8px | sm: 12px | md: 16px | lg: 24px | xl: 48px
+
+  TRANSITIONS :
+  • Durée            : 200ms
+  • Easing           : ease
+  • Flip             : 600ms cubic-bezier(0.4, 0, 0.2, 1)
+
+═══════════════════════════════════════════════════════════════════════════════
+ 5. RESPONSIVE
+═══════════════════════════════════════════════════════════════════════════════
+
+  ┌─────────────────────────────────────────────────────────────────────────┐
+  │  DESKTOP (> 900px)                                                     │
+  ├─────────────────────────────────────────────────────────────────────────┤
+  │  Grille           : 3 colonnes (repeat(3, 1fr))                        │
+  │  Gap              : 24px (space-lg)                                    │
+  │  Hauteur carte    : 280px                                              │
+  │  Section padding  : 48px 24px                                          │
+  │  Max-width        : 1120px, centré                                     │
+  │  H2               : 32px                                               │
+  │  Sous-titre       : 16px, max-width 520px                              │
+  │  Emoji            : 64×64px, font-size 32px                            │
+  │  Titre recto      : 16px                                               │
+  │  Desc recto       : 13px                                               │
+  │  Produit verso    : 20px                                               │
+  │  CTA              : 13px, padding 10px 20px                            │
+  └─────────────────────────────────────────────────────────────────────────┘
+
+  ┌─────────────────────────────────────────────────────────────────────────┐
+  │  TABLETTE (≤ 900px)                                                    │
+  ├─────────────────────────────────────────────────────────────────────────┤
+  │  Grille           : 2 colonnes (repeat(2, 1fr))                        │
+  │  Gap              : 16px (space-md)                                    │
+  │  Hauteur carte    : 260px                                              │
+  │  H2               : 26px                                               │
+  │  Sous-titre       : 14px                                               │
+  │  Reste            : inchangé                                           │
+  └─────────────────────────────────────────────────────────────────────────┘
+
+  ┌─────────────────────────────────────────────────────────────────────────┐
+  │  MOBILE (≤ 540px)                                                      │
+  ├─────────────────────────────────────────────────────────────────────────┤
+  │  Grille           : 2 colonnes (repeat(2, 1fr))                        │
+  │  Gap              : 12px (space-sm)                                    │
+  │  Hauteur carte    : 240px                                              │
+  │  Section padding  : 32px 16px                                          │
+  │  H2               : 22px                                               │
+  │  Sous-titre       : 13px                                               │
+  │  Emoji            : 48×48px, font-size 24px                            │
+  │  Titre recto      : 13px                                               │
+  │  Desc recto       : 11px, clamp 2 lignes max (-webkit-line-clamp: 2)  │
+  │  Produit verso    : 16px                                               │
+  │  Desc verso       : 11px, clamp 3 lignes max                          │
+  │  CTA              : 12px, padding 8px 16px                             │
+  └─────────────────────────────────────────────────────────────────────────┘
+
+═══════════════════════════════════════════════════════════════════════════════
+ 6. CONTENU DES 6 CARTES
+═══════════════════════════════════════════════════════════════════════════════
+
+  N°  │ Emoji │ Recto (profil)                              │ Verso (produit)        │ CTA style
+  ────┼───────┼─────────────────────────────────────────────┼────────────────────────┼──────────────────
+  1   │ 🎓    │ Étudiant en Licence ou Capacité             │ L'Académie Jurible     │ cta-gradient
+  2   │ 📄    │ Vous préférez réviser sur papier            │ Les Fiches PDF         │ cta-outline-bordeaux
+  3   │ 🤖    │ Vous voulez gagner du temps                 │ La Suite IA Jurible    │ cta-outline-violet
+  4   │ 💪    │ Vous avez redoublé ou avez des difficultés  │ La Prépa Jurible       │ cta-gradient
+  5   │ 📖    │ Vous voulez maîtriser la méthodologie       │ Le Manuel Méthodologie │ cta-outline-bordeaux
+  6   │ 📝    │ Vous voulez vous entraîner sur des sujets   │ Les Annales Corrigées  │ cta-outline-bordeaux
+
+  CTA gradient    → Académie, Prépa (produits phares)
+  CTA outline     → Fiches, IA, Manuel, Annales (produits complémentaires)
+
+═══════════════════════════════════════════════════════════════════════════════
+ 7. NOTES POUR LE DÉVELOPPEUR
+═══════════════════════════════════════════════════════════════════════════════
+
+  • Le flip repose sur CSS 3D transforms (transform-style: preserve-3d)
+  • backface-visibility: hidden est nécessaire sur les deux faces
+  • event.stopPropagation() sur les CTA pour éviter que le clic
+    ne retourne la carte en même temps
+  • L'animation d'entrée (fadeInUp) se joue une seule fois au chargement
+  • Pour WordPress FSE : encapsuler dans un Custom HTML Block ou
+    créer un block pattern réutilisable
+  • Les liens href="#" sont des placeholders → remplacer par les vraies URLs
+
+═══════════════════════════════════════════════════════════════════════════════
+-->
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jurible — Trouvez votre formule</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  /* ═══════════════════════════════════════════
+     DESIGN SYSTEM TOKENS
+     ═══════════════════════════════════════════ */
+  :root {
+    /* Colors */
+    --color-bordeaux: #B0001D;
+    --color-violet: #7C3AED;
+    --color-violet-light: #EDE9FE;
+    --color-violet-medium: #A78BFA;
+    --color-gradient: linear-gradient(135deg, #B0001D, #7C3AED);
+    --color-success: #10B981;
+    --color-success-light: #ECFDF5;
+    --color-text-dark: #1A1A1A;
+    --color-text-secondary: #4A4A4A;
+    --color-text-muted: #9CA3AF;
+    --color-background: #F9FAFB;
+    --color-white: #FFFFFF;
+    --color-gray-100: #F3F4F6;
+    --color-gray-200: #E5E7EB;
+
+    /* Typography */
+    --font-family: 'Poppins', sans-serif;
+
+    /* Radius */
+    --radius-sm: 6px;
+    --radius-md: 8px;
+    --radius-lg: 12px;
+    --radius-full: 9999px;
+
+    /* Shadows */
+    --shadow-sm: 0 1px 3px rgba(0,0,0,0.1), 0 1px 2px rgba(0,0,0,0.06);
+    --shadow-md: 0 4px 6px rgba(0,0,0,0.07), 0 2px 4px rgba(0,0,0,0.06);
+    --shadow-lg: 0 10px 15px rgba(0,0,0,0.1), 0 4px 6px rgba(0,0,0,0.05);
+    --shadow-primary: 0 4px 14px rgba(124,58,237,0.25);
+
+    /* Spacing */
+    --space-xs: 8px;
+    --space-sm: 12px;
+    --space-md: 16px;
+    --space-lg: 24px;
+    --space-xl: 48px;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: var(--font-family);
+    background: var(--color-background);
+    color: var(--color-text-dark);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ═══════════════════════════════════════════
+     SECTION WRAPPER
+     ═══════════════════════════════════════════ */
+  .section-aide-choix {
+    max-width: 1120px;
+    margin: 0 auto;
+    padding: var(--space-xl) var(--space-lg);
+  }
+
+  /* Divider gradient top */
+  .section-aide-choix::before {
+    content: '';
+    display: block;
+    width: 80px;
+    height: 4px;
+    background: var(--color-gradient);
+    border-radius: var(--radius-full);
+    margin: 0 auto var(--space-lg);
+  }
+
+  /* ═══════════════════════════════════════════
+     HEADER
+     ═══════════════════════════════════════════ */
+  .section-header {
+    text-align: center;
+    margin-bottom: 40px;
+  }
+
+  .badge-aide {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: var(--color-violet-light);
+    color: var(--color-violet);
+    font-size: 13px;
+    font-weight: 600;
+    padding: 6px 14px;
+    border-radius: var(--radius-full);
+    margin-bottom: var(--space-md);
+  }
+
+  .section-header h2 {
+    font-size: 32px;
+    font-weight: 800;
+    color: var(--color-text-dark);
+    margin-bottom: var(--space-xs);
+    line-height: 1.2;
+  }
+
+  .section-header h2 span {
+    background: var(--color-gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .section-header p {
+    font-size: 16px;
+    color: var(--color-text-muted);
+    font-weight: 400;
+    max-width: 520px;
+    margin: 0 auto;
+    line-height: 1.5;
+  }
+
+  /* ═══════════════════════════════════════════
+     CARDS GRID
+     ═══════════════════════════════════════════ */
+  .cards-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-lg);
+  }
+
+  /* ═══════════════════════════════════════════
+     FLIP CARD
+     ═══════════════════════════════════════════ */
+  .flip-card {
+    perspective: 1000px;
+    height: 280px;
+    cursor: pointer;
+  }
+
+  .flip-card-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    transform-style: preserve-3d;
+  }
+
+  .flip-card.flipped .flip-card-inner {
+    transform: rotateY(180deg);
+  }
+
+  .flip-card-front,
+  .flip-card-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--color-gray-200);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    transition: box-shadow 200ms ease;
+  }
+
+  .flip-card:hover .flip-card-front,
+  .flip-card:hover .flip-card-back {
+    box-shadow: var(--shadow-lg);
+  }
+
+  /* ─── FRONT ─── */
+  .flip-card-front {
+    background: var(--color-white);
+    box-shadow: var(--shadow-sm);
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: var(--space-lg);
+  }
+
+  .front-emoji {
+    width: 64px;
+    height: 64px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 32px;
+    background: var(--color-gray-100);
+    border-radius: var(--radius-md);
+    margin-bottom: var(--space-md);
+  }
+
+  .front-title {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--color-text-dark);
+    margin-bottom: 6px;
+    line-height: 1.3;
+    padding: 0 8px;
+  }
+
+  .front-desc {
+    font-size: 13px;
+    color: var(--color-text-muted);
+    line-height: 1.4;
+    margin-bottom: var(--space-md);
+    padding: 0 4px;
+  }
+
+  .front-cta {
+    font-size: 12px;
+    color: var(--color-violet-medium);
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    transition: color 200ms ease;
+  }
+
+  .flip-card:hover .front-cta {
+    color: var(--color-violet);
+  }
+
+  .front-cta svg {
+    width: 14px;
+    height: 14px;
+    transition: transform 200ms ease;
+  }
+
+  .flip-card:hover .front-cta svg {
+    transform: rotate(90deg);
+  }
+
+  /* ─── BACK ─── */
+  .flip-card-back {
+    transform: rotateY(180deg);
+    background: var(--color-white);
+    box-shadow: var(--shadow-md);
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: var(--space-lg);
+    position: relative;
+  }
+
+  /* Subtle gradient accent top */
+  .flip-card-back::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: var(--color-gradient);
+  }
+
+  .back-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    background: var(--color-success-light);
+    color: var(--color-success);
+    font-size: 11px;
+    font-weight: 600;
+    padding: 4px 10px;
+    border-radius: var(--radius-full);
+    margin-bottom: var(--space-sm);
+  }
+
+  .back-badge svg {
+    width: 12px;
+    height: 12px;
+  }
+
+  .back-product {
+    font-size: 20px;
+    font-weight: 800;
+    margin-bottom: 6px;
+    line-height: 1.2;
+  }
+
+  .back-product.product-academie {
+    background: var(--color-gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .back-product.product-fiches { color: var(--color-bordeaux); }
+  .back-product.product-ia { color: var(--color-violet); }
+  .back-product.product-prepa {
+    background: var(--color-gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .back-product.product-manuel { color: var(--color-bordeaux); }
+  .back-product.product-annales { color: var(--color-bordeaux); }
+
+  .back-desc {
+    font-size: 13px;
+    color: var(--color-text-secondary);
+    line-height: 1.5;
+    margin-bottom: var(--space-md);
+    padding: 0 4px;
+  }
+
+  .back-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 13px;
+    font-weight: 600;
+    padding: 10px 20px;
+    border-radius: var(--radius-md);
+    text-decoration: none;
+    transition: all 200ms ease;
+    cursor: pointer;
+    border: none;
+  }
+
+  .back-cta.cta-gradient {
+    background: var(--color-gradient);
+    color: var(--color-white);
+    box-shadow: 0 2px 8px rgba(176,0,29,0.25);
+  }
+
+  .back-cta.cta-gradient:hover {
+    box-shadow: 0 4px 12px rgba(176,0,29,0.35);
+    transform: translateY(-1px);
+  }
+
+  .back-cta.cta-outline-bordeaux {
+    background: transparent;
+    color: var(--color-bordeaux);
+    border: 1.5px solid var(--color-bordeaux);
+  }
+
+  .back-cta.cta-outline-bordeaux:hover {
+    background: rgba(176,0,29,0.05);
+    transform: translateY(-1px);
+  }
+
+  .back-cta.cta-outline-violet {
+    background: transparent;
+    color: var(--color-violet);
+    border: 1.5px solid var(--color-violet);
+  }
+
+  .back-cta.cta-outline-violet:hover {
+    background: rgba(124,58,237,0.05);
+    transform: translateY(-1px);
+  }
+
+  .back-cta svg {
+    width: 14px;
+    height: 14px;
+  }
+
+  /* Back flip hint */
+  .back-flip-hint {
+    position: absolute;
+    bottom: 12px;
+    right: 14px;
+    font-size: 11px;
+    color: var(--color-text-muted);
+    display: flex;
+    align-items: center;
+    gap: 3px;
+    opacity: 0.6;
+  }
+
+  .back-flip-hint svg {
+    width: 12px;
+    height: 12px;
+  }
+
+  /* ═══════════════════════════════════════════
+     RESET BUTTON
+     ═══════════════════════════════════════════ */
+  .reset-wrapper {
+    text-align: center;
+    margin-top: 32px;
+  }
+
+  .reset-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-family: var(--font-family);
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--color-text-muted);
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 8px 16px;
+    border-radius: var(--radius-full);
+    transition: all 200ms ease;
+  }
+
+  .reset-btn:hover {
+    color: var(--color-violet);
+    background: var(--color-violet-light);
+  }
+
+  .reset-btn svg {
+    width: 14px;
+    height: 14px;
+  }
+
+  /* ═══════════════════════════════════════════
+     RESPONSIVE — TABLET (≤ 900px)
+     ═══════════════════════════════════════════ */
+  @media (max-width: 900px) {
+    .cards-grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: var(--space-md);
+    }
+
+    .flip-card {
+      height: 260px;
+    }
+
+    .section-header h2 {
+      font-size: 26px;
+    }
+
+    .section-header p {
+      font-size: 14px;
+    }
+  }
+
+  /* ═══════════════════════════════════════════
+     RESPONSIVE — MOBILE (≤ 540px)
+     ═══════════════════════════════════════════ */
+  @media (max-width: 540px) {
+    .section-aide-choix {
+      padding: 32px 16px;
+    }
+
+    .cards-grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: var(--space-sm);
+    }
+
+    .flip-card {
+      height: 240px;
+    }
+
+    .front-emoji {
+      width: 48px;
+      height: 48px;
+      font-size: 24px;
+      margin-bottom: var(--space-sm);
+    }
+
+    .front-title {
+      font-size: 13px;
+      padding: 0;
+    }
+
+    .front-desc {
+      font-size: 11px;
+      margin-bottom: var(--space-sm);
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    .front-cta {
+      font-size: 11px;
+    }
+
+    .back-product {
+      font-size: 16px;
+    }
+
+    .back-desc {
+      font-size: 11px;
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    .back-cta {
+      font-size: 12px;
+      padding: 8px 16px;
+    }
+
+    .section-header h2 {
+      font-size: 22px;
+    }
+
+    .section-header p {
+      font-size: 13px;
+    }
+  }
+
+  /* ═══════════════════════════════════════════
+     ANIMATION STAGGER ENTRANCE
+     ═══════════════════════════════════════════ */
+  .flip-card {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeInUp 0.5s ease forwards;
+  }
+
+  .flip-card:nth-child(1) { animation-delay: 0.05s; }
+  .flip-card:nth-child(2) { animation-delay: 0.1s; }
+  .flip-card:nth-child(3) { animation-delay: 0.15s; }
+  .flip-card:nth-child(4) { animation-delay: 0.2s; }
+  .flip-card:nth-child(5) { animation-delay: 0.25s; }
+  .flip-card:nth-child(6) { animation-delay: 0.3s; }
+
+  @keyframes fadeInUp {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* Subtle pulse on the front-cta to invite click */
+  @keyframes subtlePulse {
+    0%, 100% { opacity: 0.7; }
+    50% { opacity: 1; }
+  }
+
+  .flip-card:not(.flipped) .front-cta {
+    animation: subtlePulse 2.5s ease-in-out infinite;
+  }
+</style>
+</head>
+<body>
+
+<section class="section-aide-choix">
+
+  <!-- HEADER -->
+  <div class="section-header">
+    <div class="badge-aide">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+      Aide au choix
+    </div>
+    <h2>Trouvez <span>votre formule</span></h2>
+    <p>Cliquez sur la carte qui correspond à votre situation pour découvrir la solution adaptée</p>
+  </div>
+
+  <!-- CARDS GRID -->
+  <div class="cards-grid">
+
+    <!-- CARD 1 — Licence / Capacité → Académie -->
+    <div class="flip-card" onclick="this.classList.toggle('flipped')">
+      <div class="flip-card-inner">
+        <div class="flip-card-front">
+          <div class="front-emoji">🎓</div>
+          <div class="front-title">Étudiant en Licence ou Capacité</div>
+          <div class="front-desc">Vous suivez un cursus de droit et cherchez un accompagnement complet</div>
+          <div class="front-cta">
+            Cliquez pour voir
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
+          </div>
+        </div>
+        <div class="flip-card-back">
+          <div class="back-badge">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+            Recommandation
+          </div>
+          <div class="back-product product-academie">L'Académie Jurible</div>
+          <div class="back-desc">Cours vidéo, fiches, QCM, flashcards, mindmaps — tout le programme de Licence en un seul abonnement.</div>
+          <a href="#" class="back-cta cta-gradient" onclick="event.stopPropagation()">
+            Découvrir l'Académie
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
+          <div class="back-flip-hint">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 4v6h6"/><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"/></svg>
+            Retourner
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CARD 2 — Papier → Fiches PDF -->
+    <div class="flip-card" onclick="this.classList.toggle('flipped')">
+      <div class="flip-card-inner">
+        <div class="flip-card-front">
+          <div class="front-emoji">📄</div>
+          <div class="front-title">Vous préférez réviser sur papier</div>
+          <div class="front-desc">Vous aimez surligner, annoter et avoir vos fiches toujours à portée de main</div>
+          <div class="front-cta">
+            Cliquez pour voir
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
+          </div>
+        </div>
+        <div class="flip-card-back">
+          <div class="back-badge">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+            Recommandation
+          </div>
+          <div class="back-product product-fiches">Les Fiches PDF</div>
+          <div class="back-desc">Fiches de révision synthétiques par matière, prêtes à imprimer. L'essentiel du cours en format clair.</div>
+          <a href="#" class="back-cta cta-outline-bordeaux" onclick="event.stopPropagation()">
+            Voir les Fiches
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
+          <div class="back-flip-hint">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 4v6h6"/><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"/></svg>
+            Retourner
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CARD 3 — Gagner du temps → Suite IA -->
+    <div class="flip-card" onclick="this.classList.toggle('flipped')">
+      <div class="flip-card-inner">
+        <div class="flip-card-front">
+          <div class="front-emoji">🤖</div>
+          <div class="front-title">Vous voulez gagner du temps</div>
+          <div class="front-desc">Commentaires d'arrêt, cas pratiques, fiches — vous cherchez un coup de pouce IA</div>
+          <div class="front-cta">
+            Cliquez pour voir
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
+          </div>
+        </div>
+        <div class="flip-card-back">
+          <div class="back-badge">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+            Recommandation
+          </div>
+          <div class="back-product product-ia">La Suite IA Jurible</div>
+          <div class="back-desc">Générateurs d'exercices juridiques assistés par IA : commentaires, cas pratiques, dissertations et fiches d'arrêt.</div>
+          <a href="#" class="back-cta cta-outline-violet" onclick="event.stopPropagation()">
+            Essayer la Suite IA
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
+          <div class="back-flip-hint">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 4v6h6"/><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"/></svg>
+            Retourner
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CARD 4 — Redoublement / Difficultés → Prépa -->
+    <div class="flip-card" onclick="this.classList.toggle('flipped')">
+      <div class="flip-card-inner">
+        <div class="flip-card-front">
+          <div class="front-emoji">💪</div>
+          <div class="front-title">Vous avez redoublé votre L1 ou avez des difficultés</div>
+          <div class="front-desc">Vous avez besoin d'un accompagnement renforcé pour rattraper et réussir</div>
+          <div class="front-cta">
+            Cliquez pour voir
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
+          </div>
+        </div>
+        <div class="flip-card-back">
+          <div class="back-badge">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+            Recommandation
+          </div>
+          <div class="back-product product-prepa">La Prépa Jurible</div>
+          <div class="back-desc">Formation intensive avec corrections vidéo personnalisées, accès enseignant et suivi individuel pour décrocher votre année.</div>
+          <a href="#" class="back-cta cta-gradient" onclick="event.stopPropagation()">
+            Découvrir la Prépa
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
+          <div class="back-flip-hint">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 4v6h6"/><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"/></svg>
+            Retourner
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CARD 5 — Méthodologie → Manuel -->
+    <div class="flip-card" onclick="this.classList.toggle('flipped')">
+      <div class="flip-card-inner">
+        <div class="flip-card-front">
+          <div class="front-emoji">📖</div>
+          <div class="front-title">Vous voulez maîtriser la méthodologie</div>
+          <div class="front-desc">Dissertation, commentaire, cas pratique — vous cherchez la méthode qui fait la différence</div>
+          <div class="front-cta">
+            Cliquez pour voir
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
+          </div>
+        </div>
+        <div class="flip-card-back">
+          <div class="back-badge">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+            Recommandation
+          </div>
+          <div class="back-product product-manuel">Le Manuel Méthodologie</div>
+          <div class="back-desc">Guide pas-à-pas pour chaque exercice juridique : structure, plan, rédaction. Disponible en papier et numérique.</div>
+          <a href="#" class="back-cta cta-outline-bordeaux" onclick="event.stopPropagation()">
+            Voir le Manuel
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
+          <div class="back-flip-hint">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 4v6h6"/><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"/></svg>
+            Retourner
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CARD 6 — Annales → Annales corrigées (page support) -->
+    <div class="flip-card" onclick="this.classList.toggle('flipped')">
+      <div class="flip-card-inner">
+        <div class="flip-card-front">
+          <div class="front-emoji">📝</div>
+          <div class="front-title">Vous voulez vous entraîner sur des sujets d'examen</div>
+          <div class="front-desc">Vous cherchez des annales avec corrections détaillées pour préparer vos partiels</div>
+          <div class="front-cta">
+            Cliquez pour voir
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
+          </div>
+        </div>
+        <div class="flip-card-back">
+          <div class="back-badge">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+            Recommandation
+          </div>
+          <div class="back-product product-annales">Les Annales Corrigées</div>
+          <div class="back-desc">Sujets d'examen corrigés et commentés, classés par matière et par université. L'entraînement idéal avant les partiels.</div>
+          <a href="#" class="back-cta cta-outline-bordeaux" onclick="event.stopPropagation()">
+            Accéder aux Annales
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
+          <div class="back-flip-hint">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 4v6h6"/><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"/></svg>
+            Retourner
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- RESET -->
+  <div class="reset-wrapper">
+    <button class="reset-btn" onclick="document.querySelectorAll('.flip-card.flipped').forEach(c => c.classList.remove('flipped'))">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 4v6h6"/><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"/></svg>
+      Réinitialiser les cartes
+    </button>
+  </div>
+
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     DOCUMENTATION / SPECS — VISIBLE
+     ═══════════════════════════════════════════════════════════════ -->
+<section style="max-width:1120px;margin:60px auto 0;padding:0 24px 60px;font-family:'Poppins',sans-serif;">
+
+  <div style="border-top:3px solid #E5E7EB;padding-top:40px;">
+    <h2 style="font-size:24px;font-weight:800;color:#1A1A1A;margin-bottom:4px;">📋 SPECS — Aide au choix · Flip Cards</h2>
+    <p style="font-size:13px;color:#9CA3AF;margin-bottom:32px;">Composant : <code>AideChoix_FlipCards</code> · v1.0 · 05/02/2026</p>
+
+    <!-- DESCRIPTION -->
+    <h3 style="font-size:16px;font-weight:700;color:#7C3AED;margin-bottom:8px;">1. Description</h3>
+    <p style="font-size:14px;color:#4A4A4A;line-height:1.6;margin-bottom:24px;">Section interactive composée de 6 cartes retournables au clic. Chaque carte présente un profil étudiant (recto) et révèle la recommandation produit Jurible correspondante (verso).<br><strong>Usage :</strong> Pages d'offres, page d'accueil, landing pages comparatives.</p>
+
+    <!-- STRUCTURE -->
+    <h3 style="font-size:16px;font-weight:700;color:#7C3AED;margin-bottom:8px;">2. Structure</h3>
+    <pre style="font-size:12px;color:#4A4A4A;background:#F3F4F6;padding:16px;border-radius:8px;overflow-x:auto;margin-bottom:24px;line-height:1.6;">section.section-aide-choix
+├── div.section-header
+│   ├── div.badge-aide           → "Aide au choix" violet light
+│   ├── h2                       → "Trouvez votre formule" (gradient)
+│   └── p                        → sous-titre gris
+├── div.cards-grid               → grille 3×2
+│   └── div.flip-card × 6
+│       └── div.flip-card-inner
+│           ├── div.flip-card-front
+│           │   ├── div.front-emoji    → carré gris 64px + emoji
+│           │   ├── div.front-title    → titre profil
+│           │   ├── div.front-desc     → description courte
+│           │   └── div.front-cta      → "Cliquez pour voir" + ↓
+│           └── div.flip-card-back
+│               ├── div.back-badge     → ✓ "Recommandation" vert
+│               ├── div.back-product   → nom produit (gradient/couleur)
+│               ├── div.back-desc      → description produit
+│               ├── a.back-cta         → bouton CTA
+│               └── div.back-flip-hint → "Retourner" discret
+└── div.reset-wrapper
+    └── button.reset-btn         → "Réinitialiser les cartes"</pre>
+
+    <!-- COMPORTEMENT -->
+    <h3 style="font-size:16px;font-weight:700;color:#7C3AED;margin-bottom:8px;">3. Comportement / Interactions</h3>
+    <table style="width:100%;border-collapse:collapse;font-size:13px;margin-bottom:16px;">
+      <thead><tr style="background:#F3F4F6;"><th style="text-align:left;padding:8px 12px;font-weight:600;color:#1A1A1A;">Élément</th><th style="text-align:left;padding:8px 12px;font-weight:600;color:#1A1A1A;">Déclencheur</th><th style="text-align:left;padding:8px 12px;font-weight:600;color:#1A1A1A;">Animation</th><th style="text-align:left;padding:8px 12px;font-weight:600;color:#1A1A1A;">Détails</th></tr></thead>
+      <tbody>
+        <tr style="border-bottom:1px solid #E5E7EB;"><td style="padding:8px 12px;color:#4A4A4A;">Flip carte</td><td style="padding:8px 12px;color:#4A4A4A;">clic</td><td style="padding:8px 12px;color:#4A4A4A;">rotateY(180deg), 0.6s</td><td style="padding:8px 12px;color:#4A4A4A;">cubic-bezier(0.4, 0, 0.2, 1) · toggle</td></tr>
+        <tr style="border-bottom:1px solid #E5E7EB;"><td style="padding:8px 12px;color:#4A4A4A;">CTA verso</td><td style="padding:8px 12px;color:#4A4A4A;">clic</td><td style="padding:8px 12px;color:#4A4A4A;">—</td><td style="padding:8px 12px;color:#4A4A4A;">stopPropagation · redirige page produit</td></tr>
+        <tr style="border-bottom:1px solid #E5E7EB;"><td style="padding:8px 12px;color:#4A4A4A;">Hover carte</td><td style="padding:8px 12px;color:#4A4A4A;">hover</td><td style="padding:8px 12px;color:#4A4A4A;">shadow-sm → shadow-lg</td><td style="padding:8px 12px;color:#4A4A4A;">200ms ease</td></tr>
+        <tr style="border-bottom:1px solid #E5E7EB;"><td style="padding:8px 12px;color:#4A4A4A;">"Cliquez pour voir"</td><td style="padding:8px 12px;color:#4A4A4A;">auto</td><td style="padding:8px 12px;color:#4A4A4A;">pulse opacité 0.7↔1</td><td style="padding:8px 12px;color:#4A4A4A;">boucle 2.5s · s'arrête quand flipped</td></tr>
+        <tr style="border-bottom:1px solid #E5E7EB;"><td style="padding:8px 12px;color:#4A4A4A;">Icône ↓ recto</td><td style="padding:8px 12px;color:#4A4A4A;">hover</td><td style="padding:8px 12px;color:#4A4A4A;">rotate(90deg)</td><td style="padding:8px 12px;color:#4A4A4A;">200ms ease</td></tr>
+        <tr style="border-bottom:1px solid #E5E7EB;"><td style="padding:8px 12px;color:#4A4A4A;">Entrée</td><td style="padding:8px 12px;color:#4A4A4A;">chargement</td><td style="padding:8px 12px;color:#4A4A4A;">fadeInUp (Y 20→0, opacity 0→1)</td><td style="padding:8px 12px;color:#4A4A4A;">0.5s · stagger +50ms/carte</td></tr>
+        <tr><td style="padding:8px 12px;color:#4A4A4A;">Reset</td><td style="padding:8px 12px;color:#4A4A4A;">clic bouton</td><td style="padding:8px 12px;color:#4A4A4A;">—</td><td style="padding:8px 12px;color:#4A4A4A;">retire .flipped sur toutes les cartes</td></tr>
+      </tbody>
+    </table>
+    <p style="font-size:13px;color:#9CA3AF;margin-bottom:24px;"><strong>Figma :</strong> Smart Animate pour le flip. 2 variants par carte : State=Recto / State=Verso. On Click → Change to variant (600ms, Ease In Out). CTA = composant bouton indépendant.</p>
+
+    <!-- TOKENS -->
+    <h3 style="font-size:16px;font-weight:700;color:#7C3AED;margin-bottom:8px;">4. Design System Tokens</h3>
+
+    <h4 style="font-size:13px;font-weight:600;color:#1A1A1A;margin-bottom:6px;">Couleurs</h4>
+    <table style="width:100%;border-collapse:collapse;font-size:12px;margin-bottom:16px;">
+      <thead><tr style="background:#F3F4F6;"><th style="text-align:left;padding:6px 10px;">Token</th><th style="text-align:left;padding:6px 10px;">Valeur</th><th style="text-align:left;padding:6px 10px;">Aperçu</th><th style="text-align:left;padding:6px 10px;">Usage</th></tr></thead>
+      <tbody>
+        <tr style="border-bottom:1px solid #E5E7EB;"><td style="padding:6px 10px;">Bordeaux</td><td style="padding:6px 10px;font-family:monospace;">#B0001D</td><td style="padding:6px 10px;"><span style="display:inline-block;width:16px;height:16px;background:#B0001D;border-radius:3px;vertical-align:middle;"></span></td><td style="padding:6px 10px;">CTA outline, produits</td></tr>
+        <tr style="border-bottom:1px solid #E5E7EB;"><td style="padding:6px 10px;">Violet</td><td style="padding:6px 10px;font-family:monospace;">#7C3AED</td><td style="padding:6px 10px;"><span style="display:inline-block;width:16px;height:16px;background:#7C3AED;border-radius:3px;vertical-align:middle;"></span></td><td style="padding:6px 10px;">CTA outline IA</td></tr>
+        <tr style="border-bottom:1px solid #E5E7EB;"><td style="padding:6px 10px;">Violet light</td><td style="padding:6px 10px;font-family:monospace;">#EDE9FE</td><td style="padding:6px 10px;"><span style="display:inline-block;width:16px;height:16px;background:#EDE9FE;border:1px solid #D8CCFB;border-radius:3px;vertical-align:middle;"></span></td><td style="padding:6px 10px;">Badge aide, reset hover</td></tr>
+        <tr style="border-bottom:1px solid #E5E7EB;"><td style="padding:6px 10px;">Gradient</td><td style="padding:6px 10px;font-family:monospace;">135deg, #B0001D → #7C3AED</td><td style="padding:6px 10px;"><span style="display:inline-block;width:40px;height:16px;background:linear-gradient(135deg,#B0001D,#7C3AED);border-radius:3px;vertical-align:middle;"></span></td><td style="padding:6px 10px;">H2, verso accent, CTA gradient</td></tr>
+        <tr style="border-bottom:1px solid #E5E7EB;"><td style="padding:6px 10px;">Success</td><td style="padding:6px 10px;font-family:monospace;">#10B981</td><td style="padding:6px 10px;"><span style="display:inline-block;width:16px;height:16px;background:#10B981;border-radius:3px;vertical-align:middle;"></span></td><td style="padding:6px 10px;">Badge recommandation</td></tr>
+        <tr style="border-bottom:1px solid #E5E7EB;"><td style="padding:6px 10px;">Success light</td><td style="padding:6px 10px;font-family:monospace;">#ECFDF5</td><td style="padding:6px 10px;"><span style="display:inline-block;width:16px;height:16px;background:#ECFDF5;border:1px solid #D1FAE5;border-radius:3px;vertical-align:middle;"></span></td><td style="padding:6px 10px;">Fond badge recommandation</td></tr>
+        <tr style="border-bottom:1px solid #E5E7EB;"><td style="padding:6px 10px;">Gray 100</td><td style="padding:6px 10px;font-family:monospace;">#F3F4F6</td><td style="padding:6px 10px;"><span style="display:inline-block;width:16px;height:16px;background:#F3F4F6;border:1px solid #E5E7EB;border-radius:3px;vertical-align:middle;"></span></td><td style="padding:6px 10px;">Fond carrés emoji</td></tr>
+        <tr><td style="padding:6px 10px;">Gray 200</td><td style="padding:6px 10px;font-family:monospace;">#E5E7EB</td><td style="padding:6px 10px;"><span style="display:inline-block;width:16px;height:16px;background:#E5E7EB;border:1px solid #D1D5DB;border-radius:3px;vertical-align:middle;"></span></td><td style="padding:6px 10px;">Borders cards</td></tr>
+      </tbody>
+    </table>
+
+    <h4 style="font-size:13px;font-weight:600;color:#1A1A1A;margin-bottom:6px;">Typographie — Poppins</h4>
+    <table style="width:100%;border-collapse:collapse;font-size:12px;margin-bottom:16px;">
+      <thead><tr style="background:#F3F4F6;"><th style="text-align:left;padding:6px 10px;">Élément</th><th style="text-align:left;padding:6px 10px;">Taille</th><th style="text-align:left;padding:6px 10px;">Poids</th></tr></thead>
+      <tbody>
+        <tr style="border-bottom:1px solid #E5E7EB;"><td style="padding:6px 10px;">H2 section</td><td style="padding:6px 10px;">32px</td><td style="padding:6px 10px;">800</td></tr>
+        <tr style="border-bottom:1px solid #E5E7EB;"><td style="padding:6px 10px;">Produit (verso)</td><td style="padding:6px 10px;">20px</td><td style="padding:6px 10px;">800</td></tr>
+        <tr style="border-bottom:1px solid #E5E7EB;"><td style="padding:6px 10px;">Titre (recto)</td><td style="padding:6px 10px;">16px</td><td style="padding:6px 10px;">700</td></tr>
+        <tr style="border-bottom:1px solid #E5E7EB;"><td style="padding:6px 10px;">Description recto/verso</td><td style="padding:6px 10px;">13px</td><td style="padding:6px 10px;">400</td></tr>
+        <tr style="border-bottom:1px solid #E5E7EB;"><td style="padding:6px 10px;">Badge section</td><td style="padding:6px 10px;">13px</td><td style="padding:6px 10px;">600</td></tr>
+        <tr style="border-bottom:1px solid #E5E7EB;"><td style="padding:6px 10px;">CTA bouton</td><td style="padding:6px 10px;">13px</td><td style="padding:6px 10px;">600</td></tr>
+        <tr style="border-bottom:1px solid #E5E7EB;"><td style="padding:6px 10px;">"Cliquez pour voir"</td><td style="padding:6px 10px;">12px</td><td style="padding:6px 10px;">500</td></tr>
+        <tr><td style="padding:6px 10px;">Badge verso / hint</td><td style="padding:6px 10px;">11px</td><td style="padding:6px 10px;">600 / 400</td></tr>
+      </tbody>
+    </table>
+
+    <h4 style="font-size:13px;font-weight:600;color:#1A1A1A;margin-bottom:6px;">Radius</h4>
+    <table style="width:100%;border-collapse:collapse;font-size:12px;margin-bottom:16px;">
+      <thead><tr style="background:#F3F4F6;"><th style="text-align:left;padding:6px 10px;">Élément</th><th style="text-align:left;padding:6px 10px;">Token</th><th style="text-align:left;padding:6px 10px;">Valeur</th></tr></thead>
+      <tbody>
+        <tr style="border-bottom:1px solid #E5E7EB;"><td style="padding:6px 10px;">Cards (front + back)</td><td style="padding:6px 10px;">radius-lg</td><td style="padding:6px 10px;">12px</td></tr>
+        <tr style="border-bottom:1px solid #E5E7EB;"><td style="padding:6px 10px;">Carrés emoji</td><td style="padding:6px 10px;">radius-md</td><td style="padding:6px 10px;">8px</td></tr>
+        <tr style="border-bottom:1px solid #E5E7EB;"><td style="padding:6px 10px;">CTA boutons</td><td style="padding:6px 10px;">radius-md</td><td style="padding:6px 10px;">8px</td></tr>
+        <tr><td style="padding:6px 10px;">Badges</td><td style="padding:6px 10px;">radius-full</td><td style="padding:6px 10px;">9999px</td></tr>
+      </tbody>
+    </table>
+
+    <h4 style="font-size:13px;font-weight:600;color:#1A1A1A;margin-bottom:6px;">Shadows</h4>
+    <table style="width:100%;border-collapse:collapse;font-size:12px;margin-bottom:24px;">
+      <thead><tr style="background:#F3F4F6;"><th style="text-align:left;padding:6px 10px;">Élément</th><th style="text-align:left;padding:6px 10px;">État</th><th style="text-align:left;padding:6px 10px;">Valeur</th></tr></thead>
+      <tbody>
+        <tr style="border-bottom:1px solid #E5E7EB;"><td style="padding:6px 10px;">Card front</td><td style="padding:6px 10px;">default</td><td style="padding:6px 10px;font-family:monospace;font-size:11px;">shadow-sm</td></tr>
+        <tr style="border-bottom:1px solid #E5E7EB;"><td style="padding:6px 10px;">Card front/back</td><td style="padding:6px 10px;">hover</td><td style="padding:6px 10px;font-family:monospace;font-size:11px;">shadow-lg</td></tr>
+        <tr style="border-bottom:1px solid #E5E7EB;"><td style="padding:6px 10px;">Card back</td><td style="padding:6px 10px;">default</td><td style="padding:6px 10px;font-family:monospace;font-size:11px;">shadow-md</td></tr>
+        <tr style="border-bottom:1px solid #E5E7EB;"><td style="padding:6px 10px;">CTA gradient</td><td style="padding:6px 10px;">default</td><td style="padding:6px 10px;font-family:monospace;font-size:11px;">0 2px 8px rgba(176,0,29,0.25)</td></tr>
+        <tr><td style="padding:6px 10px;">CTA gradient</td><td style="padding:6px 10px;">hover</td><td style="padding:6px 10px;font-family:monospace;font-size:11px;">0 4px 12px rgba(176,0,29,0.35)</td></tr>
+      </tbody>
+    </table>
+
+    <!-- RESPONSIVE -->
+    <h3 style="font-size:16px;font-weight:700;color:#7C3AED;margin-bottom:8px;">5. Responsive</h3>
+    <table style="width:100%;border-collapse:collapse;font-size:12px;margin-bottom:24px;">
+      <thead><tr style="background:#F3F4F6;"><th style="text-align:left;padding:6px 10px;">Propriété</th><th style="text-align:left;padding:6px 10px;">Desktop (&gt;900px)</th><th style="text-align:left;padding:6px 10px;">Tablette (≤900px)</th><th style="text-align:left;padding:6px 10px;">Mobile (≤540px)</th></tr></thead>
+      <tbody>
+        <tr style="border-bottom:1px solid #E5E7EB;"><td style="padding:6px 10px;">Grille</td><td style="padding:6px 10px;">3 colonnes</td><td style="padding:6px 10px;">2 colonnes</td><td style="padding:6px 10px;">2 colonnes</td></tr>
+        <tr style="border-bottom:1px solid #E5E7EB;"><td style="padding:6px 10px;">Gap</td><td style="padding:6px 10px;">24px</td><td style="padding:6px 10px;">16px</td><td style="padding:6px 10px;">12px</td></tr>
+        <tr style="border-bottom:1px solid #E5E7EB;"><td style="padding:6px 10px;">Hauteur carte</td><td style="padding:6px 10px;">280px</td><td style="padding:6px 10px;">260px</td><td style="padding:6px 10px;">240px</td></tr>
+        <tr style="border-bottom:1px solid #E5E7EB;"><td style="padding:6px 10px;">Section padding</td><td style="padding:6px 10px;">48px 24px</td><td style="padding:6px 10px;">48px 24px</td><td style="padding:6px 10px;">32px 16px</td></tr>
+        <tr style="border-bottom:1px solid #E5E7EB;"><td style="padding:6px 10px;">H2</td><td style="padding:6px 10px;">32px</td><td style="padding:6px 10px;">26px</td><td style="padding:6px 10px;">22px</td></tr>
+        <tr style="border-bottom:1px solid #E5E7EB;"><td style="padding:6px 10px;">Emoji</td><td style="padding:6px 10px;">64×64, 32px</td><td style="padding:6px 10px;">64×64, 32px</td><td style="padding:6px 10px;">48×48, 24px</td></tr>
+        <tr style="border-bottom:1px solid #E5E7EB;"><td style="padding:6px 10px;">Titre recto</td><td style="padding:6px 10px;">16px</td><td style="padding:6px 10px;">16px</td><td style="padding:6px 10px;">13px</td></tr>
+        <tr style="border-bottom:1px solid #E5E7EB;"><td style="padding:6px 10px;">Desc recto</td><td style="padding:6px 10px;">13px</td><td style="padding:6px 10px;">13px</td><td style="padding:6px 10px;">11px, clamp 2 lignes</td></tr>
+        <tr style="border-bottom:1px solid #E5E7EB;"><td style="padding:6px 10px;">Produit verso</td><td style="padding:6px 10px;">20px</td><td style="padding:6px 10px;">20px</td><td style="padding:6px 10px;">16px</td></tr>
+        <tr><td style="padding:6px 10px;">CTA</td><td style="padding:6px 10px;">13px, 10px 20px</td><td style="padding:6px 10px;">13px</td><td style="padding:6px 10px;">12px, 8px 16px</td></tr>
+      </tbody>
+    </table>
+
+    <!-- CONTENU -->
+    <h3 style="font-size:16px;font-weight:700;color:#7C3AED;margin-bottom:8px;">6. Contenu des 6 cartes</h3>
+    <table style="width:100%;border-collapse:collapse;font-size:12px;margin-bottom:24px;">
+      <thead><tr style="background:#F3F4F6;"><th style="text-align:left;padding:6px 10px;">N°</th><th style="text-align:left;padding:6px 10px;">Emoji</th><th style="text-align:left;padding:6px 10px;">Recto (profil)</th><th style="text-align:left;padding:6px 10px;">Verso (produit)</th><th style="text-align:left;padding:6px 10px;">CTA</th></tr></thead>
+      <tbody>
+        <tr style="border-bottom:1px solid #E5E7EB;"><td style="padding:6px 10px;">1</td><td style="padding:6px 10px;">🎓</td><td style="padding:6px 10px;">Étudiant en Licence ou Capacité</td><td style="padding:6px 10px;">L'Académie Jurible</td><td style="padding:6px 10px;"><span style="background:linear-gradient(135deg,#B0001D,#7C3AED);color:#fff;padding:2px 8px;border-radius:4px;font-size:11px;">gradient</span></td></tr>
+        <tr style="border-bottom:1px solid #E5E7EB;"><td style="padding:6px 10px;">2</td><td style="padding:6px 10px;">📄</td><td style="padding:6px 10px;">Vous préférez réviser sur papier</td><td style="padding:6px 10px;">Les Fiches PDF</td><td style="padding:6px 10px;"><span style="border:1px solid #B0001D;color:#B0001D;padding:2px 8px;border-radius:4px;font-size:11px;">outline bordeaux</span></td></tr>
+        <tr style="border-bottom:1px solid #E5E7EB;"><td style="padding:6px 10px;">3</td><td style="padding:6px 10px;">🤖</td><td style="padding:6px 10px;">Vous voulez gagner du temps</td><td style="padding:6px 10px;">La Suite IA Jurible</td><td style="padding:6px 10px;"><span style="border:1px solid #7C3AED;color:#7C3AED;padding:2px 8px;border-radius:4px;font-size:11px;">outline violet</span></td></tr>
+        <tr style="border-bottom:1px solid #E5E7EB;"><td style="padding:6px 10px;">4</td><td style="padding:6px 10px;">💪</td><td style="padding:6px 10px;">Redoublé L1 ou difficultés</td><td style="padding:6px 10px;">La Prépa Jurible</td><td style="padding:6px 10px;"><span style="background:linear-gradient(135deg,#B0001D,#7C3AED);color:#fff;padding:2px 8px;border-radius:4px;font-size:11px;">gradient</span></td></tr>
+        <tr style="border-bottom:1px solid #E5E7EB;"><td style="padding:6px 10px;">5</td><td style="padding:6px 10px;">📖</td><td style="padding:6px 10px;">Maîtriser la méthodologie</td><td style="padding:6px 10px;">Le Manuel Méthodologie</td><td style="padding:6px 10px;"><span style="border:1px solid #B0001D;color:#B0001D;padding:2px 8px;border-radius:4px;font-size:11px;">outline bordeaux</span></td></tr>
+        <tr><td style="padding:6px 10px;">6</td><td style="padding:6px 10px;">📝</td><td style="padding:6px 10px;">S'entraîner sur sujets d'examen</td><td style="padding:6px 10px;">Les Annales Corrigées</td><td style="padding:6px 10px;"><span style="border:1px solid #B0001D;color:#B0001D;padding:2px 8px;border-radius:4px;font-size:11px;">outline bordeaux</span></td></tr>
+      </tbody>
+    </table>
+    <p style="font-size:12px;color:#9CA3AF;margin-bottom:24px;"><strong>Logique CTA :</strong> gradient → produits phares (Académie, Prépa) · outline → produits complémentaires (Fiches, IA, Manuel, Annales)</p>
+
+    <!-- NOTES DEV -->
+    <h3 style="font-size:16px;font-weight:700;color:#7C3AED;margin-bottom:8px;">7. Notes développeur</h3>
+    <div style="font-size:13px;color:#4A4A4A;line-height:1.7;">
+      <p>• Le flip repose sur CSS 3D transforms (<code>transform-style: preserve-3d</code>)</p>
+      <p>• <code>backface-visibility: hidden</code> nécessaire sur les deux faces</p>
+      <p>• <code>event.stopPropagation()</code> sur les CTA pour ne pas retourner la carte au clic</p>
+      <p>• L'animation d'entrée (fadeInUp) se joue une seule fois au chargement</p>
+      <p>• WordPress FSE : Custom HTML Block ou Block Pattern réutilisable</p>
+      <p>• Les liens href="#" → remplacer par les vraies URLs produit</p>
+      <p>• Perspective : 1000px sur .flip-card</p>
+    </div>
+  </div>
+
+</section>
+
+</body>
+</html>

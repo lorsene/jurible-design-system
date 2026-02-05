@@ -1,0 +1,1192 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blocs Contenu — Design System Jurible</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* ===== DESIGN SYSTEM TOKENS ===== */
+        :root {
+            --color-primary: #B0001D;
+            --color-secondary: #7C3AED;
+            --color-black: #1A1A1A;
+            --color-white: #FFFFFF;
+            --color-gray-50: #F9FAFB;
+            --color-gray-100: #F3F4F6;
+            --color-gray-200: #E5E7EB;
+            --color-gray-400: #9CA3AF;
+            --color-gray-600: #4B5563;
+            --color-success: #10B981;
+            --color-success-light: #ECFDF5;
+            --color-success-dark: #065F46;
+            --color-secondary-light: #EDE9FE;
+            --color-secondary-dark: #5B21B6;
+            --gradient-primary: linear-gradient(135deg, #B0001D 0%, #7C3AED 100%);
+            --space-xs: 8px;
+            --space-sm: 16px;
+            --space-md: 24px;
+            --space-lg: 32px;
+            --space-xl: 48px;
+            --space-2xl: 64px;
+            --radius-sm: 6px;
+            --radius-md: 8px;
+            --radius-lg: 12px;
+            --radius-xl: 16px;
+            --radius-full: 9999px;
+            --shadow-sm: 0 1px 3px rgba(0,0,0,0.1), 0 1px 2px rgba(0,0,0,0.06);
+            --shadow-md: 0 4px 6px rgba(0,0,0,0.1), 0 2px 4px rgba(0,0,0,0.06);
+            --transition: all 150ms ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: var(--color-gray-100);
+            padding: var(--space-xl);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--color-black);
+            margin-bottom: var(--space-xs);
+        }
+
+        .subtitle {
+            color: var(--color-gray-400);
+            margin-bottom: var(--space-xl);
+        }
+
+        .section {
+            margin-bottom: var(--space-2xl);
+        }
+
+        .section-label {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: var(--color-gray-200);
+            color: var(--color-gray-600);
+            padding: 6px 14px;
+            border-radius: var(--radius-full);
+            font-size: 13px;
+            font-weight: 500;
+            margin-bottom: var(--space-md);
+        }
+
+        .page-label {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: var(--color-secondary);
+            color: var(--color-white);
+            padding: 6px 14px;
+            border-radius: var(--radius-full);
+            font-size: 12px;
+            font-weight: 600;
+            margin-bottom: var(--space-md);
+        }
+
+        /* ===== BASE COMMUNE ===== */
+        .contenu-section {
+            background: var(--color-white);
+            border-radius: var(--radius-xl);
+            padding: var(--space-xl);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .contenu-section--dark {
+            background: var(--color-black);
+        }
+
+        .contenu-section__header {
+            text-align: center;
+            margin-bottom: var(--space-lg);
+        }
+
+        .contenu-section__header--left {
+            text-align: left;
+        }
+
+        .contenu-section__badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 6px 14px;
+            border-radius: var(--radius-full);
+            font-size: 12px;
+            font-weight: 600;
+            margin-bottom: var(--space-sm);
+            background: var(--color-secondary-light);
+            color: var(--color-secondary);
+        }
+
+        .contenu-section__title {
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--color-black);
+            margin-bottom: var(--space-sm);
+            line-height: 1.3;
+        }
+
+        .contenu-section--dark .contenu-section__title {
+            color: var(--color-white);
+        }
+
+        .contenu-section__title .highlight {
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .contenu-section__subtitle {
+            font-size: 15px;
+            color: var(--color-gray-600);
+            max-width: 700px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+        .contenu-section__header--left .contenu-section__subtitle {
+            margin: 0;
+        }
+
+        .contenu-section--dark .contenu-section__subtitle {
+            color: var(--color-gray-400);
+        }
+
+        /* ═══════════════════════════════════════════════════════════════ */
+        /* PATTERN B : CONTENU CHIFFRÉ (FOND SOMBRE) — Académie           */
+        /* ═══════════════════════════════════════════════════════════════ */
+        .contenu-chiffre {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: var(--space-md);
+        }
+
+        .contenu-chiffre__card {
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: var(--radius-lg);
+            padding: var(--space-md);
+            transition: var(--transition);
+        }
+
+        .contenu-chiffre__card:hover {
+            transform: translateY(-4px);
+            background: rgba(255,255,255,0.08);
+        }
+
+        .contenu-chiffre__icon {
+            width: 48px;
+            height: 48px;
+            background: var(--gradient-primary);
+            border-radius: var(--radius-md);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            margin-bottom: var(--space-sm);
+        }
+
+        .contenu-chiffre__number {
+            font-size: 32px;
+            font-weight: 700;
+            color: var(--color-white);
+            line-height: 1;
+            margin-bottom: 4px;
+        }
+
+        .contenu-chiffre__label {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--color-white);
+            margin-bottom: var(--space-xs);
+        }
+
+        .contenu-chiffre__desc {
+            font-size: 13px;
+            color: var(--color-gray-400);
+            line-height: 1.5;
+        }
+
+        .contenu-chiffre__tag {
+            display: inline-block;
+            margin-top: var(--space-xs);
+            padding: 4px 10px;
+            background: var(--color-success);
+            color: var(--color-white);
+            font-size: 10px;
+            font-weight: 600;
+            text-transform: uppercase;
+            border-radius: var(--radius-sm);
+        }
+
+        /* ═══════════════════════════════════════════════════════════════ */
+        /* PATTERN C : LISTE MATIÈRES — Académie, Fiches générales        */
+        /* ═══════════════════════════════════════════════════════════════ */
+        .contenu-matieres {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: var(--space-sm);
+        }
+
+        .contenu-matieres__item {
+            display: flex;
+            align-items: center;
+            gap: var(--space-sm);
+            background: var(--color-white);
+            border: 1px solid var(--color-gray-200);
+            border-radius: var(--radius-md);
+            padding: var(--space-sm);
+            transition: var(--transition);
+        }
+
+        .contenu-matieres__item:hover {
+            border-color: var(--color-secondary);
+            background: var(--color-secondary-light);
+        }
+
+        .contenu-matieres__icon {
+            width: 36px;
+            height: 36px;
+            background: var(--color-gray-100);
+            border-radius: var(--radius-sm);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+        }
+
+        .contenu-matieres__name {
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--color-black);
+        }
+
+        .contenu-matieres__footer {
+            margin-top: var(--space-md);
+            padding: var(--space-sm) var(--space-md);
+            background: var(--color-success-light);
+            border-radius: var(--radius-md);
+            text-align: center;
+            font-size: 13px;
+            color: var(--color-success-dark);
+        }
+
+        .contenu-matieres__footer strong {
+            color: var(--color-primary);
+        }
+
+        /* ═══════════════════════════════════════════════════════════════ */
+        /* PATTERN D : STATS + SOMMAIRE — Fiches par matière              */
+        /* ═══════════════════════════════════════════════════════════════ */
+        .contenu-fiche {
+            display: grid;
+            grid-template-columns: 1fr 1.5fr;
+            gap: var(--space-xl);
+            align-items: start;
+        }
+
+        .contenu-fiche__left {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-md);
+        }
+
+        .contenu-fiche__intro {
+            font-size: 14px;
+            color: var(--color-gray-600);
+            line-height: 1.6;
+        }
+
+        .contenu-fiche__stats {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: var(--space-sm);
+        }
+
+        .contenu-fiche__stat {
+            background: var(--color-gray-50);
+            border-radius: var(--radius-md);
+            padding: var(--space-md);
+            text-align: center;
+        }
+
+        .contenu-fiche__stat-number {
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--color-primary);
+            line-height: 1;
+        }
+
+        .contenu-fiche__stat-label {
+            font-size: 13px;
+            color: var(--color-gray-600);
+            margin-top: 4px;
+        }
+
+        .contenu-fiche__right {
+            background: var(--color-gray-50);
+            border-radius: var(--radius-lg);
+            padding: var(--space-md);
+        }
+
+        .contenu-fiche__sommaire-title {
+            display: flex;
+            align-items: center;
+            gap: var(--space-xs);
+            font-size: 15px;
+            font-weight: 600;
+            color: var(--color-black);
+            margin-bottom: var(--space-md);
+        }
+
+        .contenu-fiche__theme {
+            margin-bottom: var(--space-md);
+        }
+
+        .contenu-fiche__theme:last-child {
+            margin-bottom: 0;
+        }
+
+        .contenu-fiche__theme-title {
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--color-primary);
+            text-transform: uppercase;
+            margin-bottom: var(--space-xs);
+        }
+
+        .contenu-fiche__theme-items {
+            list-style: none;
+        }
+
+        .contenu-fiche__theme-items li {
+            display: flex;
+            align-items: center;
+            gap: var(--space-xs);
+            font-size: 13px;
+            color: var(--color-gray-600);
+            padding: 4px 0;
+        }
+
+        .contenu-fiche__theme-items li::before {
+            content: '•';
+            color: var(--color-gray-400);
+        }
+
+        /* ═══════════════════════════════════════════════════════════════ */
+        /* PATTERN E : SOMMAIRE SIMPLE — Manuel Méthodologie              */
+        /* ═══════════════════════════════════════════════════════════════ */
+        .contenu-sommaire {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .contenu-sommaire__item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: var(--space-md);
+            background: var(--color-white);
+            border: 1px solid var(--color-gray-200);
+            border-radius: var(--radius-md);
+            margin-bottom: var(--space-sm);
+            transition: var(--transition);
+        }
+
+        .contenu-sommaire__item:hover {
+            border-color: var(--color-secondary);
+            background: var(--color-secondary-light);
+        }
+
+        .contenu-sommaire__item:last-child {
+            margin-bottom: 0;
+        }
+
+        .contenu-sommaire__item-left {
+            display: flex;
+            align-items: center;
+            gap: var(--space-sm);
+        }
+
+        .contenu-sommaire__item-icon {
+            font-size: 20px;
+        }
+
+        .contenu-sommaire__item-title {
+            font-size: 15px;
+            font-weight: 500;
+            color: var(--color-black);
+        }
+
+        .contenu-sommaire__item-pages {
+            font-size: 13px;
+            color: var(--color-gray-400);
+            background: var(--color-gray-100);
+            padding: 4px 10px;
+            border-radius: var(--radius-full);
+        }
+
+        /* ═══════════════════════════════════════════════════════════════ */
+        /* PATTERN F : PROGRAMME MODULES — Prépa                          */
+        /* ═══════════════════════════════════════════════════════════════ */
+        .contenu-programme {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .contenu-programme__module {
+            background: var(--color-white);
+            border: 1px solid var(--color-gray-200);
+            border-radius: var(--radius-lg);
+            padding: var(--space-md);
+            margin-bottom: var(--space-md);
+        }
+
+        .contenu-programme__module:last-child {
+            margin-bottom: 0;
+        }
+
+        .contenu-programme__module-header {
+            display: flex;
+            align-items: flex-start;
+            gap: var(--space-md);
+            margin-bottom: var(--space-sm);
+        }
+
+        .contenu-programme__module-number {
+            width: 36px;
+            height: 36px;
+            min-width: 36px;
+            background: var(--gradient-primary);
+            border-radius: var(--radius-full);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--color-white);
+        }
+
+        .contenu-programme__module-info {
+            flex: 1;
+        }
+
+        .contenu-programme__module-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--color-black);
+            margin-bottom: 2px;
+        }
+
+        .contenu-programme__module-duration {
+            font-size: 13px;
+            color: var(--color-gray-400);
+        }
+
+        .contenu-programme__module-content {
+            padding-left: 52px;
+        }
+
+        .contenu-programme__module-items {
+            list-style: none;
+        }
+
+        .contenu-programme__module-items li {
+            display: flex;
+            align-items: flex-start;
+            gap: var(--space-xs);
+            font-size: 13px;
+            color: var(--color-gray-600);
+            padding: 6px 0;
+            line-height: 1.4;
+        }
+
+        .contenu-programme__module-items li::before {
+            content: '•';
+            color: var(--color-primary);
+            font-weight: bold;
+        }
+
+        .contenu-programme__bonus {
+            background: var(--color-gray-50);
+            border-radius: var(--radius-lg);
+            padding: var(--space-md);
+            margin-top: var(--space-md);
+        }
+
+        .contenu-programme__bonus-title {
+            display: flex;
+            align-items: center;
+            gap: var(--space-xs);
+            font-size: 15px;
+            font-weight: 600;
+            color: var(--color-success-dark);
+            margin-bottom: var(--space-sm);
+        }
+
+        .contenu-programme__bonus-items {
+            list-style: none;
+        }
+
+        .contenu-programme__bonus-items li {
+            display: flex;
+            align-items: center;
+            gap: var(--space-xs);
+            font-size: 13px;
+            color: var(--color-gray-600);
+            padding: 4px 0;
+        }
+
+        .contenu-programme__bonus-items li::before {
+            content: '✓';
+            color: var(--color-success);
+            font-weight: 600;
+        }
+
+        /* ═══════════════════════════════════════════════════════════════ */
+        /* RESPONSIVE                                                      */
+        /* ═══════════════════════════════════════════════════════════════ */
+        @media (max-width: 1000px) {
+            .contenu-chiffre {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .contenu-matieres {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .contenu-fiche {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 600px) {
+            body {
+                padding: var(--space-sm);
+            }
+
+            .contenu-section {
+                padding: var(--space-md);
+            }
+
+            .contenu-chiffre {
+                grid-template-columns: 1fr;
+            }
+
+            .contenu-matieres {
+                grid-template-columns: 1fr;
+            }
+
+            .contenu-fiche__stats {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .contenu-section__title {
+                font-size: 22px;
+            }
+
+            .contenu-programme__module-content {
+                padding-left: 0;
+                margin-top: var(--space-sm);
+            }
+        }
+
+        /* ===== DOCUMENTATION ===== */
+        .docs {
+            margin-top: var(--space-xl);
+            padding-top: var(--space-xl);
+            border-top: 1px solid var(--color-gray-200);
+        }
+
+        .docs h2 {
+            font-size: 20px;
+            font-weight: 600;
+            color: var(--color-black);
+            margin-bottom: var(--space-md);
+        }
+
+        .docs h3 {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--color-black);
+            margin: var(--space-md) 0 var(--space-sm);
+        }
+
+        .specs-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 13px;
+            background: var(--color-white);
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            box-shadow: var(--shadow-sm);
+            margin-bottom: var(--space-md);
+        }
+
+        .specs-table th {
+            background: var(--color-gray-100);
+            font-weight: 600;
+            text-align: left;
+            padding: 12px 16px;
+            color: var(--color-black);
+        }
+
+        .specs-table td {
+            padding: 12px 16px;
+            border-bottom: 1px solid var(--color-gray-200);
+        }
+
+        .specs-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .checklist {
+            list-style: none;
+            padding: 0;
+        }
+
+        .checklist li {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 0;
+            font-size: 14px;
+            color: var(--color-gray-600);
+        }
+
+        .checklist li::before {
+            content: '✓';
+            color: var(--color-success);
+            font-weight: 600;
+        }
+
+        .divider {
+            text-align: center;
+            margin: var(--space-2xl) 0;
+            padding: var(--space-lg) 0;
+            border-top: 2px solid var(--color-gray-200);
+            border-bottom: 2px solid var(--color-gray-200);
+        }
+
+        .divider h2 {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--color-black);
+        }
+
+        .divider p {
+            color: var(--color-gray-400);
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Blocs Contenu — Design System Jurible</h1>
+        <p class="subtitle">Ce qui est INCLUS dans le produit (matières, chapitres, sommaire)</p>
+
+        <!-- ═══════════════════════════════════════════════════════════════ -->
+        <!-- PATTERN B : CONTENU CHIFFRÉ (FOND SOMBRE)                       -->
+        <!-- ═══════════════════════════════════════════════════════════════ -->
+        <div class="section">
+            <span class="section-label">🔢 Pattern B — Contenu Chiffré</span>
+            <span class="page-label">🎓 Académie</span>
+
+            <div class="contenu-section contenu-section--dark">
+                <div class="contenu-section__header">
+                    <span class="contenu-section__badge">📦 Ressources</span>
+                    <h2 class="contenu-section__title">Tout pour réussir en un seul <span class="highlight">abonnement</span></h2>
+                    <p class="contenu-section__subtitle">L'Académie contient tous les cours de ta licence par 11 enseignants à travers de nombreux formats.</p>
+                </div>
+
+                <div class="contenu-chiffre">
+                    <div class="contenu-chiffre__card">
+                        <div class="contenu-chiffre__icon">🎬</div>
+                        <div class="contenu-chiffre__number">500h+</div>
+                        <div class="contenu-chiffre__label">Cours vidéo</div>
+                        <p class="contenu-chiffre__desc">Le cours expliqué en vidéo pour mieux comprendre chaque notion.</p>
+                    </div>
+
+                    <div class="contenu-chiffre__card">
+                        <div class="contenu-chiffre__icon">📄</div>
+                        <div class="contenu-chiffre__number">20</div>
+                        <div class="contenu-chiffre__label">Cours écrits & Fiches</div>
+                        <p class="contenu-chiffre__desc">Fiches de révision complètes, consultables en ligne dans la plateforme.</p>
+                        <span class="contenu-chiffre__tag">Toutes matières</span>
+                    </div>
+
+                    <div class="contenu-chiffre__card">
+                        <div class="contenu-chiffre__icon">✅</div>
+                        <div class="contenu-chiffre__number">2000</div>
+                        <div class="contenu-chiffre__label">QCM & Quiz</div>
+                        <p class="contenu-chiffre__desc">Teste et révise tes connaissances grâce à des centaines de questions.</p>
+                    </div>
+
+                    <div class="contenu-chiffre__card">
+                        <div class="contenu-chiffre__icon">🧠</div>
+                        <div class="contenu-chiffre__number">2000</div>
+                        <div class="contenu-chiffre__label">Flashcards</div>
+                        <p class="contenu-chiffre__desc">Mémorise efficacement avec des flashcards numériques interactives.</p>
+                    </div>
+
+                    <div class="contenu-chiffre__card">
+                        <div class="contenu-chiffre__icon">📝</div>
+                        <div class="contenu-chiffre__number">400+</div>
+                        <div class="contenu-chiffre__label">Annales corrigées</div>
+                        <p class="contenu-chiffre__desc">Entraîne-toi sur de vrais sujets d'examen avec des corrections détaillées.</p>
+                    </div>
+
+                    <div class="contenu-chiffre__card">
+                        <div class="contenu-chiffre__icon">📖</div>
+                        <div class="contenu-chiffre__number">45h+</div>
+                        <div class="contenu-chiffre__label">Cours de méthodologie</div>
+                        <p class="contenu-chiffre__desc">Maîtrise les exercices : cas pratiques, commentaires d'arrêts, dissertations...</p>
+                        <span class="contenu-chiffre__tag">Essentiel</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ═══════════════════════════════════════════════════════════════ -->
+        <!-- PATTERN C : LISTE MATIÈRES                                      -->
+        <!-- ═══════════════════════════════════════════════════════════════ -->
+        <div class="section">
+            <span class="section-label">📚 Pattern C — Liste Matières</span>
+            <span class="page-label">🎓 Académie / 📄 Fiches générales</span>
+
+            <div class="contenu-section">
+                <div class="contenu-section__header">
+                    <span class="contenu-section__badge">📚 20 matières</span>
+                    <h2 class="contenu-section__title">Toutes les matières <span class="highlight">fondamentales</span></h2>
+                    <p class="contenu-section__subtitle">Un seul abonnement pour accéder à l'intégralité des matières de L1, L2, L3 et Capacité.</p>
+                </div>
+
+                <div class="contenu-matieres">
+                    <div class="contenu-matieres__item">
+                        <div class="contenu-matieres__icon">⚖️</div>
+                        <span class="contenu-matieres__name">Introduction au droit</span>
+                    </div>
+                    <div class="contenu-matieres__item">
+                        <div class="contenu-matieres__icon">🏛️</div>
+                        <span class="contenu-matieres__name">Droit constitutionnel</span>
+                    </div>
+                    <div class="contenu-matieres__item">
+                        <div class="contenu-matieres__icon">👨‍👩‍👧</div>
+                        <span class="contenu-matieres__name">Droit de la famille</span>
+                    </div>
+                    <div class="contenu-matieres__item">
+                        <div class="contenu-matieres__icon">👤</div>
+                        <span class="contenu-matieres__name">Droit des personnes</span>
+                    </div>
+                    <div class="contenu-matieres__item">
+                        <div class="contenu-matieres__icon">📜</div>
+                        <span class="contenu-matieres__name">Histoire du droit</span>
+                    </div>
+                    <div class="contenu-matieres__item">
+                        <div class="contenu-matieres__icon">🏢</div>
+                        <span class="contenu-matieres__name">Institutions juridictionnelles</span>
+                    </div>
+                    <div class="contenu-matieres__item">
+                        <div class="contenu-matieres__icon">📝</div>
+                        <span class="contenu-matieres__name">Droit des contrats</span>
+                    </div>
+                    <div class="contenu-matieres__item">
+                        <div class="contenu-matieres__icon">⚠️</div>
+                        <span class="contenu-matieres__name">Responsabilité civile</span>
+                    </div>
+                    <div class="contenu-matieres__item">
+                        <div class="contenu-matieres__icon">🏠</div>
+                        <span class="contenu-matieres__name">Droit administratif</span>
+                    </div>
+                    <div class="contenu-matieres__item">
+                        <div class="contenu-matieres__icon">👮</div>
+                        <span class="contenu-matieres__name">Droit pénal</span>
+                    </div>
+                    <div class="contenu-matieres__item">
+                        <div class="contenu-matieres__icon">💼</div>
+                        <span class="contenu-matieres__name">Droit commercial</span>
+                    </div>
+                    <div class="contenu-matieres__item">
+                        <div class="contenu-matieres__icon">💰</div>
+                        <span class="contenu-matieres__name">Droit fiscal</span>
+                    </div>
+                    <div class="contenu-matieres__item">
+                        <div class="contenu-matieres__icon">🏡</div>
+                        <span class="contenu-matieres__name">Droit des biens</span>
+                    </div>
+                    <div class="contenu-matieres__item">
+                        <div class="contenu-matieres__icon">⚖️</div>
+                        <span class="contenu-matieres__name">Procédure pénale</span>
+                    </div>
+                    <div class="contenu-matieres__item">
+                        <div class="contenu-matieres__icon">🏢</div>
+                        <span class="contenu-matieres__name">Droit des sociétés</span>
+                    </div>
+                    <div class="contenu-matieres__item">
+                        <div class="contenu-matieres__icon">👷</div>
+                        <span class="contenu-matieres__name">Droit du travail</span>
+                    </div>
+                    <div class="contenu-matieres__item">
+                        <div class="contenu-matieres__icon">🏠</div>
+                        <span class="contenu-matieres__name">Droit admin. des biens</span>
+                    </div>
+                    <div class="contenu-matieres__item">
+                        <div class="contenu-matieres__icon">🌍</div>
+                        <span class="contenu-matieres__name">Droit international public</span>
+                    </div>
+                    <div class="contenu-matieres__item">
+                        <div class="contenu-matieres__icon">👥</div>
+                        <span class="contenu-matieres__name">Relations collectives</span>
+                    </div>
+                    <div class="contenu-matieres__item">
+                        <div class="contenu-matieres__icon">📖</div>
+                        <span class="contenu-matieres__name">Méthodologie juridique</span>
+                    </div>
+                </div>
+
+                <div class="contenu-matieres__footer">
+                    📩 <strong>Une matière n'est pas disponible ?</strong> Contactez-nous en précisant la matière et votre université. Nous l'ajouterons rapidement.
+                </div>
+            </div>
+        </div>
+
+        <!-- ═══════════════════════════════════════════════════════════════ -->
+        <!-- PATTERN D : STATS + SOMMAIRE                                    -->
+        <!-- ═══════════════════════════════════════════════════════════════ -->
+        <div class="section">
+            <span class="section-label">📊 Pattern D — Stats + Sommaire</span>
+            <span class="page-label">📄 Fiches par matière</span>
+
+            <div class="contenu-section">
+                <div class="contenu-section__header contenu-section__header--left">
+                    <span class="contenu-section__badge">📦 Contenu</span>
+                    <h2 class="contenu-section__title">Tout le programme de <span class="highlight">Droit Constitutionnel</span></h2>
+                </div>
+
+                <div class="contenu-fiche">
+                    <div class="contenu-fiche__left">
+                        <p class="contenu-fiche__intro">
+                            Nos fiches couvrent l'intégralité du programme de Droit constitutionnel du premier semestre (Principes fondamentaux). Chaque notion est expliquée clairement avec des définitions, des exemples concrets et des références juridiques.
+                        </p>
+                        <p class="contenu-fiche__intro">
+                            Les cartes mentales incluses vous permettent de visualiser les liens entre les concepts et de mémoriser plus efficacement.
+                        </p>
+
+                        <div class="contenu-fiche__stats">
+                            <div class="contenu-fiche__stat">
+                                <div class="contenu-fiche__stat-number">65</div>
+                                <div class="contenu-fiche__stat-label">Pages</div>
+                            </div>
+                            <div class="contenu-fiche__stat">
+                                <div class="contenu-fiche__stat-number">20</div>
+                                <div class="contenu-fiche__stat-label">Fiches</div>
+                            </div>
+                            <div class="contenu-fiche__stat">
+                                <div class="contenu-fiche__stat-number">5</div>
+                                <div class="contenu-fiche__stat-label">Thèmes</div>
+                            </div>
+                            <div class="contenu-fiche__stat">
+                                <div class="contenu-fiche__stat-number">10+</div>
+                                <div class="contenu-fiche__stat-label">Cartes mentales</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="contenu-fiche__right">
+                        <h3 class="contenu-fiche__sommaire-title">☰ Sommaire des fiches</h3>
+
+                        <div class="contenu-fiche__theme">
+                            <div class="contenu-fiche__theme-title">Thème 1 — Le cadre du pouvoir politique</div>
+                            <ul class="contenu-fiche__theme-items">
+                                <li>Fiche n°1 - Les composantes de l'État</li>
+                                <li>Fiche n°2 - Les formes de l'État : L'État unitaire</li>
+                                <li>Fiche n°3 - Les formes de l'État : L'État fédéral et la confédération</li>
+                            </ul>
+                        </div>
+
+                        <div class="contenu-fiche__theme">
+                            <div class="contenu-fiche__theme-title">Thème 2 — La source du pouvoir politique</div>
+                            <ul class="contenu-fiche__theme-items">
+                                <li>Fiche n°4 - La notion de souveraineté</li>
+                                <li>Fiche n°5 - Les modes d'exercices du pouvoir</li>
+                            </ul>
+                        </div>
+
+                        <div class="contenu-fiche__theme">
+                            <div class="contenu-fiche__theme-title">Thème 3 — Les fondements du pouvoir politique</div>
+                            <ul class="contenu-fiche__theme-items">
+                                <li>Fiche n°6 - La Constitution</li>
+                                <li>Fiche n°7 - La révision de la Constitution</li>
+                                <li>Fiche n°8 - Le contrôle de constitutionnalité : contrôle politique</li>
+                                <li>Fiche n°9 - Le contrôle de constitutionnalité : contrôle juridictionnel</li>
+                            </ul>
+                        </div>
+
+                        <div class="contenu-fiche__theme">
+                            <div class="contenu-fiche__theme-title">Thème 4 — Les modes d'organisation du pouvoir</div>
+                            <ul class="contenu-fiche__theme-items">
+                                <li>Fiche n°10 à n°16 - Démocratie, séparation des pouvoirs, régimes...</li>
+                            </ul>
+                        </div>
+
+                        <div class="contenu-fiche__theme">
+                            <div class="contenu-fiche__theme-title">Thème 5 — L'histoire constitutionnelle française</div>
+                            <ul class="contenu-fiche__theme-items">
+                                <li>Fiche n°17 à n°20 - De la Révolution à la IVe République</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ═══════════════════════════════════════════════════════════════ -->
+        <!-- PATTERN E : SOMMAIRE SIMPLE                                     -->
+        <!-- ═══════════════════════════════════════════════════════════════ -->
+        <div class="section">
+            <span class="section-label">📋 Pattern E — Sommaire Simple</span>
+            <span class="page-label">📕 Manuel Méthodologie</span>
+
+            <div class="contenu-section">
+                <div class="contenu-section__header">
+                    <span class="contenu-section__badge">📖 Sommaire</span>
+                    <h2 class="contenu-section__title">Ce que contient le <span class="highlight">manuel</span></h2>
+                </div>
+
+                <div class="contenu-sommaire">
+                    <div class="contenu-sommaire__item">
+                        <div class="contenu-sommaire__item-left">
+                            <span class="contenu-sommaire__item-icon">📄</span>
+                            <span class="contenu-sommaire__item-title">La fiche d'arrêt</span>
+                        </div>
+                        <span class="contenu-sommaire__item-pages">12 pages</span>
+                    </div>
+
+                    <div class="contenu-sommaire__item">
+                        <div class="contenu-sommaire__item-left">
+                            <span class="contenu-sommaire__item-icon">⚖️</span>
+                            <span class="contenu-sommaire__item-title">Le commentaire d'arrêt</span>
+                        </div>
+                        <span class="contenu-sommaire__item-pages">15 pages</span>
+                    </div>
+
+                    <div class="contenu-sommaire__item">
+                        <div class="contenu-sommaire__item-left">
+                            <span class="contenu-sommaire__item-icon">✍️</span>
+                            <span class="contenu-sommaire__item-title">La dissertation juridique</span>
+                        </div>
+                        <span class="contenu-sommaire__item-pages">14 pages</span>
+                    </div>
+
+                    <div class="contenu-sommaire__item">
+                        <div class="contenu-sommaire__item-left">
+                            <span class="contenu-sommaire__item-icon">🔍</span>
+                            <span class="contenu-sommaire__item-title">Le cas pratique / consultation</span>
+                        </div>
+                        <span class="contenu-sommaire__item-pages">16 pages</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ═══════════════════════════════════════════════════════════════ -->
+        <!-- PATTERN F : PROGRAMME MODULES                                   -->
+        <!-- ═══════════════════════════════════════════════════════════════ -->
+        <div class="section">
+            <span class="section-label">🎯 Pattern F — Programme Modules</span>
+            <span class="page-label">🚀 Prépa (PASS DROIT)</span>
+
+            <div class="contenu-section">
+                <div class="contenu-section__header">
+                    <span class="contenu-section__badge">📋 Le programme</span>
+                    <h2 class="contenu-section__title">Le programme complet <span class="highlight">PASS DROIT</span></h2>
+                    <p class="contenu-section__subtitle">Un programme intensif de 70h : travaillez à votre rythme sur 3 à 24 mois selon vos disponibilités.</p>
+                </div>
+
+                <div class="contenu-programme">
+                    <div class="contenu-programme__module">
+                        <div class="contenu-programme__module-header">
+                            <div class="contenu-programme__module-number">1</div>
+                            <div class="contenu-programme__module-info">
+                                <h3 class="contenu-programme__module-title">Les bases pour réussir votre reconversion</h3>
+                                <span class="contenu-programme__module-duration">6h30</span>
+                            </div>
+                        </div>
+                        <div class="contenu-programme__module-content">
+                            <ul class="contenu-programme__module-items">
+                                <li>Prérentrée : Découvrez ce qui vous attend et comment vous organiser (3h30, 10 vidéos)</li>
+                                <li>Rédaction juridique : Apprenez à analyser, écrire et argumenter comme un juriste (3h, 5 vidéos, 1 TD)</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="contenu-programme__module">
+                        <div class="contenu-programme__module-header">
+                            <div class="contenu-programme__module-number">2</div>
+                            <div class="contenu-programme__module-info">
+                                <h3 class="contenu-programme__module-title">Les matières clés de L1</h3>
+                                <span class="contenu-programme__module-duration">45h</span>
+                            </div>
+                        </div>
+                        <div class="contenu-programme__module-content">
+                            <ul class="contenu-programme__module-items">
+                                <li>Institutions juridictionnelles : Fonctionnement des institutions judiciaires et administratives (7h50, 22 vidéos, 2 TD, 180 QCM)</li>
+                                <li>Introduction au droit : Bases et application du droit (19h10, 29 vidéos, 4 TD, 200 QCM)</li>
+                                <li>Droit constitutionnel : Principes fondamentaux (17h35, 27 vidéos, 3 TD, 120 QCM)</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="contenu-programme__module">
+                        <div class="contenu-programme__module-header">
+                            <div class="contenu-programme__module-number">3</div>
+                            <div class="contenu-programme__module-info">
+                                <h3 class="contenu-programme__module-title">La méthode pour exceller</h3>
+                                <span class="contenu-programme__module-duration">15h</span>
+                            </div>
+                        </div>
+                        <div class="contenu-programme__module-content">
+                            <ul class="contenu-programme__module-items">
+                                <li>Fiche d'arrêt : Analysez les décisions de justice (1h15, 17 vidéos)</li>
+                                <li>Commentaire d'arrêt : Décortiquez les arrêts (3h20, 19 vidéos)</li>
+                                <li>Cas pratique : Résolvez des problèmes juridiques (4h20, 20 vidéos)</li>
+                                <li>Dissertation : Rédigez des argumentations solides (4h, 20 vidéos)</li>
+                                <li>Commentaire de texte : Analysez les textes juridiques (2h30, 19 vidéos)</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="contenu-programme__bonus">
+                        <h4 class="contenu-programme__bonus-title">🎁 Bonus inclus</h4>
+                        <ul class="contenu-programme__bonus-items">
+                            <li>Pack de fiches de révision PDF téléchargeable et imprimable</li>
+                            <li>Manuel de méthodologie : guide détaillé pour tous les exercices juridiques</li>
+                            <li>Formation "Mémoriser ses cours de droit" (3h de techniques adaptées)</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ═══════════════════════════════════════════════════════════════ -->
+        <!-- DOCUMENTATION                                                   -->
+        <!-- ═══════════════════════════════════════════════════════════════ -->
+        <div class="docs">
+            <h2>📋 Récapitulatif — Blocs Contenu</h2>
+
+            <h3>5 Patterns disponibles</h3>
+            <table class="specs-table">
+                <tr>
+                    <th>Pattern</th>
+                    <th>Nom</th>
+                    <th>Usage</th>
+                    <th>Pages</th>
+                </tr>
+                <tr>
+                    <td><strong>B</strong></td>
+                    <td>Contenu Chiffré</td>
+                    <td>Stats des ressources (heures, QCM...)</td>
+                    <td>Académie</td>
+                </tr>
+                <tr>
+                    <td><strong>C</strong></td>
+                    <td>Liste Matières</td>
+                    <td>Liste de tout ce qui est inclus</td>
+                    <td>Académie, Fiches générales</td>
+                </tr>
+                <tr>
+                    <td><strong>D</strong></td>
+                    <td>Stats + Sommaire</td>
+                    <td>Stats + liste des chapitres</td>
+                    <td>Fiches par matière</td>
+                </tr>
+                <tr>
+                    <td><strong>E</strong></td>
+                    <td>Sommaire Simple</td>
+                    <td>Liste des chapitres avec nb pages</td>
+                    <td>Manuel Méthodologie</td>
+                </tr>
+                <tr>
+                    <td><strong>F</strong></td>
+                    <td>Programme Modules</td>
+                    <td>Modules détaillés avec durées</td>
+                    <td>Prépa</td>
+                </tr>
+            </table>
+
+            <h3>Règles uniformes</h3>
+            <table class="specs-table">
+                <tr>
+                    <th>Élément</th>
+                    <th>Valeur</th>
+                </tr>
+                <tr>
+                    <td>Badge section</td>
+                    <td>Violet light #EDE9FE</td>
+                </tr>
+                <tr>
+                    <td>Mot-clé H2</td>
+                    <td>Gradient bordeaux→violet</td>
+                </tr>
+                <tr>
+                    <td>Fond Pattern B</td>
+                    <td>Noir #1A1A1A (toujours)</td>
+                </tr>
+                <tr>
+                    <td>Fond autres patterns</td>
+                    <td>Blanc #FFFFFF</td>
+                </tr>
+                <tr>
+                    <td>Border-radius</td>
+                    <td>16px (section), 12px (cards)</td>
+                </tr>
+            </table>
+
+            <h3>⚠️ Attention : Contenu ≠ Fonctionnalités</h3>
+            <table class="specs-table">
+                <tr>
+                    <th>CONTENU (ce bloc)</th>
+                    <th>FONCTIONNALITÉS (autre bloc)</th>
+                </tr>
+                <tr>
+                    <td>Ce qui est inclus</td>
+                    <td>Ce que le produit fait</td>
+                </tr>
+                <tr>
+                    <td>20 matières, 500h vidéo, sommaire...</td>
+                    <td>Format PDF, téléchargeable, accessible mobile...</td>
+                </tr>
+                <tr>
+                    <td>Liste des chapitres</td>
+                    <td>Types de supports disponibles</td>
+                </tr>
+            </table>
+
+            <h3>✅ Design System respecté</h3>
+            <ul class="checklist">
+                <li>Badge toujours violet light</li>
+                <li>Mot-clé H2 en gradient</li>
+                <li>Pattern B toujours sur fond sombre</li>
+                <li>Emojis (pas d'icônes SVG)</li>
+                <li>Hover sur les éléments interactifs</li>
+            </ul>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,909 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jurible Design System — Progress Indicators</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* ========================================
+           JURIBLE DESIGN TOKENS
+           ======================================== */
+        :root {
+            /* Colors - Primary */
+            --color-primary: #B0001D;
+            --color-primary-mid: #DC2626;
+            --color-secondary: #7C3AED;
+            
+            /* Gradient */
+            --gradient-primary: linear-gradient(135deg, #B0001D 0%, #DC2626 50%, #7C3AED 100%);
+            --gradient-horizontal: linear-gradient(90deg, #B0001D 0%, #DC2626 50%, #7C3AED 100%);
+            
+            /* Colors - Text */
+            --color-text-dark: #1A1A1A;
+            --color-text-gray: #4A4A4A;
+            --color-text-muted: #9CA3AF;
+            --color-text-light: #FFFFFF;
+            
+            /* Colors - Background */
+            --color-background: #FFFFFF;
+            --color-muted: #F3F4F6;
+            --color-border: #E5E7EB;
+            --color-border-muted: #D1D5DB;
+            
+            /* Typography */
+            --font-family: 'Poppins', sans-serif;
+            --font-size-xs: 12px;
+            --font-size-sm: 14px;
+            --font-size-base: 16px;
+            
+            /* Spacing */
+            --spacing-xs: 8px;
+            --spacing-s: 16px;
+            --spacing-m: 24px;
+            --spacing-l: 32px;
+            --spacing-xl: 48px;
+            
+            /* Border Radius */
+            --radius-xs: 4px;
+            --radius-s: 6px;
+            --radius-m: 8px;
+            --radius-l: 12px;
+            --radius-xl: 16px;
+            --radius-full: 9999px;
+            
+            /* Shadows */
+            --shadow-sm: 0 1px 3px rgba(0,0,0,0.1), 0 1px 2px rgba(0,0,0,0.06);
+            --shadow-md: 0 4px 6px rgba(0,0,0,0.07);
+        }
+
+        /* ========================================
+           BASE STYLES
+           ======================================== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-family);
+            background: var(--color-background);
+            color: var(--color-text-dark);
+            padding: 48px 80px;
+            max-width: 1280px;
+            margin: 0 auto;
+        }
+
+        .page-title {
+            font-size: 48px;
+            font-weight: 700;
+            color: var(--color-text-dark);
+            margin-bottom: 8px;
+        }
+
+        .page-divider {
+            height: 3px;
+            background: var(--gradient-horizontal);
+            margin-bottom: 48px;
+            border-radius: var(--radius-full);
+        }
+
+        .section {
+            margin-bottom: 48px;
+            padding-bottom: 32px;
+            border-bottom: 1px solid var(--color-border);
+        }
+
+        .section:last-child {
+            border-bottom: none;
+        }
+
+        .section-title {
+            font-size: 24px;
+            font-weight: 600;
+            color: var(--color-text-dark);
+            margin-bottom: 8px;
+        }
+
+        .section-divider {
+            height: 1px;
+            background: var(--color-border);
+            margin-bottom: 24px;
+        }
+
+        .section-subtitle {
+            font-size: var(--font-size-sm);
+            color: var(--color-text-muted);
+            margin-bottom: 24px;
+        }
+
+        .component-group {
+            margin-bottom: 32px;
+        }
+
+        .component-row {
+            display: flex;
+            align-items: center;
+            gap: 48px;
+            flex-wrap: wrap;
+        }
+
+        .component-item {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .component-label {
+            font-size: var(--font-size-xs);
+            color: var(--color-text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-weight: 500;
+        }
+
+        .group-title {
+            font-size: var(--font-size-sm);
+            font-weight: 600;
+            color: var(--color-text-gray);
+            margin-bottom: 16px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        /* ========================================
+           1. PROGRESS BAR (Linear) - GRADIENT
+           ======================================== */
+        .progress-bar {
+            width: 300px;
+            height: 6px;
+            background: var(--color-border);
+            border-radius: var(--radius-full);
+            overflow: hidden;
+        }
+
+        .progress-bar--lg {
+            height: 8px;
+        }
+
+        .progress-bar--sm {
+            height: 4px;
+        }
+
+        .progress-bar__fill {
+            height: 100%;
+            background: var(--gradient-horizontal);
+            border-radius: var(--radius-full);
+            transition: width 0.3s ease;
+        }
+
+        /* Variante couleur solide pour comparaison */
+        .progress-bar__fill--solid-primary {
+            background: var(--color-primary);
+        }
+
+        .progress-bar__fill--solid-secondary {
+            background: var(--color-secondary);
+        }
+
+        /* Progress bar avec label */
+        .progress-bar-wrapper {
+            width: 300px;
+        }
+
+        .progress-bar-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: var(--spacing-xs);
+        }
+
+        .progress-bar-label {
+            font-size: var(--font-size-sm);
+            font-weight: 500;
+            color: var(--color-text-dark);
+        }
+
+        .progress-bar-value {
+            font-size: var(--font-size-sm);
+            font-weight: 600;
+            background: var(--gradient-horizontal);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* ========================================
+           2. PROGRESS CIRCLE (Radial) - GRADIENT
+           ======================================== */
+        .progress-circle {
+            position: relative;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .progress-circle svg {
+            transform: rotate(-90deg);
+        }
+
+        .progress-circle__track {
+            fill: none;
+            stroke: var(--color-border);
+        }
+
+        .progress-circle__fill {
+            fill: none;
+            stroke: url(#gradient-circle);
+            stroke-linecap: round;
+            transition: stroke-dashoffset 0.3s ease;
+        }
+
+        /* Variante couleur solide */
+        .progress-circle__fill--solid-primary {
+            stroke: var(--color-primary);
+        }
+
+        .progress-circle__fill--solid-secondary {
+            stroke: var(--color-secondary);
+        }
+
+        .progress-circle__value {
+            position: absolute;
+            font-size: var(--font-size-sm);
+            font-weight: 600;
+            background: var(--gradient-horizontal);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .progress-circle--lg .progress-circle__value {
+            font-size: var(--font-size-base);
+        }
+
+        .progress-circle--sm .progress-circle__value {
+            font-size: var(--font-size-xs);
+        }
+
+        /* ========================================
+           3. LOADER (Spinner) - GRADIENT
+           ======================================== */
+        .loader {
+            display: inline-block;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: conic-gradient(
+                from 0deg,
+                transparent 0deg,
+                var(--color-primary) 0deg,
+                var(--color-primary-mid) 180deg,
+                var(--color-secondary) 270deg,
+                transparent 360deg
+            );
+            animation: loader-spin 0.8s linear infinite;
+            position: relative;
+        }
+
+        .loader::before {
+            content: '';
+            position: absolute;
+            top: 3px;
+            left: 3px;
+            right: 3px;
+            bottom: 3px;
+            background: var(--color-background);
+            border-radius: 50%;
+        }
+
+        .loader--sm {
+            width: 20px;
+            height: 20px;
+        }
+
+        .loader--sm::before {
+            top: 2px;
+            left: 2px;
+            right: 2px;
+            bottom: 2px;
+        }
+
+        .loader--lg {
+            width: 48px;
+            height: 48px;
+        }
+
+        .loader--lg::before {
+            top: 4px;
+            left: 4px;
+            right: 4px;
+            bottom: 4px;
+        }
+
+        /* Loader simple (non gradient) pour comparaison */
+        .loader-simple {
+            display: inline-block;
+            width: 32px;
+            height: 32px;
+            border: 3px solid var(--color-border);
+            border-top-color: var(--color-primary);
+            border-radius: 50%;
+            animation: loader-spin 0.8s linear infinite;
+        }
+
+        .loader-simple--secondary {
+            border-top-color: var(--color-secondary);
+        }
+
+        .loader-simple--sm {
+            width: 20px;
+            height: 20px;
+            border-width: 2px;
+        }
+
+        .loader-simple--lg {
+            width: 48px;
+            height: 48px;
+            border-width: 4px;
+        }
+
+        @keyframes loader-spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        /* Loader avec texte */
+        .loader-wrapper {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .loader-text {
+            font-size: var(--font-size-sm);
+            color: var(--color-text-gray);
+        }
+
+        /* ========================================
+           4. SKELETON LOADER
+           ======================================== */
+        .skeleton {
+            background: linear-gradient(
+                90deg,
+                var(--color-border) 25%,
+                var(--color-muted) 50%,
+                var(--color-border) 75%
+            );
+            background-size: 200% 100%;
+            animation: skeleton-shimmer 1.5s infinite;
+            border-radius: var(--radius-m);
+        }
+
+        .skeleton--text {
+            height: 16px;
+            width: 200px;
+        }
+
+        .skeleton--text-sm {
+            height: 12px;
+            width: 120px;
+        }
+
+        .skeleton--circle {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+        }
+
+        .skeleton--card {
+            width: 100%;
+            height: 120px;
+            border-radius: var(--radius-l);
+        }
+
+        @keyframes skeleton-shimmer {
+            0% { background-position: 200% 0; }
+            100% { background-position: -200% 0; }
+        }
+
+        /* ========================================
+           5. STEP INDICATOR (Bonus)
+           ======================================== */
+        .steps {
+            display: flex;
+            align-items: center;
+            gap: 0;
+        }
+
+        .step {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .step__circle {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: var(--font-size-sm);
+            font-weight: 600;
+            background: var(--color-muted);
+            color: var(--color-text-muted);
+            transition: all 0.2s ease;
+        }
+
+        .step--active .step__circle {
+            background: var(--gradient-primary);
+            color: var(--color-text-light);
+        }
+
+        .step--completed .step__circle {
+            background: var(--gradient-primary);
+            color: var(--color-text-light);
+        }
+
+        .step__line {
+            width: 60px;
+            height: 2px;
+            background: var(--color-border);
+        }
+
+        .step--completed + .step .step__line,
+        .step--active .step__line {
+            background: var(--gradient-horizontal);
+        }
+
+        .step__label {
+            font-size: var(--font-size-xs);
+            color: var(--color-text-muted);
+            font-weight: 500;
+        }
+
+        .step--active .step__label {
+            color: var(--color-text-dark);
+        }
+
+        /* Checkmark icon pour completed */
+        .step--completed .step__circle::after {
+            content: '✓';
+        }
+    </style>
+</head>
+<body>
+
+    <!-- SVG Gradient Definition (pour les cercles) -->
+    <svg width="0" height="0" style="position: absolute;">
+        <defs>
+            <linearGradient id="gradient-circle" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#B0001D"/>
+                <stop offset="50%" stop-color="#DC2626"/>
+                <stop offset="100%" stop-color="#7C3AED"/>
+            </linearGradient>
+        </defs>
+    </svg>
+
+    <h1 class="page-title">progress indicator</h1>
+    <div class="page-divider"></div>
+
+    <!-- ========================================
+         PROGRESS BAR
+         ======================================== -->
+    <div class="section">
+        <h2 class="section-title">progress bar</h2>
+        <div class="section-divider"></div>
+        <p class="section-subtitle">progress container</p>
+
+        <!-- Tailles -->
+        <div class="component-group">
+            <p class="group-title">Tailles</p>
+            <div class="component-row">
+                <div class="component-item">
+                    <span class="component-label">Small (4px)</span>
+                    <div class="progress-bar progress-bar--sm">
+                        <div class="progress-bar__fill" style="width: 40%;"></div>
+                    </div>
+                </div>
+                <div class="component-item">
+                    <span class="component-label">Default (6px)</span>
+                    <div class="progress-bar">
+                        <div class="progress-bar__fill" style="width: 40%;"></div>
+                    </div>
+                </div>
+                <div class="component-item">
+                    <span class="component-label">Large (8px)</span>
+                    <div class="progress-bar progress-bar--lg">
+                        <div class="progress-bar__fill" style="width: 40%;"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- États de progression -->
+        <div class="component-group">
+            <p class="group-title">États de progression</p>
+            <div class="component-row">
+                <div class="component-item">
+                    <span class="component-label">0%</span>
+                    <div class="progress-bar">
+                        <div class="progress-bar__fill" style="width: 0%;"></div>
+                    </div>
+                </div>
+                <div class="component-item">
+                    <span class="component-label">25%</span>
+                    <div class="progress-bar">
+                        <div class="progress-bar__fill" style="width: 25%;"></div>
+                    </div>
+                </div>
+                <div class="component-item">
+                    <span class="component-label">50%</span>
+                    <div class="progress-bar">
+                        <div class="progress-bar__fill" style="width: 50%;"></div>
+                    </div>
+                </div>
+                <div class="component-item">
+                    <span class="component-label">75%</span>
+                    <div class="progress-bar">
+                        <div class="progress-bar__fill" style="width: 75%;"></div>
+                    </div>
+                </div>
+                <div class="component-item">
+                    <span class="component-label">100%</span>
+                    <div class="progress-bar">
+                        <div class="progress-bar__fill" style="width: 100%;"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Variantes de couleur -->
+        <div class="component-group">
+            <p class="group-title">Variantes de couleur</p>
+            <div class="component-row">
+                <div class="component-item">
+                    <span class="component-label">Gradient (défaut)</span>
+                    <div class="progress-bar">
+                        <div class="progress-bar__fill" style="width: 60%;"></div>
+                    </div>
+                </div>
+                <div class="component-item">
+                    <span class="component-label">Solid Primary</span>
+                    <div class="progress-bar">
+                        <div class="progress-bar__fill progress-bar__fill--solid-primary" style="width: 60%;"></div>
+                    </div>
+                </div>
+                <div class="component-item">
+                    <span class="component-label">Solid Secondary</span>
+                    <div class="progress-bar">
+                        <div class="progress-bar__fill progress-bar__fill--solid-secondary" style="width: 60%;"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Avec label -->
+        <div class="component-group">
+            <p class="group-title">Avec label et pourcentage</p>
+            <div class="component-row">
+                <div class="progress-bar-wrapper">
+                    <div class="progress-bar-header">
+                        <span class="progress-bar-label">Progression du cours</span>
+                        <span class="progress-bar-value">40%</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-bar__fill" style="width: 40%;"></div>
+                    </div>
+                </div>
+                <div class="progress-bar-wrapper">
+                    <div class="progress-bar-header">
+                        <span class="progress-bar-label">Fiches révisées</span>
+                        <span class="progress-bar-value">75%</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-bar__fill" style="width: 75%;"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ========================================
+         PROGRESS CIRCLE
+         ======================================== -->
+    <div class="section">
+        <h2 class="section-title">progress circle</h2>
+        <div class="section-divider"></div>
+        <p class="section-subtitle">Indicateurs circulaires avec pourcentage</p>
+
+        <!-- États de progression -->
+        <div class="component-group">
+            <p class="group-title">États de progression</p>
+            <div class="component-row">
+                <!-- 0% -->
+                <div class="component-item">
+                    <span class="component-label">0%</span>
+                    <div class="progress-circle">
+                        <svg width="64" height="64" viewBox="0 0 64 64">
+                            <circle class="progress-circle__track" cx="32" cy="32" r="28" stroke-width="6"/>
+                            <circle class="progress-circle__fill" cx="32" cy="32" r="28" stroke-width="6"
+                                stroke-dasharray="175.93"
+                                stroke-dashoffset="175.93"/>
+                        </svg>
+                        <span class="progress-circle__value">0%</span>
+                    </div>
+                </div>
+                <!-- 25% -->
+                <div class="component-item">
+                    <span class="component-label">25%</span>
+                    <div class="progress-circle">
+                        <svg width="64" height="64" viewBox="0 0 64 64">
+                            <circle class="progress-circle__track" cx="32" cy="32" r="28" stroke-width="6"/>
+                            <circle class="progress-circle__fill" cx="32" cy="32" r="28" stroke-width="6"
+                                stroke-dasharray="175.93"
+                                stroke-dashoffset="131.95"/>
+                        </svg>
+                        <span class="progress-circle__value">25%</span>
+                    </div>
+                </div>
+                <!-- 40% -->
+                <div class="component-item">
+                    <span class="component-label">40%</span>
+                    <div class="progress-circle">
+                        <svg width="64" height="64" viewBox="0 0 64 64">
+                            <circle class="progress-circle__track" cx="32" cy="32" r="28" stroke-width="6"/>
+                            <circle class="progress-circle__fill" cx="32" cy="32" r="28" stroke-width="6"
+                                stroke-dasharray="175.93"
+                                stroke-dashoffset="105.56"/>
+                        </svg>
+                        <span class="progress-circle__value">40%</span>
+                    </div>
+                </div>
+                <!-- 75% -->
+                <div class="component-item">
+                    <span class="component-label">75%</span>
+                    <div class="progress-circle">
+                        <svg width="64" height="64" viewBox="0 0 64 64">
+                            <circle class="progress-circle__track" cx="32" cy="32" r="28" stroke-width="6"/>
+                            <circle class="progress-circle__fill" cx="32" cy="32" r="28" stroke-width="6"
+                                stroke-dasharray="175.93"
+                                stroke-dashoffset="43.98"/>
+                        </svg>
+                        <span class="progress-circle__value">75%</span>
+                    </div>
+                </div>
+                <!-- 100% -->
+                <div class="component-item">
+                    <span class="component-label">100%</span>
+                    <div class="progress-circle">
+                        <svg width="64" height="64" viewBox="0 0 64 64">
+                            <circle class="progress-circle__track" cx="32" cy="32" r="28" stroke-width="6"/>
+                            <circle class="progress-circle__fill" cx="32" cy="32" r="28" stroke-width="6"
+                                stroke-dasharray="175.93"
+                                stroke-dashoffset="0"/>
+                        </svg>
+                        <span class="progress-circle__value">100%</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tailles -->
+        <div class="component-group">
+            <p class="group-title">Tailles</p>
+            <div class="component-row">
+                <!-- Small -->
+                <div class="component-item">
+                    <span class="component-label">Small (48px)</span>
+                    <div class="progress-circle progress-circle--sm">
+                        <svg width="48" height="48" viewBox="0 0 48 48">
+                            <circle class="progress-circle__track" cx="24" cy="24" r="20" stroke-width="4"/>
+                            <circle class="progress-circle__fill" cx="24" cy="24" r="20" stroke-width="4"
+                                stroke-dasharray="125.66"
+                                stroke-dashoffset="75.4"/>
+                        </svg>
+                        <span class="progress-circle__value">40%</span>
+                    </div>
+                </div>
+                <!-- Default -->
+                <div class="component-item">
+                    <span class="component-label">Default (64px)</span>
+                    <div class="progress-circle">
+                        <svg width="64" height="64" viewBox="0 0 64 64">
+                            <circle class="progress-circle__track" cx="32" cy="32" r="28" stroke-width="6"/>
+                            <circle class="progress-circle__fill" cx="32" cy="32" r="28" stroke-width="6"
+                                stroke-dasharray="175.93"
+                                stroke-dashoffset="105.56"/>
+                        </svg>
+                        <span class="progress-circle__value">40%</span>
+                    </div>
+                </div>
+                <!-- Large -->
+                <div class="component-item">
+                    <span class="component-label">Large (96px)</span>
+                    <div class="progress-circle progress-circle--lg">
+                        <svg width="96" height="96" viewBox="0 0 96 96">
+                            <circle class="progress-circle__track" cx="48" cy="48" r="42" stroke-width="8"/>
+                            <circle class="progress-circle__fill" cx="48" cy="48" r="42" stroke-width="8"
+                                stroke-dasharray="263.89"
+                                stroke-dashoffset="158.34"/>
+                        </svg>
+                        <span class="progress-circle__value">40%</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Variantes de couleur -->
+        <div class="component-group">
+            <p class="group-title">Variantes de couleur</p>
+            <div class="component-row">
+                <div class="component-item">
+                    <span class="component-label">Gradient (défaut)</span>
+                    <div class="progress-circle">
+                        <svg width="64" height="64" viewBox="0 0 64 64">
+                            <circle class="progress-circle__track" cx="32" cy="32" r="28" stroke-width="6"/>
+                            <circle class="progress-circle__fill" cx="32" cy="32" r="28" stroke-width="6"
+                                stroke-dasharray="175.93"
+                                stroke-dashoffset="105.56"/>
+                        </svg>
+                        <span class="progress-circle__value">40%</span>
+                    </div>
+                </div>
+                <div class="component-item">
+                    <span class="component-label">Solid Primary</span>
+                    <div class="progress-circle">
+                        <svg width="64" height="64" viewBox="0 0 64 64">
+                            <circle class="progress-circle__track" cx="32" cy="32" r="28" stroke-width="6"/>
+                            <circle class="progress-circle__fill progress-circle__fill--solid-primary" cx="32" cy="32" r="28" stroke-width="6"
+                                stroke-dasharray="175.93"
+                                stroke-dashoffset="105.56"/>
+                        </svg>
+                        <span class="progress-circle__value" style="background: none; -webkit-text-fill-color: #B0001D; color: #B0001D;">40%</span>
+                    </div>
+                </div>
+                <div class="component-item">
+                    <span class="component-label">Solid Secondary</span>
+                    <div class="progress-circle">
+                        <svg width="64" height="64" viewBox="0 0 64 64">
+                            <circle class="progress-circle__track" cx="32" cy="32" r="28" stroke-width="6"/>
+                            <circle class="progress-circle__fill progress-circle__fill--solid-secondary" cx="32" cy="32" r="28" stroke-width="6"
+                                stroke-dasharray="175.93"
+                                stroke-dashoffset="105.56"/>
+                        </svg>
+                        <span class="progress-circle__value" style="background: none; -webkit-text-fill-color: #7C3AED; color: #7C3AED;">40%</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ========================================
+         LOADER
+         ======================================== -->
+    <div class="section">
+        <h2 class="section-title">loader</h2>
+        <div class="section-divider"></div>
+        <p class="section-subtitle">Indicateurs de chargement animés</p>
+
+        <!-- Gradient Loader -->
+        <div class="component-group">
+            <p class="group-title">Gradient Loader</p>
+            <div class="component-row">
+                <div class="component-item">
+                    <span class="component-label">Small (20px)</span>
+                    <div class="loader loader--sm"></div>
+                </div>
+                <div class="component-item">
+                    <span class="component-label">Default (32px)</span>
+                    <div class="loader"></div>
+                </div>
+                <div class="component-item">
+                    <span class="component-label">Large (48px)</span>
+                    <div class="loader loader--lg"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Simple Loader -->
+        <div class="component-group">
+            <p class="group-title">Simple Loader (couleur solide)</p>
+            <div class="component-row">
+                <div class="component-item">
+                    <span class="component-label">Primary</span>
+                    <div class="loader-simple"></div>
+                </div>
+                <div class="component-item">
+                    <span class="component-label">Secondary</span>
+                    <div class="loader-simple loader-simple--secondary"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Avec texte -->
+        <div class="component-group">
+            <p class="group-title">Avec texte</p>
+            <div class="component-row">
+                <div class="loader-wrapper">
+                    <div class="loader loader--sm"></div>
+                    <span class="loader-text">Chargement...</span>
+                </div>
+                <div class="loader-wrapper">
+                    <div class="loader-simple loader-simple--sm"></div>
+                    <span class="loader-text">Chargement en cours</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ========================================
+         SKELETON LOADER
+         ======================================== -->
+    <div class="section">
+        <h2 class="section-title">skeleton loader</h2>
+        <div class="section-divider"></div>
+        <p class="section-subtitle">Placeholders de chargement pour le contenu</p>
+
+        <div class="component-group">
+            <p class="group-title">Éléments</p>
+            <div class="component-row">
+                <div class="component-item">
+                    <span class="component-label">Avatar + Texte</span>
+                    <div style="display: flex; gap: 12px; align-items: center;">
+                        <div class="skeleton skeleton--circle"></div>
+                        <div style="display: flex; flex-direction: column; gap: 8px;">
+                            <div class="skeleton skeleton--text"></div>
+                            <div class="skeleton skeleton--text-sm"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="component-item">
+                    <span class="component-label">Card</span>
+                    <div class="skeleton skeleton--card" style="width: 200px;"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ========================================
+         STEP INDICATOR (Bonus)
+         ======================================== -->
+    <div class="section" style="border-bottom: none;">
+        <h2 class="section-title">step indicator</h2>
+        <div class="section-divider"></div>
+        <p class="section-subtitle">Indicateur d'étapes pour les parcours</p>
+
+        <div class="component-group">
+            <p class="group-title">Exemple de progression</p>
+            <div class="component-row">
+                <div class="steps">
+                    <div class="step step--completed">
+                        <div class="step__circle"></div>
+                    </div>
+                    <div class="step step--completed">
+                        <div class="step__line"></div>
+                        <div class="step__circle"></div>
+                    </div>
+                    <div class="step step--active">
+                        <div class="step__line"></div>
+                        <div class="step__circle">3</div>
+                    </div>
+                    <div class="step">
+                        <div class="step__line"></div>
+                        <div class="step__circle">4</div>
+                    </div>
+                    <div class="step">
+                        <div class="step__line"></div>
+                        <div class="step__circle">5</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

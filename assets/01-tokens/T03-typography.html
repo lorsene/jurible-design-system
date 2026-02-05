@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jurible Design System — Typography</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --color-primary: #B0001D;
+            --color-secondary: #7C3AED;
+            --color-text-dark: #1A1A1A;
+            --color-text-gray: #4A4A4A;
+            --color-text-muted: #9CA3AF;
+            --color-background: #FFFFFF;
+            --color-muted: #F3F4F6;
+            --color-border: #E5E7EB;
+            --font-family: 'Poppins', sans-serif;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: var(--font-family);
+            background: var(--color-background);
+            color: var(--color-text-dark);
+            padding: 48px 80px;
+            max-width: 1280px;
+            margin: 0 auto;
+        }
+
+        .page-header { margin-bottom: 48px; }
+
+        .page-title {
+            font-size: 48px;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .page-divider {
+            height: 3px;
+            width: 120px;
+            background: linear-gradient(90deg, #B0001D 0%, #DC2626 50%, #7C3AED 100%);
+            border-radius: 9999px;
+        }
+
+        .section {
+            margin-bottom: 48px;
+        }
+
+        .section-title {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 24px;
+            color: var(--color-text-dark);
+        }
+
+        .section-divider {
+            height: 1px;
+            background: var(--color-border);
+            margin: 48px 0;
+        }
+
+        /* ==================== TYPEFACE PREVIEW ==================== */
+        .typeface-card {
+            border: 1px solid var(--color-border);
+            border-radius: 12px;
+            padding: 32px;
+            margin-bottom: 32px;
+        }
+
+        .typeface-name {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--color-text-dark);
+            margin-bottom: 8px;
+        }
+
+        .typeface-preview {
+            font-size: 64px;
+            font-weight: 700;
+            color: var(--color-text-dark);
+            margin-bottom: 8px;
+        }
+
+        .typeface-alphabet {
+            font-size: 14px;
+            color: var(--color-text-muted);
+            margin-bottom: 24px;
+        }
+
+        .typeface-weights {
+            display: flex;
+            gap: 32px;
+        }
+
+        .weight-item {
+            font-size: 14px;
+        }
+
+        .weight-item--bold { font-weight: 700; }
+        .weight-item--semibold { font-weight: 600; }
+        .weight-item--medium { font-weight: 500; }
+        .weight-item--regular { font-weight: 400; }
+
+        /* ==================== TYPE SCALE TABLE ==================== */
+        .type-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .type-table th {
+            text-align: left;
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--color-text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            padding: 12px 16px;
+            background: var(--color-muted);
+            border-bottom: 1px solid var(--color-border);
+        }
+
+        .type-table th:first-child {
+            border-radius: 8px 0 0 0;
+        }
+
+        .type-table th:last-child {
+            border-radius: 0 8px 0 0;
+        }
+
+        .type-table td {
+            padding: 16px;
+            border-bottom: 1px solid var(--color-border);
+            vertical-align: middle;
+        }
+
+        .type-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .style-name {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--color-text-dark);
+        }
+
+        .style-specs {
+            font-size: 12px;
+            color: var(--color-text-muted);
+            font-family: 'SF Mono', 'Monaco', monospace;
+        }
+
+        /* ==================== RESPONSIVE COMPARISON ==================== */
+        .responsive-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 32px;
+        }
+
+        .responsive-column {
+            border: 1px solid var(--color-border);
+            border-radius: 12px;
+            padding: 32px;
+        }
+
+        .responsive-title {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 24px;
+        }
+
+        .responsive-section-label {
+            font-size: 12px;
+            font-weight: 500;
+            color: var(--color-secondary);
+            margin-bottom: 16px;
+            margin-top: 24px;
+        }
+
+        .responsive-section-label:first-of-type {
+            margin-top: 0;
+        }
+
+        .type-sample {
+            margin-bottom: 16px;
+        }
+
+        .type-sample-label {
+            font-size: 12px;
+            color: var(--color-text-muted);
+            margin-top: 4px;
+        }
+
+        /* Type samples */
+        .sample-h1-desktop { font-size: 48px; font-weight: 700; line-height: 120%; }
+        .sample-h2-desktop { font-size: 40px; font-weight: 700; line-height: 130%; }
+        .sample-h3-desktop { font-size: 30px; font-weight: 600; line-height: 140%; }
+        .sample-h4-desktop { font-size: 20px; font-weight: 600; line-height: 140%; }
+
+        .sample-h1-mobile { font-size: 32px; font-weight: 700; line-height: 120%; }
+        .sample-h2-mobile { font-size: 28px; font-weight: 700; line-height: 130%; }
+        .sample-h3-mobile { font-size: 20px; font-weight: 600; line-height: 140%; }
+        .sample-h4-mobile { font-size: 20px; font-weight: 600; line-height: 140%; }
+
+        .sample-body-large { font-size: 18px; font-weight: 400; line-height: 160%; }
+        .sample-body-regular { font-size: 16px; font-weight: 400; line-height: 160%; }
+        .sample-body-italic { font-size: 16px; font-weight: 400; font-style: italic; line-height: 160%; }
+        .sample-body-bold { font-size: 16px; font-weight: 700; line-height: 150%; }
+        .sample-body-small { font-size: 14px; font-weight: 400; line-height: 150%; }
+
+        .sample-caption { font-size: 12px; font-weight: 400; line-height: 140%; color: var(--color-text-muted); }
+        .sample-label { font-size: 12px; font-weight: 500; line-height: 140%; }
+        .sample-button { font-size: 14px; font-weight: 500; letter-spacing: 0.5px; }
+        .sample-menu { font-size: 14px; font-weight: 500; letter-spacing: 0.5px; text-transform: uppercase; }
+
+        .sample-key-numbers { font-size: 48px; font-weight: 700; }
+
+        /* ==================== INFO BOX ==================== */
+        .info-box {
+            background: var(--color-muted);
+            border-radius: 12px;
+            padding: 24px;
+            margin-bottom: 32px;
+            display: flex;
+            gap: 16px;
+            align-items: flex-start;
+        }
+
+        .info-box-icon {
+            color: var(--color-warning);
+            flex-shrink: 0;
+        }
+
+        .info-box-content {
+            flex: 1;
+        }
+
+        .info-box-title {
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .info-box-text {
+            font-size: 14px;
+            color: var(--color-text-gray);
+            line-height: 1.6;
+        }
+
+        /* ==================== CODE BOX ==================== */
+        .code-box {
+            background: var(--color-text-dark);
+            border-radius: 12px;
+            padding: 24px;
+            margin-top: 32px;
+        }
+
+        .code-title {
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--color-text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 16px;
+        }
+
+        .code-content {
+            font-family: 'SF Mono', 'Monaco', 'Consolas', monospace;
+            font-size: 13px;
+            color: #E5E7EB;
+            line-height: 1.8;
+        }
+
+        .code-comment {
+            color: var(--color-text-muted);
+        }
+
+        .code-value {
+            color: #7C3AED;
+        }
+
+        .code-property {
+            color: #10B981;
+        }
+    </style>
+</head>
+<body>
+
+<div class="page-header">
+    <h1 class="page-title">typography</h1>
+    <div class="page-divider"></div>
+</div>
+
+<!-- ==================== INFO BOX ==================== -->
+<div class="info-box">
+    <svg class="info-box-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"></path>
+        <path d="M12 9v4"></path>
+        <path d="M12 17h.01"></path>
+    </svg>
+    <div class="info-box-content">
+        <p class="info-box-title">Police principale</p>
+        <p class="info-box-text">
+            La police utilisée est <strong>Poppins</strong> (Google Fonts).<br>
+            Les tailles sont basées sur le thème WordPress CapitaineWP et utilisent le système "fluid" pour le responsive.
+        </p>
+    </div>
+</div>
+
+<!-- ==================== TYPEFACE ==================== -->
+<div class="section">
+    <h2 class="section-title">Typeface</h2>
+    
+    <div class="typeface-card">
+        <p class="typeface-name">Poppins</p>
+        <p class="typeface-preview">Aa</p>
+        <p class="typeface-alphabet">abcdefghijklmnopqrstuvwxyz</p>
+        <div class="typeface-weights">
+            <span class="weight-item weight-item--bold">Bold</span>
+            <span class="weight-item weight-item--semibold">Semi bold</span>
+            <span class="weight-item weight-item--medium">Medium</span>
+            <span class="weight-item weight-item--regular">Regular</span>
+        </div>
+    </div>
+</div>
+
+<div class="section-divider"></div>
+
+<!-- ==================== TYPE SCALE TABLE ==================== -->
+<div class="section">
+    <h2 class="section-title">Type Scale</h2>
+    
+    <table class="type-table">
+        <thead>
+            <tr>
+                <th style="width: 140px;">Style</th>
+                <th style="width: 100px;">Desktop</th>
+                <th style="width: 100px;">Mobile</th>
+                <th style="width: 100px;">Weight</th>
+                <th style="width: 100px;">Line Height</th>
+                <th style="width: 120px;">Letter Spacing</th>
+                <th>Preview</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><span class="style-name">Heading H1</span></td>
+                <td><span class="style-specs">48px</span></td>
+                <td><span class="style-specs">32px</span></td>
+                <td><span class="style-specs">Bold 700</span></td>
+                <td><span class="style-specs">120%</span></td>
+                <td><span class="style-specs">0</span></td>
+                <td><span style="font-size: 32px; font-weight: 700;">Jurible</span></td>
+            </tr>
+            <tr>
+                <td><span class="style-name">Heading H2</span></td>
+                <td><span class="style-specs">40px</span></td>
+                <td><span class="style-specs">28px</span></td>
+                <td><span class="style-specs">Bold 700</span></td>
+                <td><span class="style-specs">130%</span></td>
+                <td><span class="style-specs">0</span></td>
+                <td><span style="font-size: 28px; font-weight: 700;">Jurible</span></td>
+            </tr>
+            <tr>
+                <td><span class="style-name">Heading H3</span></td>
+                <td><span class="style-specs">30px</span></td>
+                <td><span class="style-specs">20px</span></td>
+                <td><span class="style-specs">SemiBold 600</span></td>
+                <td><span class="style-specs">140%</span></td>
+                <td><span class="style-specs">0</span></td>
+                <td><span style="font-size: 24px; font-weight: 600;">Jurible</span></td>
+            </tr>
+            <tr>
+                <td><span class="style-name">Heading H4</span></td>
+                <td><span class="style-specs">20px</span></td>
+                <td><span class="style-specs">20px</span></td>
+                <td><span class="style-specs">SemiBold 600</span></td>
+                <td><span class="style-specs">140%</span></td>
+                <td><span class="style-specs">0</span></td>
+                <td><span style="font-size: 20px; font-weight: 600;">Jurible</span></td>
+            </tr>
+            <tr>
+                <td><span class="style-name">Body Large</span></td>
+                <td><span class="style-specs">18px</span></td>
+                <td><span class="style-specs">18px</span></td>
+                <td><span class="style-specs">Regular 400</span></td>
+                <td><span class="style-specs">160%</span></td>
+                <td><span class="style-specs">0</span></td>
+                <td><span style="font-size: 18px; font-weight: 400;">Corps de texte</span></td>
+            </tr>
+            <tr>
+                <td><span class="style-name">Body Regular</span></td>
+                <td><span class="style-specs">16px</span></td>
+                <td><span class="style-specs">16px</span></td>
+                <td><span class="style-specs">Regular 400</span></td>
+                <td><span class="style-specs">160%</span></td>
+                <td><span class="style-specs">0</span></td>
+                <td><span style="font-size: 16px; font-weight: 400;">Corps de texte</span></td>
+            </tr>
+            <tr>
+                <td><span class="style-name">Body Italic</span></td>
+                <td><span class="style-specs">16px</span></td>
+                <td><span class="style-specs">16px</span></td>
+                <td><span class="style-specs">Regular 400</span></td>
+                <td><span class="style-specs">160%</span></td>
+                <td><span class="style-specs">0</span></td>
+                <td><span style="font-size: 16px; font-weight: 400; font-style: italic;">Corps de texte</span></td>
+            </tr>
+            <tr>
+                <td><span class="style-name">Body Bold</span></td>
+                <td><span class="style-specs">16px</span></td>
+                <td><span class="style-specs">16px</span></td>
+                <td><span class="style-specs">Bold 700</span></td>
+                <td><span class="style-specs">150%</span></td>
+                <td><span class="style-specs">0</span></td>
+                <td><span style="font-size: 16px; font-weight: 700;">Corps de texte</span></td>
+            </tr>
+            <tr>
+                <td><span class="style-name">Body Small</span></td>
+                <td><span class="style-specs">14px</span></td>
+                <td><span class="style-specs">14px</span></td>
+                <td><span class="style-specs">Regular 400</span></td>
+                <td><span class="style-specs">150%</span></td>
+                <td><span class="style-specs">0</span></td>
+                <td><span style="font-size: 14px; font-weight: 400;">Corps de texte</span></td>
+            </tr>
+            <tr>
+                <td><span class="style-name">Caption</span></td>
+                <td><span class="style-specs">12px</span></td>
+                <td><span class="style-specs">12px</span></td>
+                <td><span class="style-specs">Regular 400</span></td>
+                <td><span class="style-specs">140%</span></td>
+                <td><span class="style-specs">0</span></td>
+                <td><span style="font-size: 12px; font-weight: 400; color: #9CA3AF;">Légende</span></td>
+            </tr>
+            <tr>
+                <td><span class="style-name">Label</span></td>
+                <td><span class="style-specs">12px</span></td>
+                <td><span class="style-specs">12px</span></td>
+                <td><span class="style-specs">Medium 500</span></td>
+                <td><span class="style-specs">140%</span></td>
+                <td><span class="style-specs">0</span></td>
+                <td><span style="font-size: 12px; font-weight: 500;">Label</span></td>
+            </tr>
+            <tr>
+                <td><span class="style-name">Button</span></td>
+                <td><span class="style-specs">14px</span></td>
+                <td><span class="style-specs">14px</span></td>
+                <td><span class="style-specs">Medium 500</span></td>
+                <td><span class="style-specs">100%</span></td>
+                <td><span class="style-specs">0.5px</span></td>
+                <td><span style="font-size: 14px; font-weight: 500; letter-spacing: 0.5px;">Button</span></td>
+            </tr>
+            <tr>
+                <td><span class="style-name">Menu</span></td>
+                <td><span class="style-specs">14px</span></td>
+                <td><span class="style-specs">14px</span></td>
+                <td><span class="style-specs">Medium 500</span></td>
+                <td><span class="style-specs">100%</span></td>
+                <td><span class="style-specs">0.5px</span></td>
+                <td><span style="font-size: 14px; font-weight: 500; letter-spacing: 0.5px; text-transform: uppercase;">Menu</span></td>
+            </tr>
+            <tr>
+                <td><span class="style-name">Key Numbers</span></td>
+                <td><span class="style-specs">48px</span></td>
+                <td><span class="style-specs">32px</span></td>
+                <td><span class="style-specs">Bold 700</span></td>
+                <td><span class="style-specs">100%</span></td>
+                <td><span class="style-specs">0</span></td>
+                <td><span style="font-size: 32px; font-weight: 700;">25 000+</span></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<div class="section-divider"></div>
+
+<!-- ==================== RESPONSIVE COMPARISON ==================== -->
+<div class="section">
+    <h2 class="section-title">Desktop vs Mobile</h2>
+    
+    <div class="responsive-grid">
+        <!-- Desktop -->
+        <div class="responsive-column">
+            <p class="responsive-title">Desktop</p>
+            
+            <p class="responsive-section-label">a) Main styles</p>
+            
+            <div class="type-sample">
+                <p class="sample-h1-desktop">H1 – 48 px</p>
+            </div>
+            <div class="type-sample">
+                <p class="sample-h2-desktop">H2 – 40 px</p>
+            </div>
+            <div class="type-sample">
+                <p class="sample-h3-desktop">H3 – 30 px</p>
+            </div>
+            <div class="type-sample">
+                <p class="sample-h4-desktop">H4 – 20 px</p>
+            </div>
+            <div class="type-sample">
+                <p class="sample-body-large">Body Large – 18 px</p>
+            </div>
+            <div class="type-sample">
+                <p class="sample-body-regular">Body regular – 16 px</p>
+            </div>
+            <div class="type-sample">
+                <p class="sample-body-italic">Body Italic – 16 px</p>
+            </div>
+            <div class="type-sample">
+                <p class="sample-body-bold">Body bold – 16 px</p>
+            </div>
+            <div class="type-sample">
+                <p class="sample-body-small">Body small – 14 px</p>
+            </div>
+            
+            <p class="responsive-section-label">b) Custom</p>
+            
+            <div class="type-sample">
+                <p class="sample-key-numbers">key-numbers</p>
+            </div>
+            <div class="type-sample">
+                <p class="sample-caption">Caption</p>
+            </div>
+            <div class="type-sample">
+                <p class="sample-label">Label – 12 px</p>
+            </div>
+            <div class="type-sample">
+                <p class="sample-button">Button</p>
+            </div>
+            <div class="type-sample">
+                <p class="sample-menu">Menu</p>
+            </div>
+        </div>
+
+        <!-- Mobile -->
+        <div class="responsive-column">
+            <p class="responsive-title">Mobile</p>
+            
+            <p class="responsive-section-label">a) Main styles</p>
+            
+            <div class="type-sample">
+                <p class="sample-h1-mobile">H1 – 32 px</p>
+            </div>
+            <div class="type-sample">
+                <p class="sample-h2-mobile">H2 – 28 px</p>
+            </div>
+            <div class="type-sample">
+                <p class="sample-h3-mobile">H3 – 20 px</p>
+            </div>
+            <div class="type-sample">
+                <p class="sample-h4-mobile">H4 – 20 px</p>
+            </div>
+            <div class="type-sample">
+                <p class="sample-body-large">Body Large – 18 px</p>
+            </div>
+            <div class="type-sample">
+                <p class="sample-body-regular">Body regular – 16 px</p>
+            </div>
+            <div class="type-sample">
+                <p class="sample-body-italic">Body Italic – 16 px</p>
+            </div>
+            <div class="type-sample">
+                <p class="sample-body-bold">Body bold – 16 px</p>
+            </div>
+            <div class="type-sample">
+                <p class="sample-body-small">Body small – 14 px</p>
+            </div>
+            
+            <p class="responsive-section-label">b) Custom</p>
+            
+            <div class="type-sample">
+                <p class="sample-key-numbers" style="font-size: 32px;">key-numbers</p>
+            </div>
+            <div class="type-sample">
+                <p class="sample-caption">Caption</p>
+            </div>
+            <div class="type-sample">
+                <p class="sample-label">Label – 12 px</p>
+            </div>
+            <div class="type-sample">
+                <p class="sample-button">Button</p>
+            </div>
+            <div class="type-sample">
+                <p class="sample-menu">Menu</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="section-divider"></div>
+
+<!-- ==================== CODE FOR DEV ==================== -->
+<div class="code-box">
+    <p class="code-title">📋 CSS Fluid Typography (pour le dev)</p>
+    <div class="code-content">
+        <span class="code-comment">/* Typographie Fluid avec clamp() */</span><br>
+        <span class="code-comment">/* Format: clamp(mobile, preferred, desktop) */</span><br><br>
+        
+        <span class="code-property">--font-h1:</span> <span class="code-value">clamp(32px, 2rem + 2vw, 48px)</span>;<br>
+        <span class="code-property">--font-h2:</span> <span class="code-value">clamp(28px, 1.75rem + 1.5vw, 40px)</span>;<br>
+        <span class="code-property">--font-h3:</span> <span class="code-value">clamp(20px, 1.25rem + 1vw, 30px)</span>;<br>
+        <span class="code-property">--font-h4:</span> <span class="code-value">20px</span>;<br>
+        <span class="code-property">--font-body-large:</span> <span class="code-value">18px</span>;<br>
+        <span class="code-property">--font-body:</span> <span class="code-value">16px</span>;<br>
+        <span class="code-property">--font-body-small:</span> <span class="code-value">14px</span>;<br>
+        <span class="code-property">--font-caption:</span> <span class="code-value">12px</span>;<br><br>
+
+        <span class="code-comment">/* Line Heights */</span><br>
+        <span class="code-property">--lh-heading:</span> <span class="code-value">1.2</span>; <span class="code-comment">/* 120% */</span><br>
+        <span class="code-property">--lh-subheading:</span> <span class="code-value">1.4</span>; <span class="code-comment">/* 140% */</span><br>
+        <span class="code-property">--lh-body:</span> <span class="code-value">1.6</span>; <span class="code-comment">/* 160% */</span><br>
+    </div>
+</div>
+
+</body>
+</html>

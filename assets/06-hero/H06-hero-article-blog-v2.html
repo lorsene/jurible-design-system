@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jurible — Hero Article (Version Gradient)</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bordeaux: #B0001D;
+    --rouge: #DC2626;
+    --violet: #7C3AED;
+    --gradient-jurible: linear-gradient(135deg, #B0001D 0%, #DC2626 45%, #7C3AED 100%);
+    --white: #FFFFFF;
+    --white-90: rgba(255,255,255,0.9);
+    --white-70: rgba(255,255,255,0.7);
+    --white-50: rgba(255,255,255,0.5);
+    --white-20: rgba(255,255,255,0.2);
+    --white-10: rgba(255,255,255,0.1);
+    --font: 'Poppins', sans-serif;
+    --radius-sm: 8px;
+    --radius-md: 12px;
+    --radius-lg: 16px;
+    --radius-xl: 20px;
+    --radius-full: 9999px;
+  }
+
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: var(--font); background: #F8F7FC; color: var(--white); }
+
+  .section-label {
+    text-align: center;
+    padding: 48px 24px 24px;
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+  }
+  .section-label span {
+    display: inline-block;
+    background: var(--gradient-jurible);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .device-label {
+    text-align: center;
+    padding: 12px;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: #9CA3AF;
+  }
+  .separator {
+    max-width: 800px;
+    margin: 0 auto;
+    border: none;
+    border-top: 1px dashed #E5E7EB;
+  }
+
+  /* ══════════════════════════════════════════════
+     HERO ARTICLE — GRADIENT JURIBLE
+     #B0001D → #DC2626 → #7C3AED
+  ══════════════════════════════════════════════ */
+  .hero-article-gradient {
+    position: relative;
+    overflow: hidden;
+    padding: 80px 24px 0;
+    background: linear-gradient(135deg, #B0001D 0%, #DC2626 45%, #7C3AED 100%);
+  }
+  .hero-article-gradient::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(ellipse at 15% 25%, rgba(176,0,29,0.3) 0%, transparent 45%),
+                radial-gradient(ellipse at 85% 75%, rgba(124,58,237,0.35) 0%, transparent 45%),
+                radial-gradient(ellipse at 50% 50%, rgba(220,38,38,0.15) 0%, transparent 55%);
+    pointer-events: none;
+  }
+  .hero-article-gradient::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 120px;
+    background: linear-gradient(to top, #F8F7FC 0%, transparent 100%);
+    pointer-events: none;
+    z-index: 2;
+  }
+
+  .hero-article-gradient .hero-inner {
+    position: relative;
+    z-index: 1;
+    max-width: 900px;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  .hero-article-gradient .badge-category {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 16px;
+    background: var(--white-20);
+    backdrop-filter: blur(10px);
+    border: 1px solid var(--white-20);
+    border-radius: var(--radius-full);
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--white);
+    text-decoration: none;
+    transition: all 0.3s ease;
+    animation: fadeInDown 0.6s ease both;
+  }
+  .hero-article-gradient .badge-category:hover {
+    background: rgba(255,255,255,0.3);
+    transform: translateY(-1px);
+  }
+
+  .hero-article-gradient h1 {
+    margin-top: 24px;
+    font-size: 42px;
+    font-weight: 800;
+    line-height: 1.15;
+    color: var(--white);
+    text-shadow: 0 2px 20px rgba(0,0,0,0.12);
+    animation: fadeInUp 0.7s ease 0.1s both;
+  }
+
+  .hero-article-gradient .meta-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    margin-top: 24px;
+    flex-wrap: wrap;
+    animation: fadeInUp 0.7s ease 0.2s both;
+  }
+  .hero-article-gradient .author-block {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .hero-article-gradient .author-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: var(--white-20);
+    border: 2px solid var(--white-50);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--white);
+  }
+  .hero-article-gradient .author-info { text-align: left; }
+  .hero-article-gradient .author-name { font-size: 14px; font-weight: 600; color: var(--white); }
+  .hero-article-gradient .author-role { font-size: 12px; color: var(--white-70); }
+  .hero-article-gradient .meta-dot { width: 4px; height: 4px; border-radius: 50%; background: var(--white-50); }
+  .hero-article-gradient .meta-item {
+    font-size: 13px;
+    color: var(--white-70);
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+  .hero-article-gradient .meta-item svg { width: 14px; height: 14px; opacity: 0.7; }
+
+  .hero-article-gradient .featured-image-wrap {
+    margin-top: 40px;
+    position: relative;
+    z-index: 3;
+    animation: fadeInUp 0.8s ease 0.3s both;
+  }
+
+  .hero-article-gradient .cta-bar {
+    margin-top: 28px;
+    padding: 14px 24px;
+    background: var(--white-10);
+    backdrop-filter: blur(10px);
+    border: 1px solid var(--white-10);
+    border-radius: var(--radius-lg);
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 13px;
+    color: var(--white-70);
+    animation: fadeInUp 0.7s ease 0.25s both;
+  }
+  .hero-article-gradient .cta-bar a {
+    color: var(--white);
+    font-weight: 600;
+    text-decoration: none;
+    border-bottom: 1px solid var(--white-50);
+    transition: all 0.2s;
+  }
+  .hero-article-gradient .cta-bar a:hover { border-color: var(--white); }
+
+  /* MOBILE */
+  .mobile-frame {
+    max-width: 390px;
+    margin: 0 auto;
+    border-radius: 24px;
+    overflow: hidden;
+    box-shadow: 0 8px 40px rgba(0,0,0,0.12);
+    border: 1px solid #E5E7EB;
+    background: #F8F7FC;
+  }
+  .mobile-frame .hero-article-gradient { padding: 48px 20px 0; }
+  .mobile-frame .hero-article-gradient h1 { font-size: 26px; line-height: 1.2; }
+  .mobile-frame .hero-article-gradient .meta-row { gap: 8px; }
+  .mobile-frame .hero-article-gradient .meta-dot { display: none; }
+  .mobile-frame .hero-article-gradient .meta-item { font-size: 12px; }
+  .mobile-frame .hero-article-gradient .author-avatar { width: 34px; height: 34px; font-size: 14px; }
+  .mobile-frame .hero-article-gradient .author-name { font-size: 13px; }
+  .mobile-frame .hero-article-gradient .cta-bar {
+    padding: 12px 16px;
+    font-size: 12px;
+    gap: 8px;
+    flex-direction: column;
+    text-align: center;
+  }
+
+  /* PLACEHOLDER IMAGE */
+  .img-placeholder {
+    width: 100%;
+    max-width: 860px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    aspect-ratio: 16/9;
+    border-radius: var(--radius-xl) var(--radius-xl) 0 0;
+    background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.04) 100%);
+    border: 1px solid var(--white-10);
+    box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+    color: var(--white-50);
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 1px;
+  }
+  .mobile-frame .img-placeholder {
+    border-radius: var(--radius-md) var(--radius-md) 0 0;
+    font-size: 12px;
+  }
+
+  .hero-article-gradient .grain {
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+    background-size: 128px 128px;
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.4;
+  }
+
+  @keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes fadeInDown {
+    from { opacity: 0; transform: translateY(-12px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+</style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════
+     E1 — ARTICLE AVEC CTA (GRADIENT JURIBLE)
+     ═══════════════════════════════════════════ -->
+
+<p class="section-label"><span>E1 — Article avec CTA (Gradient Jurible)</span></p>
+
+<p class="device-label">Desktop</p>
+<section class="hero-article-gradient">
+  <div class="grain"></div>
+  <div class="hero-inner">
+    <a href="#" class="badge-category">📝 Méthodologie</a>
+    <h1>Comment rédiger une fiche d'arrêt parfaite en 5 étapes</h1>
+    <div class="meta-row">
+      <div class="author-block">
+        <div class="author-avatar">RL</div>
+        <div class="author-info">
+          <div class="author-name">Raphaël Music</div>
+          <div class="author-role">Enseignant en Droit</div>
+        </div>
+      </div>
+      <span class="meta-dot"></span>
+      <span class="meta-item">
+        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+        15 janvier 2025
+      </span>
+      <span class="meta-dot"></span>
+      <span class="meta-item">
+        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+        8 min de lecture
+      </span>
+    </div>
+    <div class="cta-bar">
+      🎓 Accédez à tous nos cours et ressources —
+      <a href="#">Rejoindre l'Académie · 29€/mois →</a>
+    </div>
+    <div class="featured-image-wrap">
+      <div class="img-placeholder">IMAGE À LA UNE · 16:9</div>
+    </div>
+  </div>
+</section>
+
+<br><br>
+<p class="device-label">Mobile</p>
+<div class="mobile-frame">
+  <section class="hero-article-gradient">
+    <div class="grain"></div>
+    <div class="hero-inner">
+      <a href="#" class="badge-category">📝 Méthodologie</a>
+      <h1>Comment rédiger une fiche d'arrêt parfaite en 5 étapes</h1>
+      <div class="meta-row">
+        <div class="author-block">
+          <div class="author-avatar">RL</div>
+          <div class="author-info">
+            <div class="author-name">Raphaël Music</div>
+            <div class="author-role">Enseignant en Droit</div>
+          </div>
+        </div>
+        <span class="meta-item">
+          <svg fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+          15 janv. 2025
+        </span>
+        <span class="meta-item">
+          <svg fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+          8 min
+        </span>
+      </div>
+      <div class="cta-bar">
+        🎓 Tous nos cours et ressources —
+        <a href="#">Rejoindre l'Académie →</a>
+      </div>
+      <div class="featured-image-wrap">
+        <div class="img-placeholder">IMAGE · 16:9</div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<br>
+<hr class="separator">
+<br>
+
+<!-- ═══════════════════════════════════════════
+     E2 — ARTICLE SANS CTA (GRADIENT JURIBLE)
+     ═══════════════════════════════════════════ -->
+
+<p class="section-label"><span>E2 — Article sans CTA (Gradient Jurible)</span></p>
+
+<p class="device-label">Desktop</p>
+<section class="hero-article-gradient">
+  <div class="grain"></div>
+  <div class="hero-inner">
+    <a href="#" class="badge-category">⚖️ Actualités juridiques</a>
+    <h1>Réforme du droit des contrats 2025 : ce qui change pour les étudiants</h1>
+    <div class="meta-row">
+      <div class="author-block">
+        <div class="author-avatar">MB</div>
+        <div class="author-info">
+          <div class="author-name">Marie Blanchard</div>
+          <div class="author-role">Rédactrice juridique</div>
+        </div>
+      </div>
+      <span class="meta-dot"></span>
+      <span class="meta-item">
+        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+        3 février 2025
+      </span>
+      <span class="meta-dot"></span>
+      <span class="meta-item">
+        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+        12 min de lecture
+      </span>
+    </div>
+    <div class="featured-image-wrap">
+      <div class="img-placeholder">IMAGE À LA UNE · 16:9</div>
+    </div>
+  </div>
+</section>
+
+<br><br>
+<p class="device-label">Mobile</p>
+<div class="mobile-frame">
+  <section class="hero-article-gradient">
+    <div class="grain"></div>
+    <div class="hero-inner">
+      <a href="#" class="badge-category">⚖️ Actualités juridiques</a>
+      <h1>Réforme du droit des contrats 2025 : ce qui change pour les étudiants</h1>
+      <div class="meta-row">
+        <div class="author-block">
+          <div class="author-avatar">MB</div>
+          <div class="author-info">
+            <div class="author-name">Marie Blanchard</div>
+            <div class="author-role">Rédactrice juridique</div>
+          </div>
+        </div>
+        <span class="meta-item">
+          <svg fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+          3 fév. 2025
+        </span>
+        <span class="meta-item">
+          <svg fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+          12 min
+        </span>
+      </div>
+      <div class="featured-image-wrap">
+        <div class="img-placeholder">IMAGE · 16:9</div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<br><br>
+
+</body>
+</html>

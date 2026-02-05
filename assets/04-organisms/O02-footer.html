@@ -1,0 +1,845 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jurible Design System — Footer</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --color-primary: #B0001D;
+            --color-primary-hover: #DC2626;
+            --color-secondary: #7C3AED;
+            --color-text-dark: #1A1A1A;
+            --color-text-gray: #4A4A4A;
+            --color-text-muted: #9CA3AF;
+            --color-background: #FFFFFF;
+            --color-muted: #F3F4F6;
+            --color-border: #E5E7EB;
+
+            --space-xs: 8px;
+            --space-sm: 16px;
+            --space-md: 24px;
+            --space-lg: 32px;
+            --space-xl: 48px;
+            --space-2xl: 64px;
+
+            --radius-sm: 6px;
+            --radius-md: 8px;
+            --radius-lg: 12px;
+            --radius-xl: 16px;
+            --radius-full: 9999px;
+
+            --font-family: 'Poppins', sans-serif;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: var(--font-family);
+            background: var(--color-background);
+            color: var(--color-text-dark);
+            padding: var(--space-xl) 80px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .page-header { margin-bottom: var(--space-xl); }
+        .page-title { font-size: 48px; font-weight: 700; margin-bottom: var(--space-xs); }
+        .page-divider { height: 3px; width: 120px; background: linear-gradient(90deg, #B0001D 0%, #DC2626 50%, #7C3AED 100%); border-radius: var(--radius-full); }
+
+        .section { margin-bottom: var(--space-xl); }
+        .section-title { font-size: 24px; font-weight: 600; margin-bottom: var(--space-xs); }
+        .section-subtitle { font-size: 14px; color: var(--color-text-muted); margin-bottom: var(--space-md); }
+        .section-divider { height: 1px; background: var(--color-border); margin: var(--space-xl) 0; }
+
+        .component-label { font-size: 11px; color: var(--color-text-muted); text-transform: uppercase; letter-spacing: 0.5px; font-weight: 600; margin-bottom: var(--space-sm); display: inline-block; background: var(--color-muted); padding: 4px 8px; border-radius: 4px; }
+
+        /* ==================== FOOTER DESKTOP ==================== */
+        .footer {
+            background: #1A1A1A;
+            color: white;
+            padding: var(--space-2xl) var(--space-xl);
+            border-radius: var(--radius-xl);
+        }
+
+        .footer__top {
+            display: grid;
+            grid-template-columns: 1fr auto;
+            gap: var(--space-xl);
+            align-items: start;
+            margin-bottom: var(--space-xl);
+            padding-bottom: var(--space-xl);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .footer__brand {
+            max-width: 400px;
+        }
+
+        .footer__logo {
+            font-size: 32px;
+            font-weight: 700;
+            color: white;
+            margin-bottom: var(--space-sm);
+        }
+
+        .footer__tagline {
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.7);
+            line-height: 1.6;
+            margin-bottom: var(--space-md);
+        }
+
+        .footer__social {
+            display: flex;
+            gap: 12px;
+        }
+
+        .footer__social-link {
+            width: 44px;
+            height: 44px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: var(--radius-full);
+            color: white;
+            text-decoration: none;
+            transition: all 0.15s ease;
+        }
+
+        .footer__social-link:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+        }
+
+        .footer__social-link svg {
+            width: 20px;
+            height: 20px;
+            fill: currentColor;
+        }
+
+        .footer__followers {
+            font-size: 13px;
+            color: rgba(255, 255, 255, 0.6);
+            margin-top: var(--space-sm);
+        }
+
+        .footer__followers strong {
+            color: white;
+            font-weight: 600;
+        }
+
+        /* Newsletter */
+        .footer__newsletter {
+            max-width: 360px;
+        }
+
+        .footer__newsletter-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: white;
+            margin-bottom: var(--space-xs);
+        }
+
+        .footer__newsletter-text {
+            font-size: 13px;
+            color: rgba(255, 255, 255, 0.6);
+            margin-bottom: var(--space-sm);
+            line-height: 1.5;
+        }
+
+        .footer__newsletter-form {
+            display: flex;
+            gap: var(--space-xs);
+        }
+
+        .footer__newsletter-input {
+            flex: 1;
+            padding: 12px 16px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: var(--radius-md);
+            color: white;
+            font-family: var(--font-family);
+            font-size: 14px;
+            outline: none;
+            transition: all 0.15s ease;
+        }
+
+        .footer__newsletter-input::placeholder {
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        .footer__newsletter-input:focus {
+            border-color: rgba(255, 255, 255, 0.4);
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        .footer__newsletter-btn {
+            padding: 12px 20px;
+            background: linear-gradient(135deg, #B0001D 0%, #DC2626 50%, #7C3AED 100%);
+            color: white;
+            border: none;
+            border-radius: var(--radius-md);
+            font-family: var(--font-family);
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.15s ease;
+            white-space: nowrap;
+        }
+
+        .footer__newsletter-btn:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 14px rgba(176, 0, 29, 0.3);
+        }
+
+        /* Columns */
+        .footer__columns {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: var(--space-xl);
+            margin-bottom: var(--space-xl);
+        }
+
+        .footer__column-title {
+            font-size: 14px;
+            font-weight: 600;
+            color: white;
+            margin-bottom: var(--space-md);
+        }
+
+        .footer__links {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .footer__link {
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            transition: color 0.15s ease;
+        }
+
+        .footer__link:hover {
+            color: white;
+        }
+
+        .footer__link--cta {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 12px;
+            font-weight: 600;
+            color: white;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-top: 4px;
+        }
+
+        .footer__link--cta:hover {
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        /* Contact info */
+        .footer__contact-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 12px;
+            line-height: 1.5;
+        }
+
+        .footer__contact-item svg {
+            width: 18px;
+            height: 18px;
+            fill: rgba(255, 255, 255, 0.5);
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+
+        .footer__contact-link {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            transition: color 0.15s ease;
+        }
+
+        .footer__contact-link:hover {
+            color: white;
+        }
+
+        /* Bottom */
+        .footer__divider {
+            height: 1px;
+            background: rgba(255, 255, 255, 0.1);
+            margin-bottom: var(--space-md);
+        }
+
+        .footer__bottom {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: var(--space-sm);
+        }
+
+        .footer__legal {
+            display: flex;
+            align-items: center;
+            gap: var(--space-md);
+            flex-wrap: wrap;
+        }
+
+        .footer__legal-link {
+            font-size: 13px;
+            color: rgba(255, 255, 255, 0.5);
+            text-decoration: none;
+            transition: color 0.15s ease;
+        }
+
+        .footer__legal-link:hover {
+            color: white;
+        }
+
+        .footer__copyright {
+            font-size: 13px;
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        /* ==================== FOOTER MOBILE ==================== */
+        .footer-mobile {
+            background: #1A1A1A;
+            color: white;
+            padding: var(--space-lg) var(--space-md);
+            border-radius: var(--radius-xl);
+            max-width: 375px;
+        }
+
+        .footer-mobile__brand {
+            text-align: center;
+            margin-bottom: var(--space-lg);
+            padding-bottom: var(--space-lg);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .footer-mobile__logo {
+            font-size: 28px;
+            font-weight: 700;
+            color: white;
+            margin-bottom: var(--space-xs);
+        }
+
+        .footer-mobile__tagline {
+            font-size: 13px;
+            color: rgba(255, 255, 255, 0.7);
+            line-height: 1.5;
+            margin-bottom: var(--space-md);
+        }
+
+        .footer-mobile__social {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+        }
+
+        .footer-mobile__followers {
+            font-size: 13px;
+            color: rgba(255, 255, 255, 0.6);
+            text-align: center;
+            margin-top: var(--space-sm);
+        }
+
+        .footer-mobile__followers strong {
+            color: white;
+            font-weight: 600;
+        }
+
+        /* Newsletter mobile */
+        .footer-mobile__newsletter {
+            margin-bottom: var(--space-lg);
+            padding-bottom: var(--space-lg);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .footer-mobile__newsletter-title {
+            font-size: 15px;
+            font-weight: 600;
+            color: white;
+            margin-bottom: var(--space-xs);
+        }
+
+        .footer-mobile__newsletter-text {
+            font-size: 13px;
+            color: rgba(255, 255, 255, 0.6);
+            margin-bottom: var(--space-sm);
+            line-height: 1.5;
+        }
+
+        .footer-mobile__newsletter-form {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-xs);
+        }
+
+        .footer-mobile__newsletter-input {
+            width: 100%;
+            padding: 14px 16px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: var(--radius-md);
+            color: white;
+            font-family: var(--font-family);
+            font-size: 14px;
+            outline: none;
+        }
+
+        .footer-mobile__newsletter-input::placeholder {
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        .footer-mobile__newsletter-btn {
+            width: 100%;
+            padding: 14px 20px;
+            background: linear-gradient(135deg, #B0001D 0%, #DC2626 50%, #7C3AED 100%);
+            color: white;
+            border: none;
+            border-radius: var(--radius-md);
+            font-family: var(--font-family);
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        /* Accordéons mobile */
+        .footer-mobile__accordion {
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .footer-mobile__accordion-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: var(--space-sm) 0;
+            cursor: pointer;
+        }
+
+        .footer-mobile__accordion-title {
+            font-size: 14px;
+            font-weight: 600;
+            color: white;
+        }
+
+        .footer-mobile__accordion-icon {
+            font-size: 12px;
+            color: rgba(255, 255, 255, 0.5);
+            transition: transform 0.2s ease;
+        }
+
+        .footer-mobile__accordion--open .footer-mobile__accordion-icon {
+            transform: rotate(180deg);
+        }
+
+        .footer-mobile__accordion-content {
+            display: none;
+            padding-bottom: var(--space-sm);
+        }
+
+        .footer-mobile__accordion--open .footer-mobile__accordion-content {
+            display: block;
+        }
+
+        .footer-mobile__links {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .footer-mobile__link {
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+        }
+
+        .footer-mobile__link--cta {
+            font-size: 11px;
+            font-weight: 600;
+            color: white;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-top: 4px;
+        }
+
+        /* Contact mobile */
+        .footer-mobile__contact {
+            padding: var(--space-sm) 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .footer-mobile__contact-title {
+            font-size: 14px;
+            font-weight: 600;
+            color: white;
+            margin-bottom: var(--space-sm);
+        }
+
+        .footer-mobile__contact-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            font-size: 13px;
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 10px;
+            line-height: 1.5;
+        }
+
+        .footer-mobile__contact-item svg {
+            width: 16px;
+            height: 16px;
+            fill: rgba(255, 255, 255, 0.5);
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+
+        /* Bottom mobile */
+        .footer-mobile__bottom {
+            padding-top: var(--space-md);
+        }
+
+        .footer-mobile__legal {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 8px var(--space-sm);
+            margin-bottom: var(--space-sm);
+        }
+
+        .footer-mobile__legal-link {
+            font-size: 12px;
+            color: rgba(255, 255, 255, 0.5);
+            text-decoration: none;
+        }
+
+        .footer-mobile__copyright {
+            font-size: 12px;
+            color: rgba(255, 255, 255, 0.5);
+            text-align: center;
+        }
+
+        /* ==================== TABLES ==================== */
+        .specs-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 13px;
+            margin-top: var(--space-md);
+        }
+
+        .specs-table th {
+            text-align: left;
+            font-size: 11px;
+            font-weight: 600;
+            color: white;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            padding: 12px var(--space-sm);
+            background: var(--color-text-dark);
+        }
+
+        .specs-table th:first-child { border-radius: var(--radius-md) 0 0 0; }
+        .specs-table th:last-child { border-radius: 0 var(--radius-md) 0 0; }
+
+        .specs-table td { padding: 12px var(--space-sm); border-bottom: 1px solid var(--color-border); }
+        .specs-table tr:last-child td { border-bottom: none; }
+        .specs-table code { font-family: 'SF Mono', monospace; font-size: 11px; background: var(--color-muted); padding: 2px 6px; border-radius: 4px; }
+
+        .info-box { background: var(--color-muted); border-radius: var(--radius-lg); padding: var(--space-md); margin-top: var(--space-md); }
+        .info-box__title { font-size: 14px; font-weight: 600; margin-bottom: var(--space-sm); }
+        .info-box ul { font-size: 13px; color: var(--color-text-gray); line-height: 1.8; padding-left: 20px; }
+
+        .preview-row { display: flex; gap: var(--space-xl); flex-wrap: wrap; align-items: flex-start; }
+    </style>
+</head>
+<body>
+
+<div class="page-header">
+    <h1 class="page-title">footer</h1>
+    <div class="page-divider"></div>
+</div>
+
+<!-- ==================== 1. FOOTER DESKTOP ==================== -->
+<div class="section">
+    <h2 class="section-title">1. Footer Desktop</h2>
+    <p class="section-subtitle">Footer complet avec logo, newsletter, 4 colonnes et coordonnées</p>
+    
+    <span class="component-label">Desktop</span>
+    <footer class="footer">
+        <!-- Top: Brand + Newsletter -->
+        <div class="footer__top">
+            <div class="footer__brand">
+                <h3 class="footer__logo">Jurible</h3>
+                <p class="footer__tagline">Plateforme dédiée à la réussite des étudiants en droit depuis 2018 • Conçue à Nice 🇫🇷</p>
+                <div class="footer__social">
+                    <a href="#" class="footer__social-link" aria-label="LinkedIn">
+                        <svg viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+                    </a>
+                    <a href="#" class="footer__social-link" aria-label="Instagram">
+                        <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+                    </a>
+                    <a href="#" class="footer__social-link" aria-label="YouTube">
+                        <svg viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+                    </a>
+                    <a href="#" class="footer__social-link" aria-label="TikTok">
+                        <svg viewBox="0 0 24 24"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/></svg>
+                    </a>
+                </div>
+                <p class="footer__followers">Rejoignez près de <strong>200 000 abonnés</strong> sur nos réseaux</p>
+            </div>
+
+            <div class="footer__newsletter">
+                <h4 class="footer__newsletter-title">Newsletter</h4>
+                <p class="footer__newsletter-text">Recevez nos conseils et actualités pour réussir vos études de droit.</p>
+                <form class="footer__newsletter-form">
+                    <input type="email" class="footer__newsletter-input" placeholder="Votre email">
+                    <button type="submit" class="footer__newsletter-btn">S'inscrire</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Columns -->
+        <div class="footer__columns">
+            <div>
+                <h4 class="footer__column-title">Produits</h4>
+                <div class="footer__links">
+                    <a href="#" class="footer__link">Académie Jurible</a>
+                    <a href="#" class="footer__link">Prépas</a>
+                    <a href="#" class="footer__link">Fiches PDF</a>
+                    <a href="#" class="footer__link">Suite IA</a>
+                    <a href="#" class="footer__link footer__link--cta">VOIR LES FORMULES →</a>
+                </div>
+            </div>
+            <div>
+                <h4 class="footer__column-title">Ressources</h4>
+                <div class="footer__links">
+                    <a href="#" class="footer__link">Blog</a>
+                    <a href="#" class="footer__link">Guides gratuits</a>
+                    <a href="#" class="footer__link">QCM gratuits</a>
+                    <a href="#" class="footer__link">Aide et support</a>
+                    <a href="#" class="footer__link footer__link--cta">VOIR LA MÉTHODOLOGIE →</a>
+                </div>
+            </div>
+            <div>
+                <h4 class="footer__column-title">À propos</h4>
+                <div class="footer__links">
+                    <a href="#" class="footer__link">Notre projet</a>
+                    <a href="#" class="footer__link">Nos enseignants</a>
+                    <a href="#" class="footer__link">Témoignages</a>
+                    <a href="#" class="footer__link">Contact</a>
+                    <a href="#" class="footer__link footer__link--cta">RECRUTEMENT →</a>
+                </div>
+            </div>
+            <div>
+                <h4 class="footer__column-title">Contact</h4>
+                <div class="footer__contact-item">
+                    <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+                    <span>Nice, France</span>
+                </div>
+                <div class="footer__contact-item">
+                    <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+                    <a href="mailto:contact@jurible.com" class="footer__contact-link">contact@jurible.com</a>
+                </div>
+                <div class="footer__contact-item">
+                    <svg viewBox="0 0 24 24"><path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67z"/></svg>
+                    <span>Lun - Ven : 9h - 18h</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Bottom -->
+        <div class="footer__divider"></div>
+        <div class="footer__bottom">
+            <div class="footer__legal">
+                <a href="#" class="footer__legal-link">CGV</a>
+                <a href="#" class="footer__legal-link">Mentions légales</a>
+                <a href="#" class="footer__legal-link">Confidentialité</a>
+                <a href="#" class="footer__legal-link">Cookies</a>
+            </div>
+            <p class="footer__copyright">© 2025 Jurible.com - Tous droits réservés</p>
+        </div>
+    </footer>
+</div>
+
+<div class="section-divider"></div>
+
+<!-- ==================== 2. FOOTER MOBILE ==================== -->
+<div class="section">
+    <h2 class="section-title">2. Footer Mobile</h2>
+    <p class="section-subtitle">Version mobile avec accordéons et newsletter</p>
+    
+    <span class="component-label">Mobile</span>
+    <footer class="footer-mobile">
+        <!-- Brand -->
+        <div class="footer-mobile__brand">
+            <h3 class="footer-mobile__logo">Jurible</h3>
+            <p class="footer-mobile__tagline">Plateforme dédiée à la réussite des étudiants en droit depuis 2018 • Conçue à Nice 🇫🇷</p>
+            <div class="footer-mobile__social">
+                <a href="#" class="footer__social-link" aria-label="LinkedIn">
+                    <svg viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+                </a>
+                <a href="#" class="footer__social-link" aria-label="Instagram">
+                    <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+                </a>
+                <a href="#" class="footer__social-link" aria-label="YouTube">
+                    <svg viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+                </a>
+                <a href="#" class="footer__social-link" aria-label="TikTok">
+                    <svg viewBox="0 0 24 24"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/></svg>
+                </a>
+            </div>
+            <p class="footer-mobile__followers">Rejoignez près de <strong>200 000 abonnés</strong> sur nos réseaux</p>
+        </div>
+
+        <!-- Newsletter -->
+        <div class="footer-mobile__newsletter">
+            <h4 class="footer-mobile__newsletter-title">Newsletter</h4>
+            <p class="footer-mobile__newsletter-text">Recevez nos conseils pour réussir vos études de droit.</p>
+            <form class="footer-mobile__newsletter-form">
+                <input type="email" class="footer-mobile__newsletter-input" placeholder="Votre email">
+                <button type="submit" class="footer-mobile__newsletter-btn">S'inscrire</button>
+            </form>
+        </div>
+
+        <!-- Accordéon: Produits -->
+        <div class="footer-mobile__accordion footer-mobile__accordion--open">
+            <div class="footer-mobile__accordion-header">
+                <span class="footer-mobile__accordion-title">Produits</span>
+                <span class="footer-mobile__accordion-icon">▼</span>
+            </div>
+            <div class="footer-mobile__accordion-content">
+                <div class="footer-mobile__links">
+                    <a href="#" class="footer-mobile__link">Académie Jurible</a>
+                    <a href="#" class="footer-mobile__link">Prépas</a>
+                    <a href="#" class="footer-mobile__link">Fiches PDF</a>
+                    <a href="#" class="footer-mobile__link">Suite IA</a>
+                    <a href="#" class="footer-mobile__link footer-mobile__link--cta">VOIR LES FORMULES →</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Accordéon: Ressources -->
+        <div class="footer-mobile__accordion">
+            <div class="footer-mobile__accordion-header">
+                <span class="footer-mobile__accordion-title">Ressources</span>
+                <span class="footer-mobile__accordion-icon">▼</span>
+            </div>
+            <div class="footer-mobile__accordion-content">
+                <div class="footer-mobile__links">
+                    <a href="#" class="footer-mobile__link">Blog</a>
+                    <a href="#" class="footer-mobile__link">Guides gratuits</a>
+                    <a href="#" class="footer-mobile__link">QCM gratuits</a>
+                    <a href="#" class="footer-mobile__link">Aide et support</a>
+                    <a href="#" class="footer-mobile__link footer-mobile__link--cta">VOIR LA MÉTHODOLOGIE →</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Accordéon: À propos -->
+        <div class="footer-mobile__accordion">
+            <div class="footer-mobile__accordion-header">
+                <span class="footer-mobile__accordion-title">À propos</span>
+                <span class="footer-mobile__accordion-icon">▼</span>
+            </div>
+            <div class="footer-mobile__accordion-content">
+                <div class="footer-mobile__links">
+                    <a href="#" class="footer-mobile__link">Notre projet</a>
+                    <a href="#" class="footer-mobile__link">Nos enseignants</a>
+                    <a href="#" class="footer-mobile__link">Témoignages</a>
+                    <a href="#" class="footer-mobile__link">Contact</a>
+                    <a href="#" class="footer-mobile__link footer-mobile__link--cta">RECRUTEMENT →</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Contact -->
+        <div class="footer-mobile__contact">
+            <h4 class="footer-mobile__contact-title">Contact</h4>
+            <div class="footer-mobile__contact-item">
+                <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+                <span>Nice, France</span>
+            </div>
+            <div class="footer-mobile__contact-item">
+                <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+                <span>contact@jurible.com</span>
+            </div>
+            <div class="footer-mobile__contact-item">
+                <svg viewBox="0 0 24 24"><path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67z"/></svg>
+                <span>Lun - Ven : 9h - 18h</span>
+            </div>
+        </div>
+
+        <!-- Bottom -->
+        <div class="footer-mobile__bottom">
+            <div class="footer-mobile__legal">
+                <a href="#" class="footer-mobile__legal-link">CGV</a>
+                <a href="#" class="footer-mobile__legal-link">Mentions légales</a>
+                <a href="#" class="footer-mobile__legal-link">Confidentialité</a>
+                <a href="#" class="footer-mobile__legal-link">Cookies</a>
+            </div>
+            <p class="footer-mobile__copyright">© 2025 Jurible.com - Tous droits réservés</p>
+        </div>
+    </footer>
+</div>
+
+<div class="section-divider"></div>
+
+<!-- ==================== SPECS ==================== -->
+<div class="section">
+    <h2 class="section-title">📋 Specifications</h2>
+    
+    <table class="specs-table">
+        <thead>
+            <tr>
+                <th>Élément</th>
+                <th>Property</th>
+                <th>Value</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr><td rowspan="3"><strong>Footer</strong></td><td>Background</td><td><code>#1A1A1A</code></td></tr>
+            <tr><td>Padding Desktop</td><td><code>64px 48px</code></td></tr>
+            <tr><td>Padding Mobile</td><td><code>32px 24px</code></td></tr>
+            
+            <tr><td rowspan="2"><strong>Logo</strong></td><td>Font size Desktop</td><td><code>32px</code></td></tr>
+            <tr><td>Font size Mobile</td><td><code>28px</code></td></tr>
+            
+            <tr><td rowspan="3"><strong>Newsletter</strong></td><td>Input bg</td><td><code>rgba(255,255,255,0.1)</code></td></tr>
+            <tr><td>Button</td><td><code>gradient primary</code></td></tr>
+            <tr><td>Border radius</td><td><code>8px</code></td></tr>
+            
+            <tr><td rowspan="2"><strong>Social icons</strong></td><td>Size</td><td><code>44×44px</code></td></tr>
+            <tr><td>Icon SVG size</td><td><code>20×20px</code></td></tr>
+            
+            <tr><td><strong>Columns</strong></td><td>Grid Desktop</td><td><code>4 colonnes</code></td></tr>
+        </tbody>
+    </table>
+
+    <div class="info-box" style="margin-top: var(--space-md);">
+        <p class="info-box__title">✅ Améliorations apportées</p>
+        <ul>
+            <li><strong>Logo "Jurible"</strong> bien visible en haut (32px desktop, 28px mobile)</li>
+            <li><strong>Newsletter</strong> avec champ email + CTA gradient "S'inscrire"</li>
+            <li><strong>4 colonnes</strong> : Produits, Ressources, À propos, Contact</li>
+            <li><strong>Coordonnées</strong> : Adresse (Nice), Email, Horaires avec icônes SVG</li>
+            <li><strong>Vraies icônes SVG</strong> : LinkedIn, Instagram, YouTube, TikTok</li>
+            <li><strong>"Suivi par +25 000 étudiants"</strong> sous les réseaux sociaux</li>
+            <li><strong>Accordéons mobile</strong> pour réduire la hauteur du footer</li>
+            <li><strong>"Guides gratuits"</strong> corrigé au pluriel</li>
+        </ul>
+    </div>
+</div>
+
+</body>
+</html>

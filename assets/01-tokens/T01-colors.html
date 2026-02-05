@@ -1,0 +1,770 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jurible Design System — Colors</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --color-primary: #B0001D;
+            --color-secondary: #7C3AED;
+            --color-text-dark: #1A1A1A;
+            --color-text-gray: #4A4A4A;
+            --color-text-muted: #9CA3AF;
+            --color-background: #FFFFFF;
+            --color-muted: #F3F4F6;
+            --color-border: #E5E7EB;
+            --font-family: 'Poppins', sans-serif;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: var(--font-family);
+            background: var(--color-background);
+            color: var(--color-text-dark);
+            padding: 48px 80px;
+            max-width: 1280px;
+            margin: 0 auto;
+        }
+
+        .page-header { margin-bottom: 48px; }
+
+        .page-title {
+            font-size: 48px;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .page-divider {
+            height: 3px;
+            width: 120px;
+            background: linear-gradient(90deg, #B0001D 0%, #DC2626 50%, #7C3AED 100%);
+            border-radius: 9999px;
+        }
+
+        .section {
+            margin-bottom: 48px;
+        }
+
+        .section-title {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 24px;
+            color: var(--color-text-dark);
+        }
+
+        .section-divider {
+            height: 1px;
+            background: var(--color-border);
+            margin: 48px 0;
+        }
+
+        /* ==================== INFO BOX ==================== */
+        .info-card {
+            border: 1px solid var(--color-border);
+            border-radius: 12px;
+            padding: 32px;
+            margin-bottom: 48px;
+        }
+
+        .info-card-title {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 24px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .info-item {
+            background: var(--color-muted);
+            border-radius: 8px;
+            padding: 16px;
+            margin-bottom: 16px;
+        }
+
+        .info-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .info-item--warning {
+            background: #FFFBEB;
+        }
+
+        .info-item-title {
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .info-item-title--warning {
+            color: #92400E;
+        }
+
+        .info-item-text {
+            font-size: 14px;
+            color: var(--color-text-gray);
+            line-height: 1.6;
+        }
+
+        /* ==================== COLOR ROW ==================== */
+        .color-section {
+            margin-bottom: 48px;
+        }
+
+        .color-section-title {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 16px;
+            color: var(--color-text-dark);
+        }
+
+        .color-row {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        .color-item {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .color-swatch {
+            width: 80px;
+            height: 80px;
+            border-radius: 12px;
+            border: 1px solid var(--color-border);
+        }
+
+        .color-swatch--large {
+            width: 120px;
+            height: 80px;
+        }
+
+        .color-swatch--gradient {
+            background: linear-gradient(135deg, #B0001D 0%, #DC2626 50%, #7C3AED 100%);
+            border: none;
+        }
+
+        .color-swatch--transparent {
+            background: 
+                linear-gradient(45deg, #E5E7EB 25%, transparent 25%),
+                linear-gradient(-45deg, #E5E7EB 25%, transparent 25%),
+                linear-gradient(45deg, transparent 75%, #E5E7EB 75%),
+                linear-gradient(-45deg, transparent 75%, #E5E7EB 75%);
+            background-size: 16px 16px;
+            background-position: 0 0, 0 8px, 8px -8px, -8px 0px;
+        }
+
+        .color-name {
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--color-text-dark);
+        }
+
+        .color-hex {
+            font-size: 12px;
+            color: var(--color-text-muted);
+            font-family: 'SF Mono', 'Monaco', monospace;
+        }
+
+        /* ==================== STATUS COLORS (Alerts) ==================== */
+        .status-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 24px;
+        }
+
+        .status-item {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .status-label {
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .status-swatches {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .status-swatch-row {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .status-swatch {
+            width: 48px;
+            height: 48px;
+            border-radius: 8px;
+        }
+
+        .status-swatch-info {
+            flex: 1;
+        }
+
+        .status-swatch-name {
+            font-size: 12px;
+            font-weight: 500;
+            color: var(--color-text-dark);
+        }
+
+        .status-swatch-hex {
+            font-size: 11px;
+            color: var(--color-text-muted);
+            font-family: 'SF Mono', 'Monaco', monospace;
+        }
+
+        /* ==================== OPACITY ==================== */
+        .opacity-section {
+            margin-top: 48px;
+        }
+
+        .opacity-row {
+            display: flex;
+            align-items: center;
+            gap: 32px;
+            margin-bottom: 32px;
+        }
+
+        .opacity-label {
+            width: 80px;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .opacity-swatches {
+            display: flex;
+            gap: 16px;
+        }
+
+        .opacity-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .opacity-swatch {
+            width: 64px;
+            height: 64px;
+            border-radius: 8px;
+        }
+
+        .opacity-value {
+            font-size: 11px;
+            color: var(--color-text-muted);
+            font-family: 'SF Mono', 'Monaco', monospace;
+        }
+
+        /* Background for white opacity */
+        .opacity-row--white {
+            background: #6B7280;
+            padding: 24px;
+            border-radius: 12px;
+            margin-left: -24px;
+            margin-right: -24px;
+            padding-left: 24px;
+        }
+
+        .opacity-row--white .opacity-label {
+            color: white;
+        }
+
+        .opacity-row--white .opacity-value {
+            color: rgba(255,255,255,0.6);
+        }
+
+        /* ==================== CODE BOX ==================== */
+        .code-box {
+            background: var(--color-text-dark);
+            border-radius: 12px;
+            padding: 24px;
+            margin-top: 48px;
+        }
+
+        .code-title {
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--color-text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 16px;
+        }
+
+        .code-content {
+            font-family: 'SF Mono', 'Monaco', 'Consolas', monospace;
+            font-size: 13px;
+            color: #E5E7EB;
+            line-height: 1.8;
+        }
+
+        .code-comment {
+            color: var(--color-text-muted);
+        }
+
+        .code-value {
+            color: #7C3AED;
+        }
+
+        .code-property {
+            color: #10B981;
+        }
+    </style>
+</head>
+<body>
+
+<div class="page-header">
+    <h1 class="page-title">colors</h1>
+    <div class="page-divider"></div>
+</div>
+
+<!-- ==================== INFO CARD ==================== -->
+<div class="info-card">
+    <p class="info-card-title">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#F59E0B" stroke-width="2">
+            <path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"></path>
+            <path d="M12 9v4"></path>
+            <path d="M12 17h.01"></path>
+        </svg>
+        Informations
+    </p>
+    
+    <div class="info-item">
+        <p class="info-item-title">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#3B82F6" stroke-width="2">
+                <circle cx="12" cy="12" r="10"></circle>
+                <path d="M12 16v-4"></path>
+                <path d="M12 8h.01"></path>
+            </svg>
+            Couleur principale
+        </p>
+        <p class="info-item-text">La couleur principale est "Primary" (#B0001D). Les autres couleurs sont des variations ou compléments.</p>
+    </div>
+    
+    <div class="info-item">
+        <p class="info-item-title">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#3B82F6" stroke-width="2">
+                <circle cx="12" cy="12" r="10"></circle>
+                <path d="M12 16v-4"></path>
+                <path d="M12 8h.01"></path>
+            </svg>
+            Variables Figma
+        </p>
+        <p class="info-item-text">Toutes les couleurs sont liées aux variables Figma et synchronisées avec le thème WordPress CapitaineWP.</p>
+    </div>
+</div>
+
+<!-- ==================== BLACK, WHITE, TRANSPARENT ==================== -->
+<div class="color-section">
+    <p class="color-section-title">Black, White, Transparent</p>
+    <div class="color-row">
+        <div class="color-item">
+            <div class="color-swatch" style="background: #000000;"></div>
+            <span class="color-name">Black</span>
+            <span class="color-hex">#000000</span>
+        </div>
+        <div class="color-item">
+            <div class="color-swatch" style="background: #FFFFFF;"></div>
+            <span class="color-name">White</span>
+            <span class="color-hex">#FFFFFF</span>
+        </div>
+        <div class="color-item">
+            <div class="color-swatch color-swatch--transparent"></div>
+            <span class="color-name">Transparent</span>
+            <span class="color-hex">transparent</span>
+        </div>
+    </div>
+</div>
+
+<div class="section-divider"></div>
+
+<!-- ==================== PRIMARY ==================== -->
+<div class="color-section">
+    <p class="color-section-title">Primary (rouge)</p>
+    <div class="color-row">
+        <div class="color-item">
+            <div class="color-swatch" style="background: #B0001D;"></div>
+            <span class="color-name">Primary</span>
+            <span class="color-hex">#B0001D</span>
+        </div>
+        <div class="color-item">
+            <div class="color-swatch" style="background: #DC2626;"></div>
+            <span class="color-name">Primary Hover</span>
+            <span class="color-hex">#DC2626</span>
+        </div>
+    </div>
+</div>
+
+<div class="section-divider"></div>
+
+<!-- ==================== SECONDARY ==================== -->
+<div class="color-section">
+    <p class="color-section-title">Secondary (violet)</p>
+    <div class="color-row">
+        <div class="color-item">
+            <div class="color-swatch" style="background: #7C3AED;"></div>
+            <span class="color-name">Secondary</span>
+            <span class="color-hex">#7C3AED</span>
+        </div>
+        <div class="color-item">
+            <div class="color-swatch" style="background: #6D28D9;"></div>
+            <span class="color-name">Secondary Hover</span>
+            <span class="color-hex">#6D28D9</span>
+        </div>
+    </div>
+</div>
+
+<div class="section-divider"></div>
+
+<!-- ==================== GRAY ==================== -->
+<div class="color-section">
+    <p class="color-section-title">Gray</p>
+    <div class="color-row">
+        <div class="color-item">
+            <div class="color-swatch" style="background: #F9FAFB;"></div>
+            <span class="color-name">Background</span>
+            <span class="color-hex">#F9FAFB</span>
+        </div>
+        <div class="color-item">
+            <div class="color-swatch" style="background: #F3F4F6;"></div>
+            <span class="color-name">Muted</span>
+            <span class="color-hex">#F3F4F6</span>
+        </div>
+        <div class="color-item">
+            <div class="color-swatch" style="background: #E5E7EB;"></div>
+            <span class="color-name">Border</span>
+            <span class="color-hex">#E5E7EB</span>
+        </div>
+        <div class="color-item">
+            <div class="color-swatch" style="background: #D1D5DB;"></div>
+            <span class="color-name">Border Muted</span>
+            <span class="color-hex">#D1D5DB</span>
+        </div>
+        <div class="color-item">
+            <div class="color-swatch" style="background: #9CA3AF;"></div>
+            <span class="color-name">Text Muted</span>
+            <span class="color-hex">#9CA3AF</span>
+        </div>
+        <div class="color-item">
+            <div class="color-swatch" style="background: #4A4A4A;"></div>
+            <span class="color-name">Text Gray</span>
+            <span class="color-hex">#4A4A4A</span>
+        </div>
+        <div class="color-item">
+            <div class="color-swatch" style="background: #1A1A1A;"></div>
+            <span class="color-name">Text Dark</span>
+            <span class="color-hex">#1A1A1A</span>
+        </div>
+    </div>
+</div>
+
+<div class="section-divider"></div>
+
+<!-- ==================== GRADIENT ==================== -->
+<div class="color-section">
+    <p class="color-section-title">Gradient</p>
+    <div class="color-row">
+        <div class="color-item">
+            <div class="color-swatch color-swatch--large color-swatch--gradient"></div>
+            <span class="color-name">CTA Gradient</span>
+            <span class="color-hex">#B0001D → #DC2626 → #7C3AED (135°)</span>
+        </div>
+    </div>
+</div>
+
+<div class="section-divider"></div>
+
+<!-- ==================== STATUS COLORS ==================== -->
+<div class="color-section">
+    <p class="color-section-title">Status (Alerts)</p>
+    
+    <div class="status-grid">
+        <!-- Info -->
+        <div class="status-item">
+            <p class="status-label" style="color: #3B82F6;">Info</p>
+            <div class="status-swatches">
+                <div class="status-swatch-row">
+                    <div class="status-swatch" style="background: #3B82F6;"></div>
+                    <div class="status-swatch-info">
+                        <p class="status-swatch-name">Icon / Title</p>
+                        <p class="status-swatch-hex">#3B82F6</p>
+                    </div>
+                </div>
+                <div class="status-swatch-row">
+                    <div class="status-swatch" style="background: #EFF6FF;"></div>
+                    <div class="status-swatch-info">
+                        <p class="status-swatch-name">Background</p>
+                        <p class="status-swatch-hex">#EFF6FF</p>
+                    </div>
+                </div>
+                <div class="status-swatch-row">
+                    <div class="status-swatch" style="background: #1E40AF;"></div>
+                    <div class="status-swatch-info">
+                        <p class="status-swatch-name">Text</p>
+                        <p class="status-swatch-hex">#1E40AF</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Success -->
+        <div class="status-item">
+            <p class="status-label" style="color: #10B981;">Success</p>
+            <div class="status-swatches">
+                <div class="status-swatch-row">
+                    <div class="status-swatch" style="background: #10B981;"></div>
+                    <div class="status-swatch-info">
+                        <p class="status-swatch-name">Icon / Title</p>
+                        <p class="status-swatch-hex">#10B981</p>
+                    </div>
+                </div>
+                <div class="status-swatch-row">
+                    <div class="status-swatch" style="background: #ECFDF5;"></div>
+                    <div class="status-swatch-info">
+                        <p class="status-swatch-name">Background</p>
+                        <p class="status-swatch-hex">#ECFDF5</p>
+                    </div>
+                </div>
+                <div class="status-swatch-row">
+                    <div class="status-swatch" style="background: #065F46;"></div>
+                    <div class="status-swatch-info">
+                        <p class="status-swatch-name">Text</p>
+                        <p class="status-swatch-hex">#065F46</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Warning -->
+        <div class="status-item">
+            <p class="status-label" style="color: #F59E0B;">Warning</p>
+            <div class="status-swatches">
+                <div class="status-swatch-row">
+                    <div class="status-swatch" style="background: #F59E0B;"></div>
+                    <div class="status-swatch-info">
+                        <p class="status-swatch-name">Icon / Title</p>
+                        <p class="status-swatch-hex">#F59E0B</p>
+                    </div>
+                </div>
+                <div class="status-swatch-row">
+                    <div class="status-swatch" style="background: #FFFBEB;"></div>
+                    <div class="status-swatch-info">
+                        <p class="status-swatch-name">Background</p>
+                        <p class="status-swatch-hex">#FFFBEB</p>
+                    </div>
+                </div>
+                <div class="status-swatch-row">
+                    <div class="status-swatch" style="background: #92400E;"></div>
+                    <div class="status-swatch-info">
+                        <p class="status-swatch-name">Text</p>
+                        <p class="status-swatch-hex">#92400E</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Error -->
+        <div class="status-item">
+            <p class="status-label" style="color: #EF4444;">Error</p>
+            <div class="status-swatches">
+                <div class="status-swatch-row">
+                    <div class="status-swatch" style="background: #EF4444;"></div>
+                    <div class="status-swatch-info">
+                        <p class="status-swatch-name">Icon / Title</p>
+                        <p class="status-swatch-hex">#EF4444</p>
+                    </div>
+                </div>
+                <div class="status-swatch-row">
+                    <div class="status-swatch" style="background: #FEF2F2;"></div>
+                    <div class="status-swatch-info">
+                        <p class="status-swatch-name">Background</p>
+                        <p class="status-swatch-hex">#FEF2F2</p>
+                    </div>
+                </div>
+                <div class="status-swatch-row">
+                    <div class="status-swatch" style="background: #991B1B;"></div>
+                    <div class="status-swatch-info">
+                        <p class="status-swatch-name">Text</p>
+                        <p class="status-swatch-hex">#991B1B</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Accent -->
+        <div class="status-item">
+            <p class="status-label" style="color: #7C3AED;">Accent</p>
+            <div class="status-swatches">
+                <div class="status-swatch-row">
+                    <div class="status-swatch" style="background: #7C3AED;"></div>
+                    <div class="status-swatch-info">
+                        <p class="status-swatch-name">Icon / Title</p>
+                        <p class="status-swatch-hex">#7C3AED</p>
+                    </div>
+                </div>
+                <div class="status-swatch-row">
+                    <div class="status-swatch" style="background: #F5F3FF;"></div>
+                    <div class="status-swatch-info">
+                        <p class="status-swatch-name">Background</p>
+                        <p class="status-swatch-hex">#F5F3FF</p>
+                    </div>
+                </div>
+                <div class="status-swatch-row">
+                    <div class="status-swatch" style="background: #5B21B6;"></div>
+                    <div class="status-swatch-info">
+                        <p class="status-swatch-name">Text</p>
+                        <p class="status-swatch-hex">#5B21B6</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="section-divider"></div>
+
+<!-- ==================== OPACITY ==================== -->
+<div class="color-section opacity-section">
+    <p class="color-section-title">Opacity</p>
+    
+    <div class="info-item" style="margin-bottom: 32px;">
+        <p class="info-item-title">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#3B82F6" stroke-width="2">
+                <circle cx="12" cy="12" r="10"></circle>
+                <path d="M12 16v-4"></path>
+                <path d="M12 8h.01"></path>
+            </svg>
+            Opacity is compatible with any color style
+        </p>
+        <p class="info-item-text">Les opacités peuvent être appliquées à n'importe quelle couleur du Design System. Utilisez-les pour les overlays, états disabled, ombres légères, etc.</p>
+    </div>
+
+    <div class="info-item info-item--warning" style="margin-bottom: 32px;">
+        <p class="info-item-title info-item-title--warning">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#F59E0B" stroke-width="2">
+                <path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"></path>
+                <path d="M12 9v4"></path>
+                <path d="M12 17h.01"></path>
+            </svg>
+            N'existe pas dans le design system Captain WP
+        </p>
+    </div>
+
+    <!-- Black opacity -->
+    <div class="opacity-row">
+        <span class="opacity-label">Black</span>
+        <div class="opacity-swatches">
+            <div class="opacity-item">
+                <div class="opacity-swatch" style="background: rgba(0,0,0,0.25);"></div>
+                <span class="opacity-value">opacity-25</span>
+            </div>
+            <div class="opacity-item">
+                <div class="opacity-swatch" style="background: rgba(0,0,0,0.50);"></div>
+                <span class="opacity-value">opacity-50</span>
+            </div>
+            <div class="opacity-item">
+                <div class="opacity-swatch" style="background: rgba(0,0,0,0.75);"></div>
+                <span class="opacity-value">opacity-75</span>
+            </div>
+            <div class="opacity-item">
+                <div class="opacity-swatch" style="background: rgba(0,0,0,1);"></div>
+                <span class="opacity-value">opacity-100</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Primary opacity -->
+    <div class="opacity-row">
+        <span class="opacity-label">Primary</span>
+        <div class="opacity-swatches">
+            <div class="opacity-item">
+                <div class="opacity-swatch" style="background: rgba(176,0,29,0.25);"></div>
+                <span class="opacity-value">opacity-25</span>
+            </div>
+            <div class="opacity-item">
+                <div class="opacity-swatch" style="background: rgba(176,0,29,0.50);"></div>
+                <span class="opacity-value">opacity-50</span>
+            </div>
+            <div class="opacity-item">
+                <div class="opacity-swatch" style="background: rgba(176,0,29,0.75);"></div>
+                <span class="opacity-value">opacity-75</span>
+            </div>
+            <div class="opacity-item">
+                <div class="opacity-swatch" style="background: rgba(176,0,29,1);"></div>
+                <span class="opacity-value">opacity-100</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- White opacity (on dark background) -->
+    <div class="opacity-row opacity-row--white">
+        <span class="opacity-label">White</span>
+        <div class="opacity-swatches">
+            <div class="opacity-item">
+                <div class="opacity-swatch" style="background: rgba(255,255,255,0.25);"></div>
+                <span class="opacity-value">opacity-25</span>
+            </div>
+            <div class="opacity-item">
+                <div class="opacity-swatch" style="background: rgba(255,255,255,0.50);"></div>
+                <span class="opacity-value">opacity-50</span>
+            </div>
+            <div class="opacity-item">
+                <div class="opacity-swatch" style="background: rgba(255,255,255,0.75);"></div>
+                <span class="opacity-value">opacity-75</span>
+            </div>
+            <div class="opacity-item">
+                <div class="opacity-swatch" style="background: rgba(255,255,255,1);"></div>
+                <span class="opacity-value">opacity-100</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ==================== CSS VARIABLES ==================== -->
+<div class="code-box">
+    <p class="code-title">📋 CSS Variables (pour le dev)</p>
+    <div class="code-content">
+        <span class="code-comment">/* Primary */</span><br>
+        <span class="code-property">--color-primary:</span> <span class="code-value">#B0001D</span>;<br>
+        <span class="code-property">--color-primary-hover:</span> <span class="code-value">#DC2626</span>;<br><br>
+        
+        <span class="code-comment">/* Secondary */</span><br>
+        <span class="code-property">--color-secondary:</span> <span class="code-value">#7C3AED</span>;<br>
+        <span class="code-property">--color-secondary-hover:</span> <span class="code-value">#6D28D9</span>;<br><br>
+        
+        <span class="code-comment">/* Gray Scale */</span><br>
+        <span class="code-property">--color-background:</span> <span class="code-value">#F9FAFB</span>;<br>
+        <span class="code-property">--color-muted:</span> <span class="code-value">#F3F4F6</span>;<br>
+        <span class="code-property">--color-border:</span> <span class="code-value">#E5E7EB</span>;<br>
+        <span class="code-property">--color-border-muted:</span> <span class="code-value">#D1D5DB</span>;<br>
+        <span class="code-property">--color-text-muted:</span> <span class="code-value">#9CA3AF</span>;<br>
+        <span class="code-property">--color-text-gray:</span> <span class="code-value">#4A4A4A</span>;<br>
+        <span class="code-property">--color-text-dark:</span> <span class="code-value">#1A1A1A</span>;<br><br>
+        
+        <span class="code-comment">/* Status */</span><br>
+        <span class="code-property">--color-info:</span> <span class="code-value">#3B82F6</span>;<br>
+        <span class="code-property">--color-success:</span> <span class="code-value">#10B981</span>;<br>
+        <span class="code-property">--color-warning:</span> <span class="code-value">#F59E0B</span>;<br>
+        <span class="code-property">--color-error:</span> <span class="code-value">#EF4444</span>;<br><br>
+        
+        <span class="code-comment">/* Gradient */</span><br>
+        <span class="code-property">--gradient-cta:</span> <span class="code-value">linear-gradient(135deg, #B0001D 0%, #DC2626 50%, #7C3AED 100%)</span>;<br>
+    </div>
+</div>
+
+</body>
+</html>

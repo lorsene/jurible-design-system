@@ -1,0 +1,985 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jurible Design System - Cards Blog</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* =====================================================
+           JURIBLE DESIGN SYSTEM - VARIABLES
+           ===================================================== */
+        :root {
+            /* Colors */
+            --color-primary: #B0001D;
+            --color-primary-hover: #8B0016;
+            --color-secondary: #7C3AED;
+            --color-secondary-hover: #6D28D9;
+            
+            /* Text Colors */
+            --text-dark: #1A1A1A;
+            --text-gray: #4A4A4A;
+            --text-muted: #6B7280;
+            --text-light: #9CA3AF;
+            
+            /* Background Colors */
+            --bg-white: #FFFFFF;
+            --bg-light: #F9FAFB;
+            --bg-gray: #F3F4F6;
+            --bg-border: #E5E7EB;
+            
+            /* Tag Colors */
+            --tag-methodologie: #10B981;
+            --tag-methodologie-bg: rgba(16, 185, 129, 0.1);
+            --tag-orientation: #EF4444;
+            --tag-orientation-bg: rgba(239, 68, 68, 0.1);
+            --tag-vie-etudiante: #3B82F6;
+            --tag-vie-etudiante-bg: rgba(59, 130, 246, 0.1);
+            --tag-actualites: #F59E0B;
+            --tag-actualites-bg: rgba(245, 158, 11, 0.1);
+            --tag-examens: #8B5CF6;
+            --tag-examens-bg: rgba(139, 92, 246, 0.1);
+            
+            /* Shadows */
+            --shadow-xs: 0 1px 2px rgba(0,0,0,0.05);
+            --shadow-sm: 0 1px 3px rgba(0,0,0,0.1), 0 1px 2px rgba(0,0,0,0.06);
+            --shadow-md: 0 4px 6px rgba(0,0,0,0.07);
+            --shadow-lg: 0 10px 15px rgba(0,0,0,0.1), 0 4px 6px rgba(0,0,0,0.05);
+            
+            /* Spacing */
+            --spacing-xs: 8px;
+            --spacing-sm: 12px;
+            --spacing-md: 16px;
+            --spacing-lg: 24px;
+            --spacing-xl: 32px;
+            
+            /* Border Radius */
+            --radius-sm: 8px;
+            --radius-md: 12px;
+            --radius-lg: 16px;
+            --radius-full: 9999px;
+            
+            /* Transitions */
+            --transition-fast: 150ms ease;
+            --transition-normal: 200ms ease;
+            --transition-slow: 300ms ease;
+        }
+
+        /* =====================================================
+           BASE STYLES
+           ===================================================== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: var(--bg-light);
+            color: var(--text-dark);
+            line-height: 1.5;
+            padding: 40px;
+        }
+
+        /* =====================================================
+           DOCUMENTATION LAYOUT
+           ===================================================== */
+        .doc-container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .doc-header {
+            text-align: center;
+            margin-bottom: 60px;
+            padding-bottom: 40px;
+            border-bottom: 2px solid var(--bg-border);
+        }
+
+        .doc-header h1 {
+            font-size: 32px;
+            font-weight: 700;
+            color: var(--color-primary);
+            margin-bottom: 8px;
+        }
+
+        .doc-header p {
+            font-size: 16px;
+            color: var(--text-gray);
+        }
+
+        .doc-section {
+            margin-bottom: 80px;
+        }
+
+        .doc-section-title {
+            font-size: 24px;
+            font-weight: 600;
+            color: var(--text-dark);
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .doc-section-title::before {
+            content: '';
+            width: 4px;
+            height: 28px;
+            background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
+            border-radius: 2px;
+        }
+
+        .doc-section-desc {
+            font-size: 14px;
+            color: var(--text-muted);
+            margin-bottom: 32px;
+            margin-left: 16px;
+        }
+
+        .components-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 32px;
+            align-items: flex-start;
+        }
+
+        .component-wrapper {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .state-label {
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: var(--text-muted);
+            padding: 4px 10px;
+            background: var(--bg-gray);
+            border-radius: var(--radius-sm);
+            width: fit-content;
+        }
+
+        /* =====================================================
+           1. CARD ARTICLE BLOG
+           ===================================================== */
+        .card-article {
+            width: 380px;
+            background: var(--bg-white);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-sm);
+            overflow: hidden;
+            transition: all var(--transition-normal);
+            cursor: pointer;
+        }
+
+        .card-article:hover {
+            box-shadow: var(--shadow-lg);
+            transform: translateY(-4px);
+        }
+
+        /* Image Zone */
+        .card-article__image {
+            width: 100%;
+            height: 180px;
+            background: var(--bg-gray);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card-article__image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform var(--transition-slow);
+        }
+
+        .card-article:hover .card-article__image img {
+            transform: scale(1.05);
+        }
+
+        /* Placeholder pour image */
+        .card-article__image-placeholder {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, var(--bg-gray) 0%, var(--bg-border) 100%);
+        }
+
+        .card-article__image-placeholder svg {
+            width: 48px;
+            height: 48px;
+            color: var(--text-light);
+            opacity: 0.5;
+        }
+
+        /* Content */
+        .card-article__content {
+            padding: var(--spacing-lg);
+        }
+
+        /* Tag */
+        .card-article__tag {
+            display: inline-block;
+            padding: 6px 14px;
+            border-radius: var(--radius-full);
+            font-size: 12px;
+            font-weight: 600;
+            margin-bottom: 12px;
+        }
+
+        .card-article__tag--methodologie {
+            background: var(--tag-methodologie);
+            color: var(--bg-white);
+        }
+
+        .card-article__tag--orientation {
+            background: var(--tag-orientation);
+            color: var(--bg-white);
+        }
+
+        .card-article__tag--vie-etudiante {
+            background: var(--tag-vie-etudiante);
+            color: var(--bg-white);
+        }
+
+        .card-article__tag--actualites {
+            background: var(--tag-actualites);
+            color: var(--bg-white);
+        }
+
+        .card-article__tag--examens {
+            background: var(--tag-examens);
+            color: var(--bg-white);
+        }
+
+        .card-article__title {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--text-dark);
+            line-height: 1.4;
+            margin-bottom: 8px;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .card-article__excerpt {
+            font-size: 14px;
+            font-weight: 400;
+            color: var(--text-gray);
+            line-height: 1.6;
+            margin-bottom: 16px;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        /* Footer */
+        .card-article__footer {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .card-article__meta {
+            font-size: 13px;
+            font-weight: 400;
+            color: var(--text-muted);
+        }
+
+        .card-article__link {
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--color-primary);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            transition: all var(--transition-fast);
+        }
+
+        .card-article__link:hover {
+            color: var(--color-primary-hover);
+            gap: 10px;
+        }
+
+        .card-article__link svg {
+            width: 16px;
+            height: 16px;
+            transition: transform var(--transition-fast);
+        }
+
+        .card-article:hover .card-article__link svg {
+            transform: translateX(4px);
+        }
+
+        /* =====================================================
+           2. CARD ARTICLE SIMPLE (sans extrait - pour Articles similaires)
+           ===================================================== */
+        .card-article--simple .card-article__content {
+            padding: var(--spacing-md) var(--spacing-lg) var(--spacing-lg);
+        }
+
+        .card-article--simple .card-article__title {
+            margin-bottom: 12px;
+        }
+
+        .card-article--simple .card-article__meta {
+            color: var(--tag-methodologie);
+            font-size: 13px;
+        }
+
+        /* =====================================================
+           3. CARD CATÉGORIE
+           ===================================================== */
+        .card-category {
+            width: 220px;
+            background: var(--bg-white);
+            border-radius: var(--radius-md);
+            box-shadow: var(--shadow-xs);
+            padding: var(--spacing-lg);
+            text-align: center;
+            cursor: pointer;
+            transition: all var(--transition-normal);
+        }
+
+        .card-category:hover {
+            box-shadow: var(--shadow-md);
+            transform: translateY(-2px);
+        }
+
+        .card-category__icon {
+            width: 56px;
+            height: 56px;
+            background: var(--bg-light);
+            border-radius: var(--radius-md);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 16px;
+            font-size: 28px;
+            transition: all var(--transition-normal);
+        }
+
+        .card-category:hover .card-category__icon {
+            background: var(--bg-gray);
+            transform: scale(1.05);
+        }
+
+        .card-category__title {
+            font-size: 15px;
+            font-weight: 600;
+            color: var(--text-dark);
+            margin-bottom: 4px;
+        }
+
+        .card-category__count {
+            font-size: 13px;
+            font-weight: 400;
+            color: var(--text-muted);
+        }
+
+        /* =====================================================
+           BLOC SECTION (Articles similaires / Catégories)
+           ===================================================== */
+        .section-block {
+            background: var(--bg-light);
+            padding: 60px 40px;
+            border-radius: var(--radius-lg);
+            border: 1px solid var(--bg-border);
+        }
+
+        .section-block__title {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--text-dark);
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .section-block__grid {
+            display: flex;
+            justify-content: center;
+            gap: 24px;
+            flex-wrap: wrap;
+        }
+
+        /* =====================================================
+           SPECS TABLE
+           ===================================================== */
+        .specs-section {
+            background: var(--bg-white);
+            border: 1px solid var(--bg-border);
+            border-radius: var(--radius-md);
+            padding: var(--spacing-xl);
+            margin-top: 60px;
+        }
+
+        .specs-section h3 {
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--text-dark);
+            margin-bottom: 20px;
+        }
+
+        .specs-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 14px;
+        }
+
+        .specs-table th,
+        .specs-table td {
+            padding: 12px 16px;
+            text-align: left;
+            border-bottom: 1px solid var(--bg-border);
+        }
+
+        .specs-table th {
+            font-weight: 600;
+            color: var(--text-dark);
+            background: var(--bg-light);
+        }
+
+        .specs-table td {
+            color: var(--text-gray);
+        }
+
+        .specs-table code {
+            background: var(--bg-gray);
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-family: 'SF Mono', Monaco, monospace;
+            font-size: 12px;
+            color: var(--color-primary);
+        }
+
+        /* =====================================================
+           RESPONSIVE
+           ===================================================== */
+        @media (max-width: 768px) {
+            body {
+                padding: 20px;
+            }
+
+            .card-article {
+                width: 100%;
+                max-width: 380px;
+            }
+
+            .card-category {
+                width: 100%;
+                max-width: 220px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="doc-container">
+        <!-- Header -->
+        <header class="doc-header">
+            <h1>Jurible Design System</h1>
+            <p>Composants Cards Blog — Export Figma Ready</p>
+        </header>
+
+        <!-- =====================================================
+             SECTION 1: CARD ARTICLE - ÉTATS
+             ===================================================== -->
+        <section class="doc-section">
+            <h2 class="doc-section-title">Card Article Blog</h2>
+            <p class="doc-section-desc">Card principale pour afficher les articles du blog. Comprend image, tag catégorie, titre, extrait, date/temps de lecture et lien.</p>
+
+            <div class="components-grid">
+                <!-- Default -->
+                <div class="component-wrapper">
+                    <span class="state-label">Default</span>
+                    <article class="card-article">
+                        <div class="card-article__image">
+                            <div class="card-article__image-placeholder">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="card-article__content">
+                            <span class="card-article__tag card-article__tag--methodologie">Méthodologie</span>
+                            <h3 class="card-article__title">Comment faire une fiche d'arrêt parfaite</h3>
+                            <p class="card-article__excerpt">Structure, contenu et conseils pour rédiger des fiches d'arrêt efficaces.</p>
+                            <div class="card-article__footer">
+                                <span class="card-article__meta">25 nov. 2024 • 7 min</span>
+                                <a href="#" class="card-article__link">
+                                    Lire
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                                    </svg>
+                                </a>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+
+                <!-- Hover -->
+                <div class="component-wrapper">
+                    <span class="state-label">Hover</span>
+                    <article class="card-article" style="box-shadow: var(--shadow-lg); transform: translateY(-4px);">
+                        <div class="card-article__image">
+                            <div class="card-article__image-placeholder">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="card-article__content">
+                            <span class="card-article__tag card-article__tag--methodologie">Méthodologie</span>
+                            <h3 class="card-article__title">L'introduction de la dissertation juridique</h3>
+                            <p class="card-article__excerpt">Les clés d'une introduction réussie : accroche, définitions, problématique.</p>
+                            <div class="card-article__footer">
+                                <span class="card-article__meta">22 nov. 2024 • 9 min</span>
+                                <a href="#" class="card-article__link" style="gap: 10px;">
+                                    Lire
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" style="transform: translateX(4px);">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                                    </svg>
+                                </a>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- =====================================================
+             SECTION 2: TAGS CATÉGORIES
+             ===================================================== -->
+        <section class="doc-section">
+            <h2 class="doc-section-title">Tags Catégories</h2>
+            <p class="doc-section-desc">5 couleurs de tags correspondant aux catégories du blog Jurible.</p>
+
+            <div class="components-grid">
+                <!-- Méthodologie -->
+                <div class="component-wrapper">
+                    <span class="state-label">Méthodologie</span>
+                    <article class="card-article">
+                        <div class="card-article__image">
+                            <div class="card-article__image-placeholder">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="card-article__content">
+                            <span class="card-article__tag card-article__tag--methodologie">Méthodologie</span>
+                            <h3 class="card-article__title">Le syllogisme juridique expliqué simplement</h3>
+                            <p class="card-article__excerpt">Comprendre et maîtriser le raisonnement juridique fondamental.</p>
+                            <div class="card-article__footer">
+                                <span class="card-article__meta">18 nov. 2024 • 6 min</span>
+                                <a href="#" class="card-article__link">Lire <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg></a>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+
+                <!-- Orientation -->
+                <div class="component-wrapper">
+                    <span class="state-label">Orientation</span>
+                    <article class="card-article">
+                        <div class="card-article__image">
+                            <div class="card-article__image-placeholder">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="card-article__content">
+                            <span class="card-article__tag card-article__tag--orientation">Orientation</span>
+                            <h3 class="card-article__title">Que faire après une licence de droit ?</h3>
+                            <p class="card-article__excerpt">Les différentes voies et débouchés pour les diplômés en droit.</p>
+                            <div class="card-article__footer">
+                                <span class="card-article__meta">12 nov. 2024 • 10 min</span>
+                                <a href="#" class="card-article__link">Lire <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg></a>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+
+                <!-- Vie étudiante -->
+                <div class="component-wrapper">
+                    <span class="state-label">Vie étudiante</span>
+                    <article class="card-article">
+                        <div class="card-article__image">
+                            <div class="card-article__image-placeholder">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="card-article__content">
+                            <span class="card-article__tag card-article__tag--vie-etudiante">Vie étudiante</span>
+                            <h3 class="card-article__title">Comment organiser ses révisions efficacement</h3>
+                            <p class="card-article__excerpt">Méthodes et planning pour optimiser son temps de travail.</p>
+                            <div class="card-article__footer">
+                                <span class="card-article__meta">8 nov. 2024 • 8 min</span>
+                                <a href="#" class="card-article__link">Lire <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg></a>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+            </div>
+
+            <!-- Suite des tags -->
+            <div class="components-grid" style="margin-top: 32px;">
+                <!-- Actualités juridiques -->
+                <div class="component-wrapper">
+                    <span class="state-label">Actualités</span>
+                    <article class="card-article">
+                        <div class="card-article__image">
+                            <div class="card-article__image-placeholder">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="card-article__content">
+                            <span class="card-article__tag card-article__tag--actualites">Actualités juridiques</span>
+                            <h3 class="card-article__title">Réforme du droit des contrats : ce qui change</h3>
+                            <p class="card-article__excerpt">Analyse des nouvelles dispositions et leur impact pratique.</p>
+                            <div class="card-article__footer">
+                                <span class="card-article__meta">5 nov. 2024 • 12 min</span>
+                                <a href="#" class="card-article__link">Lire <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg></a>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+
+                <!-- Examens & Concours -->
+                <div class="component-wrapper">
+                    <span class="state-label">Examens</span>
+                    <article class="card-article">
+                        <div class="card-article__image">
+                            <div class="card-article__image-placeholder">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="card-article__content">
+                            <span class="card-article__tag card-article__tag--examens">Examens & Concours</span>
+                            <h3 class="card-article__title">Se préparer au CRFPA : guide complet</h3>
+                            <p class="card-article__excerpt">Planning, ressources et conseils pour réussir l'examen d'entrée.</p>
+                            <div class="card-article__footer">
+                                <span class="card-article__meta">1 nov. 2024 • 15 min</span>
+                                <a href="#" class="card-article__link">Lire <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg></a>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- =====================================================
+             SECTION 3: BLOC ARTICLES SIMILAIRES
+             ===================================================== -->
+        <section class="doc-section">
+            <h2 class="doc-section-title">Bloc Articles Similaires</h2>
+            <p class="doc-section-desc">Section affichée en bas des articles pour suggérer du contenu connexe. Cards simplifiées sans extrait.</p>
+
+            <div class="section-block">
+                <h2 class="section-block__title">Articles similaires</h2>
+                <div class="section-block__grid">
+                    <!-- Card 1 -->
+                    <article class="card-article card-article--simple">
+                        <div class="card-article__image">
+                            <div class="card-article__image-placeholder">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="card-article__content">
+                            <span class="card-article__tag card-article__tag--methodologie">Méthodologie</span>
+                            <h3 class="card-article__title">Le commentaire d'arrêt : méthode complète et exemples</h3>
+                            <span class="card-article__meta">28 nov. 2024 • 10 min</span>
+                        </div>
+                    </article>
+
+                    <!-- Card 2 -->
+                    <article class="card-article card-article--simple">
+                        <div class="card-article__image">
+                            <div class="card-article__image-placeholder">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="card-article__content">
+                            <span class="card-article__tag card-article__tag--methodologie">Méthodologie</span>
+                            <h3 class="card-article__title">5 erreurs à éviter dans le cas pratique</h3>
+                            <span class="card-article__meta">22 nov. 2024 • 8 min</span>
+                        </div>
+                    </article>
+
+                    <!-- Card 3 -->
+                    <article class="card-article card-article--simple">
+                        <div class="card-article__image">
+                            <div class="card-article__image-placeholder">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="card-article__content">
+                            <span class="card-article__tag card-article__tag--methodologie">Méthodologie</span>
+                            <h3 class="card-article__title">Comment faire une fiche d'arrêt parfaite</h3>
+                            <span class="card-article__meta">18 nov. 2024 • 7 min</span>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- =====================================================
+             SECTION 4: CARDS CATÉGORIES
+             ===================================================== -->
+        <section class="doc-section">
+            <h2 class="doc-section-title">Card Catégorie</h2>
+            <p class="doc-section-desc">Card pour naviguer entre les catégories du blog. Design simple avec emoji, titre et compteur.</p>
+
+            <div class="components-grid">
+                <div class="component-wrapper">
+                    <span class="state-label">Default</span>
+                    <div class="card-category">
+                        <div class="card-category__icon">🎯</div>
+                        <h3 class="card-category__title">Orientation</h3>
+                        <span class="card-category__count">18 articles</span>
+                    </div>
+                </div>
+
+                <div class="component-wrapper">
+                    <span class="state-label">Hover</span>
+                    <div class="card-category" style="box-shadow: var(--shadow-md); transform: translateY(-2px);">
+                        <div class="card-category__icon" style="background: var(--bg-gray); transform: scale(1.05);">📚</div>
+                        <h3 class="card-category__title">Vie étudiante</h3>
+                        <span class="card-category__count">15 articles</span>
+                    </div>
+                </div>
+
+                <div class="component-wrapper">
+                    <span class="state-label">Default</span>
+                    <div class="card-category">
+                        <div class="card-category__icon">⚖️</div>
+                        <h3 class="card-category__title">Actualités juridiques</h3>
+                        <span class="card-category__count">32 articles</span>
+                    </div>
+                </div>
+
+                <div class="component-wrapper">
+                    <span class="state-label">Default</span>
+                    <div class="card-category">
+                        <div class="card-category__icon">🏆</div>
+                        <h3 class="card-category__title">Examens & Concours</h3>
+                        <span class="card-category__count">12 articles</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- =====================================================
+             SECTION 5: BLOC EXPLORER CATÉGORIES
+             ===================================================== -->
+        <section class="doc-section">
+            <h2 class="doc-section-title">Bloc Explorer d'autres catégories</h2>
+            <p class="doc-section-desc">Section complète affichée sur la page blog pour naviguer entre catégories.</p>
+
+            <div class="section-block" style="background: var(--bg-white);">
+                <h2 class="section-block__title">Explorer d'autres catégories</h2>
+                <div class="section-block__grid">
+                    <div class="card-category">
+                        <div class="card-category__icon">🎯</div>
+                        <h3 class="card-category__title">Orientation</h3>
+                        <span class="card-category__count">18 articles</span>
+                    </div>
+                    <div class="card-category">
+                        <div class="card-category__icon">📚</div>
+                        <h3 class="card-category__title">Vie étudiante</h3>
+                        <span class="card-category__count">15 articles</span>
+                    </div>
+                    <div class="card-category">
+                        <div class="card-category__icon">⚖️</div>
+                        <h3 class="card-category__title">Actualités juridiques</h3>
+                        <span class="card-category__count">32 articles</span>
+                    </div>
+                    <div class="card-category">
+                        <div class="card-category__icon">🏆</div>
+                        <h3 class="card-category__title">Examens & Concours</h3>
+                        <span class="card-category__count">12 articles</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- =====================================================
+             SPECS TABLE
+             ===================================================== -->
+        <div class="specs-section">
+            <h3>📋 Spécifications CSS</h3>
+            <table class="specs-table">
+                <thead>
+                    <tr>
+                        <th>Propriété</th>
+                        <th>Card Article</th>
+                        <th>Card Catégorie</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Width</td>
+                        <td><code>380px</code></td>
+                        <td><code>220px</code></td>
+                    </tr>
+                    <tr>
+                        <td>Image height</td>
+                        <td><code>180px</code></td>
+                        <td>—</td>
+                    </tr>
+                    <tr>
+                        <td>Background</td>
+                        <td><code>#FFFFFF</code></td>
+                        <td><code>#FFFFFF</code></td>
+                    </tr>
+                    <tr>
+                        <td>Border</td>
+                        <td>—</td>
+                        <td>—</td>
+                    </tr>
+                    <tr>
+                        <td>Border-radius</td>
+                        <td><code>16px</code></td>
+                        <td><code>12px</code></td>
+                    </tr>
+                    <tr>
+                        <td>Shadow default</td>
+                        <td><code>0 1px 3px rgba(0,0,0,0.1)</code></td>
+                        <td><code>0 1px 2px rgba(0,0,0,0.05)</code></td>
+                    </tr>
+                    <tr>
+                        <td>Shadow hover</td>
+                        <td><code>0 10px 15px rgba(0,0,0,0.1)</code></td>
+                        <td><code>0 4px 6px rgba(0,0,0,0.07)</code></td>
+                    </tr>
+                    <tr>
+                        <td>Transform hover</td>
+                        <td><code>translateY(-4px)</code></td>
+                        <td><code>translateY(-2px)</code></td>
+                    </tr>
+                    <tr>
+                        <td>Padding content</td>
+                        <td><code>24px</code></td>
+                        <td><code>24px</code></td>
+                    </tr>
+                    <tr>
+                        <td>Transition</td>
+                        <td><code>200ms ease</code></td>
+                        <td><code>200ms ease</code></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3 style="margin-top: 32px;">🏷️ Tags Catégories</h3>
+            <table class="specs-table">
+                <thead>
+                    <tr>
+                        <th>Catégorie</th>
+                        <th>Couleur fond</th>
+                        <th>Emoji</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Méthodologie</td>
+                        <td><code>#10B981</code></td>
+                        <td>—</td>
+                    </tr>
+                    <tr>
+                        <td>Orientation</td>
+                        <td><code>#EF4444</code></td>
+                        <td>🎯</td>
+                    </tr>
+                    <tr>
+                        <td>Vie étudiante</td>
+                        <td><code>#3B82F6</code></td>
+                        <td>📚</td>
+                    </tr>
+                    <tr>
+                        <td>Actualités juridiques</td>
+                        <td><code>#F59E0B</code></td>
+                        <td>⚖️</td>
+                    </tr>
+                    <tr>
+                        <td>Examens & Concours</td>
+                        <td><code>#8B5CF6</code></td>
+                        <td>🏆</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3 style="margin-top: 32px;">📝 Typographie</h3>
+            <table class="specs-table">
+                <thead>
+                    <tr>
+                        <th>Élément</th>
+                        <th>Font</th>
+                        <th>Couleur</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Titre article</td>
+                        <td><code>Poppins 600, 16px</code></td>
+                        <td><code>#1A1A1A</code></td>
+                    </tr>
+                    <tr>
+                        <td>Extrait article</td>
+                        <td><code>Poppins 400, 14px</code></td>
+                        <td><code>#4A4A4A</code></td>
+                    </tr>
+                    <tr>
+                        <td>Meta (date/temps)</td>
+                        <td><code>Poppins 400, 13px</code></td>
+                        <td><code>#6B7280</code> ou <code>#10B981</code></td>
+                    </tr>
+                    <tr>
+                        <td>Lien "Lire"</td>
+                        <td><code>Poppins 500, 14px</code></td>
+                        <td><code>#B0001D</code></td>
+                    </tr>
+                    <tr>
+                        <td>Tag catégorie</td>
+                        <td><code>Poppins 600, 12px</code></td>
+                        <td><code>#FFFFFF</code></td>
+                    </tr>
+                    <tr>
+                        <td>Titre catégorie</td>
+                        <td><code>Poppins 600, 15px</code></td>
+                        <td><code>#1A1A1A</code></td>
+                    </tr>
+                    <tr>
+                        <td>Titre section</td>
+                        <td><code>Poppins 700, 24px</code></td>
+                        <td><code>#1A1A1A</code></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+</html>

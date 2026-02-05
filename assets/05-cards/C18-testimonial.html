@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cards Témoignages — Design System Jurible</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --color-primary: #B0001D;
+            --color-secondary: #7C3AED;
+            --color-white: #FFFFFF;
+            --color-black: #1A1A1A;
+            --color-gray-100: #F3F4F6;
+            --color-gray-200: #E5E7EB;
+            --color-gray-400: #9CA3AF;
+            --color-success: #10B981;
+            --color-success-light: #ECFDF5;
+            --color-success-dark: #065F46;
+            --color-warning: #F59E0B;
+            --gradient: linear-gradient(135deg, #B0001D 0%, #7C3AED 100%);
+            --space-md: 24px;
+            --space-lg: 32px;
+            --radius-md: 8px;
+            --radius-lg: 12px;
+            --radius-full: 9999px;
+            --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.1), 0 1px 2px rgba(0, 0, 0, 0.06);
+            --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1), 0 4px 6px rgba(0, 0, 0, 0.05);
+            --transition: all 150ms ease;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: #F9FAFB;
+            padding: 48px;
+            color: var(--color-black);
+        }
+
+        .container { max-width: 1200px; margin: 0 auto; }
+
+        h1 { font-size: 32px; font-weight: 700; margin-bottom: 8px; }
+
+        .subtitle { font-size: 14px; color: var(--color-gray-400); margin-bottom: 48px; }
+
+        .section { margin-bottom: 64px; }
+
+        .section-title { font-size: 20px; font-weight: 600; margin-bottom: 8px; }
+
+        .section-desc { font-size: 14px; color: var(--color-gray-400); margin-bottom: 24px; }
+
+        .cards-row { display: flex; gap: 24px; flex-wrap: wrap; }
+
+        .state-label {
+            font-size: 11px;
+            font-weight: 600;
+            color: var(--color-gray-400);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 12px;
+            background: var(--color-gray-100);
+            padding: 8px 16px;
+            border-radius: var(--radius-md) var(--radius-md) 0 0;
+        }
+
+        /* =========================================
+           AVATAR - 2 VARIANTES
+           ========================================= */
+        .avatar {
+            width: 44px;
+            height: 44px;
+            border-radius: var(--radius-full);
+            flex-shrink: 0;
+            overflow: hidden;
+        }
+
+        .avatar--lg {
+            width: 64px;
+            height: 64px;
+        }
+
+        /* Variante 1 : PHOTO */
+        .avatar--photo {
+            background-size: cover;
+            background-position: center;
+            background-color: var(--color-gray-200); /* placeholder si image ne charge pas */
+        }
+
+        /* Variante 2 : INITIALES (fallback) */
+        .avatar--initials {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            color: var(--color-white);
+            background: var(--gradient);
+            font-size: 14px;
+        }
+
+        .avatar--initials.avatar--lg {
+            font-size: 20px;
+        }
+
+        /* =========================================
+           ÉTOILES
+           ========================================= */
+        .stars { display: flex; gap: 2px; margin-bottom: 12px; }
+        .stars--lg { gap: 4px; margin-bottom: 24px; justify-content: center; }
+        .star { color: var(--color-warning); font-size: 16px; }
+        .star--lg { font-size: 24px; }
+
+        /* =========================================
+           BADGE RÉSULTAT
+           ========================================= */
+        .badge-result {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--color-success-dark);
+            background: var(--color-success-light);
+            padding: 6px 12px;
+            border-radius: var(--radius-full);
+            margin-bottom: 16px;
+        }
+
+        .badge-result--lg { font-size: 14px; padding: 8px 16px; margin-bottom: 24px; }
+
+        /* =========================================
+           AUTEUR
+           ========================================= */
+        .author { display: flex; align-items: center; gap: 12px; }
+        .author--center { justify-content: center; gap: 16px; }
+        .author__info h4 { font-size: 14px; font-weight: 600; color: var(--color-black); margin-bottom: 2px; }
+        .author__info p { font-size: 13px; color: var(--color-gray-400); }
+        .author__info--lg h4 { font-size: 18px; margin-bottom: 4px; }
+        .author__info--lg p { font-size: 14px; }
+
+        /* =========================================
+           1. CARD TÉMOIGNAGE STANDARD
+           ========================================= */
+        .card-testimonial {
+            width: 360px;
+            background: var(--color-white);
+            border-radius: var(--radius-lg);
+            border: 1px solid var(--color-gray-200);
+            box-shadow: var(--shadow-sm);
+            padding: var(--space-md);
+            transition: var(--transition);
+        }
+
+        .card-testimonial:hover {
+            box-shadow: var(--shadow-lg);
+            transform: translateY(-2px);
+        }
+
+        .card-testimonial__quote {
+            font-size: 15px;
+            line-height: 1.6;
+            color: var(--color-black);
+            margin-bottom: 16px;
+            font-style: italic;
+        }
+
+        .card-testimonial__quote strong { font-style: normal; font-weight: 600; }
+
+        /* =========================================
+           2. CARD TÉMOIGNAGE HERO
+           ========================================= */
+        .testimonial-hero {
+            max-width: 800px;
+            background: var(--color-white);
+            border-radius: var(--radius-lg);
+            border: 1px solid var(--color-gray-200);
+            box-shadow: var(--shadow-lg);
+            padding: var(--space-lg) 48px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .testimonial-hero__carousel { position: relative; min-height: 300px; }
+
+        .testimonial-hero__slide {
+            opacity: 0;
+            visibility: hidden;
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            transition: opacity 0.5s ease, visibility 0.5s ease;
+        }
+
+        .testimonial-hero__slide.active {
+            opacity: 1;
+            visibility: visible;
+            position: relative;
+        }
+
+        .testimonial-hero__quote {
+            font-size: 22px;
+            line-height: 1.6;
+            color: var(--color-black);
+            margin-bottom: 24px;
+            font-style: italic;
+        }
+
+        .testimonial-hero__quote strong {
+            font-style: normal;
+            font-weight: 600;
+            color: var(--color-primary);
+        }
+
+        .testimonial-hero__dots { display: flex; justify-content: center; gap: 8px; margin-top: 24px; }
+
+        .testimonial-hero__dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--color-gray-200);
+            border: none;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .testimonial-hero__dot.active {
+            background: var(--color-primary);
+            width: 24px;
+            border-radius: 4px;
+        }
+
+        .testimonial-hero__progress {
+            position: absolute;
+            bottom: 0; left: 0;
+            height: 3px;
+            background: var(--gradient);
+            animation: progress 4s linear infinite;
+        }
+
+        @keyframes progress { from { width: 0%; } to { width: 100%; } }
+
+        /* =========================================
+           3. BADGE TRUST
+           ========================================= */
+        .badge-trust {
+            display: inline-flex;
+            align-items: center;
+            gap: 16px;
+            background: var(--color-white);
+            border-radius: var(--radius-lg);
+            border: 1px solid var(--color-gray-200);
+            box-shadow: var(--shadow-sm);
+            padding: 16px 20px;
+        }
+
+        .badge-trust__icon {
+            width: 48px;
+            height: 48px;
+            background: var(--gradient);
+            border-radius: var(--radius-md);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+        }
+
+        .badge-trust__content h4 { font-size: 15px; font-weight: 600; color: var(--color-black); margin-bottom: 2px; }
+        .badge-trust__content p { font-size: 13px; color: var(--color-gray-400); }
+
+        .badge-trust__rating { display: flex; align-items: center; gap: 8px; }
+        .badge-trust__stars { display: flex; gap: 2px; }
+        .badge-trust__score { font-size: 15px; font-weight: 600; color: var(--color-black); }
+        .badge-trust__count { font-size: 13px; color: var(--color-gray-400); }
+
+        .badge-trust--compact { padding: 12px 16px; gap: 12px; }
+        .badge-trust--compact .badge-trust__icon { width: 40px; height: 40px; font-size: 20px; }
+
+        /* =========================================
+           SPECS
+           ========================================= */
+        .specs {
+            background: var(--color-white);
+            border-radius: var(--radius-lg);
+            padding: 24px;
+            margin-top: 48px;
+        }
+
+        .specs h3 { font-size: 16px; font-weight: 600; margin-bottom: 16px; }
+
+        .specs-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+
+        .specs-table th, .specs-table td {
+            padding: 12px 16px;
+            text-align: left;
+            border-bottom: 1px solid var(--color-gray-200);
+        }
+
+        .specs-table th { font-weight: 600; background: var(--color-gray-100); }
+
+        .specs-table code {
+            background: var(--color-gray-100);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: monospace;
+            font-size: 12px;
+        }
+
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+        }
+
+        .grid-3 .card-testimonial { width: 100%; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Cards Témoignages</h1>
+        <p class="subtitle">Organisms — 3 variantes avec 2 options d'avatar (photo ou initiales)</p>
+
+        <!-- =========================================
+             AVATAR OPTIONS
+             ========================================= -->
+        <div class="section">
+            <h2 class="section-title">Options Avatar</h2>
+            <p class="section-desc">Chaque card peut avoir soit une photo, soit les initiales sur fond gradient</p>
+
+            <div class="cards-row" style="gap: 48px; align-items: center;">
+                <div style="text-align: center;">
+                    <div class="state-label" style="display: inline-block;">Photo</div>
+                    <div class="avatar avatar--photo" style="margin: 0 auto; background-image: url('https://i.pravatar.cc/100?img=1');"></div>
+                    <p style="font-size: 12px; color: var(--color-gray-400); margin-top: 8px;">44×44px</p>
+                </div>
+                <div style="text-align: center;">
+                    <div class="state-label" style="display: inline-block;">Initiales</div>
+                    <div class="avatar avatar--initials" style="margin: 0 auto;">ML</div>
+                    <p style="font-size: 12px; color: var(--color-gray-400); margin-top: 8px;">44×44px</p>
+                </div>
+                <div style="text-align: center;">
+                    <div class="state-label" style="display: inline-block;">Photo (Large)</div>
+                    <div class="avatar avatar--lg avatar--photo" style="margin: 0 auto; background-image: url('https://i.pravatar.cc/100?img=10');"></div>
+                    <p style="font-size: 12px; color: var(--color-gray-400); margin-top: 8px;">64×64px</p>
+                </div>
+                <div style="text-align: center;">
+                    <div class="state-label" style="display: inline-block;">Initiales (Large)</div>
+                    <div class="avatar avatar--lg avatar--initials" style="margin: 0 auto;">MB</div>
+                    <p style="font-size: 12px; color: var(--color-gray-400); margin-top: 8px;">64×64px</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- =========================================
+             1. CARD STANDARD
+             ========================================= -->
+        <div class="section">
+            <h2 class="section-title">1. Card Témoignage Standard</h2>
+            <p class="section-desc">Pour grille x3 — Avec photo ou initiales</p>
+
+            <div class="cards-row">
+                <!-- PHOTO -->
+                <div>
+                    <div class="state-label">Avec photo</div>
+                    <div class="card-testimonial">
+                        <div class="stars">
+                            <span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span>
+                        </div>
+                        <p class="card-testimonial__quote">
+                            "J'ai validé ma L1 du premier coup grâce à Jurible. Les vidéos sont super claires et les fiches m'ont fait gagner un temps fou."
+                        </p>
+                        <div class="badge-result">✓ L1 validée avec mention</div>
+                        <div class="author">
+                            <div class="avatar avatar--photo" style="background-image: url('https://i.pravatar.cc/100?img=1');"></div>
+                            <div class="author__info">
+                                <h4>Marie L.</h4>
+                                <p>L1 Droit — Paris 1</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- INITIALES -->
+                <div>
+                    <div class="state-label">Avec initiales</div>
+                    <div class="card-testimonial">
+                        <div class="stars">
+                            <span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span>
+                        </div>
+                        <p class="card-testimonial__quote">
+                            "Les QCM et flashcards sont parfaits pour réviser dans les transports. J'ai eu <strong>15/20</strong> alors que je partais de zéro."
+                        </p>
+                        <div class="badge-result">✓ 15/20 en Droit constit</div>
+                        <div class="author">
+                            <div class="avatar avatar--initials">TC</div>
+                            <div class="author__info">
+                                <h4>Thomas C.</h4>
+                                <p>L1 Droit — Lyon 3</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- =========================================
+             2. CARD HERO
+             ========================================= -->
+        <div class="section">
+            <h2 class="section-title">2. Card Témoignage Hero</h2>
+            <p class="section-desc">Mise en avant — Avec photo ou initiales</p>
+
+            <div class="cards-row">
+                <!-- HERO PHOTO -->
+                <div>
+                    <div class="state-label">Avec photo</div>
+                    <div class="testimonial-hero" style="max-width: 480px;">
+                        <div class="stars stars--lg">
+                            <span class="star star--lg">★</span><span class="star star--lg">★</span><span class="star star--lg">★</span><span class="star star--lg">★</span><span class="star star--lg">★</span>
+                        </div>
+                        <p class="testimonial-hero__quote">
+                            "J'ai validé mon année à <strong>12.55/20</strong>. Je recommande à tous les L1 !"
+                        </p>
+                        <div class="badge-result badge-result--lg">✓ Année validée</div>
+                        <div class="author author--center">
+                            <div class="avatar avatar--lg avatar--photo" style="background-image: url('https://i.pravatar.cc/100?img=10');"></div>
+                            <div class="author__info author__info--lg" style="text-align: left;">
+                                <h4>Manon B.</h4>
+                                <p>L1 Droit — Paris Assas</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- HERO INITIALES -->
+                <div>
+                    <div class="state-label">Avec initiales</div>
+                    <div class="testimonial-hero" style="max-width: 480px;">
+                        <div class="stars stars--lg">
+                            <span class="star star--lg">★</span><span class="star star--lg">★</span><span class="star star--lg">★</span><span class="star star--lg">★</span><span class="star star--lg">★</span>
+                        </div>
+                        <p class="testimonial-hero__quote">
+                            "Le coaching individuel a fait toute <strong>la différence</strong>."
+                        </p>
+                        <div class="badge-result badge-result--lg">✓ Capacité obtenue</div>
+                        <div class="author author--center">
+                            <div class="avatar avatar--lg avatar--initials">PD</div>
+                            <div class="author__info author__info--lg" style="text-align: left;">
+                                <h4>Pierre D.</h4>
+                                <p>Reconversion — Capacité</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CARROUSEL -->
+            <p class="section-desc" style="margin-top: 32px;">Carrousel avec défilement auto (4s)</p>
+            <div class="testimonial-hero">
+                <div class="testimonial-hero__carousel">
+                    <div class="testimonial-hero__slide active">
+                        <div class="stars stars--lg">
+                            <span class="star star--lg">★</span><span class="star star--lg">★</span><span class="star star--lg">★</span><span class="star star--lg">★</span><span class="star star--lg">★</span>
+                        </div>
+                        <p class="testimonial-hero__quote">"J'ai révisé mes partiels uniquement avec vos fiches et j'ai validé mon année à <strong>12.55/20</strong>."</p>
+                        <div class="badge-result badge-result--lg">✓ Année validée</div>
+                        <div class="author author--center">
+                            <div class="avatar avatar--lg avatar--photo" style="background-image: url('https://i.pravatar.cc/100?img=10');"></div>
+                            <div class="author__info author__info--lg" style="text-align: left;">
+                                <h4>Manon B.</h4>
+                                <p>L1 Droit — Paris Assas</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="testimonial-hero__slide">
+                        <div class="stars stars--lg">
+                            <span class="star star--lg">★</span><span class="star star--lg">★</span><span class="star star--lg">★</span><span class="star star--lg">★</span><span class="star star--lg">★</span>
+                        </div>
+                        <p class="testimonial-hero__quote">"En reconversion à 35 ans, le coaching individuel a fait toute <strong>la différence</strong>."</p>
+                        <div class="badge-result badge-result--lg">✓ Capacité obtenue</div>
+                        <div class="author author--center">
+                            <div class="avatar avatar--lg avatar--initials">PD</div>
+                            <div class="author__info author__info--lg" style="text-align: left;">
+                                <h4>Pierre D.</h4>
+                                <p>Reconversion — Capacité</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="testimonial-hero__slide">
+                        <div class="stars stars--lg">
+                            <span class="star star--lg">★</span><span class="star star--lg">★</span><span class="star star--lg">★</span><span class="star star--lg">★</span><span class="star star--lg">★</span>
+                        </div>
+                        <p class="testimonial-hero__quote">"Les Fiches PDF sont parfaites : je les imprime, je surligne. <strong>Format idéal.</strong>"</p>
+                        <div class="badge-result badge-result--lg">✓ 16/20 aux partiels</div>
+                        <div class="author author--center">
+                            <div class="avatar avatar--lg avatar--photo" style="background-image: url('https://i.pravatar.cc/100?img=20');"></div>
+                            <div class="author__info author__info--lg" style="text-align: left;">
+                                <h4>Camille B.</h4>
+                                <p>L2 Droit — Lyon 3</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-hero__dots">
+                    <button class="testimonial-hero__dot active" data-slide="0"></button>
+                    <button class="testimonial-hero__dot" data-slide="1"></button>
+                    <button class="testimonial-hero__dot" data-slide="2"></button>
+                </div>
+                <div class="testimonial-hero__progress"></div>
+            </div>
+        </div>
+
+        <!-- =========================================
+             3. BADGE TRUST
+             ========================================= -->
+        <div class="section">
+            <h2 class="section-title">3. Badge Trust</h2>
+            <p class="section-desc">Social proof compact</p>
+
+            <div class="cards-row" style="flex-direction: column; gap: 24px;">
+                <div>
+                    <div class="state-label">Complet</div>
+                    <div class="badge-trust">
+                        <div class="badge-trust__icon">🎓</div>
+                        <div class="badge-trust__content">
+                            <h4>École en ligne depuis 2018</h4>
+                            <p>25 000+ étudiants formés</p>
+                        </div>
+                        <div class="badge-trust__rating">
+                            <div class="badge-trust__stars">
+                                <span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span>
+                            </div>
+                            <span class="badge-trust__score">4.8/5</span>
+                            <span class="badge-trust__count">(+150 avis)</span>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <div class="state-label">Compact</div>
+                    <div class="badge-trust badge-trust--compact">
+                        <div class="badge-trust__icon">🎓</div>
+                        <div class="badge-trust__content">
+                            <h4>25 000+ étudiants formés</h4>
+                        </div>
+                        <div class="badge-trust__rating">
+                            <div class="badge-trust__stars">
+                                <span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span>
+                            </div>
+                            <span class="badge-trust__score">4.8/5</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- =========================================
+             SPECS
+             ========================================= -->
+        <div class="specs">
+            <h3>Specs Avatar</h3>
+            <table class="specs-table">
+                <thead>
+                    <tr>
+                        <th>Type</th>
+                        <th>Classe CSS</th>
+                        <th>Specs</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Photo</strong></td>
+                        <td><code>.avatar.avatar--photo</code></td>
+                        <td><code>background-image: url(...); background-size: cover; background-position: center;</code></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Initiales</strong></td>
+                        <td><code>.avatar.avatar--initials</code></td>
+                        <td><code>background: linear-gradient(135deg, #B0001D, #7C3AED); color: #FFF; font-weight: 600;</code></td>
+                    </tr>
+                    <tr>
+                        <td>Standard</td>
+                        <td><code>.avatar</code></td>
+                        <td><code>44×44px</code> / font-size: <code>14px</code></td>
+                    </tr>
+                    <tr>
+                        <td>Hero (large)</td>
+                        <td><code>.avatar.avatar--lg</code></td>
+                        <td><code>64×64px</code> / font-size: <code>20px</code></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+
+    <script>
+        const slides = document.querySelectorAll('.testimonial-hero__slide');
+        const dots = document.querySelectorAll('.testimonial-hero__dot');
+        const progress = document.querySelector('.testimonial-hero__progress');
+        let currentSlide = 0;
+
+        function showSlide(index) {
+            slides.forEach(s => s.classList.remove('active'));
+            dots.forEach(d => d.classList.remove('active'));
+            slides[index].classList.add('active');
+            dots[index].classList.add('active');
+            progress.style.animation = 'none';
+            progress.offsetHeight;
+            progress.style.animation = 'progress 4s linear';
+        }
+
+        setInterval(() => { currentSlide = (currentSlide + 1) % slides.length; showSlide(currentSlide); }, 4000);
+
+        dots.forEach((dot, i) => dot.addEventListener('click', () => { currentSlide = i; showSlide(i); }));
+    </script>
+</body>
+</html>

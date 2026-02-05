@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jurible — Bandeau Universités</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bordeaux: #B0001D;
+    --violet: #7C3AED;
+    --gradient-jurible: linear-gradient(135deg, #B0001D 0%, #DC2626 45%, #7C3AED 100%);
+    --text-dark: #1A1A1A;
+    --text-muted: #9CA3AF;
+    --font: 'Poppins', sans-serif;
+  }
+
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: var(--font); background: #FFFFFF; }
+
+  .device-label {
+    text-align: center;
+    padding: 12px;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: #9CA3AF;
+  }
+
+  /* ══════════════════════════════════════════════
+     BANDEAU UNIVERSITÉS
+  ══════════════════════════════════════════════ */
+  .uni-banner {
+    background: linear-gradient(180deg, #FAF8FF 0%, #F5F1FE 100%);
+    padding: 48px 48px;
+    text-align: center;
+  }
+
+  .uni-banner h3 {
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--text-muted);
+    margin-bottom: 32px;
+  }
+
+  .uni-banner .logos-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 12px 48px;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .uni-banner .logo-item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.3s ease;
+  }
+  .uni-banner .logo-item:hover {
+    transform: translateY(-2px);
+  }
+
+  /* Images : grisées par défaut → colorées au hover */
+  .uni-banner .logo-item img {
+    height: 40px;
+    width: auto;
+    max-width: 150px;
+    object-fit: contain;
+    filter: grayscale(100%);
+    opacity: 0.45;
+    transition: all 0.3s ease;
+  }
+  .uni-banner .logo-item:hover img {
+    filter: grayscale(0%);
+    opacity: 1;
+  }
+
+  /* Placeholders (à remplacer par <img>) */
+  .uni-banner .logo-placeholder {
+    height: 40px;
+    padding: 0 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1.5px dashed #D1D5DB;
+    border-radius: 8px;
+    font-size: 11px;
+    font-weight: 500;
+    color: #D1D5DB;
+    transition: all 0.3s ease;
+  }
+  .uni-banner .logo-item:hover .logo-placeholder {
+    border-color: var(--violet);
+    color: var(--violet);
+  }
+
+  /* ══════════════════════════════════════════════
+     MOBILE
+  ══════════════════════════════════════════════ */
+  .mobile-frame {
+    max-width: 390px;
+    margin: 0 auto;
+    border-radius: 24px;
+    overflow: hidden;
+    box-shadow: 0 8px 40px rgba(0,0,0,0.12);
+    border: 1px solid #E5E7EB;
+    background: #FFFFFF;
+  }
+  .mobile-frame .uni-banner {
+    padding: 32px 20px;
+  }
+  .mobile-frame .uni-banner h3 {
+    font-size: 13px;
+    margin-bottom: 24px;
+  }
+  .mobile-frame .uni-banner .logos-row {
+    gap: 10px 24px;
+  }
+  .mobile-frame .uni-banner .logo-item img,
+  .mobile-frame .uni-banner .logo-placeholder {
+    height: 32px;
+  }
+  .mobile-frame .uni-banner .logo-placeholder {
+    padding: 0 14px;
+    font-size: 9px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    * { transition-duration: 0.01ms !important; }
+  }
+</style>
+</head>
+<body>
+
+<!-- DESKTOP -->
+<p class="device-label">Desktop</p>
+<section class="uni-banner">
+  <h3>Nos cours préparent les étudiants des meilleures universités françaises</h3>
+  <div class="logos-row">
+    <div class="logo-item"><!-- <img src="logo-paris1-sorbonne.png" alt="Paris 1 Sorbonne"> --><div class="logo-placeholder">Paris 1 Sorbonne</div></div>
+    <div class="logo-item"><!-- <img src="logo-paris2-assas.png" alt="Paris 2 Assas"> --><div class="logo-placeholder">Paris 2 Assas</div></div>
+    <div class="logo-item"><!-- <img src="logo-paris-nanterre.png" alt="Paris Nanterre"> --><div class="logo-placeholder">Paris Nanterre</div></div>
+    <div class="logo-item"><!-- <img src="logo-paris-saclay.png" alt="Paris-Saclay"> --><div class="logo-placeholder">Paris-Saclay</div></div>
+    <div class="logo-item"><!-- <img src="logo-lyon3.png" alt="Lyon 3"> --><div class="logo-placeholder">Lyon 3</div></div>
+    <div class="logo-item"><!-- <img src="logo-bordeaux.png" alt="Bordeaux"> --><div class="logo-placeholder">Bordeaux</div></div>
+    <div class="logo-item"><!-- <img src="logo-aix-marseille.png" alt="Aix-Marseille"> --><div class="logo-placeholder">Aix-Marseille</div></div>
+    <div class="logo-item"><!-- <img src="logo-strasbourg.png" alt="Strasbourg"> --><div class="logo-placeholder">Strasbourg</div></div>
+    <div class="logo-item"><!-- <img src="logo-clermont.png" alt="Clermont Auvergne"> --><div class="logo-placeholder">Clermont Auvergne</div></div>
+    <div class="logo-item"><!-- <img src="logo-cote-azur.png" alt="Côte d'Azur"> --><div class="logo-placeholder">Côte d'Azur</div></div>
+  </div>
+</section>
+
+<br><br>
+
+<!-- MOBILE -->
+<p class="device-label">Mobile</p>
+<div class="mobile-frame">
+  <section class="uni-banner">
+    <h3>Nos cours préparent les étudiants des meilleures universités françaises</h3>
+    <div class="logos-row">
+      <div class="logo-item"><div class="logo-placeholder">Paris 1 Sorbonne</div></div>
+      <div class="logo-item"><div class="logo-placeholder">Paris 2 Assas</div></div>
+      <div class="logo-item"><div class="logo-placeholder">Paris Nanterre</div></div>
+      <div class="logo-item"><div class="logo-placeholder">Paris-Saclay</div></div>
+      <div class="logo-item"><div class="logo-placeholder">Lyon 3</div></div>
+      <div class="logo-item"><div class="logo-placeholder">Bordeaux</div></div>
+      <div class="logo-item"><div class="logo-placeholder">Aix-Marseille</div></div>
+      <div class="logo-item"><div class="logo-placeholder">Strasbourg</div></div>
+      <div class="logo-item"><div class="logo-placeholder">Clermont Auvergne</div></div>
+      <div class="logo-item"><div class="logo-placeholder">Côte d'Azur</div></div>
+    </div>
+  </section>
+</div>
+
+<br><br>
+
+<!--
+  INTÉGRATION : remplacer chaque placeholder par :
+  
+  <div class="logo-item">
+    <img src="votre-logo.png" alt="Nom université">
+  </div>
+  
+  → Grisé par défaut
+  → Coloré + léger lift au hover
+-->
+
+</body>
+</html>

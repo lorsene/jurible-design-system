@@ -1,0 +1,1140 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jurible Design System - Blocs Comparaison</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --color-primary: #B0001D;
+            --color-secondary: #7C3AED;
+            --color-success: #10B981;
+            --color-warning: #F59E0B;
+            --color-danger: #EF4444;
+            --gradient-jurible: linear-gradient(135deg, #B0001D 0%, #DC2626 50%, #7C3AED 100%);
+            --text-dark: #1A1A1A;
+            --text-gray: #4A4A4A;
+            --text-muted: #6B7280;
+            --text-contrast: #FFFFFF;
+            --bg-white: #FFFFFF;
+            --bg-light: #F9FAFB;
+            --bg-gray: #F3F4F6;
+            --bg-border: #E5E7EB;
+            --bg-success-light: #ECFDF5;
+            --bg-danger-light: #FEF2F2;
+            --shadow-sm: 0 1px 3px rgba(0,0,0,0.08);
+            --shadow-md: 0 4px 12px rgba(0,0,0,0.1);
+            --radius-md: 8px;
+            --radius-lg: 12px;
+            --radius-xl: 16px;
+            --radius-full: 9999px;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: var(--bg-light);
+            color: var(--text-dark);
+            line-height: 1.5;
+            padding: 40px 20px;
+        }
+
+        .doc-container { max-width: 1100px; margin: 0 auto; }
+        .doc-header {
+            text-align: center;
+            margin-bottom: 48px;
+            padding-bottom: 32px;
+            border-bottom: 2px solid var(--bg-border);
+        }
+        .doc-header h1 { font-size: 28px; font-weight: 700; color: var(--color-primary); margin-bottom: 8px; }
+        .doc-header p { font-size: 15px; color: var(--text-gray); }
+
+        .component-wrapper { margin-bottom: 80px; }
+        .state-label {
+            font-size: 11px; font-weight: 600; text-transform: uppercase;
+            letter-spacing: 0.5px; color: var(--text-muted);
+            padding: 4px 10px; background: var(--bg-gray);
+            border-radius: 4px; width: fit-content; margin-bottom: 16px;
+        }
+
+        /* =====================================================
+           SECTION HEADER (commun à tous les blocs)
+           ===================================================== */
+        .section-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .section-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: rgba(124, 58, 237, 0.1);
+            color: var(--color-secondary);
+            font-size: 13px;
+            font-weight: 600;
+            padding: 8px 16px;
+            border-radius: var(--radius-full);
+            margin-bottom: 16px;
+        }
+
+        .section-title {
+            font-size: 32px;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 12px;
+        }
+
+        .section-title span {
+            background: var(--gradient-jurible);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .section-subtitle {
+            font-size: 16px;
+            font-weight: 400;
+            color: var(--text-muted);
+        }
+
+        /* =====================================================
+           V1: CARDS SANS/AVEC (2 colonnes)
+           ===================================================== */
+        .comparison-cards {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 24px;
+        }
+
+        .comparison-card {
+            background: var(--bg-white);
+            border-radius: var(--radius-xl);
+            padding: 32px;
+            border: 2px solid var(--bg-border);
+            transition: all 0.3s ease;
+        }
+
+        .comparison-card:hover {
+            transform: translateY(-4px);
+        }
+
+        .comparison-card--negative {
+            background: var(--bg-white);
+        }
+
+        .comparison-card--negative:hover {
+            box-shadow: 0 8px 30px rgba(239, 68, 68, 0.1);
+        }
+
+        .comparison-card--positive {
+            background: var(--bg-success-light);
+            border-color: var(--color-success);
+        }
+
+        .comparison-card--positive:hover {
+            box-shadow: 0 8px 30px rgba(16, 185, 129, 0.2);
+        }
+
+        .comparison-card__header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 24px;
+        }
+
+        .comparison-card__icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            transition: all 0.3s ease;
+        }
+
+        .comparison-card:hover .comparison-card__icon {
+            transform: scale(1.1) rotate(5deg);
+        }
+
+        .comparison-card--negative .comparison-card__icon {
+            background: var(--bg-gray);
+        }
+
+        .comparison-card--positive .comparison-card__icon {
+            background: rgba(16, 185, 129, 0.15);
+        }
+
+        .comparison-card--positive:hover .comparison-card__icon {
+            background: rgba(16, 185, 129, 0.25);
+            box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
+        }
+
+        .comparison-card__title {
+            font-size: 20px;
+            font-weight: 700;
+        }
+
+        .comparison-card--negative .comparison-card__title {
+            color: var(--text-dark);
+        }
+
+        .comparison-card--positive .comparison-card__title {
+            color: var(--color-success);
+        }
+
+        .comparison-card__list {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .comparison-card__item {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            font-size: 15px;
+            color: var(--text-gray);
+            padding: 8px;
+            border-radius: var(--radius-md);
+            transition: all 0.2s ease;
+        }
+
+        .comparison-card__item:hover {
+            background: rgba(0,0,0,0.02);
+            transform: translateX(4px);
+        }
+
+        .comparison-card--positive .comparison-card__item:hover {
+            background: rgba(16, 185, 129, 0.08);
+        }
+
+        .comparison-card__item-icon {
+            width: 20px;
+            height: 20px;
+            min-width: 20px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: 2px;
+            transition: all 0.2s ease;
+        }
+
+        .comparison-card__item:hover .comparison-card__item-icon {
+            transform: scale(1.15);
+        }
+
+        .comparison-card__item-icon--negative {
+            background: rgba(239, 68, 68, 0.1);
+            color: var(--color-danger);
+        }
+
+        .comparison-card__item:hover .comparison-card__item-icon--negative {
+            background: var(--color-danger);
+            color: white;
+            box-shadow: 0 2px 8px rgba(239, 68, 68, 0.3);
+        }
+
+        .comparison-card__item-icon--positive {
+            background: var(--color-success);
+            color: white;
+            box-shadow: 0 2px 8px rgba(16, 185, 129, 0.3);
+        }
+
+        .comparison-card__item:hover .comparison-card__item-icon--positive {
+            box-shadow: 0 4px 12px rgba(16, 185, 129, 0.4);
+        }
+
+        .comparison-card__item-icon svg {
+            width: 12px;
+            height: 12px;
+        }
+
+        /* =====================================================
+           V2: TABLEAU AVANT/APRÈS
+           ===================================================== */
+        .comparison-table-wrapper {
+            background: var(--bg-white);
+            border-radius: var(--radius-xl);
+            overflow: hidden;
+            box-shadow: var(--shadow-sm);
+            transition: all 0.3s ease;
+        }
+
+        .comparison-table-wrapper:hover {
+            box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+        }
+
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .comparison-table th,
+        .comparison-table td {
+            padding: 16px 24px;
+            text-align: left;
+            border-bottom: 1px solid var(--bg-border);
+            transition: all 0.2s ease;
+        }
+
+        .comparison-table thead th {
+            font-size: 14px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .comparison-table thead th:first-child {
+            background: var(--bg-gray);
+            color: var(--text-dark);
+        }
+
+        .comparison-table thead th.col-before {
+            background: var(--bg-danger-light);
+            color: var(--color-danger);
+        }
+
+        .comparison-table thead th.col-after {
+            background: var(--bg-success-light);
+            color: var(--color-success);
+        }
+
+        .comparison-table tbody tr {
+            transition: all 0.2s ease;
+        }
+
+        .comparison-table tbody tr:hover {
+            background: var(--bg-light);
+        }
+
+        .comparison-table tbody tr:hover td {
+            transform: scale(1.01);
+        }
+
+        .comparison-table tbody td {
+            font-size: 15px;
+        }
+
+        .comparison-table tbody td:first-child {
+            font-weight: 600;
+            color: var(--text-dark);
+            background: var(--bg-light);
+        }
+
+        .comparison-table tbody tr:hover td:first-child {
+            background: var(--bg-gray);
+        }
+
+        .comparison-table tbody td.cell-before {
+            color: var(--color-danger);
+        }
+
+        .comparison-table tbody td.cell-after {
+            color: var(--color-success);
+            font-weight: 500;
+        }
+
+        .comparison-table tbody tr:last-child td {
+            border-bottom: none;
+        }
+
+        /* =====================================================
+           V3: TABLEAU COMPARATIF MULTI-COLONNES
+           ===================================================== */
+        .comparison-table-multi thead th {
+            text-align: center;
+        }
+
+        .comparison-table-multi thead th:first-child {
+            text-align: left;
+        }
+
+        .comparison-table-multi thead th.col-highlight {
+            background: var(--color-primary);
+            color: white;
+        }
+
+        .comparison-table-multi thead th.col-other {
+            background: var(--bg-gray);
+            color: var(--text-dark);
+        }
+
+        .comparison-table-multi tbody td {
+            text-align: center;
+        }
+
+        .comparison-table-multi tbody td:first-child {
+            text-align: left;
+        }
+
+        .comparison-table-multi tbody td.cell-highlight {
+            background: rgba(176, 0, 29, 0.03);
+            position: relative;
+        }
+
+        .comparison-table-multi tbody tr:hover td.cell-highlight {
+            background: rgba(176, 0, 29, 0.08);
+        }
+
+        /* Bordure lumineuse sur la colonne Jurible */
+        .comparison-table-multi thead th.col-highlight {
+            box-shadow: 0 4px 20px rgba(176, 0, 29, 0.3);
+        }
+
+        /* Icônes de statut */
+        .status-icon {
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .comparison-table tbody tr:hover .status-icon {
+            transform: scale(1.15);
+        }
+
+        .status-icon--yes {
+            background: rgba(16, 185, 129, 0.15);
+            color: var(--color-success);
+        }
+
+        .comparison-table tbody tr:hover .status-icon--yes {
+            background: var(--color-success);
+            color: white;
+            box-shadow: 0 4px 12px rgba(16, 185, 129, 0.4);
+        }
+
+        .status-icon--no {
+            background: rgba(107, 114, 128, 0.1);
+            color: var(--text-muted);
+        }
+
+        .comparison-table tbody tr:hover .status-icon--no {
+            background: rgba(239, 68, 68, 0.15);
+            color: var(--color-danger);
+        }
+
+        .status-icon--partial {
+            background: rgba(245, 158, 11, 0.15);
+            color: var(--color-warning);
+        }
+
+        .comparison-table tbody tr:hover .status-icon--partial {
+            background: var(--color-warning);
+            color: white;
+            box-shadow: 0 4px 12px rgba(245, 158, 11, 0.4);
+        }
+
+        .status-icon svg {
+            width: 14px;
+            height: 14px;
+        }
+
+        .price-highlight {
+            font-weight: 700;
+            color: var(--color-success);
+            transition: all 0.2s ease;
+        }
+
+        .comparison-table tbody tr:hover .price-highlight {
+            transform: scale(1.05);
+            display: inline-block;
+        }
+
+        /* =====================================================
+           V4: TABLEAU HEADER NOIR/GRADIENT
+           ===================================================== */
+        .comparison-table-dark thead th {
+            background: var(--text-dark);
+            color: white;
+            text-align: center;
+        }
+
+        .comparison-table-dark thead th:first-child {
+            background: var(--text-dark);
+            color: white;
+            text-align: left;
+        }
+
+        .comparison-table-dark thead th.col-highlight {
+            background: var(--gradient-jurible);
+            box-shadow: 0 4px 20px rgba(176, 0, 29, 0.4);
+            position: relative;
+        }
+
+        .comparison-table-dark thead th.col-highlight::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: var(--gradient-jurible);
+        }
+
+        .comparison-table-dark tbody td {
+            text-align: center;
+            font-size: 14px;
+            color: var(--text-gray);
+        }
+
+        .comparison-table-dark tbody td:first-child {
+            text-align: left;
+            font-weight: 600;
+            color: var(--text-dark);
+        }
+
+        .comparison-table-dark tbody td.cell-highlight {
+            background: rgba(176, 0, 29, 0.03);
+            font-weight: 500;
+            color: var(--text-dark);
+            position: relative;
+        }
+
+        .comparison-table-dark tbody tr:hover td.cell-highlight {
+            background: rgba(176, 0, 29, 0.08);
+        }
+
+        .comparison-table-dark tbody td.cell-highlight strong {
+            color: var(--color-primary);
+            transition: all 0.2s ease;
+        }
+
+        .comparison-table-dark tbody tr:hover td.cell-highlight strong {
+            transform: scale(1.05);
+            display: inline-block;
+        }
+
+        /* CTA après tableau */
+        .comparison-cta {
+            text-align: center;
+            margin-top: 32px;
+        }
+
+        .comparison-cta__button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            background: var(--gradient-jurible);
+            color: white;
+            font-family: inherit;
+            font-size: 15px;
+            font-weight: 600;
+            padding: 16px 32px;
+            border: none;
+            border-radius: var(--radius-md);
+            cursor: pointer;
+            box-shadow: 0 4px 14px rgba(176, 0, 29, 0.3);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .comparison-cta__button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .comparison-cta__button:hover::before {
+            left: 100%;
+        }
+
+        .comparison-cta__button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(176, 0, 29, 0.4);
+        }
+
+        .comparison-cta__button:active {
+            transform: translateY(-1px);
+        }
+
+        .comparison-cta__note {
+            margin-top: 12px;
+            font-size: 13px;
+            color: var(--text-muted);
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.6; }
+        }
+
+        /* =====================================================
+           RESPONSIVE
+           ===================================================== */
+        @media (max-width: 768px) {
+            .comparison-cards {
+                grid-template-columns: 1fr;
+            }
+
+            .section-title {
+                font-size: 24px;
+            }
+
+            .comparison-table th,
+            .comparison-table td {
+                padding: 12px 16px;
+                font-size: 13px;
+            }
+        }
+
+        /* =====================================================
+           SPECS TABLE
+           ===================================================== */
+        .specs-section {
+            background: var(--bg-white);
+            border: 1px solid var(--bg-border);
+            border-radius: var(--radius-lg);
+            padding: 32px;
+            margin-top: 48px;
+        }
+        .specs-section h3 { font-size: 16px; font-weight: 600; color: var(--text-dark); margin-bottom: 16px; }
+        .specs-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+        .specs-table th, .specs-table td { padding: 10px 12px; text-align: left; border-bottom: 1px solid var(--bg-border); }
+        .specs-table th { font-weight: 600; color: var(--text-dark); background: var(--bg-light); }
+        .specs-table td { color: var(--text-gray); }
+        .specs-table code { background: var(--bg-gray); padding: 2px 6px; border-radius: 4px; font-family: monospace; font-size: 11px; color: var(--color-primary); }
+    </style>
+</head>
+<body>
+    <div class="doc-container">
+        <header class="doc-header">
+            <h1>Blocs Comparaison</h1>
+            <p>Différentes variantes de tableaux et cards comparatifs</p>
+        </header>
+
+        <!-- =====================================================
+             V1: CARDS SANS/AVEC JURIBLE
+             ===================================================== -->
+        <div class="component-wrapper">
+            <div class="state-label">V1 — Cards Sans/Avec</div>
+            
+            <div class="section-header">
+                <div class="section-badge">⚡ Le changement</div>
+                <h2 class="section-title">Réviser <span>autrement</span></h2>
+            </div>
+
+            <div class="comparison-cards">
+                <!-- Card Négative -->
+                <div class="comparison-card comparison-card--negative">
+                    <div class="comparison-card__header">
+                        <div class="comparison-card__icon">😰</div>
+                        <h3 class="comparison-card__title">Sans Jurible</h3>
+                    </div>
+                    <div class="comparison-card__list">
+                        <div class="comparison-card__item">
+                            <span class="comparison-card__item-icon comparison-card__item-icon--negative">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                                </svg>
+                            </span>
+                            Cours incomplets ou difficiles à comprendre
+                        </div>
+                        <div class="comparison-card__item">
+                            <span class="comparison-card__item-icon comparison-card__item-icon--negative">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                                </svg>
+                            </span>
+                            Méthodologie floue, incertitude aux examens
+                        </div>
+                        <div class="comparison-card__item">
+                            <span class="comparison-card__item-icon comparison-card__item-icon--negative">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                                </svg>
+                            </span>
+                            Heures perdues à chercher les bonnes ressources
+                        </div>
+                        <div class="comparison-card__item">
+                            <span class="comparison-card__item-icon comparison-card__item-icon--negative">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                                </svg>
+                            </span>
+                            Stress permanent et peur de l'échec
+                        </div>
+                        <div class="comparison-card__item">
+                            <span class="comparison-card__item-icon comparison-card__item-icon--negative">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                                </svg>
+                            </span>
+                            Aucune idée de ton niveau réel
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card Positive -->
+                <div class="comparison-card comparison-card--positive">
+                    <div class="comparison-card__header">
+                        <div class="comparison-card__icon">🎯</div>
+                        <h3 class="comparison-card__title">Avec Jurible</h3>
+                    </div>
+                    <div class="comparison-card__list">
+                        <div class="comparison-card__item">
+                            <span class="comparison-card__item-icon comparison-card__item-icon--positive">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+                                </svg>
+                            </span>
+                            Cours clairs et structurés par des pros
+                        </div>
+                        <div class="comparison-card__item">
+                            <span class="comparison-card__item-icon comparison-card__item-icon--positive">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+                                </svg>
+                            </span>
+                            Méthodologie maîtrisée, confiance aux partiels
+                        </div>
+                        <div class="comparison-card__item">
+                            <span class="comparison-card__item-icon comparison-card__item-icon--positive">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+                                </svg>
+                            </span>
+                            Tout au même endroit, gain de temps énorme
+                        </div>
+                        <div class="comparison-card__item">
+                            <span class="comparison-card__item-icon comparison-card__item-icon--positive">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+                                </svg>
+                            </span>
+                            Sérénité : tu sais que tu es bien préparé
+                        </div>
+                        <div class="comparison-card__item">
+                            <span class="comparison-card__item-icon comparison-card__item-icon--positive">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+                                </svg>
+                            </span>
+                            QCM et flashcards pour t'auto-évaluer
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- =====================================================
+             V2: TABLEAU AVANT/APRÈS
+             ===================================================== -->
+        <div class="component-wrapper">
+            <div class="state-label">V2 — Tableau Avant/Après</div>
+            
+            <div class="section-header">
+                <div class="section-badge">⏱️ Gain de temps</div>
+                <h2 class="section-title">Gagnez un temps fou pour vos <span>TD et révisions</span></h2>
+                <p class="section-subtitle">Fini le stress des recherches interminables !</p>
+            </div>
+
+            <div class="comparison-table-wrapper">
+                <table class="comparison-table">
+                    <thead>
+                        <tr>
+                            <th>Tâche</th>
+                            <th class="col-before">Avant</th>
+                            <th class="col-after">Avec Jurible</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Comprendre le cours</td>
+                            <td class="cell-before">3h à relire des notes de CM</td>
+                            <td class="cell-after">30 min de vidéo claire</td>
+                        </tr>
+                        <tr>
+                            <td>Préparer un TD</td>
+                            <td class="cell-before">4h de stress sans méthode</td>
+                            <td class="cell-after">1h de préparation ciblée</td>
+                        </tr>
+                        <tr>
+                            <td>Réviser pour les partiels</td>
+                            <td class="cell-before">Journées entières à reprendre</td>
+                            <td class="cell-after">Révision intelligente et ciblée</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- =====================================================
+             V3: TABLEAU COMPARATIF AVEC ICÔNES
+             ===================================================== -->
+        <div class="component-wrapper">
+            <div class="state-label">V3 — Tableau comparatif avec icônes</div>
+            
+            <div class="section-header">
+                <div class="section-badge">📊 Comparaison</div>
+                <h2 class="section-title">Jurible vs les autres <span>méthodes</span></h2>
+            </div>
+
+            <div class="comparison-table-wrapper">
+                <table class="comparison-table comparison-table-multi">
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th class="col-highlight">Jurible</th>
+                            <th class="col-other">Manuels</th>
+                            <th class="col-other">Cours amphi</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Explications claires et pédagogiques</td>
+                            <td class="cell-highlight">
+                                <span class="status-icon status-icon--yes">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+                                    </svg>
+                                </span>
+                            </td>
+                            <td>
+                                <span class="status-icon status-icon--partial">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M20 12H4" />
+                                    </svg>
+                                </span>
+                            </td>
+                            <td>
+                                <span class="status-icon status-icon--partial">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M20 12H4" />
+                                    </svg>
+                                </span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Disponible 24h/24, où vous voulez</td>
+                            <td class="cell-highlight">
+                                <span class="status-icon status-icon--yes">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+                                    </svg>
+                                </span>
+                            </td>
+                            <td>
+                                <span class="status-icon status-icon--yes">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+                                    </svg>
+                                </span>
+                            </td>
+                            <td>
+                                <span class="status-icon status-icon--no">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                                    </svg>
+                                </span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>QCM et exercices interactifs</td>
+                            <td class="cell-highlight">
+                                <span class="status-icon status-icon--yes">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+                                    </svg>
+                                </span>
+                            </td>
+                            <td>
+                                <span class="status-icon status-icon--no">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                                    </svg>
+                                </span>
+                            </td>
+                            <td>
+                                <span class="status-icon status-icon--no">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                                    </svg>
+                                </span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Flashcards pour mémoriser</td>
+                            <td class="cell-highlight">
+                                <span class="status-icon status-icon--yes">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+                                    </svg>
+                                </span>
+                            </td>
+                            <td>
+                                <span class="status-icon status-icon--no">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                                    </svg>
+                                </span>
+                            </td>
+                            <td>
+                                <span class="status-icon status-icon--no">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                                    </svg>
+                                </span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Méthodologie des exercices juridiques</td>
+                            <td class="cell-highlight">
+                                <span class="status-icon status-icon--yes">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+                                    </svg>
+                                </span>
+                            </td>
+                            <td>
+                                <span class="status-icon status-icon--partial">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M20 12H4" />
+                                    </svg>
+                                </span>
+                            </td>
+                            <td>
+                                <span class="status-icon status-icon--partial">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M20 12H4" />
+                                    </svg>
+                                </span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Annales corrigées en détail</td>
+                            <td class="cell-highlight">
+                                <span class="status-icon status-icon--yes">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+                                    </svg>
+                                </span>
+                            </td>
+                            <td>
+                                <span class="status-icon status-icon--partial">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M20 12H4" />
+                                    </svg>
+                                </span>
+                            </td>
+                            <td>
+                                <span class="status-icon status-icon--no">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                                    </svg>
+                                </span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Prix</td>
+                            <td class="cell-highlight"><span class="price-highlight">29€/mois</span></td>
+                            <td>30-50€/manuel</td>
+                            <td>Gratuit*</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- =====================================================
+             V4: TABLEAU HEADER NOIR/GRADIENT
+             ===================================================== -->
+        <div class="component-wrapper">
+            <div class="state-label">V4 — Tableau header noir + gradient</div>
+            
+            <div class="section-header">
+                <div class="section-badge">⚖️ Comparatif</div>
+                <h2 class="section-title">Pourquoi choisir <span>PASS DROIT</span> ?</h2>
+            </div>
+
+            <div class="comparison-table-wrapper">
+                <table class="comparison-table comparison-table-dark">
+                    <thead>
+                        <tr>
+                            <th>Critères</th>
+                            <th class="col-highlight">PASS DROIT</th>
+                            <th>Prépa classique</th>
+                            <th>Prof particulier</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Format</td>
+                            <td class="cell-highlight">En ligne, 24/7, compatible vie active</td>
+                            <td>Présentiel, horaires fixes</td>
+                            <td>Créneaux à réserver</td>
+                        </tr>
+                        <tr>
+                            <td>Devoirs corrigés</td>
+                            <td class="cell-highlight"><strong>10 TD</strong> avec correction individuelle</td>
+                            <td>2-5 TD max</td>
+                            <td>Limité par budget</td>
+                        </tr>
+                        <tr>
+                            <td>Approche pédagogique</td>
+                            <td class="cell-highlight">Conçue pour adultes en reconversion</td>
+                            <td>Pensée pour jeunes bacheliers</td>
+                            <td>Variable</td>
+                        </tr>
+                        <tr>
+                            <td>Contenu</td>
+                            <td class="cell-highlight">100+ vidéos + 600 QCM</td>
+                            <td>1-2 matières</td>
+                            <td>Dépend du prof</td>
+                        </tr>
+                        <tr>
+                            <td>Prix</td>
+                            <td class="cell-highlight"><strong>1 650€</strong> (tout inclus)</td>
+                            <td>800 à 3 000€</td>
+                            <td>~3 500€ équivalent</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="comparison-cta">
+                <button class="comparison-cta__button">S'inscrire à la prépa</button>
+                <p class="comparison-cta__note">🔥 Inscriptions limitées à 5 places par session</p>
+            </div>
+        </div>
+
+        <!-- =====================================================
+             SPECS
+             ===================================================== -->
+        <div class="specs-section">
+            <h3>📋 Spécifications</h3>
+            <table class="specs-table">
+                <thead>
+                    <tr><th>Élément</th><th>Valeur</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>Badge section</td><td><code>bg: rgba(124,58,237,0.1), color: #7C3AED</code></td></tr>
+                    <tr><td>Titre</td><td><code>32px 700, mot clé en gradient</code></td></tr>
+                    <tr><td>Card positive</td><td><code>bg: #ECFDF5, border: 2px solid #10B981</code></td></tr>
+                    <tr><td>Card négative</td><td><code>bg: white, border: 2px solid #E5E7EB</code></td></tr>
+                    <tr><td>Icône ✓</td><td><code>bg: #10B981, 20px ou 28px</code></td></tr>
+                    <tr><td>Icône ✗</td><td><code>bg: rgba(239,68,68,0.1), color: #EF4444</code></td></tr>
+                    <tr><td>Icône —</td><td><code>bg: rgba(245,158,11,0.15), color: #F59E0B</code></td></tr>
+                    <tr><td>Header tableau rouge</td><td><code>bg: #B0001D ou gradient</code></td></tr>
+                    <tr><td>Header tableau noir</td><td><code>bg: #1A1A1A</code></td></tr>
+                    <tr><td>Cellule highlight</td><td><code>bg: rgba(176,0,29,0.03)</code></td></tr>
+                    <tr><td>Texte avant</td><td><code>color: #EF4444</code></td></tr>
+                    <tr><td>Texte après</td><td><code>color: #10B981</code></td></tr>
+                    <tr><td colspan="2" style="background: var(--bg-gray); font-weight: 600;">Effets & Animations</td></tr>
+                    <tr><td>Hover lignes tableau</td><td><code>background: #F9FAFB, scale: 1.01</code></td></tr>
+                    <tr><td>Hover icône ✓</td><td><code>scale: 1.15, bg: #10B981, shadow vert</code></td></tr>
+                    <tr><td>Hover cards</td><td><code>translateY(-4px), shadow colorée</code></td></tr>
+                    <tr><td>Hover items liste</td><td><code>translateX(4px), icône scale 1.15</code></td></tr>
+                    <tr><td>Animation scroll lignes</td><td><code>translateX(-20px → 0), delay 0.1s/ligne</code></td></tr>
+                    <tr><td>Animation scroll cards</td><td><code>translateY(30px → 0), delay 0.15s/card</code></td></tr>
+                    <tr><td>Bouton CTA shine</td><td><code>gradient blanc qui traverse au hover</code></td></tr>
+                    <tr><td>Note CTA</td><td><code>animation pulse 2s infinite</code></td></tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+<script>
+        // Animation des lignes de tableau au scroll
+        function initTableAnimations() {
+            const tables = document.querySelectorAll('.comparison-table-wrapper');
+            
+            tables.forEach(table => {
+                const rows = table.querySelectorAll('tbody tr');
+                
+                // Initialiser les lignes comme invisibles
+                rows.forEach((row, index) => {
+                    row.style.opacity = '0';
+                    row.style.transform = 'translateX(-20px)';
+                    row.style.transition = `all 0.4s ease ${index * 0.1}s`;
+                });
+                
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            rows.forEach((row) => {
+                                row.style.opacity = '1';
+                                row.style.transform = 'translateX(0)';
+                            });
+                        }
+                    });
+                }, { threshold: 0.2 });
+                
+                observer.observe(table);
+            });
+        }
+
+        // Animation des cards au scroll
+        function initCardAnimations() {
+            const cards = document.querySelectorAll('.comparison-card');
+            
+            cards.forEach((card, index) => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(30px)';
+                card.style.transition = `all 0.5s ease ${index * 0.15}s`;
+                
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            card.style.opacity = '1';
+                            card.style.transform = 'translateY(0)';
+                        }
+                    });
+                }, { threshold: 0.2 });
+                
+                observer.observe(card);
+            });
+        }
+
+        // Animation des items de liste
+        function initListAnimations() {
+            const cards = document.querySelectorAll('.comparison-card');
+            
+            cards.forEach(card => {
+                const items = card.querySelectorAll('.comparison-card__item');
+                
+                items.forEach((item, index) => {
+                    item.style.opacity = '0';
+                    item.style.transform = 'translateX(-15px)';
+                    item.style.transition = `all 0.3s ease ${0.3 + index * 0.08}s`;
+                });
+                
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            items.forEach((item) => {
+                                item.style.opacity = '1';
+                                item.style.transform = 'translateX(0)';
+                            });
+                        }
+                    });
+                }, { threshold: 0.3 });
+                
+                observer.observe(card);
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            initTableAnimations();
+            initCardAnimations();
+            initListAnimations();
+        });
+    </script>
+</body>
+</html>

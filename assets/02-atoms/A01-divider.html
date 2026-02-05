@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Divider — Design System Jurible</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --color-primary: #B0001D;
+            --color-secondary: #7C3AED;
+            --color-border: #E5E7EB;
+            --color-text-muted: #9CA3AF;
+            --space-md: 24px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: #F9FAFB;
+            padding: 48px;
+            color: #1A1A1A;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .subtitle {
+            font-size: 14px;
+            color: var(--color-text-muted);
+            margin-bottom: 48px;
+        }
+
+        .section {
+            background: #FFFFFF;
+            border-radius: 12px;
+            padding: 32px;
+            margin-bottom: 24px;
+        }
+
+        .section-title {
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--color-text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 24px;
+        }
+
+        .demo-box {
+            margin-bottom: 32px;
+        }
+
+        .demo-box:last-child {
+            margin-bottom: 0;
+        }
+
+        .label {
+            font-size: 12px;
+            color: var(--color-text-muted);
+            margin-bottom: 16px;
+        }
+
+        /* ===== DIVIDERS ===== */
+        
+        /* Base (gris) */
+        .divider {
+            border: none;
+            height: 2px;
+            background: var(--color-border);
+            margin: var(--space-md) 0;
+        }
+
+        /* Gradient */
+        .divider--gradient {
+            background: linear-gradient(90deg, #B0001D 0%, #DC2626 50%, #7C3AED 100%);
+            border-radius: 1px;
+        }
+
+        /* Avec texte (gris) */
+        .divider-text {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin: var(--space-md) 0;
+        }
+
+        .divider-text::before,
+        .divider-text::after {
+            content: '';
+            flex: 1;
+            height: 2px;
+            background: var(--color-border);
+        }
+
+        .divider-text span {
+            font-size: 13px;
+            color: var(--color-text-muted);
+            white-space: nowrap;
+        }
+
+        /* Avec texte + gradient */
+        .divider-text--gradient::before,
+        .divider-text--gradient::after {
+            background: linear-gradient(90deg, #B0001D 0%, #DC2626 50%, #7C3AED 100%);
+        }
+
+        /* ===== SPECS ===== */
+        .specs {
+            background: #F9FAFB;
+            border-radius: 8px;
+            padding: 16px;
+            font-size: 13px;
+            margin-top: 24px;
+        }
+
+        .specs-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            border-bottom: 1px solid var(--color-border);
+        }
+
+        .specs-row:last-child {
+            border-bottom: none;
+        }
+
+        .specs-row span:first-child {
+            color: var(--color-text-muted);
+        }
+
+        .specs-row code {
+            background: #FFFFFF;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: monospace;
+            font-size: 12px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Divider</h1>
+        <p class="subtitle">Atoms — Séparateurs</p>
+
+        <!-- Ligne simple -->
+        <div class="section">
+            <div class="section-title">Ligne simple</div>
+            
+            <div class="demo-box">
+                <p class="label">Gris (défaut)</p>
+                <hr class="divider">
+            </div>
+            
+            <div class="demo-box">
+                <p class="label">Gradient</p>
+                <hr class="divider divider--gradient">
+            </div>
+        </div>
+
+        <!-- Avec texte -->
+        <div class="section">
+            <div class="section-title">Avec texte</div>
+            
+            <div class="demo-box">
+                <p class="label">Gris + texte</p>
+                <div class="divider-text">
+                    <span>ou</span>
+                </div>
+            </div>
+            
+            <div class="demo-box">
+                <p class="label">Gradient + texte</p>
+                <div class="divider-text divider-text--gradient">
+                    <span>ou</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Specs -->
+        <div class="section">
+            <div class="section-title">Specs</div>
+            <div class="specs">
+                <div class="specs-row">
+                    <span>Épaisseur</span>
+                    <code>2px</code>
+                </div>
+                <div class="specs-row">
+                    <span>Couleur gris</span>
+                    <code>#E5E7EB</code>
+                </div>
+                <div class="specs-row">
+                    <span>Gradient</span>
+                    <code>#B0001D → #DC2626 → #7C3AED</code>
+                </div>
+                <div class="specs-row">
+                    <span>Margin</span>
+                    <code>24px 0</code>
+                </div>
+                <div class="specs-row">
+                    <span>Texte</span>
+                    <code>13px / #9CA3AF</code>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</body>
+</html>

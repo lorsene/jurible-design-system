@@ -1,0 +1,1060 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jurible Design System — Modals</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            /* Colors */
+            --color-primary: #B0001D;
+            --color-primary-hover: #DC2626;
+            --color-secondary: #7C3AED;
+            --color-text-dark: #1A1A1A;
+            --color-text-gray: #4A4A4A;
+            --color-text-muted: #9CA3AF;
+            --color-background: #FFFFFF;
+            --color-muted: #F3F4F6;
+            --color-border: #E5E7EB;
+            --color-success: #10B981;
+            --color-success-bg: #ECFDF5;
+            --color-warning: #F59E0B;
+            --color-warning-bg: #FFFBEB;
+            --color-error: #EF4444;
+            --color-error-bg: #FEF2F2;
+            --color-info: #3B82F6;
+            --color-info-bg: #EFF6FF;
+
+            /* Spacing */
+            --space-xs: 8px;
+            --space-sm: 16px;
+            --space-md: 24px;
+            --space-lg: 32px;
+            --space-xl: 48px;
+
+            /* Radius */
+            --radius-sm: 6px;
+            --radius-md: 8px;
+            --radius-lg: 12px;
+            --radius-xl: 16px;
+            --radius-full: 9999px;
+
+            /* Shadows */
+            --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.1), 0 1px 2px rgba(0, 0, 0, 0.06);
+            --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1), 0 2px 4px rgba(0, 0, 0, 0.06);
+            --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1), 0 4px 6px rgba(0, 0, 0, 0.05);
+            --shadow-xl: 0 20px 25px rgba(0, 0, 0, 0.1), 0 10px 10px rgba(0, 0, 0, 0.04);
+
+            /* Z-index */
+            --z-modal-backdrop: 300;
+            --z-modal: 400;
+
+            --font-family: 'Poppins', sans-serif;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: var(--font-family);
+            background: var(--color-background);
+            color: var(--color-text-dark);
+            padding: var(--space-xl) 80px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .page-header { margin-bottom: var(--space-xl); }
+
+        .page-title {
+            font-size: 48px;
+            font-weight: 700;
+            margin-bottom: var(--space-xs);
+        }
+
+        .page-divider {
+            height: 3px;
+            width: 120px;
+            background: linear-gradient(90deg, #B0001D 0%, #DC2626 50%, #7C3AED 100%);
+            border-radius: var(--radius-full);
+        }
+
+        .section {
+            margin-bottom: var(--space-xl);
+        }
+
+        .section-title {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: var(--space-xs);
+        }
+
+        .section-subtitle {
+            font-size: 14px;
+            color: var(--color-text-muted);
+            margin-bottom: var(--space-md);
+        }
+
+        .section-divider {
+            height: 1px;
+            background: var(--color-border);
+            margin: var(--space-xl) 0;
+        }
+
+        .component-label {
+            font-size: 11px;
+            color: var(--color-text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-weight: 600;
+            margin-bottom: var(--space-xs);
+            display: inline-block;
+            background: var(--color-muted);
+            padding: 4px 8px;
+            border-radius: 4px;
+        }
+
+        .modals-row {
+            display: flex;
+            gap: var(--space-lg);
+            flex-wrap: wrap;
+            margin-bottom: var(--space-md);
+        }
+
+        .modal-wrapper {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-xs);
+        }
+
+        /* ==================== BUTTONS ==================== */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: var(--space-xs);
+            padding: 12px var(--space-md);
+            font-family: var(--font-family);
+            font-size: 14px;
+            font-weight: 500;
+            border-radius: var(--radius-md);
+            cursor: pointer;
+            transition: all 0.15s ease;
+            text-decoration: none;
+            border: none;
+        }
+
+        .btn--primary {
+            background: linear-gradient(135deg, #B0001D 0%, #DC2626 50%, #7C3AED 100%);
+            color: white;
+            box-shadow: 0 4px 14px rgba(176, 0, 29, 0.25);
+        }
+
+        .btn--secondary {
+            background: var(--color-text-dark);
+            color: white;
+        }
+
+        .btn--outline {
+            background: transparent;
+            color: var(--color-text-dark);
+            border: 1px solid var(--color-border);
+        }
+
+        .btn--ghost {
+            background: transparent;
+            color: var(--color-text-gray);
+        }
+
+        .btn--destructive {
+            background: var(--color-error);
+            color: white;
+        }
+
+        .btn--success {
+            background: var(--color-success);
+            color: white;
+        }
+
+        .btn--sm {
+            padding: 8px var(--space-sm);
+            font-size: 13px;
+        }
+
+        .btn--full {
+            width: 100%;
+        }
+
+        /* ==================== INPUT ==================== */
+        .input {
+            width: 100%;
+            padding: 12px var(--space-sm);
+            font-family: var(--font-family);
+            font-size: 14px;
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-md);
+            outline: none;
+            transition: border-color 0.15s ease;
+        }
+
+        .input:focus {
+            border-color: var(--color-primary);
+        }
+
+        .input::placeholder {
+            color: var(--color-text-muted);
+        }
+
+        .input-group {
+            margin-bottom: var(--space-sm);
+        }
+
+        .input-label {
+            display: block;
+            font-size: 14px;
+            font-weight: 500;
+            margin-bottom: var(--space-xs);
+        }
+
+        /* ==================== MODAL PREVIEW CONTAINER ==================== */
+        .modal-preview {
+            background: rgba(0, 0, 0, 0.5);
+            border-radius: var(--radius-lg);
+            padding: var(--space-lg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 300px;
+        }
+
+        .modal-preview--light {
+            background: var(--color-muted);
+        }
+
+        /* ==================== MODAL BASE ==================== */
+        .modal {
+            background: white;
+            border-radius: var(--radius-xl);
+            box-shadow: var(--shadow-xl);
+            width: 100%;
+            max-width: 480px;
+            overflow: hidden;
+        }
+
+        .modal--sm {
+            max-width: 360px;
+        }
+
+        .modal--lg {
+            max-width: 640px;
+        }
+
+        .modal--xl {
+            max-width: 800px;
+        }
+
+        .modal__header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: var(--space-md);
+            border-bottom: 1px solid var(--color-border);
+        }
+
+        .modal__header--no-border {
+            border-bottom: none;
+        }
+
+        .modal__title {
+            font-size: 18px;
+            font-weight: 600;
+        }
+
+        .modal__close {
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: transparent;
+            border: none;
+            border-radius: var(--radius-md);
+            cursor: pointer;
+            color: var(--color-text-muted);
+            font-size: 20px;
+            transition: all 0.15s ease;
+        }
+
+        .modal__close:hover {
+            background: var(--color-muted);
+            color: var(--color-text-dark);
+        }
+
+        .modal__body {
+            padding: var(--space-md);
+        }
+
+        .modal__body p {
+            font-size: 14px;
+            color: var(--color-text-gray);
+            line-height: 1.6;
+        }
+
+        .modal__footer {
+            display: flex;
+            gap: var(--space-sm);
+            padding: var(--space-md);
+            border-top: 1px solid var(--color-border);
+        }
+
+        .modal__footer--no-border {
+            border-top: none;
+        }
+
+        .modal__footer--right {
+            justify-content: flex-end;
+        }
+
+        .modal__footer--between {
+            justify-content: space-between;
+        }
+
+        .modal__footer--stack {
+            flex-direction: column;
+        }
+
+        /* ==================== MODAL CENTERED (Icon top) ==================== */
+        .modal--centered {
+            text-align: center;
+        }
+
+        .modal--centered .modal__body {
+            padding: var(--space-lg);
+        }
+
+        .modal__icon {
+            width: 64px;
+            height: 64px;
+            border-radius: var(--radius-full);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto var(--space-sm);
+            font-size: 32px;
+        }
+
+        .modal__icon--success {
+            background: var(--color-success-bg);
+            color: var(--color-success);
+        }
+
+        .modal__icon--error {
+            background: var(--color-error-bg);
+            color: var(--color-error);
+        }
+
+        .modal__icon--warning {
+            background: var(--color-warning-bg);
+            color: var(--color-warning);
+        }
+
+        .modal__icon--info {
+            background: var(--color-info-bg);
+            color: var(--color-info);
+        }
+
+        .modal--centered .modal__title {
+            margin-bottom: var(--space-xs);
+        }
+
+        .modal--centered .modal__footer {
+            justify-content: center;
+        }
+
+        /* ==================== MODAL IMAGE ==================== */
+        .modal__image {
+            width: 100%;
+            height: 200px;
+            background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 48px;
+        }
+
+        /* ==================== DRAWER ==================== */
+        .drawer {
+            background: white;
+            box-shadow: var(--shadow-xl);
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .drawer--right {
+            width: 400px;
+            border-radius: var(--radius-xl) 0 0 var(--radius-xl);
+        }
+
+        .drawer--bottom {
+            width: 100%;
+            max-width: 600px;
+            border-radius: var(--radius-xl) var(--radius-xl) 0 0;
+        }
+
+        .drawer__header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: var(--space-md);
+            border-bottom: 1px solid var(--color-border);
+        }
+
+        .drawer__title {
+            font-size: 18px;
+            font-weight: 600;
+        }
+
+        .drawer__body {
+            flex: 1;
+            padding: var(--space-md);
+            overflow-y: auto;
+        }
+
+        .drawer__footer {
+            padding: var(--space-md);
+            border-top: 1px solid var(--color-border);
+            display: flex;
+            gap: var(--space-sm);
+        }
+
+        /* ==================== MODAL COOKIES ==================== */
+        .modal-cookies {
+            position: relative;
+            background: white;
+            border-radius: var(--radius-xl);
+            box-shadow: var(--shadow-xl);
+            padding: var(--space-md);
+            max-width: 480px;
+        }
+
+        .modal-cookies__icon {
+            font-size: 32px;
+            margin-bottom: var(--space-sm);
+        }
+
+        .modal-cookies__title {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: var(--space-xs);
+        }
+
+        .modal-cookies__text {
+            font-size: 14px;
+            color: var(--color-text-gray);
+            line-height: 1.5;
+            margin-bottom: var(--space-sm);
+        }
+
+        .modal-cookies__text a {
+            color: var(--color-primary);
+        }
+
+        .modal-cookies__actions {
+            display: flex;
+            gap: var(--space-sm);
+        }
+
+        /* ==================== TOAST / SNACKBAR ==================== */
+        .toast {
+            display: flex;
+            align-items: center;
+            gap: var(--space-sm);
+            background: var(--color-text-dark);
+            color: white;
+            padding: var(--space-sm) var(--space-md);
+            border-radius: var(--radius-md);
+            box-shadow: var(--shadow-lg);
+            max-width: 400px;
+        }
+
+        .toast__icon {
+            font-size: 20px;
+        }
+
+        .toast__content {
+            flex: 1;
+        }
+
+        .toast__title {
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .toast__message {
+            font-size: 13px;
+            opacity: 0.9;
+        }
+
+        .toast__close {
+            background: transparent;
+            border: none;
+            color: white;
+            opacity: 0.7;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .toast--success {
+            background: var(--color-success);
+        }
+
+        .toast--error {
+            background: var(--color-error);
+        }
+
+        .toast--warning {
+            background: var(--color-warning);
+        }
+
+        /* ==================== TABLES ==================== */
+        .specs-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 13px;
+            margin-top: var(--space-md);
+        }
+
+        .specs-table th {
+            text-align: left;
+            font-size: 11px;
+            font-weight: 600;
+            color: white;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            padding: 12px var(--space-sm);
+            background: var(--color-text-dark);
+        }
+
+        .specs-table th:first-child { border-radius: var(--radius-md) 0 0 0; }
+        .specs-table th:last-child { border-radius: 0 var(--radius-md) 0 0; }
+
+        .specs-table td {
+            padding: 12px var(--space-sm);
+            border-bottom: 1px solid var(--color-border);
+            vertical-align: middle;
+        }
+
+        .specs-table tr:last-child td { border-bottom: none; }
+
+        .specs-table code {
+            font-family: 'SF Mono', monospace;
+            font-size: 11px;
+            background: var(--color-muted);
+            padding: 2px 6px;
+            border-radius: 4px;
+        }
+
+        /* ==================== INFO BOX ==================== */
+        .info-box {
+            background: var(--color-muted);
+            border-radius: var(--radius-lg);
+            padding: var(--space-md);
+            margin-top: var(--space-md);
+        }
+
+        .info-box__title {
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: var(--space-sm);
+        }
+
+        .info-box ul {
+            font-size: 13px;
+            color: var(--color-text-gray);
+            line-height: 1.8;
+            padding-left: 20px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="page-header">
+    <h1 class="page-title">modals</h1>
+    <div class="page-divider"></div>
+</div>
+
+<!-- ==================== 1. MODAL BASIC ==================== -->
+<div class="section">
+    <h2 class="section-title">1. Modal Basic</h2>
+    <p class="section-subtitle">Modal standard avec header, body et footer</p>
+    
+    <div class="modal-preview">
+        <div class="modal">
+            <div class="modal__header">
+                <h3 class="modal__title">Titre de la modal</h3>
+                <button class="modal__close">✕</button>
+            </div>
+            <div class="modal__body">
+                <p>Ceci est le contenu de la modal. Vous pouvez y mettre du texte, des formulaires, des images ou tout autre contenu.</p>
+            </div>
+            <div class="modal__footer modal__footer--right">
+                <button class="btn btn--outline">Annuler</button>
+                <button class="btn btn--primary">Confirmer</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="section-divider"></div>
+
+<!-- ==================== 2. MODAL CONFIRMATION ==================== -->
+<div class="section">
+    <h2 class="section-title">2. Modal Confirmation</h2>
+    <p class="section-subtitle">Pour confirmer une action importante</p>
+    
+    <div class="modals-row">
+        <div class="modal-wrapper">
+            <span class="component-label">Confirmation standard</span>
+            <div class="modal-preview">
+                <div class="modal modal--sm modal--centered">
+                    <div class="modal__body">
+                        <div class="modal__icon modal__icon--warning">⚠️</div>
+                        <h3 class="modal__title">Confirmer l'action</h3>
+                        <p>Êtes-vous sûr de vouloir continuer ? Cette action est irréversible.</p>
+                    </div>
+                    <div class="modal__footer modal__footer--no-border">
+                        <button class="btn btn--outline btn--full">Annuler</button>
+                        <button class="btn btn--primary btn--full">Confirmer</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal-wrapper">
+            <span class="component-label">Suppression (destructive)</span>
+            <div class="modal-preview">
+                <div class="modal modal--sm modal--centered">
+                    <div class="modal__body">
+                        <div class="modal__icon modal__icon--error">🗑️</div>
+                        <h3 class="modal__title">Supprimer le compte</h3>
+                        <p>Cette action supprimera définitivement votre compte et toutes vos données.</p>
+                    </div>
+                    <div class="modal__footer modal__footer--no-border">
+                        <button class="btn btn--outline btn--full">Annuler</button>
+                        <button class="btn btn--destructive btn--full">Supprimer</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="section-divider"></div>
+
+<!-- ==================== 3. MODAL SUCCESS ==================== -->
+<div class="section">
+    <h2 class="section-title">3. Modal Success</h2>
+    <p class="section-subtitle">Confirmation d'une action réussie</p>
+    
+    <div class="modal-preview">
+        <div class="modal modal--sm modal--centered">
+            <div class="modal__body">
+                <div class="modal__icon modal__icon--success">✅</div>
+                <h3 class="modal__title">Inscription réussie !</h3>
+                <p>Votre compte a été créé avec succès. Vous pouvez maintenant accéder à tous les cours.</p>
+            </div>
+            <div class="modal__footer modal__footer--no-border">
+                <button class="btn btn--primary btn--full">Commencer →</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="section-divider"></div>
+
+<!-- ==================== 4. MODAL ERROR ==================== -->
+<div class="section">
+    <h2 class="section-title">4. Modal Error</h2>
+    <p class="section-subtitle">Afficher une erreur</p>
+    
+    <div class="modal-preview">
+        <div class="modal modal--sm modal--centered">
+            <div class="modal__body">
+                <div class="modal__icon modal__icon--error">❌</div>
+                <h3 class="modal__title">Erreur de paiement</h3>
+                <p>Votre paiement n'a pas pu être traité. Veuillez vérifier vos informations et réessayer.</p>
+            </div>
+            <div class="modal__footer modal__footer--no-border">
+                <button class="btn btn--outline btn--full">Annuler</button>
+                <button class="btn btn--primary btn--full">Réessayer</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="section-divider"></div>
+
+<!-- ==================== 5. MODAL INFO ==================== -->
+<div class="section">
+    <h2 class="section-title">5. Modal Info</h2>
+    <p class="section-subtitle">Information ou aide contextuelle</p>
+    
+    <div class="modal-preview">
+        <div class="modal modal--sm modal--centered">
+            <div class="modal__body">
+                <div class="modal__icon modal__icon--info">💡</div>
+                <h3 class="modal__title">Le saviez-vous ?</h3>
+                <p>Vous pouvez télécharger les fiches en PDF pour réviser hors-ligne depuis votre espace membre.</p>
+            </div>
+            <div class="modal__footer modal__footer--no-border">
+                <button class="btn btn--primary btn--full">Compris</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="section-divider"></div>
+
+<!-- ==================== 6. MODAL FORM (Login) ==================== -->
+<div class="section">
+    <h2 class="section-title">6. Modal Form (Login)</h2>
+    <p class="section-subtitle">Modal avec formulaire de connexion</p>
+    
+    <div class="modal-preview">
+        <div class="modal">
+            <div class="modal__header">
+                <h3 class="modal__title">Se connecter</h3>
+                <button class="modal__close">✕</button>
+            </div>
+            <div class="modal__body">
+                <div class="input-group">
+                    <label class="input-label">Email</label>
+                    <input type="email" class="input" placeholder="votre@email.com">
+                </div>
+                <div class="input-group">
+                    <label class="input-label">Mot de passe</label>
+                    <input type="password" class="input" placeholder="••••••••">
+                </div>
+                <p style="font-size: 13px; color: var(--color-primary); cursor: pointer; margin-bottom: var(--space-sm);">Mot de passe oublié ?</p>
+            </div>
+            <div class="modal__footer modal__footer--no-border modal__footer--stack">
+                <button class="btn btn--primary btn--full">Se connecter</button>
+                <p style="font-size: 13px; color: var(--color-text-muted); text-align: center; margin-top: var(--space-xs);">
+                    Pas encore de compte ? <span style="color: var(--color-primary); cursor: pointer;">S'inscrire</span>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="section-divider"></div>
+
+<!-- ==================== 7. MODAL FORM (Contact) ==================== -->
+<div class="section">
+    <h2 class="section-title">7. Modal Form (Contact)</h2>
+    <p class="section-subtitle">Modal avec formulaire de contact</p>
+    
+    <div class="modal-preview">
+        <div class="modal modal--lg">
+            <div class="modal__header">
+                <h3 class="modal__title">📬 Nous contacter</h3>
+                <button class="modal__close">✕</button>
+            </div>
+            <div class="modal__body">
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-sm);">
+                    <div class="input-group">
+                        <label class="input-label">Prénom</label>
+                        <input type="text" class="input" placeholder="Jean">
+                    </div>
+                    <div class="input-group">
+                        <label class="input-label">Nom</label>
+                        <input type="text" class="input" placeholder="Dupont">
+                    </div>
+                </div>
+                <div class="input-group">
+                    <label class="input-label">Email</label>
+                    <input type="email" class="input" placeholder="votre@email.com">
+                </div>
+                <div class="input-group">
+                    <label class="input-label">Message</label>
+                    <textarea class="input" rows="4" placeholder="Votre message..."></textarea>
+                </div>
+            </div>
+            <div class="modal__footer modal__footer--right">
+                <button class="btn btn--outline">Annuler</button>
+                <button class="btn btn--primary">Envoyer le message</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="section-divider"></div>
+
+<!-- ==================== 8. MODAL WITH IMAGE ==================== -->
+<div class="section">
+    <h2 class="section-title">8. Modal with Image</h2>
+    <p class="section-subtitle">Modal avec image ou illustration en haut</p>
+    
+    <div class="modal-preview">
+        <div class="modal modal--centered">
+            <div class="modal__image">🎓</div>
+            <div class="modal__body">
+                <h3 class="modal__title">Bienvenue sur Jurible !</h3>
+                <p>Vous avez maintenant accès à plus de 500 heures de cours et des centaines de fiches de révision.</p>
+            </div>
+            <div class="modal__footer modal__footer--no-border">
+                <button class="btn btn--primary btn--full">Découvrir les cours →</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="section-divider"></div>
+
+<!-- ==================== 9. MODAL SHARE ==================== -->
+<div class="section">
+    <h2 class="section-title">9. Modal Share</h2>
+    <p class="section-subtitle">Partager un contenu</p>
+    
+    <div class="modal-preview">
+        <div class="modal modal--sm">
+            <div class="modal__header">
+                <h3 class="modal__title">Partager</h3>
+                <button class="modal__close">✕</button>
+            </div>
+            <div class="modal__body">
+                <div style="display: flex; justify-content: center; gap: var(--space-md); margin-bottom: var(--space-md);">
+                    <div style="text-align: center;">
+                        <div style="width: 48px; height: 48px; background: #1877F2; border-radius: var(--radius-full); display: flex; align-items: center; justify-content: center; color: white; font-size: 20px; margin: 0 auto 8px;">f</div>
+                        <span style="font-size: 12px; color: var(--color-text-muted);">Facebook</span>
+                    </div>
+                    <div style="text-align: center;">
+                        <div style="width: 48px; height: 48px; background: #1DA1F2; border-radius: var(--radius-full); display: flex; align-items: center; justify-content: center; color: white; font-size: 20px; margin: 0 auto 8px;">𝕏</div>
+                        <span style="font-size: 12px; color: var(--color-text-muted);">Twitter</span>
+                    </div>
+                    <div style="text-align: center;">
+                        <div style="width: 48px; height: 48px; background: #0A66C2; border-radius: var(--radius-full); display: flex; align-items: center; justify-content: center; color: white; font-size: 20px; margin: 0 auto 8px;">in</div>
+                        <span style="font-size: 12px; color: var(--color-text-muted);">LinkedIn</span>
+                    </div>
+                    <div style="text-align: center;">
+                        <div style="width: 48px; height: 48px; background: #25D366; border-radius: var(--radius-full); display: flex; align-items: center; justify-content: center; color: white; font-size: 20px; margin: 0 auto 8px;">📱</div>
+                        <span style="font-size: 12px; color: var(--color-text-muted);">WhatsApp</span>
+                    </div>
+                </div>
+                <div style="display: flex; gap: var(--space-xs);">
+                    <input type="text" class="input" value="https://jurible.com/cours/droit-civil" readonly style="font-size: 12px;">
+                    <button class="btn btn--outline btn--sm">📋</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="section-divider"></div>
+
+<!-- ==================== 10. MODAL COOKIES ==================== -->
+<div class="section">
+    <h2 class="section-title">10. Modal Cookies / RGPD</h2>
+    <p class="section-subtitle">Bandeau de consentement cookies</p>
+    
+    <div class="modal-preview--light" style="padding: var(--space-lg); border-radius: var(--radius-lg);">
+        <div class="modal-cookies">
+            <p class="modal-cookies__icon">🍪</p>
+            <h3 class="modal-cookies__title">Nous utilisons des cookies</h3>
+            <p class="modal-cookies__text">Ce site utilise des cookies pour améliorer votre expérience. En continuant, vous acceptez notre <a href="#">politique de confidentialité</a>.</p>
+            <div class="modal-cookies__actions">
+                <button class="btn btn--outline btn--sm">Personnaliser</button>
+                <button class="btn btn--primary btn--sm">Tout accepter</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="section-divider"></div>
+
+<!-- ==================== 11. DRAWER RIGHT ==================== -->
+<div class="section">
+    <h2 class="section-title">11. Drawer (Side Panel)</h2>
+    <p class="section-subtitle">Panel latéral glissant depuis la droite</p>
+    
+    <div class="modal-preview" style="justify-content: flex-end; align-items: stretch; min-height: 400px;">
+        <div class="drawer drawer--right">
+            <div class="drawer__header">
+                <h3 class="drawer__title">🛒 Votre panier</h3>
+                <button class="modal__close">✕</button>
+            </div>
+            <div class="drawer__body">
+                <div style="display: flex; gap: var(--space-sm); padding: var(--space-sm) 0; border-bottom: 1px solid var(--color-border);">
+                    <div style="width: 60px; height: 60px; background: var(--color-muted); border-radius: var(--radius-md);"></div>
+                    <div style="flex: 1;">
+                        <p style="font-size: 14px; font-weight: 500;">Pack L1 Complet</p>
+                        <p style="font-size: 12px; color: var(--color-text-muted);">Accès 1 an</p>
+                        <p style="font-size: 14px; font-weight: 600; color: var(--color-primary);">240€</p>
+                    </div>
+                    <button style="background: none; border: none; color: var(--color-text-muted); cursor: pointer;">🗑️</button>
+                </div>
+            </div>
+            <div class="drawer__footer" style="flex-direction: column;">
+                <div style="display: flex; justify-content: space-between; margin-bottom: var(--space-sm);">
+                    <span style="font-weight: 600;">Total</span>
+                    <span style="font-weight: 700; font-size: 18px;">240€</span>
+                </div>
+                <button class="btn btn--primary btn--full">Passer commande →</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="section-divider"></div>
+
+<!-- ==================== 12. TOAST / SNACKBAR ==================== -->
+<div class="section">
+    <h2 class="section-title">12. Toast / Snackbar</h2>
+    <p class="section-subtitle">Notifications temporaires (en bas de l'écran)</p>
+    
+    <div style="display: flex; flex-direction: column; gap: var(--space-sm);">
+        <div class="modal-wrapper">
+            <span class="component-label">Default</span>
+            <div class="toast">
+                <span class="toast__icon">ℹ️</span>
+                <div class="toast__content">
+                    <p class="toast__message">Votre progression a été sauvegardée.</p>
+                </div>
+                <button class="toast__close">✕</button>
+            </div>
+        </div>
+
+        <div class="modal-wrapper">
+            <span class="component-label">Success</span>
+            <div class="toast toast--success">
+                <span class="toast__icon">✅</span>
+                <div class="toast__content">
+                    <p class="toast__message">Fiche téléchargée avec succès !</p>
+                </div>
+                <button class="toast__close">✕</button>
+            </div>
+        </div>
+
+        <div class="modal-wrapper">
+            <span class="component-label">Error</span>
+            <div class="toast toast--error">
+                <span class="toast__icon">❌</span>
+                <div class="toast__content">
+                    <p class="toast__message">Une erreur est survenue. Veuillez réessayer.</p>
+                </div>
+                <button class="toast__close">✕</button>
+            </div>
+        </div>
+
+        <div class="modal-wrapper">
+            <span class="component-label">Warning</span>
+            <div class="toast toast--warning">
+                <span class="toast__icon">⚠️</span>
+                <div class="toast__content">
+                    <p class="toast__message">Votre session expire dans 5 minutes.</p>
+                </div>
+                <button class="toast__close">✕</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="section-divider"></div>
+
+<!-- ==================== SIZES ==================== -->
+<div class="section">
+    <h2 class="section-title">Tailles des modals</h2>
+    
+    <table class="specs-table" style="max-width: 500px;">
+        <thead>
+            <tr>
+                <th>Size</th>
+                <th>Max Width</th>
+                <th>Usage</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr><td><strong>SM</strong></td><td><code>360px</code></td><td>Confirmations, alertes simples</td></tr>
+            <tr><td><strong>Default</strong></td><td><code>480px</code></td><td>Formulaires courts, infos</td></tr>
+            <tr><td><strong>LG</strong></td><td><code>640px</code></td><td>Formulaires longs, contenu riche</td></tr>
+            <tr><td><strong>XL</strong></td><td><code>800px</code></td><td>Tableaux, contenus complexes</td></tr>
+            <tr><td><strong>Drawer</strong></td><td><code>400px</code></td><td>Paniers, filtres, navigation</td></tr>
+        </tbody>
+    </table>
+</div>
+
+<div class="section-divider"></div>
+
+<!-- ==================== RÉCAPITULATIF ==================== -->
+<div class="section">
+    <h2 class="section-title">📋 Récapitulatif des 12 Modals</h2>
+    
+    <table class="specs-table">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Type</th>
+                <th>Boutons</th>
+                <th>Usage</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr><td>1</td><td>Modal Basic</td><td>Outline + Primary</td><td>Usage général</td></tr>
+            <tr><td>2</td><td>Modal Confirmation</td><td>Outline + Primary/Destructive</td><td>Confirmer une action</td></tr>
+            <tr><td>3</td><td>Modal Success</td><td>Primary</td><td>Action réussie</td></tr>
+            <tr><td>4</td><td>Modal Error</td><td>Outline + Primary</td><td>Afficher une erreur</td></tr>
+            <tr><td>5</td><td>Modal Info</td><td>Primary</td><td>Information/aide</td></tr>
+            <tr><td>6</td><td>Modal Form (Login)</td><td>Primary</td><td>Connexion</td></tr>
+            <tr><td>7</td><td>Modal Form (Contact)</td><td>Outline + Primary</td><td>Formulaire contact</td></tr>
+            <tr><td>8</td><td>Modal with Image</td><td>Primary</td><td>Onboarding, promo</td></tr>
+            <tr><td>9</td><td>Modal Share</td><td>Outline (copier)</td><td>Partage réseaux sociaux</td></tr>
+            <tr><td>10</td><td>Modal Cookies</td><td>Outline + Primary</td><td>Consentement RGPD</td></tr>
+            <tr><td>11</td><td>Drawer</td><td>Primary</td><td>Panier, filtres, menu</td></tr>
+            <tr><td>12</td><td>Toast/Snackbar</td><td>Close</td><td>Notifications temporaires</td></tr>
+        </tbody>
+    </table>
+</div>
+
+<div class="section-divider"></div>
+
+<!-- ==================== SPECS ==================== -->
+<div class="section">
+    <h2 class="section-title">📋 Specifications globales</h2>
+    
+    <table class="specs-table" style="max-width: 600px;">
+        <thead>
+            <tr>
+                <th>Property</th>
+                <th>Value</th>
+                <th>Token</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr><td>Border Radius</td><td><code>16px</code></td><td><code>--radius-xl</code></td></tr>
+            <tr><td>Padding (header/footer)</td><td><code>24px</code></td><td><code>--space-md</code></td></tr>
+            <tr><td>Padding (body)</td><td><code>24px</code></td><td><code>--space-md</code></td></tr>
+            <tr><td>Gap (footer buttons)</td><td><code>16px</code></td><td><code>--space-sm</code></td></tr>
+            <tr><td>Shadow</td><td>shadow-xl</td><td><code>--shadow-xl</code></td></tr>
+            <tr><td>Backdrop</td><td><code>rgba(0,0,0,0.5)</code></td><td>—</td></tr>
+            <tr><td>Z-index (backdrop)</td><td><code>300</code></td><td><code>--z-modal-backdrop</code></td></tr>
+            <tr><td>Z-index (modal)</td><td><code>400</code></td><td><code>--z-modal</code></td></tr>
+            <tr><td>Transition</td><td><code>0.2s ease</code></td><td>—</td></tr>
+        </tbody>
+    </table>
+
+    <div class="info-box">
+        <p class="info-box__title">💡 Bonnes pratiques</p>
+        <ul>
+            <li>Toujours permettre de <strong>fermer la modal</strong> (bouton X, clic backdrop, touche Escape)</li>
+            <li>Le bouton principal (Primary) est toujours <strong>à droite</strong></li>
+            <li>Pour les actions destructives, utiliser <strong>btn--destructive</strong></li>
+            <li>Les modals de confirmation sont <strong>centrées</strong> avec icône en haut</li>
+            <li>Les Toasts disparaissent après <strong>3-5 secondes</strong></li>
+            <li>Bloquer le <strong>scroll du body</strong> quand une modal est ouverte</li>
+        </ul>
+    </div>
+</div>
+
+</body>
+</html>

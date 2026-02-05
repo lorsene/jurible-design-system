@@ -1,0 +1,1224 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jurible Design System — Buttons</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --color-primary: #B0001D;
+            --color-primary-hover: #DC2626;
+            --color-secondary: #7C3AED;
+            --color-secondary-hover: #6D28D9;
+            --color-text-dark: #1A1A1A;
+            --color-text-gray: #4A4A4A;
+            --color-text-muted: #9CA3AF;
+            --color-background: #FFFFFF;
+            --color-muted: #F3F4F6;
+            --color-border: #E5E7EB;
+            --color-border-hover: #D1D5DB;
+            --color-error: #EF4444;
+            --color-success: #10B981;
+            --color-warning: #F59E0B;
+            --color-info: #3B82F6;
+            --font-family: 'Poppins', sans-serif;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: var(--font-family);
+            background: var(--color-background);
+            color: var(--color-text-dark);
+            padding: 48px 80px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .page-header { margin-bottom: 48px; }
+
+        .page-title {
+            font-size: 48px;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .page-divider {
+            height: 3px;
+            width: 120px;
+            background: linear-gradient(90deg, #B0001D 0%, #DC2626 50%, #7C3AED 100%);
+            border-radius: 9999px;
+        }
+
+        .section {
+            margin-bottom: 48px;
+        }
+
+        .section-title {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 24px;
+            color: var(--color-text-dark);
+        }
+
+        .section-divider {
+            height: 1px;
+            background: var(--color-border);
+            margin: 48px 0;
+        }
+
+        .component-label {
+            font-size: 12px;
+            color: var(--color-text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-weight: 500;
+            margin-bottom: 16px;
+        }
+
+        /* ==================== STATES ROW ==================== */
+        .states-row {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 16px;
+            background: var(--color-muted);
+            border-radius: 12px;
+            padding: 24px;
+        }
+
+        .state-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .state-label {
+            font-size: 11px;
+            font-weight: 600;
+            color: var(--color-text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        /* ==================== BUTTONS GRID ==================== */
+        .buttons-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 24px;
+        }
+
+        .button-item {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .button-name {
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--color-text-dark);
+        }
+
+        /* ==================== BUTTONS ==================== */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 12px 24px;
+            font-family: var(--font-family);
+            font-size: 14px;
+            font-weight: 500;
+            border-radius: 8px;
+            border: none;
+            cursor: pointer;
+            transition: all 0.15s ease;
+            text-decoration: none;
+            white-space: nowrap;
+        }
+
+        .btn--sm { padding: 8px 16px; font-size: 13px; }
+        .btn--lg { padding: 16px 32px; font-size: 16px; }
+
+        .btn--primary {
+            background: linear-gradient(135deg, #B0001D 0%, #DC2626 50%, #7C3AED 100%);
+            color: white;
+            box-shadow: 0 4px 14px rgba(176, 0, 29, 0.25);
+        }
+
+        .btn--secondary {
+            background: #1A1A1A;
+            color: white;
+        }
+
+        .btn--outline {
+            background: transparent;
+            color: #B0001D;
+            border: 1px solid #B0001D;
+        }
+
+        .btn--ghost {
+            background: transparent;
+            color: #1A1A1A;
+        }
+
+        .btn--link {
+            background: transparent;
+            color: #B0001D;
+            padding: 0;
+            text-decoration: underline;
+        }
+
+        .btn--gray {
+            background: #F3F4F6;
+            color: #4A4A4A;
+            border: 1px solid #E5E7EB;
+        }
+
+        .btn--destructive {
+            background: #EF4444;
+            color: white;
+            box-shadow: 0 4px 14px rgba(239, 68, 68, 0.25);
+        }
+
+        .btn--accent {
+            background: #7C3AED;
+            color: white;
+            box-shadow: 0 4px 14px rgba(124, 58, 237, 0.25);
+        }
+
+        /* ==================== BUTTON STATES ==================== */
+        .btn--primary:hover {
+            background: linear-gradient(135deg, #9A0019 0%, #C41E1E 50%, #6D28D9 100%);
+            box-shadow: 0 6px 20px rgba(176, 0, 29, 0.35);
+            transform: translateY(-1px);
+        }
+
+        .btn--primary:active {
+            transform: translateY(0);
+            box-shadow: 0 2px 8px rgba(176, 0, 29, 0.25);
+        }
+
+        .btn--primary:focus-visible {
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.4);
+        }
+
+        .btn--primary:disabled,
+        .btn--primary.disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        .btn--secondary:hover {
+            background: #2D2D2D;
+        }
+
+        .btn--secondary:active {
+            background: #0F0F0F;
+        }
+
+        .btn--secondary:focus-visible {
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.4);
+            
+        }
+
+        .btn--secondary.disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .btn--outline:hover {
+            background: rgba(176, 0, 29, 0.05);
+            border-color: #9A0019;
+        }
+
+        .btn--outline:active {
+            background: rgba(176, 0, 29, 0.1);
+        }
+
+        .btn--outline:focus-visible {
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.4);
+            
+        }
+
+        .btn--outline.disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .btn--ghost:hover {
+            background: rgba(0, 0, 0, 0.05);
+        }
+
+        .btn--ghost:active {
+            background: rgba(0, 0, 0, 0.1);
+        }
+
+        .btn--ghost:focus-visible {
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.4);
+            
+        }
+
+        .btn--ghost.disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .btn--link:hover {
+            color: #9A0019;
+        }
+
+        .btn--link:active {
+            color: #7C3AED;
+        }
+
+        .btn--link:focus-visible {
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.4);
+            
+        }
+
+        .btn--link.disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .btn--gray:hover {
+            background: #E5E7EB;
+            border-color: #D1D5DB;
+        }
+
+        .btn--gray:active {
+            background: #D1D5DB;
+        }
+
+        .btn--gray:focus-visible {
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.4);
+            
+        }
+
+        .btn--gray.disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .btn--destructive:hover {
+            background: #DC2626;
+            box-shadow: 0 6px 20px rgba(239, 68, 68, 0.35);
+            transform: translateY(-1px);
+        }
+
+        .btn--destructive:active {
+            background: #B91C1C;
+            transform: translateY(0);
+        }
+
+        .btn--destructive:focus-visible {
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.4);
+            
+        }
+
+        .btn--destructive.disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        .btn--accent:hover {
+            background: #6D28D9;
+            box-shadow: 0 6px 20px rgba(124, 58, 237, 0.35);
+            transform: translateY(-1px);
+        }
+
+        .btn--accent:active {
+            background: #5B21B6;
+            transform: translateY(0);
+        }
+
+        .btn--accent:focus-visible {
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(176, 0, 29, 0.4);
+        }
+
+        .btn--accent.disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        /* Simulate states for demo */
+        .btn.state-hover {
+            /* Will be styled inline */
+        }
+
+        .btn.state-focus {
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.4);
+            
+        }
+
+        /* ==================== TABLES ==================== */
+        .specs-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 13px;
+        }
+
+        .specs-table th {
+            text-align: left;
+            font-size: 11px;
+            font-weight: 600;
+            color: white;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            padding: 12px 16px;
+            background: var(--color-text-dark);
+        }
+
+        .specs-table th:first-child { border-radius: 8px 0 0 0; }
+        .specs-table th:last-child { border-radius: 0 8px 0 0; }
+
+        .specs-table td {
+            padding: 12px 16px;
+            border-bottom: 1px solid var(--color-border);
+            vertical-align: middle;
+        }
+
+        .specs-table tr:last-child td { border-bottom: none; }
+
+        .specs-table code {
+            font-family: 'SF Mono', monospace;
+            font-size: 11px;
+            background: var(--color-muted);
+            padding: 2px 6px;
+            border-radius: 4px;
+        }
+
+        /* ==================== STATES BOX ==================== */
+        .states-box {
+            background: var(--color-muted);
+            border-radius: 12px;
+            padding: 24px;
+            margin-top: 24px;
+        }
+
+        .states-title {
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 16px;
+        }
+
+        .states-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 16px;
+        }
+
+        .state-item {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .state-label {
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--color-text-dark);
+        }
+
+        .state-desc {
+            font-size: 12px;
+            color: var(--color-text-muted);
+            line-height: 1.5;
+        }
+
+        /* ==================== TAGS ==================== */
+        .tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            padding: 4px 12px;
+            font-family: var(--font-family);
+            font-size: 12px;
+            font-weight: 500;
+            border-radius: 6px;
+        }
+
+        .tag--primary { background: #FEF2F2; color: #B0001D; }
+        .tag--secondary { background: #F5F3FF; color: #7C3AED; }
+        .tag--gray { background: #F3F4F6; color: #4A4A4A; }
+        .tag--success { background: #ECFDF5; color: #065F46; }
+        .tag--warning { background: #FFFBEB; color: #92400E; }
+        .tag--error { background: #FEF2F2; color: #991B1B; }
+        .tag--info { background: #EFF6FF; color: #1E40AF; }
+        .tag--dark { background: #1A1A1A; color: white; }
+
+        .tag-dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: currentColor;
+        }
+
+        /* ==================== CHIPS ==================== */
+        .chip {
+            display: inline-flex;
+            align-items: center;
+            padding: 8px 16px;
+            font-family: var(--font-family);
+            font-size: 14px;
+            font-weight: 500;
+            border-radius: 9999px;
+            cursor: pointer;
+        }
+
+        .chip--filled {
+            background: #F3F4F6;
+            color: #4A4A4A;
+        }
+
+        .chip--filled.active {
+            background: #B0001D;
+            color: white;
+        }
+
+        .chip--outline {
+            background: transparent;
+            color: #4A4A4A;
+            border: 1px solid #E5E7EB;
+        }
+
+        .chip--outline.active {
+            border-color: #B0001D;
+            color: #B0001D;
+            background: #FEF2F2;
+        }
+
+        /* ==================== BREADCRUMB ==================== */
+        .breadcrumb {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 14px;
+        }
+
+        .breadcrumb-item {
+            color: var(--color-text-muted);
+            text-decoration: none;
+        }
+
+        .breadcrumb-item.active {
+            color: var(--color-text-dark);
+            font-weight: 500;
+        }
+
+        .breadcrumb-separator {
+            color: var(--color-text-muted);
+        }
+
+        /* ==================== PAGINATION ==================== */
+        .pagination {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .pagination-btn {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: var(--font-family);
+            font-size: 14px;
+            font-weight: 500;
+            color: #4A4A4A;
+            background: transparent;
+            border: 1px solid #E5E7EB;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+
+        .pagination-btn.active {
+            background: #B0001D;
+            color: white;
+            border-color: #B0001D;
+        }
+
+        .pagination-text {
+            font-size: 14px;
+            color: var(--color-text-muted);
+        }
+
+        /* ==================== NAV DOTS ==================== */
+        .nav-dots {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .nav-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #E5E7EB;
+        }
+
+        .nav-dot.active {
+            width: 24px;
+            border-radius: 4px;
+            background: #B0001D;
+        }
+
+        /* ==================== FLEX HELPERS ==================== */
+        .flex-row {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+    </style>
+</head>
+<body>
+
+<div class="page-header">
+    <h1 class="page-title">buttons</h1>
+    <div class="page-divider"></div>
+</div>
+
+<!-- ==================== ALL BUTTONS ==================== -->
+<div class="section">
+    <h2 class="section-title">Types de boutons</h2>
+    
+    <div class="buttons-grid">
+        <div class="button-item">
+            <span class="button-name">Primary</span>
+            <button class="btn btn--primary">Button</button>
+        </div>
+        <div class="button-item">
+            <span class="button-name">Secondary</span>
+            <button class="btn btn--secondary">Button</button>
+        </div>
+        <div class="button-item">
+            <span class="button-name">Outline</span>
+            <button class="btn btn--outline">Button</button>
+        </div>
+        <div class="button-item">
+            <span class="button-name">Ghost</span>
+            <button class="btn btn--ghost">Button</button>
+        </div>
+        <div class="button-item">
+            <span class="button-name">Link</span>
+            <a href="#" class="btn btn--link">Button</a>
+        </div>
+        <div class="button-item">
+            <span class="button-name">Gray</span>
+            <button class="btn btn--gray">Button</button>
+        </div>
+        <div class="button-item">
+            <span class="button-name">Destructive</span>
+            <button class="btn btn--destructive">Button</button>
+        </div>
+        <div class="button-item">
+            <span class="button-name">Accent</span>
+            <button class="btn btn--accent">Button</button>
+        </div>
+    </div>
+
+    <!-- SPECS TABLE -->
+    <table class="specs-table" style="margin-top: 32px;">
+        <thead>
+            <tr>
+                <th>Type</th>
+                <th>Quand l'utiliser</th>
+                <th>Background</th>
+                <th>Shadow</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><strong>Primary</strong></td>
+                <td>CTA principal de la page. <strong>1 seul par écran.</strong><br>Ex: "S'inscrire", "Commencer", "Acheter"</td>
+                <td><code>gradient #B0001D → #7C3AED</code></td>
+                <td><code>rgba(176,0,29,0.25)</code></td>
+            </tr>
+            <tr>
+                <td><strong>Secondary</strong></td>
+                <td>Action secondaire importante, à côté d'un Primary.<br>Ex: "Me créer un compte" (quand Primary = "Se connecter")</td>
+                <td><code>#1A1A1A</code></td>
+                <td>—</td>
+            </tr>
+            <tr>
+                <td><strong>Outline</strong></td>
+                <td>Alternative au Primary quand on veut moins d'emphase.<br>Ex: "Voir le cours", "En savoir plus"</td>
+                <td><code>transparent</code> + border</td>
+                <td>—</td>
+            </tr>
+            <tr>
+                <td><strong>Ghost</strong></td>
+                <td>Actions tertiaires, navigation, filtres.<br>Ex: "Retour", "Annuler", boutons de toolbar</td>
+                <td><code>transparent</code></td>
+                <td>—</td>
+            </tr>
+            <tr>
+                <td><strong>Link</strong></td>
+                <td>Navigation inline dans le texte.<br>Ex: "Conditions générales", "Mot de passe oublié"</td>
+                <td><code>transparent</code> + underline</td>
+                <td>—</td>
+            </tr>
+            <tr>
+                <td><strong>Gray</strong></td>
+                <td>Actions neutres, peu importantes.<br>Ex: "Aperçu", "Télécharger", boutons dans les cards</td>
+                <td><code>#F3F4F6</code> + border</td>
+                <td>—</td>
+            </tr>
+            <tr>
+                <td><strong>Destructive</strong></td>
+                <td>Actions dangereuses irréversibles.<br>Ex: "Supprimer mon compte", "Annuler l'abonnement"</td>
+                <td><code>#EF4444</code></td>
+                <td><code>rgba(239,68,68,0.25)</code></td>
+            </tr>
+            <tr>
+                <td><strong>Accent</strong></td>
+                <td>Mise en avant spéciale : nouveautés, IA, premium.<br>Ex: "Essayer l'IA", "Nouveau", "Découvrir"</td>
+                <td><code>#7C3AED</code></td>
+                <td><code>rgba(124,58,237,0.25)</code></td>
+            </tr>
+        </tbody>
+    </table>
+    
+    <!-- HIERARCHY BOX -->
+    <div class="states-box" style="margin-top: 24px; background: #FEF2F2;">
+        <p class="states-title">📐 Hiérarchie visuelle (du plus au moins important)</p>
+        <div style="display: flex; align-items: center; gap: 16px; flex-wrap: wrap;">
+            <button class="btn btn--primary" style="pointer-events: none;">Primary</button>
+            <span style="color: #9CA3AF;">→</span>
+            <button class="btn btn--accent" style="pointer-events: none;">Accent</button>
+            <span style="color: #9CA3AF;">→</span>
+            <button class="btn btn--secondary" style="pointer-events: none;">Secondary</button>
+            <span style="color: #9CA3AF;">→</span>
+            <button class="btn btn--outline" style="pointer-events: none;">Outline</button>
+            <span style="color: #9CA3AF;">→</span>
+            <button class="btn btn--gray" style="pointer-events: none;">Gray</button>
+            <span style="color: #9CA3AF;">→</span>
+            <button class="btn btn--ghost" style="pointer-events: none;">Ghost</button>
+            <span style="color: #9CA3AF;">→</span>
+            <a class="btn btn--link" style="pointer-events: none;">Link</a>
+        </div>
+    </div>
+
+    <!-- STATES -->
+    <div class="states-box">
+        <p class="states-title">États (appliqués à tous les boutons)</p>
+        <div class="states-grid">
+            <div class="state-item">
+                <span class="state-label">Default</span>
+                <span class="state-desc">État normal</span>
+            </div>
+            <div class="state-item">
+                <span class="state-label">Hover</span>
+                <span class="state-desc">Shadow opacity → 35%<br>ou bg légèrement plus foncé</span>
+            </div>
+            <div class="state-item">
+                <span class="state-label">Focus</span>
+                <span class="state-desc"><code>box-shadow: 0 0 0 3px</code><br><code>rgba(124,58,237,0.4)</code></span>
+            </div>
+            <div class="state-item">
+                <span class="state-label">Disabled</span>
+                <span class="state-desc"><code>opacity: 0.5</code><br><code>cursor: not-allowed</code></span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="section-divider"></div>
+
+<!-- ==================== ÉTATS DES BOUTONS ==================== -->
+<div class="section">
+    <h2 class="section-title">États des boutons</h2>
+    
+    <!-- PRIMARY -->
+    <p class="component-label" style="margin-top: 24px;">Primary</p>
+    <div class="states-row">
+        <div class="state-item">
+            <span class="state-label">Default</span>
+            <button class="btn btn--primary">Button</button>
+        </div>
+        <div class="state-item">
+            <span class="state-label">Hover</span>
+            <button class="btn btn--primary" style="background: linear-gradient(135deg, #9A0019 0%, #C41E1E 50%, #6D28D9 100%); box-shadow: 0 6px 20px rgba(176, 0, 29, 0.35); transform: translateY(-1px);">Button</button>
+        </div>
+        <div class="state-item">
+            <span class="state-label">Focus</span>
+            <button class="btn btn--primary" style="box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.4);">Button</button>
+        </div>
+        <div class="state-item">
+            <span class="state-label">Active (clic)</span>
+            <button class="btn btn--primary" style="box-shadow: 0 2px 8px rgba(176, 0, 29, 0.25);">Button</button>
+        </div>
+        <div class="state-item">
+            <span class="state-label">Disabled</span>
+            <button class="btn btn--primary" style="opacity: 0.5; cursor: not-allowed;">Button</button>
+        </div>
+    </div>
+
+    <!-- SECONDARY -->
+    <p class="component-label" style="margin-top: 32px;">Secondary</p>
+    <div class="states-row">
+        <div class="state-item">
+            <span class="state-label">Default</span>
+            <button class="btn btn--secondary">Button</button>
+        </div>
+        <div class="state-item">
+            <span class="state-label">Hover</span>
+            <button class="btn btn--secondary" style="background: #2D2D2D;">Button</button>
+        </div>
+        <div class="state-item">
+            <span class="state-label">Focus</span>
+            <button class="btn btn--secondary" style="box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.4);">Button</button>
+        </div>
+        <div class="state-item">
+            <span class="state-label">Active (clic)</span>
+            <button class="btn btn--secondary" style="background: #0F0F0F;">Button</button>
+        </div>
+        <div class="state-item">
+            <span class="state-label">Disabled</span>
+            <button class="btn btn--secondary" style="opacity: 0.5; cursor: not-allowed;">Button</button>
+        </div>
+    </div>
+
+    <!-- OUTLINE -->
+    <p class="component-label" style="margin-top: 32px;">Outline</p>
+    <div class="states-row">
+        <div class="state-item">
+            <span class="state-label">Default</span>
+            <button class="btn btn--outline">Button</button>
+        </div>
+        <div class="state-item">
+            <span class="state-label">Hover</span>
+            <button class="btn btn--outline" style="background: rgba(176, 0, 29, 0.05); border-color: #9A0019;">Button</button>
+        </div>
+        <div class="state-item">
+            <span class="state-label">Focus</span>
+            <button class="btn btn--outline" style="box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.4);">Button</button>
+        </div>
+        <div class="state-item">
+            <span class="state-label">Active (clic)</span>
+            <button class="btn btn--outline" style="background: rgba(176, 0, 29, 0.1);">Button</button>
+        </div>
+        <div class="state-item">
+            <span class="state-label">Disabled</span>
+            <button class="btn btn--outline" style="opacity: 0.5; cursor: not-allowed;">Button</button>
+        </div>
+    </div>
+
+    <!-- GHOST -->
+    <p class="component-label" style="margin-top: 32px;">Ghost</p>
+    <div class="states-row">
+        <div class="state-item">
+            <span class="state-label">Default</span>
+            <button class="btn btn--ghost">Button</button>
+        </div>
+        <div class="state-item">
+            <span class="state-label">Hover</span>
+            <button class="btn btn--ghost" style="background: rgba(0, 0, 0, 0.05);">Button</button>
+        </div>
+        <div class="state-item">
+            <span class="state-label">Focus</span>
+            <button class="btn btn--ghost" style="box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.4);">Button</button>
+        </div>
+        <div class="state-item">
+            <span class="state-label">Active (clic)</span>
+            <button class="btn btn--ghost" style="background: rgba(0, 0, 0, 0.1);">Button</button>
+        </div>
+        <div class="state-item">
+            <span class="state-label">Disabled</span>
+            <button class="btn btn--ghost" style="opacity: 0.5; cursor: not-allowed;">Button</button>
+        </div>
+    </div>
+
+    <!-- LINK -->
+    <p class="component-label" style="margin-top: 32px;">Link</p>
+    <div class="states-row">
+        <div class="state-item">
+            <span class="state-label">Default</span>
+            <button class="btn btn--link">Button</button>
+        </div>
+        <div class="state-item">
+            <span class="state-label">Hover</span>
+            <button class="btn btn--link" style="color: #9A0019;">Button</button>
+        </div>
+        <div class="state-item">
+            <span class="state-label">Focus</span>
+            <button class="btn btn--link" style="box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.4);">Button</button>
+        </div>
+        <div class="state-item">
+            <span class="state-label">Active (clic)</span>
+            <button class="btn btn--link" style="color: #7C3AED;">Button</button>
+        </div>
+        <div class="state-item">
+            <span class="state-label">Disabled</span>
+            <button class="btn btn--link" style="opacity: 0.5; cursor: not-allowed;">Button</button>
+        </div>
+    </div>
+
+    <!-- GRAY -->
+    <p class="component-label" style="margin-top: 32px;">Gray</p>
+    <div class="states-row">
+        <div class="state-item">
+            <span class="state-label">Default</span>
+            <button class="btn btn--gray">Button</button>
+        </div>
+        <div class="state-item">
+            <span class="state-label">Hover</span>
+            <button class="btn btn--gray" style="background: #E5E7EB; border-color: #D1D5DB;">Button</button>
+        </div>
+        <div class="state-item">
+            <span class="state-label">Focus</span>
+            <button class="btn btn--gray" style="box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.4);">Button</button>
+        </div>
+        <div class="state-item">
+            <span class="state-label">Active (clic)</span>
+            <button class="btn btn--gray" style="background: #D1D5DB;">Button</button>
+        </div>
+        <div class="state-item">
+            <span class="state-label">Disabled</span>
+            <button class="btn btn--gray" style="opacity: 0.5; cursor: not-allowed;">Button</button>
+        </div>
+    </div>
+
+    <!-- DESTRUCTIVE -->
+    <p class="component-label" style="margin-top: 32px;">Destructive</p>
+    <div class="states-row">
+        <div class="state-item">
+            <span class="state-label">Default</span>
+            <button class="btn btn--destructive">Button</button>
+        </div>
+        <div class="state-item">
+            <span class="state-label">Hover</span>
+            <button class="btn btn--destructive" style="background: #DC2626; box-shadow: 0 6px 20px rgba(239, 68, 68, 0.35); transform: translateY(-1px);">Button</button>
+        </div>
+        <div class="state-item">
+            <span class="state-label">Focus</span>
+            <button class="btn btn--destructive" style="box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.4);">Button</button>
+        </div>
+        <div class="state-item">
+            <span class="state-label">Active (clic)</span>
+            <button class="btn btn--destructive" style="background: #B91C1C;">Button</button>
+        </div>
+        <div class="state-item">
+            <span class="state-label">Disabled</span>
+            <button class="btn btn--destructive" style="opacity: 0.5; cursor: not-allowed; box-shadow: none;">Button</button>
+        </div>
+    </div>
+
+    <!-- ACCENT -->
+    <p class="component-label" style="margin-top: 32px;">Accent</p>
+    <div class="states-row">
+        <div class="state-item">
+            <span class="state-label">Default</span>
+            <button class="btn btn--accent">Button</button>
+        </div>
+        <div class="state-item">
+            <span class="state-label">Hover</span>
+            <button class="btn btn--accent" style="background: #6D28D9; box-shadow: 0 6px 20px rgba(124, 58, 237, 0.35); transform: translateY(-1px);">Button</button>
+        </div>
+        <div class="state-item">
+            <span class="state-label">Focus</span>
+            <button class="btn btn--accent" style="box-shadow: 0 0 0 3px rgba(176, 0, 29, 0.4);">Button</button>
+        </div>
+        <div class="state-item">
+            <span class="state-label">Active (clic)</span>
+            <button class="btn btn--accent" style="background: #5B21B6;">Button</button>
+        </div>
+        <div class="state-item">
+            <span class="state-label">Disabled</span>
+            <button class="btn btn--accent" style="opacity: 0.5; cursor: not-allowed; box-shadow: none;">Button</button>
+        </div>
+    </div>
+
+    <!-- SPECS TABLE -->
+    <table class="specs-table" style="margin-top: 32px;">
+        <thead>
+            <tr>
+                <th>État</th>
+                <th>Propriété</th>
+                <th>Description</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><strong>Default</strong></td>
+                <td><code>—</code></td>
+                <td>État initial</td>
+            </tr>
+            <tr>
+                <td><strong>Hover</strong></td>
+                <td><code>background</code> légèrement plus foncé<br><code>transform: translateY(-1px)</code><br><code>box-shadow</code> plus intense</td>
+                <td>Au survol de la souris</td>
+            </tr>
+            <tr>
+                <td><strong>Focus</strong></td>
+                <td><code>outline: none</code><br><code>box-shadow: 0 0 0 3px rgba(124,58,237,0.4)</code></td>
+                <td>Navigation clavier (tab) — utiliser <code>:focus-visible</code></td>
+            </tr>
+            <tr>
+                <td><strong>Active</strong></td>
+                <td><code>background</code> encore plus foncé<br><code>transform: translateY(0)</code></td>
+                <td>Pendant le clic</td>
+            </tr>
+            <tr>
+                <td><strong>Disabled</strong></td>
+                <td><code>opacity: 0.5</code><br><code>cursor: not-allowed</code></td>
+                <td>Bouton désactivé</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<div class="section-divider"></div>
+<div class="section">
+    <h2 class="section-title">Tailles</h2>
+    
+    <div class="flex-row" style="gap: 24px; align-items: flex-end;">
+        <div class="button-item">
+            <span class="button-name">SM</span>
+            <button class="btn btn--primary btn--sm">Button</button>
+        </div>
+        <div class="button-item">
+            <span class="button-name">Default</span>
+            <button class="btn btn--primary">Button</button>
+        </div>
+        <div class="button-item">
+            <span class="button-name">LG</span>
+            <button class="btn btn--primary btn--lg">Button</button>
+        </div>
+    </div>
+
+    <table class="specs-table" style="margin-top: 24px; max-width: 400px;">
+        <thead>
+            <tr>
+                <th>Size</th>
+                <th>Padding</th>
+                <th>Font Size</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr><td><strong>SM</strong></td><td><code>8px 16px</code></td><td><code>13px</code></td></tr>
+            <tr><td><strong>Default</strong></td><td><code>12px 24px</code></td><td><code>14px</code></td></tr>
+            <tr><td><strong>LG</strong></td><td><code>16px 32px</code></td><td><code>16px</code></td></tr>
+        </tbody>
+    </table>
+</div>
+
+<div class="section-divider"></div>
+
+<!-- ==================== TAGS ==================== -->
+<div class="section">
+    <h2 class="section-title">Tags</h2>
+    
+    <div class="flex-row" style="margin-bottom: 24px;">
+        <span class="tag tag--primary">Primary</span>
+        <span class="tag tag--secondary">Secondary</span>
+        <span class="tag tag--gray">Gray</span>
+        <span class="tag tag--success">Success</span>
+        <span class="tag tag--warning">Warning</span>
+        <span class="tag tag--error">Error</span>
+        <span class="tag tag--info">Info</span>
+        <span class="tag tag--dark">Dark</span>
+    </div>
+
+    <p class="component-label">Avec indicateur</p>
+    <div class="flex-row" style="margin-bottom: 24px;">
+        <span class="tag tag--success"><span class="tag-dot"></span>Actif</span>
+        <span class="tag tag--warning"><span class="tag-dot"></span>En attente</span>
+        <span class="tag tag--error"><span class="tag-dot"></span>Erreur</span>
+    </div>
+
+    <table class="specs-table" style="max-width: 500px;">
+        <thead>
+            <tr>
+                <th>Type</th>
+                <th>Background</th>
+                <th>Color</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr><td>Primary</td><td><code>#FEF2F2</code></td><td><code>#B0001D</code></td></tr>
+            <tr><td>Secondary</td><td><code>#F5F3FF</code></td><td><code>#7C3AED</code></td></tr>
+            <tr><td>Gray</td><td><code>#F3F4F6</code></td><td><code>#4A4A4A</code></td></tr>
+            <tr><td>Success</td><td><code>#ECFDF5</code></td><td><code>#065F46</code></td></tr>
+            <tr><td>Warning</td><td><code>#FFFBEB</code></td><td><code>#92400E</code></td></tr>
+            <tr><td>Error</td><td><code>#FEF2F2</code></td><td><code>#991B1B</code></td></tr>
+            <tr><td>Info</td><td><code>#EFF6FF</code></td><td><code>#1E40AF</code></td></tr>
+            <tr><td>Dark</td><td><code>#1A1A1A</code></td><td><code>#FFFFFF</code></td></tr>
+        </tbody>
+    </table>
+</div>
+
+<div class="section-divider"></div>
+
+<!-- ==================== CHIPS ==================== -->
+<div class="section">
+    <h2 class="section-title">Chips</h2>
+    
+    <p class="component-label">Filled</p>
+    <div class="flex-row" style="margin-bottom: 24px;">
+        <span class="chip chip--filled">Default</span>
+        <span class="chip chip--filled active">Active</span>
+    </div>
+
+    <p class="component-label">Outline</p>
+    <div class="flex-row" style="margin-bottom: 24px;">
+        <span class="chip chip--outline">Default</span>
+        <span class="chip chip--outline active">Active</span>
+    </div>
+
+    <table class="specs-table" style="max-width: 400px;">
+        <thead>
+            <tr>
+                <th>Spec</th>
+                <th>Value</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr><td>Padding</td><td><code>8px 16px</code></td></tr>
+            <tr><td>Border Radius</td><td><code>9999px</code></td></tr>
+            <tr><td>Font Size</td><td><code>14px</code></td></tr>
+        </tbody>
+    </table>
+</div>
+
+<div class="section-divider"></div>
+
+<!-- ==================== BREADCRUMB ==================== -->
+<div class="section">
+    <h2 class="section-title">Breadcrumb</h2>
+    
+    <nav class="breadcrumb" style="margin-bottom: 24px;">
+        <a href="#" class="breadcrumb-item">Accueil</a>
+        <span class="breadcrumb-separator">›</span>
+        <a href="#" class="breadcrumb-item">Cours</a>
+        <span class="breadcrumb-separator">›</span>
+        <a href="#" class="breadcrumb-item">Droit civil</a>
+        <span class="breadcrumb-separator">›</span>
+        <span class="breadcrumb-item active">Chapitre 3</span>
+    </nav>
+
+    <table class="specs-table" style="max-width: 400px;">
+        <thead>
+            <tr>
+                <th>Element</th>
+                <th>Style</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr><td>Link</td><td><code>color: #9CA3AF</code></td></tr>
+            <tr><td>Link hover</td><td><code>color: #B0001D</code></td></tr>
+            <tr><td>Active</td><td><code>color: #1A1A1A; font-weight: 500</code></td></tr>
+            <tr><td>Gap</td><td><code>8px</code></td></tr>
+        </tbody>
+    </table>
+</div>
+
+<div class="section-divider"></div>
+
+<!-- ==================== PAGINATION ==================== -->
+<div class="section">
+    <h2 class="section-title">Pagination</h2>
+    
+    <nav class="pagination" style="margin-bottom: 24px;">
+        <span class="pagination-text">← Précédent</span>
+        <button class="pagination-btn active">1</button>
+        <button class="pagination-btn">2</button>
+        <button class="pagination-btn">3</button>
+        <span style="color: #9CA3AF;">...</span>
+        <button class="pagination-btn">10</button>
+        <span class="pagination-text">Suivant →</span>
+    </nav>
+
+    <table class="specs-table" style="max-width: 400px;">
+        <thead>
+            <tr>
+                <th>Spec</th>
+                <th>Value</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr><td>Button size</td><td><code>40px × 40px</code></td></tr>
+            <tr><td>Border</td><td><code>1px solid #E5E7EB</code></td></tr>
+            <tr><td>Border radius</td><td><code>8px</code></td></tr>
+            <tr><td>Active bg</td><td><code>#B0001D</code></td></tr>
+            <tr><td>Gap</td><td><code>8px</code></td></tr>
+        </tbody>
+    </table>
+</div>
+
+<div class="section-divider"></div>
+
+<!-- ==================== NAV DOTS ==================== -->
+<div class="section">
+    <h2 class="section-title">Navigation Dots</h2>
+    
+    <div class="nav-dots" style="margin-bottom: 24px;">
+        <span class="nav-dot active"></span>
+        <span class="nav-dot"></span>
+        <span class="nav-dot"></span>
+        <span class="nav-dot"></span>
+    </div>
+
+    <table class="specs-table" style="max-width: 400px;">
+        <thead>
+            <tr>
+                <th>Spec</th>
+                <th>Value</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr><td>Dot size</td><td><code>8px × 8px</code></td></tr>
+            <tr><td>Active size</td><td><code>24px × 8px</code></td></tr>
+            <tr><td>Default bg</td><td><code>#E5E7EB</code></td></tr>
+            <tr><td>Active bg</td><td><code>#B0001D</code></td></tr>
+            <tr><td>Gap</td><td><code>8px</code></td></tr>
+        </tbody>
+    </table>
+</div>
+
+<div class="section-divider"></div>
+
+<!-- ==================== GLOBAL SPECS ==================== -->
+<div class="section">
+    <h2 class="section-title">📋 Specs globales</h2>
+    
+    <table class="specs-table" style="max-width: 400px;">
+        <thead>
+            <tr>
+                <th>Property</th>
+                <th>Value</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr><td>Font Family</td><td><code>Poppins</code></td></tr>
+            <tr><td>Font Weight</td><td><code>500 (Medium)</code></td></tr>
+            <tr><td>Button Radius</td><td><code>8px</code></td></tr>
+            <tr><td>Tag Radius</td><td><code>6px</code></td></tr>
+            <tr><td>Tag Padding</td><td><code>4px 12px</code></td></tr>
+            <tr><td>Transition</td><td><code>all 0.15s ease</code></td></tr>
+        </tbody>
+    </table>
+</div>
+
+</body>
+</html>

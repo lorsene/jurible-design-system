@@ -1,0 +1,661 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jurible Design System — Hero Archive (Type C)</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        /* ==================== DESIGN SYSTEM TOKENS ==================== */
+        :root {
+            --color-primary: #B0001D;
+            --color-primary-hover: #DC2626;
+            --color-secondary: #7C3AED;
+            --color-success: #10B981;
+            --color-text-dark: #1A1A1A;
+            --color-text-gray: #4A4A4A;
+            --color-text-muted: #9CA3AF;
+            --color-background: #FFFFFF;
+            --color-muted: #F3F4F6;
+            --color-border: #E5E7EB;
+
+            --gradient-jurible: linear-gradient(135deg, #B0001D 0%, #DC2626 50%, #7C3AED 100%);
+            --gradient-hero-bg: linear-gradient(180deg, #FFFFFF 0%, #FAFAFE 50%, #F5F3FF 100%);
+
+            --space-xs: 8px; --space-sm: 16px; --space-md: 24px; --space-lg: 32px;
+            --space-xl: 48px; --space-2xl: 64px; --space-3xl: 80px;
+
+            --radius-sm: 6px; --radius-md: 8px; --radius-lg: 12px; --radius-xl: 16px;
+            --radius-full: 9999px;
+
+            --shadow-sm: 0 1px 2px rgba(0,0,0,0.05);
+            --shadow-md: 0 4px 6px rgba(0,0,0,0.07);
+            --shadow-lg: 0 10px 15px rgba(0,0,0,0.1);
+
+            --font-family: 'Poppins', sans-serif;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: var(--font-family); background: var(--color-background); color: var(--color-text-dark); line-height: 1.5; }
+
+        /* ==================== PAGE LAYOUT ==================== */
+        .page-container { max-width: 1400px; margin: 0 auto; padding: var(--space-xl); }
+        .page-header { margin-bottom: var(--space-xl); }
+        .page-title { font-size: 42px; font-weight: 700; margin-bottom: var(--space-xs); }
+        .page-divider { height: 3px; width: 120px; background: var(--gradient-jurible); border-radius: var(--radius-full); }
+        .section { margin-bottom: var(--space-3xl); }
+        .section-header { margin-bottom: var(--space-lg); }
+        .section-title { font-size: 24px; font-weight: 600; margin-bottom: 4px; }
+        .section-subtitle { font-size: 14px; color: var(--color-text-muted); }
+        .section-divider { height: 1px; background: var(--color-border); margin: var(--space-3xl) 0; }
+        .component-label { font-size: 11px; color: var(--color-text-muted); text-transform: uppercase; letter-spacing: 0.5px; font-weight: 600; display: inline-block; background: var(--color-muted); padding: 4px 10px; border-radius: 4px; }
+
+        /* ==================== PREVIEW ==================== */
+        .preview-row { display: flex; flex-direction: column; gap: var(--space-lg); align-items: stretch; }
+        .preview-desktop { border: 1px solid var(--color-border); border-radius: var(--radius-lg); overflow: hidden; background: white; }
+        .preview-mobile { width: 375px; border: 1px solid var(--color-border); border-radius: var(--radius-lg); overflow: hidden; background: white; }
+
+        /* ==================== HERO C — ARCHIVE ==================== */
+        .hero-c {
+            position: relative;
+            background: var(--gradient-hero-bg);
+            padding: var(--space-xl) var(--space-xl) var(--space-lg);
+            text-align: center;
+            overflow: hidden;
+        }
+
+        .hero-c__container {
+            max-width: 720px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Badge */
+        .hero-c__badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: rgba(124,58,237,0.1);
+            border: 1px solid rgba(124,58,237,0.2);
+            color: var(--color-secondary);
+            font-size: 13px;
+            font-weight: 600;
+            padding: 5px 14px;
+            border-radius: var(--radius-full);
+            margin-bottom: var(--space-sm);
+            animation: fadeInUp .5s ease both;
+            animation-delay: .05s;
+        }
+
+        /* Titre */
+        .hero-c__title {
+            font-size: 36px;
+            font-weight: 800;
+            line-height: 1.15;
+            color: var(--color-text-dark);
+            margin-bottom: var(--space-xs);
+            animation: fadeInUp .5s ease both;
+            animation-delay: .1s;
+        }
+
+        /* Sous-titre */
+        .hero-c__subtitle {
+            font-size: 16px;
+            color: var(--color-text-gray);
+            line-height: 1.6;
+            max-width: 560px;
+            margin: 0 auto var(--space-sm);
+            animation: fadeInUp .5s ease both;
+            animation-delay: .15s;
+        }
+
+        /* Compteur */
+        .hero-c__count {
+            font-size: 13px;
+            color: var(--color-text-muted);
+            font-weight: 500;
+            margin-bottom: var(--space-md);
+            animation: fadeInUp .5s ease both;
+            animation-delay: .2s;
+        }
+
+        .hero-c__count strong {
+            color: var(--color-secondary);
+            font-weight: 700;
+        }
+
+        /* Barre de recherche */
+        .hero-c__search {
+            position: relative;
+            max-width: 480px;
+            margin: 0 auto var(--space-sm);
+            animation: fadeInUp .5s ease both;
+            animation-delay: .25s;
+        }
+
+        .hero-c__search-input {
+            width: 100%;
+            padding: 13px 18px 13px 44px;
+            font-family: var(--font-family);
+            font-size: 14px;
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-full);
+            background: white;
+            color: var(--color-text-dark);
+            outline: none;
+            transition: all .2s ease;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .hero-c__search-input::placeholder { color: var(--color-text-muted); }
+
+        .hero-c__search-input:focus {
+            border-color: var(--color-secondary);
+            box-shadow: 0 0 0 3px rgba(124,58,237,0.1);
+        }
+
+        .hero-c__search-icon {
+            position: absolute;
+            left: 16px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 16px;
+            color: var(--color-text-muted);
+            pointer-events: none;
+        }
+
+        /* Filtres pills */
+        .hero-c__filters {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: var(--space-xs);
+            margin-bottom: var(--space-md);
+            animation: fadeInUp .5s ease both;
+            animation-delay: .3s;
+        }
+
+        .hero-c__filter {
+            padding: 7px 16px;
+            font-family: var(--font-family);
+            font-size: 13px;
+            font-weight: 500;
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-full);
+            background: white;
+            color: var(--color-text-gray);
+            cursor: pointer;
+            transition: all .2s ease;
+        }
+
+        .hero-c__filter:hover {
+            border-color: var(--color-secondary);
+            color: var(--color-secondary);
+        }
+
+        .hero-c__filter--active {
+            background: var(--color-secondary);
+            border-color: var(--color-secondary);
+            color: white;
+        }
+
+        .hero-c__filter--active:hover {
+            background: #6D28D9;
+            border-color: #6D28D9;
+            color: white;
+        }
+
+        /* CTA discret abonnement */
+        .hero-c__cta-bar {
+            display: inline-flex;
+            align-items: center;
+            gap: var(--space-xs);
+            background: rgba(124,58,237,0.05);
+            border: 1px solid rgba(124,58,237,0.12);
+            border-radius: var(--radius-full);
+            padding: 8px 20px;
+            font-size: 13px;
+            color: var(--color-text-gray);
+            animation: fadeInUp .5s ease both;
+            animation-delay: .35s;
+        }
+
+        .hero-c__cta-link {
+            color: var(--color-secondary);
+            font-weight: 600;
+            text-decoration: none;
+            transition: color .2s ease;
+        }
+
+        .hero-c__cta-link:hover {
+            color: #6D28D9;
+            text-decoration: underline;
+        }
+
+        /* ==================== MOBILE ==================== */
+        .hero-c--mobile { padding: var(--space-md) var(--space-sm) var(--space-sm); }
+        .hero-c--mobile .hero-c__title { font-size: 24px; }
+        .hero-c--mobile .hero-c__subtitle { font-size: 14px; margin-bottom: var(--space-xs); }
+        .hero-c--mobile .hero-c__count { font-size: 12px; }
+        .hero-c--mobile .hero-c__search-input { font-size: 13px; padding: 11px 16px 11px 40px; }
+        .hero-c--mobile .hero-c__filter { font-size: 12px; padding: 6px 12px; }
+        .hero-c--mobile .hero-c__cta-bar { font-size: 12px; padding: 7px 14px; }
+
+        /* ==================== ANIMATIONS ==================== */
+        @keyframes fadeInUp { from{opacity:0;transform:translateY(16px)} to{opacity:1;transform:translateY(0)} }
+
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after { animation-duration: 0.01ms !important; }
+        }
+    </style>
+</head>
+<body>
+<div class="page-container">
+    <header class="page-header">
+        <h1 class="page-title">Hero Archive (Type C)</h1>
+        <div class="page-divider"></div>
+        <p style="margin-top:12px;font-size:14px;color:var(--color-text-muted);">Template unique paramétrable — Badge, Titre, Sous-titre, Compteur, Recherche, Filtres pills, CTA discret abonnement</p>
+    </header>
+
+    <!-- ================================================================ -->
+    <!-- C1 — ARCHIVE PAR NIVEAU (ex: L1)                                 -->
+    <!-- ================================================================ -->
+    <section class="section">
+        <div class="section-header">
+            <h2 class="section-title">C — Exemple : Archive par niveau (L1)</h2>
+        </div>
+
+        <div class="preview-row">
+            <div class="preview-desktop">
+                <span class="component-label" style="margin:16px;">Desktop</span>
+                <div class="hero-c">
+                    <div class="hero-c__container">
+                        <span class="hero-c__badge">📚 Licence 1</span>
+                        <h1 class="hero-c__title">Tous les cours de Licence 1</h1>
+                        <p class="hero-c__subtitle">Retrouvez l'ensemble des matières fondamentales de première année : cours vidéo, fiches, QCM et annales corrigées.</p>
+                        <p class="hero-c__count"><strong>24</strong> cours disponibles</p>
+                        <div class="hero-c__search">
+                            <span class="hero-c__search-icon">🔍</span>
+                            <input class="hero-c__search-input" type="text" placeholder="Rechercher un cours de L1…">
+                        </div>
+                        <div class="hero-c__filters">
+                            <button class="hero-c__filter hero-c__filter--active">Tous</button>
+                            <button class="hero-c__filter">Semestre 1</button>
+                            <button class="hero-c__filter">Semestre 2</button>
+                        </div>
+                        <div class="hero-c__cta-bar">
+                            Accès illimité à tous les cours →
+                            <a href="#" class="hero-c__cta-link">Rejoindre l'Académie · 29€/mois</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="preview-mobile">
+                <span class="component-label" style="margin:12px;">Mobile 375px</span>
+                <div class="hero-c hero-c--mobile">
+                    <div class="hero-c__container">
+                        <span class="hero-c__badge">📚 Licence 1</span>
+                        <h1 class="hero-c__title">Tous les cours de L1</h1>
+                        <p class="hero-c__subtitle">Cours vidéo, fiches, QCM et annales corrigées pour la première année.</p>
+                        <p class="hero-c__count"><strong>24</strong> cours disponibles</p>
+                        <div class="hero-c__search">
+                            <span class="hero-c__search-icon">🔍</span>
+                            <input class="hero-c__search-input" type="text" placeholder="Rechercher un cours…">
+                        </div>
+                        <div class="hero-c__filters">
+                            <button class="hero-c__filter hero-c__filter--active">Tous</button>
+                            <button class="hero-c__filter">S1</button>
+                            <button class="hero-c__filter">S2</button>
+                        </div>
+                        <div class="hero-c__cta-bar">
+                            <a href="#" class="hero-c__cta-link">Rejoindre l'Académie · 29€/mois</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="section-divider"></div>
+
+    <!-- ================================================================ -->
+    <!-- C2 — ARCHIVE PAR TYPE PRODUIT (ex: Fiches PDF)                   -->
+    <!-- ================================================================ -->
+    <section class="section">
+        <div class="section-header">
+            <h2 class="section-title">C — Exemple : Archive par type produit (Fiches PDF)</h2>
+        </div>
+
+        <div class="preview-row">
+            <div class="preview-desktop">
+                <span class="component-label" style="margin:16px;">Desktop</span>
+                <div class="hero-c">
+                    <div class="hero-c__container">
+                        <span class="hero-c__badge">📄 Fiches PDF</span>
+                        <h1 class="hero-c__title">Nos fiches de révision</h1>
+                        <p class="hero-c__subtitle">Des fiches synthétiques et complètes pour chaque matière, accompagnées de cartes mentales. Téléchargeables, imprimables, accessibles à vie.</p>
+                        <p class="hero-c__count"><strong>32</strong> fiches disponibles</p>
+                        <div class="hero-c__search">
+                            <span class="hero-c__search-icon">🔍</span>
+                            <input class="hero-c__search-input" type="text" placeholder="Rechercher une fiche…">
+                        </div>
+                        <div class="hero-c__filters">
+                            <button class="hero-c__filter hero-c__filter--active">Toutes</button>
+                            <button class="hero-c__filter">L1</button>
+                            <button class="hero-c__filter">L2</button>
+                            <button class="hero-c__filter">L3</button>
+                        </div>
+                        <div class="hero-c__cta-bar">
+                            Toutes les fiches incluses dans l'abonnement →
+                            <a href="#" class="hero-c__cta-link">Rejoindre l'Académie · 29€/mois</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="section-divider"></div>
+
+    <!-- ================================================================ -->
+    <!-- C3 — ARCHIVE PAR SUPPORT (ex: Flashcards)                        -->
+    <!-- ================================================================ -->
+    <section class="section">
+        <div class="section-header">
+            <h2 class="section-title">C — Exemple : Archive par support (Flashcards)</h2>
+        </div>
+
+        <div class="preview-row">
+            <div class="preview-desktop">
+                <span class="component-label" style="margin:16px;">Desktop</span>
+                <div class="hero-c">
+                    <div class="hero-c__container">
+                        <span class="hero-c__badge">🗂️ Flashcards</span>
+                        <h1 class="hero-c__title">Les Flashcards</h1>
+                        <p class="hero-c__subtitle">Des cartes de révision interactives pour mémoriser définitions, arrêts et notions clés. Disponibles pour toutes les matières de licence.</p>
+                        <p class="hero-c__count"><strong>3 000+</strong> cartes disponibles</p>
+                        <div class="hero-c__search">
+                            <span class="hero-c__search-icon">🔍</span>
+                            <input class="hero-c__search-input" type="text" placeholder="Rechercher des flashcards…">
+                        </div>
+                        <div class="hero-c__filters">
+                            <button class="hero-c__filter hero-c__filter--active">Toutes</button>
+                            <button class="hero-c__filter">L1</button>
+                            <button class="hero-c__filter">L2</button>
+                            <button class="hero-c__filter">L3</button>
+                        </div>
+                        <div class="hero-c__cta-bar">
+                            Accès illimité aux flashcards →
+                            <a href="#" class="hero-c__cta-link">Rejoindre l'Académie · 29€/mois</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="section-divider"></div>
+
+    <!-- ================================================================ -->
+    <!-- C4 — CATALOGUE GLOBAL                                             -->
+    <!-- ================================================================ -->
+    <section class="section">
+        <div class="section-header">
+            <h2 class="section-title">C — Exemple : Catalogue global</h2>
+        </div>
+
+        <div class="preview-row">
+            <div class="preview-desktop">
+                <span class="component-label" style="margin:16px;">Desktop</span>
+                <div class="hero-c">
+                    <div class="hero-c__container">
+                        <span class="hero-c__badge">🎓 Catalogue</span>
+                        <h1 class="hero-c__title">Tous nos contenus</h1>
+                        <p class="hero-c__subtitle">Explorez l'ensemble des ressources Jurible : cours vidéo, fiches de révision, packs, flashcards, QCM et outils IA pour réussir votre licence de droit.</p>
+                        <p class="hero-c__count"><strong>500+</strong> ressources disponibles</p>
+                        <div class="hero-c__search">
+                            <span class="hero-c__search-icon">🔍</span>
+                            <input class="hero-c__search-input" type="text" placeholder="Rechercher un cours, une fiche, un outil…">
+                        </div>
+                        <div class="hero-c__filters">
+                            <button class="hero-c__filter hero-c__filter--active">Tout</button>
+                            <button class="hero-c__filter">Cours</button>
+                            <button class="hero-c__filter">Fiches PDF</button>
+                            <button class="hero-c__filter">Packs</button>
+                            <button class="hero-c__filter">Flashcards</button>
+                            <button class="hero-c__filter">Outils IA</button>
+                        </div>
+                        <div class="hero-c__cta-bar">
+                            Accès illimité à tout le catalogue →
+                            <a href="#" class="hero-c__cta-link">Rejoindre l'Académie · 29€/mois</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="preview-mobile">
+                <span class="component-label" style="margin:12px;">Mobile 375px</span>
+                <div class="hero-c hero-c--mobile">
+                    <div class="hero-c__container">
+                        <span class="hero-c__badge">🎓 Catalogue</span>
+                        <h1 class="hero-c__title">Tous nos contenus</h1>
+                        <p class="hero-c__subtitle">Cours, fiches, flashcards, QCM et outils IA pour votre licence de droit.</p>
+                        <p class="hero-c__count"><strong>500+</strong> ressources</p>
+                        <div class="hero-c__search">
+                            <span class="hero-c__search-icon">🔍</span>
+                            <input class="hero-c__search-input" type="text" placeholder="Rechercher…">
+                        </div>
+                        <div class="hero-c__filters">
+                            <button class="hero-c__filter hero-c__filter--active">Tout</button>
+                            <button class="hero-c__filter">Cours</button>
+                            <button class="hero-c__filter">Fiches</button>
+                            <button class="hero-c__filter">Packs</button>
+                        </div>
+                        <div class="hero-c__cta-bar">
+                            <a href="#" class="hero-c__cta-link">Rejoindre l'Académie · 29€/mois</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="section-divider"></div>
+
+    <!-- ================================================================ -->
+    <!-- C5 — BLOG                                                         -->
+    <!-- ================================================================ -->
+    <section class="section">
+        <div class="section-header">
+            <h2 class="section-title">C — Exemple : Blog</h2>
+        </div>
+
+        <div class="preview-row">
+            <div class="preview-desktop">
+                <span class="component-label" style="margin:16px;">Desktop</span>
+                <div class="hero-c">
+                    <div class="hero-c__container">
+                        <span class="hero-c__badge">📝 Blog</span>
+                        <h1 class="hero-c__title">Le blog Jurible</h1>
+                        <p class="hero-c__subtitle">Conseils méthodologiques, actualités juridiques et astuces pour réussir vos études de droit.</p>
+                        <p class="hero-c__count"><strong>120+</strong> articles publiés</p>
+                        <div class="hero-c__search">
+                            <span class="hero-c__search-icon">🔍</span>
+                            <input class="hero-c__search-input" type="text" placeholder="Rechercher un article…">
+                        </div>
+                        <div class="hero-c__filters">
+                            <button class="hero-c__filter hero-c__filter--active">Tous</button>
+                            <button class="hero-c__filter">Méthodologie</button>
+                            <button class="hero-c__filter">Actualités</button>
+                            <button class="hero-c__filter">Conseils</button>
+                            <button class="hero-c__filter">Fiches d'arrêt</button>
+                        </div>
+                        <div class="hero-c__cta-bar">
+                            Vous êtes étudiant en droit ?
+                            <a href="#" class="hero-c__cta-link">Découvrez l'Académie Jurible →</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="preview-mobile">
+                <span class="component-label" style="margin:12px;">Mobile 375px</span>
+                <div class="hero-c hero-c--mobile">
+                    <div class="hero-c__container">
+                        <span class="hero-c__badge">📝 Blog</span>
+                        <h1 class="hero-c__title">Le blog Jurible</h1>
+                        <p class="hero-c__subtitle">Méthodologie, actualités et conseils pour vos études de droit.</p>
+                        <p class="hero-c__count"><strong>120+</strong> articles</p>
+                        <div class="hero-c__search">
+                            <span class="hero-c__search-icon">🔍</span>
+                            <input class="hero-c__search-input" type="text" placeholder="Rechercher…">
+                        </div>
+                        <div class="hero-c__filters">
+                            <button class="hero-c__filter hero-c__filter--active">Tous</button>
+                            <button class="hero-c__filter">Méthodo</button>
+                            <button class="hero-c__filter">Actus</button>
+                            <button class="hero-c__filter">Conseils</button>
+                        </div>
+                        <div class="hero-c__cta-bar">
+                            <a href="#" class="hero-c__cta-link">Découvrez l'Académie →</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="section-divider"></div>
+
+    <!-- ================================================================ -->
+    <!-- C6 — CATÉGORIE BLOG                                               -->
+    <!-- ================================================================ -->
+    <section class="section">
+        <div class="section-header">
+            <h2 class="section-title">C — Exemple : Catégorie blog (Méthodologie)</h2>
+        </div>
+
+        <div class="preview-row">
+            <div class="preview-desktop">
+                <span class="component-label" style="margin:16px;">Desktop</span>
+                <div class="hero-c">
+                    <div class="hero-c__container">
+                        <span class="hero-c__badge">📝 Méthodologie</span>
+                        <h1 class="hero-c__title">Articles sur la Méthodologie</h1>
+                        <p class="hero-c__subtitle">Fiche d'arrêt, commentaire d'arrêt, dissertation juridique, cas pratique… Tous nos articles pour maîtriser les exercices de droit.</p>
+                        <p class="hero-c__count"><strong>34</strong> articles dans cette catégorie</p>
+                        <div class="hero-c__search">
+                            <span class="hero-c__search-icon">🔍</span>
+                            <input class="hero-c__search-input" type="text" placeholder="Rechercher dans Méthodologie…">
+                        </div>
+                        <div class="hero-c__filters">
+                            <button class="hero-c__filter hero-c__filter--active">Tous</button>
+                            <button class="hero-c__filter">Fiche d'arrêt</button>
+                            <button class="hero-c__filter">Dissertation</button>
+                            <button class="hero-c__filter">Cas pratique</button>
+                            <button class="hero-c__filter">Commentaire</button>
+                        </div>
+                        <div class="hero-c__cta-bar">
+                            Vous voulez aller plus loin ?
+                            <a href="#" class="hero-c__cta-link">Manuel de Méthodologie Juridique · 24€</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="section-divider"></div>
+
+    <!-- ================================================================ -->
+    <!-- RÉCAPITULATIF                                                     -->
+    <!-- ================================================================ -->
+    <section class="section">
+        <div class="section-header">
+            <h2 class="section-title">📋 Récapitulatif Type C</h2>
+        </div>
+
+        <div style="background:rgba(124,58,237,0.05);border:1px solid rgba(124,58,237,0.2);border-radius:var(--radius-lg);padding:var(--space-md);margin-bottom:var(--space-lg);">
+            <p style="font-weight:600;margin-bottom:12px;">🔑 Template unique — Éléments variables</p>
+            <table style="width:100%;border-collapse:collapse;font-size:13px;">
+                <thead>
+                    <tr style="background:var(--color-muted);">
+                        <th style="padding:10px;text-align:left;border:1px solid var(--color-border);">Page</th>
+                        <th style="padding:10px;text-align:left;border:1px solid var(--color-border);">Badge</th>
+                        <th style="padding:10px;text-align:left;border:1px solid var(--color-border);">Titre</th>
+                        <th style="padding:10px;text-align:left;border:1px solid var(--color-border);">Filtres</th>
+                        <th style="padding:10px;text-align:left;border:1px solid var(--color-border);">Compteur</th>
+                        <th style="padding:10px;text-align:left;border:1px solid var(--color-border);">CTA discret</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td style="padding:10px;border:1px solid var(--color-border);font-weight:600;">Par niveau</td>
+                        <td style="padding:10px;border:1px solid var(--color-border);">📚 Licence 1</td>
+                        <td style="padding:10px;border:1px solid var(--color-border);">Tous les cours de Licence 1</td>
+                        <td style="padding:10px;border:1px solid var(--color-border);">S1 · S2</td>
+                        <td style="padding:10px;border:1px solid var(--color-border);">24 cours</td>
+                        <td style="padding:10px;border:1px solid var(--color-border);">Rejoindre l'Académie</td>
+                    </tr>
+                    <tr>
+                        <td style="padding:10px;border:1px solid var(--color-border);font-weight:600;">Par type</td>
+                        <td style="padding:10px;border:1px solid var(--color-border);">📄 Fiches PDF</td>
+                        <td style="padding:10px;border:1px solid var(--color-border);">Nos fiches de révision</td>
+                        <td style="padding:10px;border:1px solid var(--color-border);">L1 · L2 · L3</td>
+                        <td style="padding:10px;border:1px solid var(--color-border);">32 fiches</td>
+                        <td style="padding:10px;border:1px solid var(--color-border);">Rejoindre l'Académie</td>
+                    </tr>
+                    <tr>
+                        <td style="padding:10px;border:1px solid var(--color-border);font-weight:600;">Par support</td>
+                        <td style="padding:10px;border:1px solid var(--color-border);">🗂️ Flashcards</td>
+                        <td style="padding:10px;border:1px solid var(--color-border);">Les Flashcards</td>
+                        <td style="padding:10px;border:1px solid var(--color-border);">L1 · L2 · L3</td>
+                        <td style="padding:10px;border:1px solid var(--color-border);">3 000+ cartes</td>
+                        <td style="padding:10px;border:1px solid var(--color-border);">Rejoindre l'Académie</td>
+                    </tr>
+                    <tr>
+                        <td style="padding:10px;border:1px solid var(--color-border);font-weight:600;">Catalogue</td>
+                        <td style="padding:10px;border:1px solid var(--color-border);">🎓 Catalogue</td>
+                        <td style="padding:10px;border:1px solid var(--color-border);">Tous nos contenus</td>
+                        <td style="padding:10px;border:1px solid var(--color-border);">Cours · Fiches · Packs · Flashcards · IA</td>
+                        <td style="padding:10px;border:1px solid var(--color-border);">500+ ressources</td>
+                        <td style="padding:10px;border:1px solid var(--color-border);">Rejoindre l'Académie</td>
+                    </tr>
+                    <tr>
+                        <td style="padding:10px;border:1px solid var(--color-border);font-weight:600;">Blog</td>
+                        <td style="padding:10px;border:1px solid var(--color-border);">📝 Blog</td>
+                        <td style="padding:10px;border:1px solid var(--color-border);">Le blog Jurible</td>
+                        <td style="padding:10px;border:1px solid var(--color-border);">Méthodo · Actus · Conseils · Fiches d'arrêt</td>
+                        <td style="padding:10px;border:1px solid var(--color-border);">120+ articles</td>
+                        <td style="padding:10px;border:1px solid var(--color-border);">Découvrez l'Académie</td>
+                    </tr>
+                    <tr>
+                        <td style="padding:10px;border:1px solid var(--color-border);font-weight:600;">Catégorie blog</td>
+                        <td style="padding:10px;border:1px solid var(--color-border);">📝 Méthodologie</td>
+                        <td style="padding:10px;border:1px solid var(--color-border);">Articles sur la Méthodologie</td>
+                        <td style="padding:10px;border:1px solid var(--color-border);">Fiche d'arrêt · Dissertation · Cas pratique</td>
+                        <td style="padding:10px;border:1px solid var(--color-border);">34 articles</td>
+                        <td style="padding:10px;border:1px solid var(--color-border);">Manuel Méthodologie · 24€</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div style="background:var(--color-muted);border-radius:var(--radius-lg);padding:var(--space-md);">
+            <p style="font-weight:600;margin-bottom:8px;">📐 Anatomie du template</p>
+            <p style="font-size:13px;color:var(--color-text-gray);line-height:1.8;">
+                1. <strong>Badge</strong> — contexte (emoji + label)<br>
+                2. <strong>Titre</strong> — h1, 36px desktop / 24px mobile<br>
+                3. <strong>Sous-titre</strong> — 1-2 lignes descriptives<br>
+                4. <strong>Compteur</strong> — "X ressources disponibles" (muted, chiffre en violet)<br>
+                5. <strong>Barre de recherche</strong> — input arrondi, placeholder contextuel<br>
+                6. <strong>Filtres pills</strong> — tags cliquables (actif = violet plein)<br>
+                7. <strong>CTA discret</strong> — bandeau léger vers abonnement ou produit lié
+            </p>
+        </div>
+    </section>
+</div>
+</body>
+</html>

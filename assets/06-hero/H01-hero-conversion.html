@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jurible Design System — Hero Conversion (Type A)</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --color-primary: #B0001D;
+            --color-primary-hover: #DC2626;
+            --color-secondary: #7C3AED;
+            --color-success: #10B981;
+            --color-warning: #F59E0B;
+            --color-text-dark: #1A1A1A;
+            --color-text-gray: #4A4A4A;
+            --color-text-muted: #9CA3AF;
+            --color-background: #FFFFFF;
+            --color-muted: #F3F4F6;
+            --color-border: #E5E7EB;
+            --gradient-jurible: linear-gradient(135deg, #B0001D 0%, #DC2626 50%, #7C3AED 100%);
+            --gradient-hero-bg: linear-gradient(180deg, #FFFFFF 0%, #FAF5FF 50%, #F3E8FF 100%);
+            --space-xs: 8px; --space-sm: 16px; --space-md: 24px; --space-lg: 32px;
+            --space-xl: 48px; --space-2xl: 64px; --space-3xl: 80px;
+            --radius-sm: 6px; --radius-md: 8px; --radius-lg: 12px; --radius-xl: 16px;
+            --radius-2xl: 20px; --radius-full: 9999px;
+            --shadow-primary: 0 4px 14px rgba(176, 0, 29, 0.25);
+            --shadow-xl: 0 20px 25px rgba(0, 0, 0, 0.15);
+            --font-family: 'Poppins', sans-serif;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: var(--font-family); background: var(--color-background); color: var(--color-text-dark); line-height: 1.5; }
+
+        /* PAGE */
+        .page-container { max-width: 1400px; margin: 0 auto; padding: var(--space-xl); }
+        .page-header { margin-bottom: var(--space-xl); }
+        .page-title { font-size: 42px; font-weight: 700; margin-bottom: var(--space-xs); }
+        .page-divider { height: 3px; width: 120px; background: var(--gradient-jurible); border-radius: var(--radius-full); }
+        .section { margin-bottom: var(--space-3xl); }
+        .section-header { margin-bottom: var(--space-lg); }
+        .section-title { font-size: 24px; font-weight: 600; margin-bottom: 4px; }
+        .section-subtitle { font-size: 14px; color: var(--color-text-muted); }
+        .section-divider { height: 1px; background: var(--color-border); margin: var(--space-3xl) 0; }
+        .component-label { font-size: 11px; color: var(--color-text-muted); text-transform: uppercase; letter-spacing: 0.5px; font-weight: 600; display: inline-block; background: var(--color-muted); padding: 4px 10px; border-radius: 4px; }
+
+        /* PREVIEW */
+        .preview-row { display: flex; flex-direction: column; gap: var(--space-lg); align-items: stretch; }
+        .preview-desktop { border: 1px solid var(--color-border); border-radius: var(--radius-lg); overflow: hidden; background: white; }
+        .preview-mobile { width: 375px; border: 1px solid var(--color-border); border-radius: var(--radius-lg); overflow: hidden; background: white; }
+        .preview-mobile-inner { max-height: 750px; overflow-y: auto; }
+
+        /* HERO BASE */
+        .hero { position: relative; background: var(--gradient-hero-bg); padding: var(--space-3xl) var(--space-xl); overflow: hidden; }
+        .hero__container { max-width: 1200px; margin: 0 auto; }
+        .hero__grid { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-xl); align-items: center; }
+
+        /* DECOR */
+        .hero__decor { position: absolute; border-radius: 50%; pointer-events: none; }
+        .hero__decor--1 { width: 500px; height: 500px; background: radial-gradient(circle, rgba(124,58,237,0.08) 0%, transparent 70%); top: -150px; right: -100px; }
+        .hero__decor--2 { width: 300px; height: 300px; background: radial-gradient(circle, rgba(176,0,29,0.06) 0%, transparent 70%); bottom: -80px; left: -80px; }
+        .hero__dot { position: absolute; width: 8px; height: 8px; border-radius: 50%; background: rgba(176,0,29,0.2); animation: floatDot 5s ease-in-out infinite; }
+        .hero__dot--1 { bottom: 40%; left: 48%; }
+        .hero__dot--2 { top: 15%; right: 35%; animation-delay: 1.5s; background: rgba(124,58,237,0.15); width: 6px; height: 6px; }
+        @keyframes floatDot { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-12px)} }
+
+        /* BADGE */
+        .hero__badge { display: inline-flex; align-items: center; gap: 6px; background: rgba(124,58,237,0.1); border: 1px solid rgba(124,58,237,0.2); color: var(--color-secondary); font-size: 13px; font-weight: 600; padding: 6px 16px; border-radius: var(--radius-full); margin-bottom: var(--space-md); animation: fadeInUp .5s ease both; animation-delay: .1s; }
+
+        /* TITLE */
+        .hero__title { font-size: 48px; font-weight: 800; line-height: 1.1; color: var(--color-text-dark); margin-bottom: var(--space-md); animation: fadeInUp .5s ease both; animation-delay: .2s; }
+        .hero__title-gradient { background: var(--gradient-jurible); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+
+        /* SUBTITLE */
+        .hero__subtitle { font-size: 17px; color: var(--color-text-gray); line-height: 1.7; margin-bottom: var(--space-lg); max-width: 500px; animation: fadeInUp .5s ease both; animation-delay: .3s; }
+
+        /* CTA GROUP */
+        .hero__cta-group { display: flex; align-items: center; gap: var(--space-sm); margin-bottom: var(--space-sm); animation: fadeInUp .5s ease both; animation-delay: .4s; }
+        .btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; padding: 14px 28px; font-family: var(--font-family); font-size: 14px; font-weight: 500; letter-spacing: 0.3px; border-radius: var(--radius-md); cursor: pointer; transition: all .2s ease; text-decoration: none; border: none; }
+        .btn--primary { background: var(--gradient-jurible); color: white; box-shadow: var(--shadow-primary); }
+        .btn--primary:hover { box-shadow: 0 6px 20px rgba(176,0,29,0.35); transform: translateY(-2px); }
+        .btn--outline { background: white; color: var(--color-text-dark); border: 1.5px solid var(--color-border); font-weight: 500; }
+        .btn--outline:hover { border-color: var(--color-text-dark); transform: translateY(-1px); }
+
+        /* MENTIONS */
+        .hero__mentions { display: flex; align-items: center; gap: var(--space-md); font-size: 13px; color: var(--color-text-muted); animation: fadeInUp .5s ease both; animation-delay: .45s; }
+        .hero__mentions span { display: flex; align-items: center; gap: 5px; }
+        .hero__mention-check { color: var(--color-text-muted); font-size: 14px; }
+
+        /* PROOF */
+        .hero__proof { display: flex; align-items: center; gap: var(--space-sm); margin-bottom: var(--space-md); animation: fadeInUp .5s ease both; animation-delay: .35s; }
+        .hero__stars { color: #FBBF24; font-size: 16px; letter-spacing: 2px; }
+        .hero__rating { font-size: 14px; font-weight: 600; color: var(--color-text-dark); }
+        .hero__students { font-size: 14px; color: var(--color-text-muted); }
+
+        /* FEATURES */
+        .hero__features { display: flex; flex-direction: column; gap: var(--space-xs); margin-bottom: var(--space-md); animation: fadeInUp .5s ease both; animation-delay: .35s; }
+        .hero__features--inline { flex-direction: row; flex-wrap: wrap; gap: var(--space-xs) var(--space-md); }
+        .hero__feature { display: flex; align-items: center; gap: 10px; font-size: 14px; color: var(--color-text-gray); line-height: 1.5; }
+        .hero__feature-icon { width: 22px; height: 22px; background: var(--color-success); border-radius: var(--radius-full); display: flex; align-items: center; justify-content: center; color: white; font-size: 11px; flex-shrink: 0; }
+
+        /* URGENCY */
+        .hero__urgency { display: flex; align-items: center; gap: var(--space-xs); background: rgba(245,158,11,0.08); color: #D97706; font-size: 14px; font-weight: 500; padding: 12px 18px; border-radius: var(--radius-md); margin-bottom: var(--space-md); animation: fadeInUp .5s ease both; animation-delay: .42s; }
+        .hero__urgency-icon { font-size: 16px; }
+
+        /* STATS */
+        .hero__stats { display: grid; grid-template-columns: repeat(3, auto); gap: var(--space-xl); margin-top: var(--space-xl); padding-top: var(--space-xl); border-top: 1px solid rgba(124,58,237,0.08); animation: fadeInUp .5s ease both; animation-delay: .55s; }
+        .hero__stat { text-align: left; }
+        .hero__stat-value { font-size: 36px; font-weight: 800; color: var(--color-text-dark); margin-bottom: 2px; line-height: 1.1; }
+        .hero__stat-label { font-size: 14px; color: var(--color-text-muted); }
+
+        /* VISUALS */
+        .hero__visual { position: relative; z-index: 2; animation: fadeInRight .6s ease both; animation-delay: .3s; }
+
+        /* Mockup browser dark */
+        .hero__mockup { position: relative; background: var(--color-text-dark); border-radius: var(--radius-xl); overflow: hidden; box-shadow: var(--shadow-xl); }
+        .hero__mockup-header { display: flex; align-items: center; gap: 8px; padding: 14px 18px; }
+        .hero__mockup-dot { width: 12px; height: 12px; border-radius: var(--radius-full); }
+        .hero__mockup-dot--red { background: #EF4444; }
+        .hero__mockup-dot--yellow { background: #F59E0B; }
+        .hero__mockup-dot--green { background: #10B981; }
+        .hero__mockup-body { aspect-ratio: 16/10; background: linear-gradient(180deg, #1A1A1A 0%, #2D2D2D 100%); display: flex; align-items: center; justify-content: center; color: rgba(255,255,255,0.35); font-size: 14px; }
+
+        /* Mockup CTA below */
+        .hero__mockup-cta { display: flex; justify-content: center; margin-top: var(--space-sm); animation: fadeInUp .5s ease both; animation-delay: .5s; }
+        .btn--mockup { background: var(--color-muted); color: var(--color-text-muted); font-size: 13px; font-weight: 500; padding: 8px 18px; border-radius: var(--radius-full); border: 1px solid var(--color-border); cursor: default; font-family: var(--font-family); transition: all .2s ease; }
+        .btn--mockup:hover { color: var(--color-text-gray); }
+
+        /* Video */
+        .hero__video { position: relative; background: var(--color-text-dark); border-radius: var(--radius-xl); overflow: hidden; aspect-ratio: 16/9; box-shadow: var(--shadow-xl); }
+        .hero__video-placeholder { width: 100%; height: 100%; background: linear-gradient(135deg, #1A1A1A 0%, #2D2D2D 100%); display: flex; align-items: center; justify-content: center; }
+        .hero__video-play { width: 72px; height: 72px; background: rgba(255,255,255,0.95); border-radius: var(--radius-full); display: flex; align-items: center; justify-content: center; cursor: pointer; transition: all .2s ease; box-shadow: 0 4px 20px rgba(0,0,0,0.3); }
+        .hero__video-play:hover { transform: scale(1.1); }
+        .hero__video-play svg { width: 28px; height: 28px; color: var(--color-primary); margin-left: 4px; }
+        .hero__video-label { position: absolute; bottom: var(--space-sm); left: 50%; transform: translateX(-50%); background: rgba(0,0,0,0.7); color: white; font-size: 12px; font-weight: 500; padding: 6px 14px; border-radius: var(--radius-full); backdrop-filter: blur(4px); white-space: nowrap; }
+
+        /* Product mockup (white) */
+        .hero__product-mockup { position: relative; background: white; border-radius: var(--radius-2xl); overflow: hidden; box-shadow: var(--shadow-xl); border: 1px solid rgba(229,231,235,0.5); aspect-ratio: 4/3; display: flex; align-items: center; justify-content: center; color: var(--color-text-muted); font-size: 14px; }
+
+        /* TECH VARIANT */
+        .hero--tech .hero__badge { background: linear-gradient(135deg, rgba(124,58,237,0.12) 0%, rgba(59,130,246,0.12) 100%); border-color: rgba(124,58,237,0.25); }
+        .hero__tech-particles { position: absolute; inset: 0; overflow: hidden; pointer-events: none; }
+        .hero__tech-particle { position: absolute; width: 4px; height: 4px; background: var(--color-secondary); border-radius: var(--radius-full); opacity: 0.25; animation: floatParticle 6s ease-in-out infinite; }
+        .hero__tech-particle:nth-child(1) { top: 15%; left: 8%; }
+        .hero__tech-particle:nth-child(2) { top: 55%; left: 18%; animation-delay: 1.2s; }
+        .hero__tech-particle:nth-child(3) { top: 25%; right: 12%; animation-delay: 2.4s; }
+        .hero__tech-particle:nth-child(4) { top: 65%; right: 22%; animation-delay: 3.6s; width: 3px; height: 3px; }
+        .hero__tech-particle:nth-child(5) { top: 80%; left: 40%; animation-delay: 4.8s; width: 3px; height: 3px; }
+        @keyframes floatParticle { 0%,100%{transform:translateY(0) scale(1);opacity:.25} 50%{transform:translateY(-18px) scale(1.3);opacity:.45} }
+        .hero--tech .hero__mockup { transform: perspective(1000px) rotateY(-4deg) rotateX(2deg); transition: transform .4s ease; }
+        .hero--tech .hero__mockup:hover { transform: perspective(1000px) rotateY(0) rotateX(0); }
+
+        /* ANIMATIONS */
+        @keyframes fadeInUp { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:translateY(0)} }
+        @keyframes fadeInRight { from{opacity:0;transform:translateX(30px)} to{opacity:1;transform:translateX(0)} }
+
+        /* MOBILE */
+        .hero--mobile { padding: var(--space-lg) var(--space-sm); }
+        .hero--mobile .hero__grid { grid-template-columns: 1fr; gap: var(--space-md); }
+        .hero--mobile .hero__title { font-size: 28px; line-height: 1.15; }
+        .hero--mobile .hero__subtitle { font-size: 15px; margin-bottom: var(--space-md); }
+        .hero--mobile .hero__badge { font-size: 12px; padding: 5px 12px; }
+        .hero--mobile .hero__cta-group { flex-direction: column; gap: var(--space-xs); }
+        .hero--mobile .btn { width: 100%; padding: 14px 24px; }
+        .hero--mobile .hero__mentions { flex-direction: column; align-items: flex-start; gap: 6px; }
+        .hero--mobile .hero__features { gap: 8px; }
+        .hero--mobile .hero__features--inline { flex-direction: column; }
+        .hero--mobile .hero__proof { flex-wrap: wrap; gap: var(--space-xs); }
+        .hero--mobile .hero__stats { grid-template-columns: repeat(3, 1fr); gap: var(--space-sm); text-align: center; }
+        .hero--mobile .hero__stat { text-align: center; }
+        .hero--mobile .hero__stat-value { font-size: 24px; }
+        .hero--mobile .hero__stat-label { font-size: 12px; }
+        .hero--mobile .hero__video-play { width: 56px; height: 56px; }
+        .hero--mobile .hero__video-play svg { width: 22px; height: 22px; }
+        .hero--mobile .hero__urgency { font-size: 13px; padding: 10px 14px; }
+
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
+        }
+    </style>
+</head>
+<body>
+<div class="page-container">
+    <header class="page-header">
+        <h1 class="page-title">Hero Conversion (Type A)</h1>
+        <div class="page-divider"></div>
+    </header>
+
+    <!-- ==================== A1 — HOMEPAGE ==================== -->
+    <section class="section">
+        <div class="section-header">
+            <h2 class="section-title">A1 — Homepage</h2>
+            <p class="section-subtitle">2 CTA + Mockup navigateur + Label gris "Aperçu" sous le mockup (stats = composant séparé)</p>
+        </div>
+        <div class="preview-row">
+            <div class="preview-desktop">
+                <span class="component-label" style="margin:16px;">Desktop</span>
+                <div class="hero">
+                    <div class="hero__decor hero__decor--1"></div>
+                    <div class="hero__decor hero__decor--2"></div>
+                    <div class="hero__dot hero__dot--1"></div>
+                    <div class="hero__dot hero__dot--2"></div>
+                    <div class="hero__container">
+                        <div class="hero__grid">
+                            <div class="hero__content">
+                                <span class="hero__badge">🎓 École de droit en ligne</span>
+                                <h1 class="hero__title">La plateforme complète pour <span class="hero__title-gradient">réussir en droit</span></h1>
+                                <p class="hero__subtitle">Cours vidéo, fiches de révision, annales corrigées, outils IA… Tout ce qu'il vous faut pour valider votre licence, au même endroit.</p>
+                                <div class="hero__cta-group">
+                                    <button class="btn btn--primary">Découvrir nos offres →</button>
+                                    <button class="btn btn--outline">Voir la plateforme</button>
+                                </div>
+                                <div class="hero__mentions">
+                                    <span><span class="hero__mention-check">✓</span> Sans engagement</span>
+                                    <span><span class="hero__mention-check">✓</span> Accès immédiat</span>
+                                    <span><span class="hero__mention-check">✓</span> Paiement sécurisé</span>
+                                </div>
+                            </div>
+                            <div class="hero__visual">
+                                <div class="hero__mockup">
+                                    <div class="hero__mockup-header">
+                                        <span class="hero__mockup-dot hero__mockup-dot--red"></span>
+                                        <span class="hero__mockup-dot hero__mockup-dot--yellow"></span>
+                                        <span class="hero__mockup-dot hero__mockup-dot--green"></span>
+                                    </div>
+                                    <div class="hero__mockup-body">Screenshot ou vidéo de la plateforme ecole.jurible.com</div>
+                                </div>
+                                <div class="hero__mockup-cta">
+                                    <button class="btn--mockup">✨ Aperçu de la plateforme</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="preview-mobile">
+                <span class="component-label" style="margin:12px;">Mobile 375px</span>
+                <div class="preview-mobile-inner">
+                    <div class="hero hero--mobile">
+                        <div class="hero__decor hero__decor--1"></div>
+                        <div class="hero__container">
+                            <div class="hero__grid">
+                                <div class="hero__content" style="order:1;">
+                                    <span class="hero__badge">🎓 École de droit en ligne</span>
+                                    <h1 class="hero__title">La plateforme pour <span class="hero__title-gradient">réussir en droit</span></h1>
+                                    <p class="hero__subtitle">Cours vidéo, fiches et annales corrigées pour valider votre licence.</p>
+                                    <div class="hero__cta-group">
+                                        <button class="btn btn--primary">Découvrir nos offres →</button>
+                                        <button class="btn btn--outline">Voir la plateforme</button>
+                                    </div>
+                                    <div class="hero__mentions">
+                                        <span><span class="hero__mention-check">✓</span> Sans engagement</span>
+                                        <span><span class="hero__mention-check">✓</span> Accès immédiat</span>
+                                    </div>
+                                </div>
+                                <div class="hero__visual" style="order:2;">
+                                    <div class="hero__mockup">
+                                        <div class="hero__mockup-header">
+                                            <span class="hero__mockup-dot hero__mockup-dot--red"></span>
+                                            <span class="hero__mockup-dot hero__mockup-dot--yellow"></span>
+                                            <span class="hero__mockup-dot hero__mockup-dot--green"></span>
+                                        </div>
+                                        <div class="hero__mockup-body" style="aspect-ratio:16/9;">Aperçu plateforme</div>
+                                    </div>
+                                    <div class="hero__mockup-cta"><button class="btn--mockup">✨ Aperçu de la plateforme</button></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="section-divider"></div>
+
+    <!-- ==================== A2 — ACADÉMIE ==================== -->
+    <section class="section">
+        <div class="section-header">
+            <h2 class="section-title">A2 — Académie</h2>
+            <p class="section-subtitle">CTA direct "Rejoindre l'Académie" + Features ✓ + Vidéo + Preuve sociale ★★★★★</p>
+        </div>
+        <div class="preview-row">
+            <div class="preview-desktop">
+                <span class="component-label" style="margin:16px;">Desktop</span>
+                <div class="hero">
+                    <div class="hero__decor hero__decor--1"></div>
+                    <div class="hero__decor hero__decor--2"></div>
+                    <div class="hero__container">
+                        <div class="hero__grid">
+                            <div class="hero__content">
+                                <span class="hero__badge">🎓 L'Académie Jurible</span>
+                                <h1 class="hero__title">Tous les cours pour réussir votre <span class="hero__title-gradient">licence de droit</span></h1>
+                                <p class="hero__subtitle">Une seule plateforme avec tout le programme de licence : cours vidéo, fiches, exercices corrigés et outils IA pour réviser efficacement.</p>
+                                <div class="hero__features hero__features--inline">
+                                    <div class="hero__feature"><span class="hero__feature-icon">✓</span> 500h+ de cours vidéo</div>
+                                    <div class="hero__feature"><span class="hero__feature-icon">✓</span> 20 matières de licence</div>
+                                    <div class="hero__feature"><span class="hero__feature-icon">✓</span> 2 000+ QCM d'entraînement</div>
+                                    <div class="hero__feature"><span class="hero__feature-icon">✓</span> Annales corrigées</div>
+                                </div>
+                                <div class="hero__proof">
+                                    <span class="hero__stars">★★★★★</span>
+                                    <span class="hero__rating">4.8/5</span>
+                                    <span class="hero__students">· 25 000+ étudiants</span>
+                                </div>
+                                <div class="hero__cta-group">
+                                    <button class="btn btn--primary">Rejoindre l'Académie →</button>
+                                </div>
+                                <div class="hero__mentions">
+                                    <span><span class="hero__mention-check">✓</span> Sans engagement</span>
+                                    <span><span class="hero__mention-check">✓</span> Annulable en 1 clic</span>
+                                </div>
+                            </div>
+                            <div class="hero__visual">
+                                <div class="hero__video">
+                                    <div class="hero__video-placeholder">
+                                        <div class="hero__video-play"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></div>
+                                    </div>
+                                    <span class="hero__video-label">Découvrez l'Académie en 2 min</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="preview-mobile">
+                <span class="component-label" style="margin:12px;">Mobile 375px</span>
+                <div class="preview-mobile-inner">
+                    <div class="hero hero--mobile">
+                        <div class="hero__decor hero__decor--1"></div>
+                        <div class="hero__container">
+                            <div class="hero__grid">
+                                <div class="hero__content" style="order:1;">
+                                    <span class="hero__badge">🎓 L'Académie Jurible</span>
+                                    <h1 class="hero__title">Tous les cours pour votre <span class="hero__title-gradient">licence de droit</span></h1>
+                                    <p class="hero__subtitle">Cours vidéo, fiches, exercices corrigés et outils IA pour réviser efficacement.</p>
+                                    <div class="hero__proof">
+                                        <span class="hero__stars">★★★★★</span>
+                                        <span class="hero__rating">4.8/5</span>
+                                        <span class="hero__students">· 25 000+ étudiants</span>
+                                    </div>
+                                    <div class="hero__cta-group"><button class="btn btn--primary">Rejoindre l'Académie →</button></div>
+                                    <div class="hero__mentions">
+                                        <span><span class="hero__mention-check">✓</span> Sans engagement</span>
+                                        <span><span class="hero__mention-check">✓</span> Annulable en 1 clic</span>
+                                    </div>
+                                </div>
+                                <div class="hero__visual" style="order:2;">
+                                    <div class="hero__video">
+                                        <div class="hero__video-placeholder">
+                                            <div class="hero__video-play"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></div>
+                                        </div>
+                                        <span class="hero__video-label">Découvrez en 2 min</span>
+                                    </div>
+                                </div>
+                                <div class="hero__features" style="order:3;margin-top:16px;">
+                                    <div class="hero__feature"><span class="hero__feature-icon">✓</span> 500h+ de cours vidéo</div>
+                                    <div class="hero__feature"><span class="hero__feature-icon">✓</span> 20 matières de licence</div>
+                                    <div class="hero__feature"><span class="hero__feature-icon">✓</span> 2 000+ QCM</div>
+                                    <div class="hero__feature"><span class="hero__feature-icon">✓</span> Annales corrigées</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="section-divider"></div>
+
+    <!-- ==================== A3 — PRÉPA ==================== -->
+    <section class="section">
+        <div class="section-header">
+            <h2 class="section-title">A3 — Prépa (Urgence)</h2>
+            <p class="section-subtitle">2 CTA ("Je m'inscris" + "J'ai des questions") + Bandeau urgence + Features ✓ + Mockup blanc</p>
+        </div>
+        <div class="preview-row">
+            <div class="preview-desktop">
+                <span class="component-label" style="margin:16px;">Desktop</span>
+                <div class="hero">
+                    <div class="hero__decor hero__decor--1"></div>
+                    <div class="hero__decor hero__decor--2"></div>
+                    <div class="hero__dot hero__dot--2"></div>
+                    <div class="hero__container">
+                        <div class="hero__grid">
+                            <div class="hero__content">
+                                <span class="hero__badge">🎓 Formation reprise d'études</span>
+                                <h1 class="hero__title">Prépa <span class="hero__title-gradient">PASS DROIT</span></h1>
+                                <p class="hero__subtitle">Maîtrisez les fondamentaux du droit pour réussir votre reconversion professionnelle. Abordez sereinement votre reprise d'études en Licence de droit, quel que soit votre âge ou votre parcours.</p>
+                                <div class="hero__cta-group">
+                                    <button class="btn btn--primary">Je m'inscris</button>
+                                    <button class="btn btn--outline">J'ai des questions</button>
+                                </div>
+                                <div class="hero__urgency">
+                                    <span class="hero__urgency-icon">⚠️</span>
+                                    Inscriptions limitées à 5 places par session
+                                </div>
+                                <div class="hero__features">
+                                    <div class="hero__feature"><span class="hero__feature-icon">✓</span> Démarrage immédiat — Accès 24 mois</div>
+                                    <div class="hero__feature"><span class="hero__feature-icon">✓</span> 10 devoirs corrigés individuellement</div>
+                                    <div class="hero__feature"><span class="hero__feature-icon">✓</span> Adapté aux contraintes des adultes actifs</div>
+                                </div>
+                            </div>
+                            <div class="hero__visual">
+                                <div class="hero__product-mockup">
+                                    <div style="text-align:center;">
+                                        <div style="font-size:32px;margin-bottom:8px;">🎓</div>
+                                        Visuel Prépa PASS DROIT<br>
+                                        <span style="font-size:12px;color:#bbb;">Mockup formation</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="preview-mobile">
+                <span class="component-label" style="margin:12px;">Mobile 375px</span>
+                <div class="preview-mobile-inner">
+                    <div class="hero hero--mobile">
+                        <div class="hero__decor hero__decor--1"></div>
+                        <div class="hero__container">
+                            <div class="hero__grid">
+                                <div class="hero__content" style="order:1;">
+                                    <span class="hero__badge">🎓 Formation reprise d'études</span>
+                                    <h1 class="hero__title">Prépa <span class="hero__title-gradient">PASS DROIT</span></h1>
+                                    <p class="hero__subtitle">Maîtrisez les fondamentaux du droit pour réussir votre reconversion professionnelle.</p>
+                                    <div class="hero__cta-group">
+                                        <button class="btn btn--primary">Je m'inscris</button>
+                                        <button class="btn btn--outline">J'ai des questions</button>
+                                    </div>
+                                    <div class="hero__urgency">
+                                        <span class="hero__urgency-icon">⚠️</span>
+                                        Limité à 5 places par session
+                                    </div>
+                                </div>
+                                <div class="hero__visual" style="order:2;">
+                                    <div class="hero__product-mockup" style="aspect-ratio:16/9;">
+                                        <div style="text-align:center;"><div style="font-size:28px;margin-bottom:4px;">🎓</div>Visuel Prépa</div>
+                                    </div>
+                                </div>
+                                <div class="hero__features" style="order:3;margin-top:12px;">
+                                    <div class="hero__feature"><span class="hero__feature-icon">✓</span> Accès 24 mois</div>
+                                    <div class="hero__feature"><span class="hero__feature-icon">✓</span> 10 devoirs corrigés</div>
+                                    <div class="hero__feature"><span class="hero__feature-icon">✓</span> Adapté aux adultes actifs</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="section-divider"></div>
+
+    <!-- ==================== A4 — SUITE IA ==================== -->
+    <section class="section">
+        <div class="section-header">
+            <h2 class="section-title">A4 — Suite IA (Tech)</h2>
+            <p class="section-subtitle">Badge tech + Features IA + Mockup 3D tilt + Particules flottantes</p>
+        </div>
+        <div class="preview-row">
+            <div class="preview-desktop">
+                <span class="component-label" style="margin:16px;">Desktop</span>
+                <div class="hero hero--tech">
+                    <div class="hero__decor hero__decor--1"></div>
+                    <div class="hero__decor hero__decor--2"></div>
+                    <div class="hero__tech-particles">
+                        <div class="hero__tech-particle"></div>
+                        <div class="hero__tech-particle"></div>
+                        <div class="hero__tech-particle"></div>
+                        <div class="hero__tech-particle"></div>
+                        <div class="hero__tech-particle"></div>
+                    </div>
+                    <div class="hero__container">
+                        <div class="hero__grid">
+                            <div class="hero__content">
+                                <span class="hero__badge">🤖 Suite IA Minos</span>
+                                <h1 class="hero__title">L'intelligence artificielle au service de votre <span class="hero__title-gradient">réussite</span></h1>
+                                <p class="hero__subtitle">Génère des fiches d'arrêt en 30 secondes, crée des plans de dissertation et révise avec un assistant IA entraîné sur le droit français.</p>
+                                <div class="hero__features hero__features--inline">
+                                    <div class="hero__feature"><span class="hero__feature-icon">✓</span> Générateur de fiches d'arrêt</div>
+                                    <div class="hero__feature"><span class="hero__feature-icon">✓</span> Assistant IA juridique</div>
+                                    <div class="hero__feature"><span class="hero__feature-icon">✓</span> Plans de dissertation</div>
+                                    <div class="hero__feature"><span class="hero__feature-icon">✓</span> Résumés intelligents</div>
+                                </div>
+                                <div class="hero__proof">
+                                    <span class="hero__stars">★★★★★</span>
+                                    <span class="hero__rating">4.9/5</span>
+                                    <span class="hero__students">· 8 000+ utilisateurs</span>
+                                </div>
+                                <div class="hero__cta-group">
+                                    <button class="btn btn--primary">Essayer gratuitement →</button>
+                                </div>
+                                <div class="hero__mentions">
+                                    <span><span class="hero__mention-check">✓</span> 3 générations gratuites</span>
+                                    <span><span class="hero__mention-check">✓</span> Sans carte bancaire</span>
+                                </div>
+                            </div>
+                            <div class="hero__visual">
+                                <div class="hero__mockup">
+                                    <div class="hero__mockup-header">
+                                        <span class="hero__mockup-dot hero__mockup-dot--red"></span>
+                                        <span class="hero__mockup-dot hero__mockup-dot--yellow"></span>
+                                        <span class="hero__mockup-dot hero__mockup-dot--green"></span>
+                                    </div>
+                                    <div class="hero__mockup-body" style="background:linear-gradient(135deg,#0F0F1A 0%,#1A1A2E 50%,#16213E 100%);color:rgba(255,255,255,0.3);">
+                                        <div style="text-align:center;"><div style="font-size:40px;margin-bottom:8px;">🤖</div>Interface IA Minos</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="preview-mobile">
+                <span class="component-label" style="margin:12px;">Mobile 375px</span>
+                <div class="preview-mobile-inner">
+                    <div class="hero hero--mobile hero--tech">
+                        <div class="hero__decor hero__decor--1"></div>
+                        <div class="hero__tech-particles">
+                            <div class="hero__tech-particle"></div>
+                            <div class="hero__tech-particle"></div>
+                            <div class="hero__tech-particle"></div>
+                        </div>
+                        <div class="hero__container">
+                            <div class="hero__grid">
+                                <div class="hero__content" style="order:1;">
+                                    <span class="hero__badge">🤖 Suite IA Minos</span>
+                                    <h1 class="hero__title">L'IA au service de votre <span class="hero__title-gradient">réussite</span></h1>
+                                    <p class="hero__subtitle">Fiches d'arrêt, plans de dissertation, révisions : l'IA entraînée sur le droit français.</p>
+                                    <div class="hero__proof">
+                                        <span class="hero__stars">★★★★★</span>
+                                        <span class="hero__rating">4.9/5</span>
+                                        <span class="hero__students">· 8 000+ utilisateurs</span>
+                                    </div>
+                                    <div class="hero__cta-group"><button class="btn btn--primary">Essayer gratuitement →</button></div>
+                                    <div class="hero__mentions">
+                                        <span><span class="hero__mention-check">✓</span> 3 générations gratuites</span>
+                                        <span><span class="hero__mention-check">✓</span> Sans carte bancaire</span>
+                                    </div>
+                                </div>
+                                <div class="hero__visual" style="order:2;">
+                                    <div class="hero__mockup" style="transform:none;">
+                                        <div class="hero__mockup-header">
+                                            <span class="hero__mockup-dot hero__mockup-dot--red"></span>
+                                            <span class="hero__mockup-dot hero__mockup-dot--yellow"></span>
+                                            <span class="hero__mockup-dot hero__mockup-dot--green"></span>
+                                        </div>
+                                        <div class="hero__mockup-body" style="aspect-ratio:16/9;background:linear-gradient(135deg,#0F0F1A 0%,#1A1A2E 50%,#16213E 100%);color:rgba(255,255,255,0.3);">
+                                            <div style="text-align:center;"><div style="font-size:32px;margin-bottom:4px;">🤖</div>Interface IA</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="hero__features" style="order:3;margin-top:16px;">
+                                    <div class="hero__feature"><span class="hero__feature-icon">✓</span> Fiches d'arrêt en 30s</div>
+                                    <div class="hero__feature"><span class="hero__feature-icon">✓</span> Assistant IA juridique</div>
+                                    <div class="hero__feature"><span class="hero__feature-icon">✓</span> Plans de dissertation</div>
+                                    <div class="hero__feature"><span class="hero__feature-icon">✓</span> Résumés intelligents</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="section-divider"></div>
+
+    <!-- ==================== RÉCAPITULATIF ==================== -->
+    <section class="section">
+        <div class="section-header">
+            <h2 class="section-title">📋 Récapitulatif</h2>
+        </div>
+        <table style="width:100%;border-collapse:collapse;font-size:14px;">
+            <thead>
+                <tr style="background:var(--color-muted);">
+                    <th style="padding:12px;text-align:left;border:1px solid var(--color-border);">Variante</th>
+                    <th style="padding:12px;text-align:left;border:1px solid var(--color-border);">CTA</th>
+                    <th style="padding:12px;text-align:left;border:1px solid var(--color-border);">Visuel</th>
+                    <th style="padding:12px;text-align:left;border:1px solid var(--color-border);">Spécificités</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td style="padding:12px;border:1px solid var(--color-border);"><strong>A1 — Homepage</strong></td>
+                    <td style="padding:12px;border:1px solid var(--color-border);">"Découvrir nos offres →" + "Voir la plateforme"</td>
+                    <td style="padding:12px;border:1px solid var(--color-border);">Mockup dark + label gris "Aperçu" dessous</td>
+                    <td style="padding:12px;border:1px solid var(--color-border);">3 mentions, stats en composant séparé</td>
+                </tr>
+                <tr>
+                    <td style="padding:12px;border:1px solid var(--color-border);"><strong>A2 — Académie</strong></td>
+                    <td style="padding:12px;border:1px solid var(--color-border);">"Rejoindre l'Académie →" (seul)</td>
+                    <td style="padding:12px;border:1px solid var(--color-border);">Vidéo dark (play + label)</td>
+                    <td style="padding:12px;border:1px solid var(--color-border);">Features ✓ inline, ★★★★★</td>
+                </tr>
+                <tr>
+                    <td style="padding:12px;border:1px solid var(--color-border);"><strong>A3 — Prépa</strong></td>
+                    <td style="padding:12px;border:1px solid var(--color-border);">"Je m'inscris" + "J'ai des questions"</td>
+                    <td style="padding:12px;border:1px solid var(--color-border);">Mockup blanc (product card)</td>
+                    <td style="padding:12px;border:1px solid var(--color-border);">Bandeau urgence, features ✓ verticales</td>
+                </tr>
+                <tr>
+                    <td style="padding:12px;border:1px solid var(--color-border);"><strong>A4 — Suite IA</strong></td>
+                    <td style="padding:12px;border:1px solid var(--color-border);">"Essayer gratuitement →" (seul)</td>
+                    <td style="padding:12px;border:1px solid var(--color-border);">Mockup dark blue + 3D tilt</td>
+                    <td style="padding:12px;border:1px solid var(--color-border);">Particules, features IA, ★★★★★</td>
+                </tr>
+            </tbody>
+        </table>
+        <div style="background:rgba(124,58,237,0.05);border:1px solid rgba(124,58,237,0.2);border-radius:var(--radius-lg);padding:var(--space-md);margin-top:var(--space-lg);">
+            <p style="font-weight:600;margin-bottom:8px;">🎨 Différenciation Homepage vs Académie</p>
+            <table style="width:100%;font-size:13px;border-collapse:collapse;margin-top:8px;">
+                <tr><td style="padding:8px;border-bottom:1px solid var(--color-border);width:30%;"></td><td style="padding:8px;border-bottom:1px solid var(--color-border);font-weight:600;">A1 Homepage</td><td style="padding:8px;border-bottom:1px solid var(--color-border);font-weight:600;">A2 Académie</td></tr>
+                <tr><td style="padding:8px;border-bottom:1px solid var(--color-border);color:var(--color-text-muted);">Objectif</td><td style="padding:8px;border-bottom:1px solid var(--color-border);">Découvrir, orienter</td><td style="padding:8px;border-bottom:1px solid var(--color-border);">Convertir, rejoindre</td></tr>
+                <tr><td style="padding:8px;border-bottom:1px solid var(--color-border);color:var(--color-text-muted);">CTA</td><td style="padding:8px;border-bottom:1px solid var(--color-border);">2 boutons (exploration)</td><td style="padding:8px;border-bottom:1px solid var(--color-border);">1 bouton (action directe)</td></tr>
+                <tr><td style="padding:8px;border-bottom:1px solid var(--color-border);color:var(--color-text-muted);">Visuel</td><td style="padding:8px;border-bottom:1px solid var(--color-border);">Mockup plateforme</td><td style="padding:8px;border-bottom:1px solid var(--color-border);">Vidéo présentation</td></tr>
+                <tr><td style="padding:8px;border-bottom:1px solid var(--color-border);color:var(--color-text-muted);">Preuve sociale</td><td style="padding:8px;border-bottom:1px solid var(--color-border);">Stats chiffrées (bas)</td><td style="padding:8px;border-bottom:1px solid var(--color-border);">★★★★★ inline + features ✓</td></tr>
+                <tr><td style="padding:8px;color:var(--color-text-muted);">Ton</td><td style="padding:8px;">Vitrine, vue d'ensemble</td><td style="padding:8px;">Détaillé, argumentaire</td></tr>
+            </table>
+        </div>
+        <div style="background:rgba(124,58,237,0.05);border:1px solid rgba(124,58,237,0.2);border-radius:var(--radius-lg);padding:var(--space-md);margin-top:var(--space-sm);">
+            <p style="font-weight:600;margin-bottom:8px;">📱 Ordre mobile (CTA visible sans scroll)</p>
+            <p style="font-size:14px;color:var(--color-text-gray);line-height:1.8;">1. Badge → 2. Titre → 3. Sous-titre → 4. Preuve sociale (si présente) → 5. <strong>CTA visible sans scroller</strong> → 6. Mentions → 7. Visuel → 8. Features / Stats</p>
+        </div>
+    </section>
+</div>
+</body>
+</html>

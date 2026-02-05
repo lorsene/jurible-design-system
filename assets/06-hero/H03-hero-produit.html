@@ -1,0 +1,1405 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jurible Design System — Hero Produit (Type B)</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        /* ==================== DESIGN SYSTEM TOKENS ==================== */
+        :root {
+            --color-primary: #B0001D;
+            --color-primary-hover: #DC2626;
+            --color-secondary: #7C3AED;
+            --color-success: #10B981;
+            --color-warning: #F59E0B;
+            --color-text-dark: #1A1A1A;
+            --color-text-gray: #4A4A4A;
+            --color-text-muted: #9CA3AF;
+            --color-background: #FFFFFF;
+            --color-muted: #F3F4F6;
+            --color-border: #E5E7EB;
+
+            --gradient-jurible: linear-gradient(135deg, #B0001D 0%, #DC2626 50%, #7C3AED 100%);
+            --gradient-hero-bg: linear-gradient(180deg, #FFFFFF 0%, #FAF5FF 50%, #F3E8FF 100%);
+
+            --space-xs: 8px; --space-sm: 16px; --space-md: 24px; --space-lg: 32px;
+            --space-xl: 48px; --space-2xl: 64px; --space-3xl: 80px;
+
+            --radius-sm: 6px; --radius-md: 8px; --radius-lg: 12px; --radius-xl: 16px;
+            --radius-2xl: 20px; --radius-full: 9999px;
+
+            --shadow-sm: 0 1px 2px rgba(0,0,0,0.05);
+            --shadow-md: 0 4px 6px rgba(0,0,0,0.07);
+            --shadow-lg: 0 10px 15px rgba(0,0,0,0.1);
+            --shadow-xl: 0 20px 25px rgba(0,0,0,0.15);
+            --shadow-primary: 0 4px 14px rgba(176,0,29,0.25);
+            --shadow-card: 0 8px 30px rgba(0,0,0,0.08);
+
+            --font-family: 'Poppins', sans-serif;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: var(--font-family); background: var(--color-background); color: var(--color-text-dark); line-height: 1.5; }
+
+        /* ==================== PAGE LAYOUT ==================== */
+        .page-container { max-width: 1400px; margin: 0 auto; padding: var(--space-xl); }
+        .page-header { margin-bottom: var(--space-xl); }
+        .page-title { font-size: 42px; font-weight: 700; margin-bottom: var(--space-xs); }
+        .page-divider { height: 3px; width: 120px; background: var(--gradient-jurible); border-radius: var(--radius-full); }
+        .section { margin-bottom: var(--space-3xl); }
+        .section-header { margin-bottom: var(--space-lg); }
+        .section-title { font-size: 24px; font-weight: 600; margin-bottom: 4px; }
+        .section-subtitle { font-size: 14px; color: var(--color-text-muted); }
+        .section-divider { height: 1px; background: var(--color-border); margin: var(--space-3xl) 0; }
+        .component-label { font-size: 11px; color: var(--color-text-muted); text-transform: uppercase; letter-spacing: 0.5px; font-weight: 600; display: inline-block; background: var(--color-muted); padding: 4px 10px; border-radius: 4px; }
+
+        /* ==================== PREVIEW ==================== */
+        .preview-row { display: flex; flex-direction: column; gap: var(--space-lg); align-items: stretch; }
+        .preview-desktop { border: 1px solid var(--color-border); border-radius: var(--radius-lg); overflow: hidden; background: white; }
+        .preview-mobile { width: 375px; border: 1px solid var(--color-border); border-radius: var(--radius-lg); overflow: hidden; background: white; }
+        .preview-mobile-inner { max-height: 850px; overflow-y: auto; }
+
+        /* ==================== HERO B — BASE ==================== */
+        .hero-b {
+            position: relative;
+            background: var(--gradient-hero-bg);
+            padding: var(--space-xl) var(--space-xl) var(--space-3xl);
+            overflow: hidden;
+        }
+
+        .hero-b__decor {
+            position: absolute;
+            border-radius: 50%;
+            pointer-events: none;
+        }
+
+        .hero-b__decor--1 {
+            width: 400px; height: 400px;
+            background: radial-gradient(circle, rgba(124,58,237,0.06) 0%, transparent 70%);
+            top: -120px; right: -80px;
+        }
+
+        .hero-b__decor--2 {
+            width: 250px; height: 250px;
+            background: radial-gradient(circle, rgba(176,0,29,0.04) 0%, transparent 70%);
+            bottom: -60px; left: -60px;
+        }
+
+        .hero-b__container {
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-b__grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--space-xl);
+            align-items: flex-start;
+        }
+
+        /* Layout inversé (visuel à gauche) */
+        .hero-b__grid--reversed {
+            grid-template-columns: 1fr 1fr;
+        }
+
+        .hero-b__grid--reversed .hero-b__content { order: 2; }
+        .hero-b__grid--reversed .hero-b__visual { order: 1; }
+
+        /* ==================== BADGE ==================== */
+        .hero-b__badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: rgba(124,58,237,0.1);
+            border: 1px solid rgba(124,58,237,0.2);
+            color: var(--color-secondary);
+            font-size: 13px;
+            font-weight: 600;
+            padding: 5px 14px;
+            border-radius: var(--radius-full);
+            margin-bottom: var(--space-sm);
+            animation: fadeInUp .5s ease both;
+            animation-delay: .1s;
+        }
+
+        .hero-b__badge--green {
+            background: rgba(16,185,129,0.1);
+            border-color: rgba(16,185,129,0.2);
+            color: var(--color-success);
+        }
+
+        /* ==================== TITLE ==================== */
+        .hero-b__title {
+            font-size: 40px;
+            font-weight: 800;
+            line-height: 1.1;
+            color: var(--color-text-dark);
+            margin-bottom: var(--space-xs);
+            animation: fadeInUp .5s ease both;
+            animation-delay: .15s;
+        }
+
+        .hero-b__title-gradient {
+            background: var(--gradient-jurible);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* ==================== META (niveau, semestre) ==================== */
+        .hero-b__meta {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--color-text-gray);
+            margin-bottom: var(--space-sm);
+            animation: fadeInUp .5s ease both;
+            animation-delay: .2s;
+        }
+
+        /* ==================== SUBTITLE ==================== */
+        .hero-b__subtitle {
+            font-size: 16px;
+            color: var(--color-text-gray);
+            line-height: 1.7;
+            margin-bottom: var(--space-md);
+            max-width: 520px;
+            animation: fadeInUp .5s ease both;
+            animation-delay: .25s;
+        }
+
+        /* ==================== TAGS ==================== */
+        .hero-b__tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--space-xs);
+            margin-bottom: var(--space-sm);
+            animation: fadeInUp .5s ease both;
+            animation-delay: .25s;
+        }
+
+        .hero-b__tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 13px;
+            font-weight: 500;
+            padding: 6px 14px;
+            border-radius: var(--radius-full);
+            border: 1px solid var(--color-border);
+            background: white;
+            color: var(--color-text-gray);
+        }
+
+        .hero-b__tag-icon { font-size: 14px; }
+
+        /* Tags colorés (fiches) */
+        .hero-b__tag--violet {
+            background: rgba(124,58,237,0.1);
+            border-color: rgba(124,58,237,0.2);
+            color: var(--color-secondary);
+        }
+
+        .hero-b__tag--red {
+            background: rgba(176,0,29,0.08);
+            border-color: rgba(176,0,29,0.15);
+            color: var(--color-primary);
+        }
+
+        .hero-b__tag--green {
+            background: rgba(16,185,129,0.1);
+            border-color: rgba(16,185,129,0.2);
+            color: #059669;
+        }
+
+        .hero-b__tag--dark {
+            background: var(--color-text-dark);
+            border-color: var(--color-text-dark);
+            color: white;
+        }
+
+        /* ==================== STARS ==================== */
+        .hero-b__proof {
+            display: flex;
+            align-items: center;
+            gap: var(--space-xs);
+            margin-bottom: var(--space-md);
+            animation: fadeInUp .5s ease both;
+            animation-delay: .3s;
+        }
+
+        .hero-b__stars { color: #FBBF24; font-size: 15px; letter-spacing: 2px; }
+        .hero-b__rating { font-size: 14px; font-weight: 600; color: var(--color-text-dark); }
+        .hero-b__rating-count { font-size: 13px; color: var(--color-text-muted); }
+
+        /* ==================== FEATURES ✓ ==================== */
+        .hero-b__features {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            margin-bottom: var(--space-md);
+            animation: fadeInUp .5s ease both;
+            animation-delay: .3s;
+        }
+
+        .hero-b__feature {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 14px;
+            color: var(--color-text-gray);
+        }
+
+        .hero-b__feature-icon {
+            color: var(--color-success);
+            font-size: 16px;
+            flex-shrink: 0;
+        }
+
+        /* ==================== AUTEUR ==================== */
+        .hero-b__author {
+            display: flex;
+            align-items: center;
+            gap: var(--space-sm);
+            margin-bottom: var(--space-md);
+            animation: fadeInUp .5s ease both;
+            animation-delay: .3s;
+        }
+
+        .hero-b__author-avatar {
+            width: 44px; height: 44px;
+            border-radius: var(--radius-full);
+            background: var(--color-secondary);
+            display: flex; align-items: center; justify-content: center;
+            color: white; font-weight: 700; font-size: 16px;
+        }
+
+        .hero-b__author-name { font-size: 14px; font-weight: 600; color: var(--color-text-dark); }
+        .hero-b__author-role { font-size: 13px; color: var(--color-text-muted); }
+
+        /* ==================== CARD LATÉRALE (B1 — cours) ==================== */
+        .hero-b__card {
+            background: white;
+            border-radius: var(--radius-xl);
+            box-shadow: var(--shadow-card);
+            overflow: hidden;
+            animation: fadeInRight .6s ease both;
+            animation-delay: .2s;
+        }
+
+        .hero-b__card-visual {
+            aspect-ratio: 16/9;
+            background: linear-gradient(180deg, #1A1A1A 0%, #2D2D2D 100%);
+            display: flex; align-items: center; justify-content: center;
+            color: rgba(255,255,255,0.35); font-size: 14px;
+        }
+
+        .hero-b__card-body { padding: var(--space-md); }
+
+        .hero-b__card-title {
+            font-size: 15px;
+            font-weight: 700;
+            color: var(--color-text-dark);
+            margin-bottom: var(--space-sm);
+        }
+
+        .hero-b__card-features {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            margin-bottom: var(--space-md);
+        }
+
+        .hero-b__card-feature {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 13px;
+            color: var(--color-text-gray);
+        }
+
+        .hero-b__card-feature-icon {
+            color: var(--color-success);
+            font-size: 15px;
+        }
+
+        /* ==================== PRIX ==================== */
+        .hero-b__price-box {
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-lg);
+            padding: var(--space-sm) var(--space-md);
+            margin-bottom: var(--space-sm);
+        }
+
+        .hero-b__price-row {
+            display: flex;
+            align-items: baseline;
+            gap: var(--space-xs);
+            flex-wrap: wrap;
+        }
+
+        .hero-b__price {
+            font-size: 36px;
+            font-weight: 800;
+            color: var(--color-text-dark);
+            line-height: 1.1;
+        }
+
+        .hero-b__price-period {
+            font-size: 16px;
+            font-weight: 500;
+            color: var(--color-text-muted);
+        }
+
+        .hero-b__price-old {
+            font-size: 18px;
+            color: var(--color-text-muted);
+            text-decoration: line-through;
+        }
+
+        .hero-b__price-badge {
+            display: inline-flex;
+            align-items: center;
+            font-size: 12px;
+            font-weight: 700;
+            color: white;
+            background: var(--color-success);
+            padding: 3px 8px;
+            border-radius: var(--radius-sm);
+        }
+
+        .hero-b__price-savings {
+            font-size: 13px;
+            color: var(--color-success);
+            font-weight: 500;
+            margin-top: 4px;
+        }
+
+        .hero-b__price-details {
+            font-size: 13px;
+            color: var(--color-text-muted);
+            margin-top: 4px;
+        }
+
+        /* ==================== CTA ==================== */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 14px 28px;
+            font-family: var(--font-family);
+            font-size: 15px;
+            font-weight: 600;
+            border-radius: var(--radius-md);
+            cursor: pointer;
+            transition: all .2s ease;
+            text-decoration: none;
+            border: none;
+            width: 100%;
+        }
+
+        .btn--primary {
+            background: var(--gradient-jurible);
+            color: white;
+            box-shadow: var(--shadow-primary);
+        }
+
+        .btn--primary:hover {
+            box-shadow: 0 6px 20px rgba(176,0,29,0.35);
+            transform: translateY(-2px);
+        }
+
+        .hero-b__cta-group {
+            margin-bottom: var(--space-xs);
+            animation: fadeInUp .5s ease both;
+            animation-delay: .4s;
+        }
+
+        .hero-b__cta-mention {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            font-size: 12px;
+            color: var(--color-text-muted);
+            margin-top: 8px;
+        }
+
+        .hero-b__cta-mentions-row {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: var(--space-sm);
+            font-size: 12px;
+            color: var(--color-text-muted);
+            margin-top: 8px;
+        }
+
+        /* ==================== SPECS GRID 2×2 ==================== */
+        .hero-b__specs {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1px;
+            background: var(--color-border);
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            margin-top: var(--space-sm);
+        }
+
+        .hero-b__spec {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            padding: var(--space-sm);
+            background: white;
+        }
+
+        .hero-b__spec-icon {
+            font-size: 18px;
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+
+        .hero-b__spec-title { font-size: 14px; font-weight: 600; color: var(--color-text-dark); }
+        .hero-b__spec-desc { font-size: 12px; color: var(--color-text-muted); }
+
+        /* ==================== GARANTIE ==================== */
+        .hero-b__guarantee {
+            display: flex;
+            align-items: flex-start;
+            gap: var(--space-sm);
+            background: rgba(16,185,129,0.06);
+            border: 1px solid rgba(16,185,129,0.2);
+            border-radius: var(--radius-lg);
+            padding: var(--space-sm) var(--space-md);
+            margin-top: var(--space-sm);
+        }
+
+        .hero-b__guarantee-icon {
+            width: 36px; height: 36px;
+            background: var(--color-success);
+            border-radius: var(--radius-full);
+            display: flex; align-items: center; justify-content: center;
+            color: white; font-size: 16px; flex-shrink: 0;
+        }
+
+        .hero-b__guarantee-title { font-size: 14px; font-weight: 600; color: var(--color-text-dark); }
+        .hero-b__guarantee-desc { font-size: 13px; color: var(--color-text-gray); line-height: 1.5; }
+
+        /* ==================== VISUEL PRODUIT ==================== */
+        .hero-b__visual {
+            animation: fadeInRight .6s ease both;
+            animation-delay: .2s;
+        }
+
+        .hero-b__mockup-container {
+            position: relative;
+            background: white;
+            border-radius: var(--radius-2xl);
+            overflow: hidden;
+            box-shadow: var(--shadow-card);
+            border: 1px solid rgba(229,231,235,0.5);
+        }
+
+        .hero-b__mockup-main {
+            aspect-ratio: 4/3;
+            background: var(--color-muted);
+            display: flex; align-items: center; justify-content: center;
+            color: var(--color-text-muted); font-size: 14px;
+        }
+
+        .hero-b__mockup-badge {
+            position: absolute;
+            top: var(--space-sm);
+            right: var(--space-sm);
+            background: var(--color-secondary);
+            color: white;
+            font-size: 12px;
+            font-weight: 600;
+            padding: 5px 12px;
+            border-radius: var(--radius-full);
+        }
+
+        .hero-b__mockup-badge--red {
+            background: var(--color-primary);
+        }
+
+        .hero-b__mockup-badge--green {
+            background: var(--color-success);
+        }
+
+        /* Galerie miniatures */
+        .hero-b__thumbnails {
+            display: flex;
+            gap: var(--space-xs);
+            margin-top: var(--space-sm);
+            animation: fadeInUp .5s ease both;
+            animation-delay: .35s;
+        }
+
+        .hero-b__thumb {
+            width: 72px; height: 72px;
+            background: white;
+            border: 2px solid var(--color-border);
+            border-radius: var(--radius-md);
+            display: flex; align-items: center; justify-content: center;
+            font-size: 11px; color: var(--color-text-muted);
+            cursor: pointer;
+            transition: all .2s ease;
+            text-align: center;
+            line-height: 1.2;
+            padding: 4px;
+        }
+
+        .hero-b__thumb:hover,
+        .hero-b__thumb--active {
+            border-color: var(--color-primary);
+        }
+
+        /* Grid miniatures (pack) */
+        .hero-b__thumb-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: var(--space-xs);
+            margin-top: var(--space-sm);
+            animation: fadeInUp .5s ease both;
+            animation-delay: .35s;
+        }
+
+        .hero-b__thumb-grid .hero-b__thumb {
+            width: auto; height: 80px;
+        }
+
+        /* ==================== ANIMATIONS ==================== */
+        @keyframes fadeInUp { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:translateY(0)} }
+        @keyframes fadeInRight { from{opacity:0;transform:translateX(30px)} to{opacity:1;transform:translateX(0)} }
+
+        /* ==================== MOBILE ==================== */
+        .hero-b--mobile { padding: var(--space-md) var(--space-sm) var(--space-lg); }
+        .hero-b--mobile .hero-b__grid { grid-template-columns: 1fr; gap: var(--space-md); }
+        .hero-b--mobile .hero-b__grid--reversed .hero-b__content { order: 1; }
+        .hero-b--mobile .hero-b__grid--reversed .hero-b__visual { order: 2; }
+        .hero-b--mobile .hero-b__title { font-size: 26px; }
+        .hero-b--mobile .hero-b__meta { font-size: 14px; }
+        .hero-b--mobile .hero-b__subtitle { font-size: 14px; }
+        .hero-b--mobile .hero-b__badge { font-size: 12px; padding: 4px 12px; }
+        .hero-b--mobile .hero-b__tags { gap: 6px; }
+        .hero-b--mobile .hero-b__tag { font-size: 12px; padding: 5px 10px; }
+        .hero-b--mobile .hero-b__price { font-size: 28px; }
+        .hero-b--mobile .hero-b__thumb { width: 56px; height: 56px; font-size: 10px; }
+        .hero-b--mobile .hero-b__thumb-grid { grid-template-columns: repeat(4, 1fr); }
+        .hero-b--mobile .hero-b__thumb-grid .hero-b__thumb { height: 64px; }
+        .hero-b--mobile .hero-b__specs { font-size: 13px; }
+        .hero-b--mobile .hero-b__guarantee { padding: var(--space-sm); }
+
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
+        }
+    </style>
+</head>
+<body>
+<div class="page-container">
+    <header class="page-header">
+        <h1 class="page-title">Hero Produit (Type B)</h1>
+        <div class="page-divider"></div>
+    </header>
+
+    <!-- ================================================================ -->
+    <!-- B1 — COURS (ABONNEMENT)                                          -->
+    <!-- ================================================================ -->
+    <section class="section">
+        <div class="section-header">
+            <h2 class="section-title">B1 — Cours par matière (abonnement)</h2>
+            <p class="section-subtitle">Badge + Titre gradient + Niveau/Semestre + Tags contenus + ★★★★★ + Features ✓ + Card latérale avec prix</p>
+        </div>
+
+        <div class="preview-row">
+            <!-- Desktop -->
+            <div class="preview-desktop">
+                <span class="component-label" style="margin:16px;">Desktop</span>
+                <div class="hero-b">
+                    <div class="hero-b__decor hero-b__decor--1"></div>
+                    <div class="hero-b__decor hero-b__decor--2"></div>
+                    <div class="hero-b__container">
+                        <div class="hero-b__grid">
+                            <!-- Contenu gauche = CE COURS -->
+                            <div class="hero-b__content">
+                                <span class="hero-b__badge">● Cours complet de Droit constitutionnel</span>
+
+                                <h1 class="hero-b__title">
+                                    Maîtrisez le <span class="hero-b__title-gradient">Droit constitutionnel</span>
+                                </h1>
+
+                                <p class="hero-b__meta">Principes fondamentaux (S1) – Licence 1</p>
+
+                                <p class="hero-b__subtitle">
+                                    Un cours conçu pour comprendre et mémoriser facilement tout le programme de droit constitutionnel.
+                                </p>
+
+                                <div class="hero-b__tags">
+                                    <span class="hero-b__tag"><span class="hero-b__tag-icon">🎬</span> 20 vidéos</span>
+                                    <span class="hero-b__tag"><span class="hero-b__tag-icon">📄</span> Cours écrit</span>
+                                    <span class="hero-b__tag"><span class="hero-b__tag-icon">✅</span> 200+ QCM</span>
+                                    <span class="hero-b__tag"><span class="hero-b__tag-icon">🗂️</span> 200+ Flashcards</span>
+                                    <span class="hero-b__tag"><span class="hero-b__tag-icon">📋</span> Annales corrigées</span>
+                                    <span class="hero-b__tag"><span class="hero-b__tag-icon">🎞️</span> Fiches animées</span>
+                                    <span class="hero-b__tag"><span class="hero-b__tag-icon">🧠</span> Mindmaps</span>
+                                </div>
+
+                                <div class="hero-b__proof">
+                                    <span class="hero-b__stars">★★★★★</span>
+                                    <span class="hero-b__rating">4.8/5</span>
+                                    <span class="hero-b__rating-count">basé sur 320 avis</span>
+                                </div>
+
+                                <div class="hero-b__features">
+                                    <div class="hero-b__feature">
+                                        <span class="hero-b__feature-icon">✅</span>
+                                        Conforme au programme universitaire
+                                    </div>
+                                    <div class="hero-b__feature">
+                                        <span class="hero-b__feature-icon">✅</span>
+                                        + de 25 000 étudiants nous font confiance
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Card latérale droite = LA PLATEFORME -->
+                            <div>
+                                <div class="hero-b__card">
+                                    <div class="hero-b__card-visual">[Illustration cours]</div>
+                                    <div class="hero-b__card-body">
+                                        <p class="hero-b__card-title">Inclus dans l'abonnement Jurible</p>
+                                        <div class="hero-b__card-features">
+                                            <div class="hero-b__card-feature">
+                                                <span class="hero-b__card-feature-icon">✅</span>
+                                                Accès à 20 matières de licence
+                                            </div>
+                                            <div class="hero-b__card-feature">
+                                                <span class="hero-b__card-feature-icon">✅</span>
+                                                Cours de méthodologie inclus
+                                            </div>
+                                            <div class="hero-b__card-feature">
+                                                <span class="hero-b__card-feature-icon">✅</span>
+                                                Outils IA (fiches d'arrêt, plans…)
+                                            </div>
+                                            <div class="hero-b__card-feature">
+                                                <span class="hero-b__card-feature-icon">✅</span>
+                                                Mises à jour régulières
+                                            </div>
+                                        </div>
+
+                                        <div class="hero-b__price-row" style="margin-bottom: 12px;">
+                                            <span class="hero-b__price">29€</span>
+                                            <span class="hero-b__price-period">/mois</span>
+                                        </div>
+
+                                        <div class="hero-b__cta-group">
+                                            <button class="btn btn--primary">Rejoindre l'Académie →</button>
+                                            <div class="hero-b__cta-mentions-row">
+                                                <span>Sans engagement</span>
+                                                <span>•</span>
+                                                <span>Annulable en 1 clic</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Mobile -->
+            <div class="preview-mobile">
+                <span class="component-label" style="margin:12px;">Mobile 375px</span>
+                <div class="preview-mobile-inner">
+                    <div class="hero-b hero-b--mobile">
+                        <div class="hero-b__container">
+                            <div class="hero-b__grid">
+                                <div class="hero-b__content">
+                                    <span class="hero-b__badge">● Cours complet de Droit constitutionnel</span>
+                                    <h1 class="hero-b__title">Maîtrisez le <span class="hero-b__title-gradient">Droit constitutionnel</span></h1>
+                                    <p class="hero-b__meta">Principes fondamentaux (S1) – L1</p>
+                                    <p class="hero-b__subtitle">Comprendre et mémoriser tout le programme de droit constitutionnel.</p>
+                                    <div class="hero-b__proof">
+                                        <span class="hero-b__stars">★★★★★</span>
+                                        <span class="hero-b__rating">4.8/5</span>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="hero-b__card">
+                                        <div class="hero-b__card-visual" style="aspect-ratio:16/8;">[Illustration]</div>
+                                        <div class="hero-b__card-body">
+                                            <p class="hero-b__card-title">Inclus dans l'abonnement Jurible</p>
+                                            <div class="hero-b__card-features">
+                                                <div class="hero-b__card-feature"><span class="hero-b__card-feature-icon">✅</span> 20 matières de licence</div>
+                                                <div class="hero-b__card-feature"><span class="hero-b__card-feature-icon">✅</span> Méthodologie incluse</div>
+                                                <div class="hero-b__card-feature"><span class="hero-b__card-feature-icon">✅</span> Outils IA</div>
+                                            </div>
+                                            <div class="hero-b__price-row" style="margin-bottom:12px;">
+                                                <span class="hero-b__price">29€</span>
+                                                <span class="hero-b__price-period">/mois</span>
+                                            </div>
+                                            <div class="hero-b__cta-group">
+                                                <button class="btn btn--primary">Rejoindre l'Académie →</button>
+                                                <div class="hero-b__cta-mentions-row">
+                                                    <span>Sans engagement</span><span>•</span><span>Annulable en 1 clic</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="hero-b__tags" style="margin-top:8px;">
+                                    <span class="hero-b__tag"><span class="hero-b__tag-icon">🎬</span> 20 vidéos</span>
+                                    <span class="hero-b__tag"><span class="hero-b__tag-icon">✅</span> 200+ QCM</span>
+                                    <span class="hero-b__tag"><span class="hero-b__tag-icon">🗂️</span> Flashcards</span>
+                                    <span class="hero-b__tag"><span class="hero-b__tag-icon">🧠</span> Mindmaps</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="section-divider"></div>
+
+    <!-- ================================================================ -->
+    <!-- B1bis — SUPPORT (ABONNEMENT)                                     -->
+    <!-- ================================================================ -->
+    <section class="section">
+        <div class="section-header">
+            <h2 class="section-title">B1bis — Page support (abonnement)</h2>
+            <p class="section-subtitle">Flashcards, Fiches vidéo, Mindmaps… Même structure que B1, contenu adapté au support</p>
+        </div>
+
+        <div class="preview-row">
+            <div class="preview-desktop">
+                <span class="component-label" style="margin:16px;">Desktop — Exemple Flashcards</span>
+                <div class="hero-b">
+                    <div class="hero-b__decor hero-b__decor--1"></div>
+                    <div class="hero-b__container">
+                        <div class="hero-b__grid">
+                            <div class="hero-b__content">
+                                <span class="hero-b__badge">🗂️ Flashcards juridiques</span>
+
+                                <h1 class="hero-b__title">
+                                    Révisez avec les <span class="hero-b__title-gradient">Flashcards</span>
+                                </h1>
+
+                                <p class="hero-b__meta">Disponible pour toutes les matières de licence</p>
+
+                                <p class="hero-b__subtitle">
+                                    Des cartes de révision interactives pour mémoriser les définitions, arrêts et notions clés de chaque matière. L'outil idéal pour vos sessions de révision.
+                                </p>
+
+                                <div class="hero-b__tags">
+                                    <span class="hero-b__tag"><span class="hero-b__tag-icon">📚</span> 20 matières</span>
+                                    <span class="hero-b__tag"><span class="hero-b__tag-icon">🗂️</span> 3 000+ cartes</span>
+                                    <span class="hero-b__tag"><span class="hero-b__tag-icon">🔄</span> Mode aléatoire</span>
+                                    <span class="hero-b__tag"><span class="hero-b__tag-icon">📱</span> Mobile-friendly</span>
+                                </div>
+
+                                <div class="hero-b__proof">
+                                    <span class="hero-b__stars">★★★★★</span>
+                                    <span class="hero-b__rating">4.7/5</span>
+                                    <span class="hero-b__rating-count">basé sur 180 avis</span>
+                                </div>
+
+                                <div class="hero-b__features">
+                                    <div class="hero-b__feature"><span class="hero-b__feature-icon">✅</span> Inclus dans l'abonnement Jurible</div>
+                                    <div class="hero-b__feature"><span class="hero-b__feature-icon">✅</span> Mises à jour régulières</div>
+                                    <div class="hero-b__feature"><span class="hero-b__feature-icon">✅</span> Conçu par des enseignants de droit</div>
+                                </div>
+                            </div>
+
+                            <div>
+                                <div class="hero-b__card">
+                                    <div class="hero-b__card-visual" style="background: linear-gradient(135deg, #7C3AED 0%, #5B21B6 100%); color: rgba(255,255,255,0.6);">
+                                        [Aperçu Flashcards]
+                                    </div>
+                                    <div class="hero-b__card-body">
+                                        <p class="hero-b__card-title">Inclus dans l'abonnement Jurible</p>
+                                        <div class="hero-b__card-features">
+                                            <div class="hero-b__card-feature"><span class="hero-b__card-feature-icon">✅</span> 3 000+ flashcards incluses</div>
+                                            <div class="hero-b__card-feature"><span class="hero-b__card-feature-icon">✅</span> + tous les cours et outils Jurible</div>
+                                            <div class="hero-b__card-feature"><span class="hero-b__card-feature-icon">✅</span> 20 matières de licence</div>
+                                        </div>
+                                        <div class="hero-b__price-row" style="margin-bottom:12px;">
+                                            <span class="hero-b__price">29€</span>
+                                            <span class="hero-b__price-period">/mois</span>
+                                        </div>
+                                        <div class="hero-b__cta-group">
+                                            <button class="btn btn--primary">Rejoindre l'Académie →</button>
+                                            <div class="hero-b__cta-mentions-row">
+                                                <span>Sans engagement</span><span>•</span><span>Annulable en 1 clic</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="section-divider"></div>
+
+    <!-- ================================================================ -->
+    <!-- B2 — FICHE PDF UNITAIRE (ACHAT)                                  -->
+    <!-- ================================================================ -->
+    <section class="section">
+        <div class="section-header">
+            <h2 class="section-title">B2 — Fiche PDF unitaire (achat)</h2>
+            <p class="section-subtitle">Visuel gauche + Galerie miniatures + Tags colorés + ★★★★★ + Prix + CTA Acheter + Specs 2×2 + Garantie</p>
+        </div>
+
+        <div class="preview-row">
+            <!-- Desktop -->
+            <div class="preview-desktop">
+                <span class="component-label" style="margin:16px;">Desktop</span>
+                <div class="hero-b">
+                    <div class="hero-b__decor hero-b__decor--1"></div>
+                    <div class="hero-b__decor hero-b__decor--2"></div>
+                    <div class="hero-b__container">
+                        <div class="hero-b__grid hero-b__grid--reversed">
+                            <!-- Visuel gauche -->
+                            <div class="hero-b__visual">
+                                <div class="hero-b__mockup-container">
+                                    <div class="hero-b__mockup-main" style="aspect-ratio: 3/4;">
+                                        <div style="text-align:center;">
+                                            <div style="font-size:32px;margin-bottom:8px;">📄</div>
+                                            Image du mockup 3D<br>
+                                            <span style="font-size:12px;">Fiches Droit Constitutionnel</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="hero-b__thumbnails">
+                                    <div class="hero-b__thumb hero-b__thumb--active">Couverture</div>
+                                    <div class="hero-b__thumb">Sommaire</div>
+                                    <div class="hero-b__thumb">Extrait 1</div>
+                                    <div class="hero-b__thumb">Extrait 2</div>
+                                    <div class="hero-b__thumb">Carte mentale</div>
+                                </div>
+                            </div>
+
+                            <!-- Contenu droite -->
+                            <div class="hero-b__content">
+                                <div class="hero-b__tags" style="margin-bottom:12px;">
+                                    <span class="hero-b__tag hero-b__tag--dark">Édition 2025-2026</span>
+                                </div>
+
+                                <h1 class="hero-b__title">Fiches de Droit Constitutionnel</h1>
+                                <p class="hero-b__meta">Principes fondamentaux (Semestre 1)</p>
+
+                                <div class="hero-b__proof">
+                                    <span class="hero-b__stars">★★★★★</span>
+                                    <span class="hero-b__rating">4.9/5</span>
+                                    <span class="hero-b__rating-count">basé sur 127 avis</span>
+                                </div>
+
+                                <div class="hero-b__author">
+                                    <div class="hero-b__author-avatar">R</div>
+                                    <div>
+                                        <div class="hero-b__author-name">Raphaël Briguet-Lamarre</div>
+                                        <div class="hero-b__author-role">Ex-avocat, chargé d'enseignement à l'université</div>
+                                    </div>
+                                </div>
+
+                                <p class="hero-b__price-details" style="margin-bottom:12px;">Paiement unique · Accès à vie · Téléchargement immédiat</p>
+
+                                <div class="hero-b__cta-group">
+                                    <button class="btn btn--primary">🛒 Acheter maintenant — 19€</button>
+                                    <div class="hero-b__cta-mention">🔒 Paiement sécurisé par carte bancaire</div>
+                                </div>
+
+                                <div class="hero-b__specs">
+                                    <div class="hero-b__spec">
+                                        <span class="hero-b__spec-icon">📄</span>
+                                        <div><div class="hero-b__spec-title">65 pages</div><div class="hero-b__spec-desc">20 fiches complètes</div></div>
+                                    </div>
+                                    <div class="hero-b__spec">
+                                        <span class="hero-b__spec-icon">⬇️</span>
+                                        <div><div class="hero-b__spec-title">Téléchargement immédiat</div><div class="hero-b__spec-desc">Accès instantané après paiement</div></div>
+                                    </div>
+                                    <div class="hero-b__spec">
+                                        <span class="hero-b__spec-icon">🖨️</span>
+                                        <div><div class="hero-b__spec-title">Imprimable</div><div class="hero-b__spec-desc">Format PDF haute qualité</div></div>
+                                    </div>
+                                    <div class="hero-b__spec">
+                                        <span class="hero-b__spec-icon">♾️</span>
+                                        <div><div class="hero-b__spec-title">Accès à vie</div><div class="hero-b__spec-desc">Pas d'abonnement</div></div>
+                                    </div>
+                                </div>
+
+                                <div class="hero-b__guarantee">
+                                    <div class="hero-b__guarantee-icon">🛡️</div>
+                                    <div>
+                                        <div class="hero-b__guarantee-title">Garantie "Réussite ou Remboursé"</div>
+                                        <div class="hero-b__guarantee-desc">Si vous n'obtenez pas la moyenne au partiel, nous vous remboursons intégralement.</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Mobile -->
+            <div class="preview-mobile">
+                <span class="component-label" style="margin:12px;">Mobile 375px</span>
+                <div class="preview-mobile-inner">
+                    <div class="hero-b hero-b--mobile">
+                        <div class="hero-b__container">
+                            <div class="hero-b__grid">
+                                <div class="hero-b__content">
+                                    <div class="hero-b__tags" style="margin-bottom:8px;">
+                                        <span class="hero-b__tag hero-b__tag--dark">2025-2026</span>
+                                    </div>
+                                    <h1 class="hero-b__title">Fiches de Droit Constitutionnel</h1>
+                                    <p class="hero-b__meta">Principes fondamentaux (S1)</p>
+                                    <div class="hero-b__proof">
+                                        <span class="hero-b__stars">★★★★★</span>
+                                        <span class="hero-b__rating">4.9/5</span>
+                                        <span class="hero-b__rating-count">· 127 avis</span>
+                                    </div>
+                                    <div class="hero-b__author">
+                                        <div class="hero-b__author-avatar">R</div>
+                                        <div>
+                                            <div class="hero-b__author-name">Raphaël Briguet-Lamarre</div>
+                                            <div class="hero-b__author-role">Ex-avocat, enseignant</div>
+                                        </div>
+                                    </div>
+                                    <p class="hero-b__price-details" style="margin-bottom:10px;">Paiement unique · Accès à vie</p>
+                                    <div class="hero-b__cta-group">
+                                        <button class="btn btn--primary">🛒 Acheter — 19€</button>
+                                        <div class="hero-b__cta-mention">🔒 Paiement sécurisé</div>
+                                    </div>
+                                </div>
+                                <div class="hero-b__visual">
+                                    <div class="hero-b__mockup-container">
+                                        <div class="hero-b__mockup-main" style="aspect-ratio:4/3;">
+                                            <div style="text-align:center;"><div style="font-size:28px;margin-bottom:4px;">📄</div>Mockup Fiches</div>
+                                        </div>
+                                    </div>
+                                    <div class="hero-b__thumbnails">
+                                        <div class="hero-b__thumb hero-b__thumb--active">Couverture</div>
+                                        <div class="hero-b__thumb">Sommaire</div>
+                                        <div class="hero-b__thumb">Extrait</div>
+                                        <div class="hero-b__thumb">Carte</div>
+                                    </div>
+                                </div>
+                                <div class="hero-b__guarantee">
+                                    <div class="hero-b__guarantee-icon">🛡️</div>
+                                    <div>
+                                        <div class="hero-b__guarantee-title">Garantie "Réussite ou Remboursé"</div>
+                                        <div class="hero-b__guarantee-desc">Si vous n'obtenez pas la moyenne, nous vous remboursons.</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="section-divider"></div>
+
+    <!-- ================================================================ -->
+    <!-- B3 — PACK FICHES (ACHAT)                                         -->
+    <!-- ================================================================ -->
+    <section class="section">
+        <div class="section-header">
+            <h2 class="section-title">B3 — Pack Fiches (achat)</h2>
+            <p class="section-subtitle">Badge promo + Grid miniatures + Tags + ★★★★★ + Prix barré + Économie + CTA + Specs + Garantie</p>
+        </div>
+
+        <div class="preview-row">
+            <!-- Desktop -->
+            <div class="preview-desktop">
+                <span class="component-label" style="margin:16px;">Desktop</span>
+                <div class="hero-b">
+                    <div class="hero-b__decor hero-b__decor--1"></div>
+                    <div class="hero-b__decor hero-b__decor--2"></div>
+                    <div class="hero-b__container">
+                        <div class="hero-b__grid hero-b__grid--reversed">
+                            <!-- Visuel gauche -->
+                            <div class="hero-b__visual">
+                                <div class="hero-b__mockup-container">
+                                    <span class="hero-b__mockup-badge hero-b__mockup-badge--green">🎁 1 matière offerte</span>
+                                    <div class="hero-b__mockup-main">
+                                        <div style="text-align:center;">
+                                            <div style="font-size:32px;margin-bottom:8px;">📚</div>
+                                            Image des 8 mockups<br>
+                                            <span style="font-size:12px;">Pack Fiches L1</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="hero-b__thumb-grid">
+                                    <div class="hero-b__thumb hero-b__thumb--active">Droit Constit S1</div>
+                                    <div class="hero-b__thumb">Droit Constit S2</div>
+                                    <div class="hero-b__thumb">Intro Droit</div>
+                                    <div class="hero-b__thumb">Famille</div>
+                                    <div class="hero-b__thumb">Personnes</div>
+                                    <div class="hero-b__thumb">Institutions</div>
+                                    <div class="hero-b__thumb">Biens</div>
+                                    <div class="hero-b__thumb">Histoire</div>
+                                </div>
+                            </div>
+
+                            <!-- Contenu droite -->
+                            <div class="hero-b__content">
+                                <div class="hero-b__tags" style="margin-bottom:12px;">
+                                    <span class="hero-b__tag hero-b__tag--dark">Édition 2025-2026</span>
+                                </div>
+
+                                <h1 class="hero-b__title">Pack Fiches L1 Droit</h1>
+
+                                <p class="hero-b__subtitle">
+                                    Toutes les matières fondamentales de première année en fiches et cartes mentales. 8 matières complètes pour réussir vos partiels.
+                                </p>
+
+                                <div class="hero-b__proof">
+                                    <span class="hero-b__stars">★★★★★</span>
+                                    <span class="hero-b__rating">4.9/5</span>
+                                    <span class="hero-b__rating-count">basé sur 250+ avis</span>
+                                </div>
+
+                                <p class="hero-b__price-savings" style="margin-bottom:4px;">✨ Économisez 19€ avec le pack (1 matière offerte)</p>
+                                <p class="hero-b__price-details" style="margin-bottom:12px;">Paiement unique · Accès à vie · Téléchargement immédiat</p>
+
+                                <div class="hero-b__cta-group">
+                                    <button class="btn btn--primary">🛒 Acheter le pack — 133€</button>
+                                    <div class="hero-b__cta-mention">🔒 Paiement sécurisé par carte bancaire</div>
+                                </div>
+
+                                <div class="hero-b__specs">
+                                    <div class="hero-b__spec">
+                                        <span class="hero-b__spec-icon">📚</span>
+                                        <div><div class="hero-b__spec-title">8 matières</div><div class="hero-b__spec-desc">L1 complète couverte</div></div>
+                                    </div>
+                                    <div class="hero-b__spec">
+                                        <span class="hero-b__spec-icon">📄</span>
+                                        <div><div class="hero-b__spec-title">500+ pages</div><div class="hero-b__spec-desc">Fiches + cartes mentales</div></div>
+                                    </div>
+                                    <div class="hero-b__spec">
+                                        <span class="hero-b__spec-icon">⬇️</span>
+                                        <div><div class="hero-b__spec-title">Téléchargement immédiat</div><div class="hero-b__spec-desc">PDF haute qualité</div></div>
+                                    </div>
+                                    <div class="hero-b__spec">
+                                        <span class="hero-b__spec-icon">♾️</span>
+                                        <div><div class="hero-b__spec-title">Accès à vie</div><div class="hero-b__spec-desc">Pas d'abonnement</div></div>
+                                    </div>
+                                </div>
+
+                                <div class="hero-b__guarantee">
+                                    <div class="hero-b__guarantee-icon">🛡️</div>
+                                    <div>
+                                        <div class="hero-b__guarantee-title">Garantie "Réussite ou Remboursé"</div>
+                                        <div class="hero-b__guarantee-desc">Si vous n'obtenez pas la moyenne au partiel dans la matière concernée, nous vous remboursons.</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Mobile -->
+            <div class="preview-mobile">
+                <span class="component-label" style="margin:12px;">Mobile 375px</span>
+                <div class="preview-mobile-inner">
+                    <div class="hero-b hero-b--mobile">
+                        <div class="hero-b__container">
+                            <div class="hero-b__grid">
+                                <div class="hero-b__content">
+                                    <div class="hero-b__tags" style="margin-bottom:8px;">
+                                        <span class="hero-b__tag hero-b__tag--dark">2025-2026</span>
+                                    </div>
+                                    <h1 class="hero-b__title">Pack Fiches L1 Droit</h1>
+                                    <p class="hero-b__subtitle">8 matières complètes pour réussir vos partiels.</p>
+                                    <div class="hero-b__proof">
+                                        <span class="hero-b__stars">★★★★★</span>
+                                        <span class="hero-b__rating">4.9/5</span>
+                                        <span class="hero-b__rating-count">· 250+ avis</span>
+                                    </div>
+                                    <p class="hero-b__price-savings" style="margin-bottom:4px;">✨ 1 matière offerte</p>
+                                    <p class="hero-b__price-details" style="margin-bottom:10px;">Paiement unique · Accès à vie</p>
+                                    <div class="hero-b__cta-group">
+                                        <button class="btn btn--primary">🛒 Acheter — 133€</button>
+                                        <div class="hero-b__cta-mention">🔒 Paiement sécurisé</div>
+                                    </div>
+                                </div>
+                                <div class="hero-b__visual">
+                                    <div class="hero-b__mockup-container">
+                                        <span class="hero-b__mockup-badge hero-b__mockup-badge--green">🎁 1 offerte</span>
+                                        <div class="hero-b__mockup-main" style="aspect-ratio:4/3;">
+                                            <div style="text-align:center;"><div style="font-size:28px;margin-bottom:4px;">📚</div>Pack L1</div>
+                                        </div>
+                                    </div>
+                                    <div class="hero-b__thumb-grid">
+                                        <div class="hero-b__thumb hero-b__thumb--active">Constit S1</div>
+                                        <div class="hero-b__thumb">Constit S2</div>
+                                        <div class="hero-b__thumb">Intro</div>
+                                        <div class="hero-b__thumb">Famille</div>
+                                    </div>
+                                </div>
+                                <div class="hero-b__guarantee">
+                                    <div class="hero-b__guarantee-icon">🛡️</div>
+                                    <div>
+                                        <div class="hero-b__guarantee-title">Réussite ou Remboursé</div>
+                                        <div class="hero-b__guarantee-desc">Pas la moyenne ? Nous vous remboursons.</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="section-divider"></div>
+
+    <!-- ================================================================ -->
+    <!-- B4 — MANUEL / GUIDE (ACHAT)                                      -->
+    <!-- ================================================================ -->
+    <section class="section">
+        <div class="section-header">
+            <h2 class="section-title">B4 — Manuel / Guide (achat)</h2>
+            <p class="section-subtitle">Visuel gauche + Badge pages + Badge type + Auteur + Features ✓ + Prix barré + CTA (pas de garantie)</p>
+        </div>
+
+        <div class="preview-row">
+            <!-- Desktop -->
+            <div class="preview-desktop">
+                <span class="component-label" style="margin:16px;">Desktop</span>
+                <div class="hero-b">
+                    <div class="hero-b__decor hero-b__decor--1"></div>
+                    <div class="hero-b__decor hero-b__decor--2"></div>
+                    <div class="hero-b__container">
+                        <div class="hero-b__grid hero-b__grid--reversed">
+                            <!-- Visuel gauche -->
+                            <div class="hero-b__visual">
+                                <div class="hero-b__mockup-container">
+                                    <span class="hero-b__mockup-badge">PDF 57 pages</span>
+                                    <div class="hero-b__mockup-main" style="aspect-ratio:3/4;">
+                                        <div style="text-align:center;">
+                                            <div style="font-size:40px;margin-bottom:8px;">📘</div>
+                                            Couverture du Manuel<br>
+                                            <span style="font-size:12px;">de Méthodologie Juridique</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Contenu droite -->
+                            <div class="hero-b__content">
+                                <span class="hero-b__badge">📚 Guide complet</span>
+
+                                <h1 class="hero-b__title">
+                                    Manuel de <span class="hero-b__title-gradient">Méthodologie Juridique</span>
+                                </h1>
+
+                                <p class="hero-b__subtitle">
+                                    Tous les exercices juridiques expliqués et détaillés avec de nombreux exemples : fiche d'arrêt, commentaire d'arrêt, dissertation, cas pratique. Le guide indispensable de la L1 au Master.
+                                </p>
+
+                                <div class="hero-b__author">
+                                    <div class="hero-b__author-avatar">R</div>
+                                    <div>
+                                        <div class="hero-b__author-name">Raphaël Briguet-Lamarre</div>
+                                        <div class="hero-b__author-role">Ex-avocat, chargé d'enseignement à l'université</div>
+                                    </div>
+                                </div>
+
+                                <div class="hero-b__features">
+                                    <div class="hero-b__feature"><span class="hero-b__feature-icon">✅</span> PDF téléchargeable et imprimable (57 pages)</div>
+                                    <div class="hero-b__feature"><span class="hero-b__feature-icon">✅</span> Conforme au programme universitaire français 2025-2026</div>
+                                    <div class="hero-b__feature"><span class="hero-b__feature-icon">✅</span> Réponse à vos questions sous 48h</div>
+                                    <div class="hero-b__feature"><span class="hero-b__feature-icon">✅</span> Accès immédiat après achat</div>
+                                </div>
+
+                                <div class="hero-b__price-box">
+                                    <div class="hero-b__price-row">
+                                        <span class="hero-b__price">24€</span>
+                                        <span class="hero-b__price-old">29€</span>
+                                    </div>
+                                    <p class="hero-b__price-details">Paiement unique • Accès à vie • Mises à jour incluses</p>
+                                </div>
+
+                                <div class="hero-b__cta-group">
+                                    <button class="btn btn--primary">Acheter le manuel</button>
+                                    <div class="hero-b__cta-mention">🛡️ Garantie satisfait ou remboursé si vous n'obtenez pas la moyenne</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Mobile -->
+            <div class="preview-mobile">
+                <span class="component-label" style="margin:12px;">Mobile 375px</span>
+                <div class="preview-mobile-inner">
+                    <div class="hero-b hero-b--mobile">
+                        <div class="hero-b__container">
+                            <div class="hero-b__grid">
+                                <div class="hero-b__content">
+                                    <span class="hero-b__badge">📚 Guide complet</span>
+                                    <h1 class="hero-b__title">Manuel de <span class="hero-b__title-gradient">Méthodologie Juridique</span></h1>
+                                    <p class="hero-b__subtitle">Le guide indispensable de la L1 au Master : tous les exercices juridiques expliqués.</p>
+                                    <div class="hero-b__author">
+                                        <div class="hero-b__author-avatar">R</div>
+                                        <div>
+                                            <div class="hero-b__author-name">Raphaël Briguet-Lamarre</div>
+                                            <div class="hero-b__author-role">Ex-avocat, enseignant</div>
+                                        </div>
+                                    </div>
+                                    <div class="hero-b__price-box">
+                                        <div class="hero-b__price-row">
+                                            <span class="hero-b__price">24€</span>
+                                            <span class="hero-b__price-old">29€</span>
+                                        </div>
+                                        <p class="hero-b__price-details">Paiement unique • Accès à vie</p>
+                                    </div>
+                                    <div class="hero-b__cta-group">
+                                        <button class="btn btn--primary">Acheter le manuel</button>
+                                        <div class="hero-b__cta-mention">🔒 Paiement sécurisé</div>
+                                    </div>
+                                </div>
+                                <div class="hero-b__visual">
+                                    <div class="hero-b__mockup-container">
+                                        <span class="hero-b__mockup-badge">PDF 57 pages</span>
+                                        <div class="hero-b__mockup-main" style="aspect-ratio:3/4;">
+                                            <div style="text-align:center;"><div style="font-size:32px;margin-bottom:4px;">📘</div>Couverture Manuel</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="hero-b__features" style="margin-top:8px;">
+                                    <div class="hero-b__feature"><span class="hero-b__feature-icon">✅</span> 57 pages PDF imprimable</div>
+                                    <div class="hero-b__feature"><span class="hero-b__feature-icon">✅</span> Programme 2025-2026</div>
+                                    <div class="hero-b__feature"><span class="hero-b__feature-icon">✅</span> Réponse sous 48h</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="section-divider"></div>
+
+    <!-- ================================================================ -->
+    <!-- RÉCAPITULATIF                                                     -->
+    <!-- ================================================================ -->
+    <section class="section">
+        <div class="section-header">
+            <h2 class="section-title">📋 Récapitulatif Type B</h2>
+        </div>
+        <table style="width:100%;border-collapse:collapse;font-size:13px;">
+            <thead>
+                <tr style="background:var(--color-muted);">
+                    <th style="padding:10px;text-align:left;border:1px solid var(--color-border);">Variante</th>
+                    <th style="padding:10px;text-align:left;border:1px solid var(--color-border);">Type</th>
+                    <th style="padding:10px;text-align:left;border:1px solid var(--color-border);">Layout</th>
+                    <th style="padding:10px;text-align:left;border:1px solid var(--color-border);">CTA</th>
+                    <th style="padding:10px;text-align:left;border:1px solid var(--color-border);">Visuel</th>
+                    <th style="padding:10px;text-align:left;border:1px solid var(--color-border);">Spécificités</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td style="padding:10px;border:1px solid var(--color-border);"><strong>B1</strong></td>
+                    <td style="padding:10px;border:1px solid var(--color-border);">Cours (abo)</td>
+                    <td style="padding:10px;border:1px solid var(--color-border);">Contenu ← | Card →</td>
+                    <td style="padding:10px;border:1px solid var(--color-border);">Rejoindre l'Académie →</td>
+                    <td style="padding:10px;border:1px solid var(--color-border);">Card blanche avec illustration</td>
+                    <td style="padding:10px;border:1px solid var(--color-border);">Tags contenus du cours (gauche), card plateforme (droite), ★, prix dans card</td>
+                </tr>
+                <tr>
+                    <td style="padding:10px;border:1px solid var(--color-border);"><strong>B1bis</strong></td>
+                    <td style="padding:10px;border:1px solid var(--color-border);">Support (abo)</td>
+                    <td style="padding:10px;border:1px solid var(--color-border);">Contenu ← | Card →</td>
+                    <td style="padding:10px;border:1px solid var(--color-border);">Rejoindre l'Académie →</td>
+                    <td style="padding:10px;border:1px solid var(--color-border);">Card avec aperçu du support</td>
+                    <td style="padding:10px;border:1px solid var(--color-border);">Comme B1, contenu adapté au support</td>
+                </tr>
+                <tr>
+                    <td style="padding:10px;border:1px solid var(--color-border);"><strong>B2</strong></td>
+                    <td style="padding:10px;border:1px solid var(--color-border);">Fiche PDF (achat)</td>
+                    <td style="padding:10px;border:1px solid var(--color-border);">Mockup ← | Contenu →</td>
+                    <td style="padding:10px;border:1px solid var(--color-border);">🛒 Acheter — prix</td>
+                    <td style="padding:10px;border:1px solid var(--color-border);">Mockup vertical + 5 thumbs</td>
+                    <td style="padding:10px;border:1px solid var(--color-border);">Tag année seul, auteur, prix dans CTA, specs 2×2, garantie ✅</td>
+                </tr>
+                <tr>
+                    <td style="padding:10px;border:1px solid var(--color-border);"><strong>B3</strong></td>
+                    <td style="padding:10px;border:1px solid var(--color-border);">Pack (achat)</td>
+                    <td style="padding:10px;border:1px solid var(--color-border);">Mockup ← | Contenu →</td>
+                    <td style="padding:10px;border:1px solid var(--color-border);">🛒 Acheter le pack — prix</td>
+                    <td style="padding:10px;border:1px solid var(--color-border);">Mockup + badge promo + grid 4×2</td>
+                    <td style="padding:10px;border:1px solid var(--color-border);">Tag année seul, badge promo vert, prix dans CTA, économie, specs, garantie ✅</td>
+                </tr>
+                <tr>
+                    <td style="padding:10px;border:1px solid var(--color-border);"><strong>B4</strong></td>
+                    <td style="padding:10px;border:1px solid var(--color-border);">Manuel (achat)</td>
+                    <td style="padding:10px;border:1px solid var(--color-border);">Mockup ← | Contenu →</td>
+                    <td style="padding:10px;border:1px solid var(--color-border);">Acheter le manuel</td>
+                    <td style="padding:10px;border:1px solid var(--color-border);">Mockup vertical + badge pages</td>
+                    <td style="padding:10px;border:1px solid var(--color-border);">Auteur (avatar), features ✓, prix barré, pas de garantie encadrée</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div style="background:rgba(124,58,237,0.05);border:1px solid rgba(124,58,237,0.2);border-radius:var(--radius-lg);padding:var(--space-md);margin-top:var(--space-lg);">
+            <p style="font-weight:600;margin-bottom:8px;">🔑 Logique de différenciation</p>
+            <table style="width:100%;font-size:13px;border-collapse:collapse;margin-top:8px;">
+                <tr>
+                    <td style="padding:8px;border-bottom:1px solid var(--color-border);width:25%;"></td>
+                    <td style="padding:8px;border-bottom:1px solid var(--color-border);font-weight:600;">Abonnement (B1, B1bis)</td>
+                    <td style="padding:8px;border-bottom:1px solid var(--color-border);font-weight:600;">Achat unitaire (B2, B3, B4)</td>
+                </tr>
+                <tr>
+                    <td style="padding:8px;border-bottom:1px solid var(--color-border);color:var(--color-text-muted);">Layout</td>
+                    <td style="padding:8px;border-bottom:1px solid var(--color-border);">Contenu ← | Card →</td>
+                    <td style="padding:8px;border-bottom:1px solid var(--color-border);">Mockup ← | Contenu → (inversé)</td>
+                </tr>
+                <tr>
+                    <td style="padding:8px;border-bottom:1px solid var(--color-border);color:var(--color-text-muted);">Prix</td>
+                    <td style="padding:8px;border-bottom:1px solid var(--color-border);">Dans la card (29€/mois)</td>
+                    <td style="padding:8px;border-bottom:1px solid var(--color-border);">Dans le contenu (encadré, noir)</td>
+                </tr>
+                <tr>
+                    <td style="padding:8px;border-bottom:1px solid var(--color-border);color:var(--color-text-muted);">CTA</td>
+                    <td style="padding:8px;border-bottom:1px solid var(--color-border);">Rejoindre l'Académie</td>
+                    <td style="padding:8px;border-bottom:1px solid var(--color-border);">🛒 Acheter — prix</td>
+                </tr>
+                <tr>
+                    <td style="padding:8px;border-bottom:1px solid var(--color-border);color:var(--color-text-muted);">Garantie</td>
+                    <td style="padding:8px;border-bottom:1px solid var(--color-border);">Non (sans engagement)</td>
+                    <td style="padding:8px;border-bottom:1px solid var(--color-border);">Oui sur B2/B3 (fiches PDF)</td>
+                </tr>
+                <tr>
+                    <td style="padding:8px;color:var(--color-text-muted);">Visuel</td>
+                    <td style="padding:8px;">Card blanche avec aperçu</td>
+                    <td style="padding:8px;">Mockup produit + miniatures</td>
+                </tr>
+            </table>
+        </div>
+    </section>
+</div>
+</body>
+</html>

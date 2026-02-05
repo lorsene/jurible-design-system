@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Outils complémentaires — Jurible DS</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        /* ===== DESIGN SYSTEM TOKENS ===== */
+        :root {
+            --color-primary: #B0001D;
+            --color-secondary: #7C3AED;
+            --color-black: #1A1A1A;
+            --color-white: #FFFFFF;
+            --color-gray-50: #F9FAFB;
+            --color-gray-100: #F3F4F6;
+            --color-gray-200: #E5E7EB;
+            --color-gray-400: #9CA3AF;
+            --color-gray-600: #4B5563;
+            --color-success: #10B981;
+            --color-success-light: #ECFDF5;
+            --color-success-dark: #065F46;
+            --color-secondary-light: #EDE9FE;
+            --color-secondary-dark: #5B21B6;
+            --gradient-primary: linear-gradient(135deg, #B0001D 0%, #7C3AED 100%);
+            --space-xs: 8px;
+            --space-sm: 16px;
+            --space-md: 24px;
+            --space-lg: 32px;
+            --space-xl: 48px;
+            --radius-sm: 6px;
+            --radius-md: 8px;
+            --radius-lg: 12px;
+            --radius-xl: 16px;
+            --radius-full: 9999px;
+            --shadow-sm: 0 1px 3px rgba(0,0,0,0.1), 0 1px 2px rgba(0,0,0,0.06);
+            --shadow-md: 0 4px 6px rgba(0,0,0,0.1), 0 2px 4px rgba(0,0,0,0.06);
+            --shadow-lg: 0 10px 15px rgba(0,0,0,0.1), 0 4px 6px rgba(0,0,0,0.05);
+            --shadow-primary: 0 4px 14px rgba(124, 58, 237, 0.3);
+            --transition: all 150ms ease;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: var(--color-gray-100);
+            padding: var(--space-lg);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: var(--space-xl);
+        }
+
+        /* ===== PREVIEW LABELS ===== */
+        .preview-label {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: var(--color-secondary);
+            color: white;
+            padding: 8px 16px;
+            border-radius: var(--radius-full);
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: var(--space-md);
+        }
+
+        .preview-label--mobile {
+            background: var(--color-primary);
+        }
+
+        .preview-section {
+            width: 100%;
+            max-width: 1100px;
+        }
+
+        /* ===== SECTION OUTILS ===== */
+        .outils-section {
+            padding: var(--space-xl) var(--space-lg);
+            text-align: center;
+        }
+
+        .outils-section__badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: var(--color-success-light);
+            color: var(--color-success-dark);
+            font-size: 13px;
+            font-weight: 600;
+            padding: 6px 16px;
+            border-radius: var(--radius-full);
+            margin-bottom: var(--space-md);
+        }
+
+        .outils-section__badge svg {
+            width: 16px;
+            height: 16px;
+        }
+
+        .outils-section__title {
+            font-size: 36px;
+            font-weight: 800;
+            color: var(--color-black);
+            margin-bottom: var(--space-xl);
+            letter-spacing: -0.5px;
+        }
+
+        .outils-section__title em {
+            font-style: normal;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* ===== CARDS GRID ===== */
+        .outils-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: var(--space-md);
+            text-align: left;
+        }
+
+        /* ===== CARD ===== */
+        .outil-card {
+            background: var(--color-white);
+            border: 1px solid var(--color-gray-200);
+            border-radius: var(--radius-xl);
+            padding: var(--space-lg);
+            display: flex;
+            flex-direction: column;
+            transition: var(--transition);
+        }
+
+        .outil-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-md);
+        }
+
+        /* Card mise en avant (IA) */
+        .outil-card--highlight {
+            border: 2px solid transparent;
+            background:
+                linear-gradient(white, white) padding-box,
+                linear-gradient(135deg, var(--color-secondary-light), var(--color-secondary)) border-box;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .outil-card--highlight:hover {
+            box-shadow: var(--shadow-lg), var(--shadow-primary);
+        }
+
+        /* Icon */
+        .outil-card__icon {
+            width: 52px;
+            height: 52px;
+            border-radius: var(--radius-lg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: var(--space-md);
+            font-size: 26px;
+        }
+
+        .outil-card__icon--red {
+            background: var(--color-gray-100);
+        }
+
+        .outil-card__icon--purple {
+            background: var(--color-gray-100);
+        }
+
+        /* Title */
+        .outil-card__title {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--color-black);
+            margin-bottom: var(--space-xs);
+            line-height: 1.3;
+        }
+
+        /* Description */
+        .outil-card__desc {
+            font-size: 14px;
+            color: var(--color-gray-600);
+            line-height: 1.6;
+            margin-bottom: var(--space-sm);
+            flex-grow: 1;
+        }
+
+        /* Price */
+        .outil-card__price {
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: var(--space-sm);
+        }
+
+        .outil-card__price--red {
+            color: var(--color-primary);
+        }
+
+        .outil-card__price--purple {
+            color: var(--color-secondary);
+        }
+
+        /* CTA */
+        .outil-card__cta {
+            display: block;
+            width: 100%;
+            padding: 14px var(--space-md);
+            font-family: 'Poppins', sans-serif;
+            font-size: 14px;
+            font-weight: 600;
+            border-radius: var(--radius-md);
+            cursor: pointer;
+            transition: var(--transition);
+            text-align: center;
+            text-decoration: none;
+        }
+
+        .outil-card__cta--outline {
+            background: var(--color-white);
+            color: var(--color-primary);
+            border: 1.5px solid var(--color-primary);
+        }
+
+        .outil-card__cta--outline:hover {
+            background: #FEF2F2;
+        }
+
+        .outil-card__cta--filled {
+            background: var(--color-secondary);
+            color: var(--color-white);
+            border: none;
+        }
+
+        .outil-card__cta--filled:hover {
+            background: var(--color-secondary-dark);
+            transform: translateY(-1px);
+        }
+
+        /* ===== MOBILE FRAME ===== */
+        .mobile-preview-wrapper {
+            display: flex;
+            justify-content: center;
+            padding: var(--space-lg);
+        }
+
+        .mobile-frame {
+            width: 375px;
+            background: var(--color-black);
+            border-radius: 40px;
+            padding: 12px;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.25);
+        }
+
+        .mobile-frame__notch {
+            width: 150px;
+            height: 30px;
+            background: var(--color-black);
+            border-radius: 0 0 20px 20px;
+            margin: 0 auto 10px;
+            position: relative;
+            top: -2px;
+        }
+
+        .mobile-frame__screen {
+            background: var(--color-gray-100);
+            border-radius: 28px;
+            overflow: hidden;
+            padding: 16px;
+        }
+
+        /* Mobile overrides */
+        .mobile-frame .outils-section {
+            padding: var(--space-md) var(--space-xs);
+        }
+
+        .mobile-frame .outils-section__badge {
+            font-size: 11px;
+            padding: 4px 12px;
+            margin-bottom: var(--space-sm);
+        }
+
+        .mobile-frame .outils-section__badge svg {
+            width: 13px;
+            height: 13px;
+        }
+
+        .mobile-frame .outils-section__title {
+            font-size: 20px;
+            margin-bottom: var(--space-md);
+        }
+
+        .mobile-frame .outils-grid {
+            grid-template-columns: 1fr;
+            gap: var(--space-sm);
+        }
+
+        .mobile-frame .outil-card {
+            padding: var(--space-md);
+            border-radius: var(--radius-lg);
+        }
+
+        .mobile-frame .outil-card__icon {
+            width: 42px;
+            height: 42px;
+            border-radius: var(--radius-md);
+            margin-bottom: var(--space-sm);
+            font-size: 22px;
+        }
+
+        .mobile-frame .outil-card__title {
+            font-size: 15px;
+        }
+
+        .mobile-frame .outil-card__desc {
+            font-size: 12px;
+            margin-bottom: 10px;
+        }
+
+        .mobile-frame .outil-card__price {
+            font-size: 12px;
+            margin-bottom: 10px;
+        }
+
+        .mobile-frame .outil-card__cta {
+            padding: 10px var(--space-sm);
+            font-size: 12px;
+        }
+
+        /* ===== RESPONSIVE (pour usage production) ===== */
+        @media (max-width: 900px) {
+            .outils-section__title {
+                font-size: 28px;
+            }
+
+            .outils-grid {
+                grid-template-columns: 1fr;
+                gap: var(--space-sm);
+                max-width: 480px;
+                margin: 0 auto;
+            }
+        }
+
+        @media (max-width: 540px) {
+            .outils-section {
+                padding: var(--space-lg) var(--space-sm);
+            }
+
+            .outils-section__title {
+                font-size: 22px;
+                margin-bottom: var(--space-lg);
+            }
+
+            .outil-card {
+                padding: var(--space-md);
+            }
+
+            .outil-card__title {
+                font-size: 16px;
+            }
+
+            .outil-card__desc {
+                font-size: 13px;
+            }
+
+            .outil-card__cta {
+                padding: 12px var(--space-sm);
+                font-size: 13px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ===== VERSION DESKTOP ===== -->
+    <div class="preview-section">
+        <span class="preview-label">💻 Version Desktop (1100px)</span>
+
+        <div class="outils-section">
+            <span class="outils-section__badge">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+                Compléments
+            </span>
+
+            <h2 class="outils-section__title">Outils complémentaires pour cette <em>matière</em></h2>
+
+            <div class="outils-grid">
+                <!-- Card 1 : Fiches PDF -->
+                <div class="outil-card">
+                    <div class="outil-card__icon outil-card__icon--red">📄</div>
+                    <h3 class="outil-card__title">Fiches PDF Droit constitutionnel</h3>
+                    <p class="outil-card__desc">Fiches téléchargeables et imprimables (21 fiches, 65 pages). Parfait pour réviser hors ligne.</p>
+                    <p class="outil-card__price outil-card__price--red">19€ seul ou inclus dans Pack L1 (135€)</p>
+                    <a href="#" class="outil-card__cta outil-card__cta--outline">Acheter les fiches PDF →</a>
+                </div>
+
+                <!-- Card 2 : Générateurs IA (highlight) -->
+                <div class="outil-card outil-card--highlight">
+                    <div class="outil-card__icon outil-card__icon--purple">🤖</div>
+                    <h3 class="outil-card__title">Générateurs IA pour le Droit</h3>
+                    <p class="outil-card__desc">Générez des dissertations, commentaires et cas pratiques. Entraînez-vous avec des sujets sur mesure.</p>
+                    <p class="outil-card__price outil-card__price--purple">Crédits IA à partir de 5€</p>
+                    <a href="#" class="outil-card__cta outil-card__cta--filled">Découvrir la Suite IA →</a>
+                </div>
+
+                <!-- Card 3 : Manuel Méthodologie -->
+                <div class="outil-card">
+                    <div class="outil-card__icon outil-card__icon--red">📖</div>
+                    <h3 class="outil-card__title">Manuel de Méthodologie</h3>
+                    <p class="outil-card__desc">Maîtrisez tous les exercices juridiques : fiche d'arrêt, commentaire, dissertation, cas pratique.</p>
+                    <p class="outil-card__price outil-card__price--red">29€ seul ou inclus dans l'abonnement</p>
+                    <a href="#" class="outil-card__cta outil-card__cta--outline">Acheter le manuel →</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== VERSION MOBILE ===== -->
+    <div class="preview-section" style="display:flex;flex-direction:column;align-items:center;">
+        <span class="preview-label preview-label--mobile">📱 Version Mobile (375px)</span>
+
+        <div class="mobile-preview-wrapper">
+            <div class="mobile-frame">
+                <div class="mobile-frame__notch"></div>
+                <div class="mobile-frame__screen">
+
+                    <div class="outils-section">
+                        <span class="outils-section__badge">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+                            Compléments
+                        </span>
+
+                        <h2 class="outils-section__title">Outils complémentaires pour cette <em>matière</em></h2>
+
+                        <div class="outils-grid">
+                            <!-- Card 1 -->
+                            <div class="outil-card">
+                                <div class="outil-card__icon outil-card__icon--red">📄</div>
+                                <h3 class="outil-card__title">Fiches PDF Droit constitutionnel</h3>
+                                <p class="outil-card__desc">Fiches téléchargeables et imprimables (21 fiches, 65 pages).</p>
+                                <p class="outil-card__price outil-card__price--red">19€ seul ou inclus dans Pack L1 (135€)</p>
+                                <a href="#" class="outil-card__cta outil-card__cta--outline">Acheter les fiches PDF →</a>
+                            </div>
+
+                            <!-- Card 2 (highlight) -->
+                            <div class="outil-card outil-card--highlight">
+                                <div class="outil-card__icon outil-card__icon--purple">🤖</div>
+                                <h3 class="outil-card__title">Générateurs IA pour le Droit</h3>
+                                <p class="outil-card__desc">Générez des dissertations, commentaires et cas pratiques sur mesure.</p>
+                                <p class="outil-card__price outil-card__price--purple">Crédits IA à partir de 5€</p>
+                                <a href="#" class="outil-card__cta outil-card__cta--filled">Découvrir la Suite IA →</a>
+                            </div>
+
+                            <!-- Card 3 -->
+                            <div class="outil-card">
+                                <div class="outil-card__icon outil-card__icon--red">📖</div>
+                                <h3 class="outil-card__title">Manuel de Méthodologie</h3>
+                                <p class="outil-card__desc">Maîtrisez tous les exercices juridiques : fiche d'arrêt, commentaire, dissertation, cas pratique.</p>
+                                <p class="outil-card__price outil-card__price--red">29€ seul ou inclus dans l'abonnement</p>
+                                <a href="#" class="outil-card__cta outil-card__cta--outline">Acheter le manuel →</a>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

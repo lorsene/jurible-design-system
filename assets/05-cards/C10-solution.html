@@ -1,0 +1,981 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cards Solution — Uniformisées</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* ===== DESIGN SYSTEM TOKENS ===== */
+        :root {
+            --color-primary: #B0001D;
+            --color-secondary: #7C3AED;
+            --color-black: #1A1A1A;
+            --color-white: #FFFFFF;
+            --color-gray-50: #F9FAFB;
+            --color-gray-100: #F3F4F6;
+            --color-gray-200: #E5E7EB;
+            --color-gray-400: #9CA3AF;
+            --color-gray-600: #4B5563;
+            --color-success: #10B981;
+            --color-success-light: #ECFDF5;
+            --color-success-dark: #065F46;
+            --color-secondary-light: #EDE9FE;
+            --color-secondary-dark: #5B21B6;
+            --gradient-primary: linear-gradient(135deg, #B0001D 0%, #7C3AED 100%);
+            --space-xs: 8px;
+            --space-sm: 16px;
+            --space-md: 24px;
+            --space-lg: 32px;
+            --space-xl: 48px;
+            --space-2xl: 64px;
+            --radius-sm: 6px;
+            --radius-md: 8px;
+            --radius-lg: 12px;
+            --radius-xl: 16px;
+            --radius-full: 9999px;
+            --shadow-sm: 0 1px 3px rgba(0,0,0,0.1), 0 1px 2px rgba(0,0,0,0.06);
+            --shadow-md: 0 4px 6px rgba(0,0,0,0.1), 0 2px 4px rgba(0,0,0,0.06);
+            --transition: all 150ms ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: var(--color-gray-100);
+            padding: var(--space-xl);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--color-black);
+            margin-bottom: var(--space-xs);
+        }
+
+        .subtitle {
+            color: var(--color-gray-400);
+            margin-bottom: var(--space-xl);
+        }
+
+        .section {
+            margin-bottom: var(--space-2xl);
+        }
+
+        .section-label {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: var(--color-gray-200);
+            color: var(--color-gray-600);
+            padding: 6px 14px;
+            border-radius: var(--radius-full);
+            font-size: 13px;
+            font-weight: 500;
+            margin-bottom: var(--space-md);
+        }
+
+        .page-label {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: var(--color-secondary);
+            color: var(--color-white);
+            padding: 6px 14px;
+            border-radius: var(--radius-full);
+            font-size: 12px;
+            font-weight: 600;
+            margin-bottom: var(--space-md);
+        }
+
+        /* ===== SECTION SOLUTION (UNIFORMISÉE) ===== */
+        .solution-section {
+            background: var(--color-white);
+            border-radius: var(--radius-xl);
+            padding: var(--space-xl);
+            box-shadow: var(--shadow-sm);
+        }
+
+        /* Header section */
+        .solution-section__header {
+            text-align: center;
+            margin-bottom: var(--space-lg);
+        }
+
+        /* Badge UNIFORMISÉ : toujours VERT */
+        .solution-section__badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 6px 14px;
+            border-radius: var(--radius-full);
+            font-size: 12px;
+            font-weight: 600;
+            margin-bottom: var(--space-sm);
+            background: var(--color-success-light);
+            color: var(--color-success-dark);
+        }
+
+        /* Titre section */
+        .solution-section__title {
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--color-black);
+            margin-bottom: var(--space-sm);
+            line-height: 1.3;
+        }
+
+        /* Mot-clé en gradient */
+        .solution-section__title .highlight {
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* Sous-titre */
+        .solution-section__subtitle {
+            font-size: 15px;
+            color: var(--color-gray-600);
+            max-width: 700px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+        /* ===== GRILLE 6 SOLUTIONS (Pages longues) - Layout horizontal ===== */
+        .solution-grid-6 {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: var(--space-md);
+        }
+
+        .solution-card-6 {
+            background: var(--color-white);
+            border: 1px solid var(--color-gray-200);
+            border-radius: var(--radius-lg);
+            padding: var(--space-md);
+            display: flex;
+            align-items: flex-start;
+            gap: var(--space-md);
+            transition: var(--transition);
+        }
+
+        .solution-card-6:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .solution-card-6 .solution-card__icon {
+            width: 48px;
+            height: 48px;
+            min-width: 48px;
+            background: var(--color-gray-100);
+            border-radius: var(--radius-md);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+        }
+
+        .solution-card-6 .solution-card__content {
+            flex: 1;
+        }
+
+        .solution-card-6 .solution-card__title {
+            font-size: 15px;
+            font-weight: 600;
+            color: var(--color-black);
+            margin-bottom: 4px;
+        }
+
+        .solution-card-6 .solution-card__description {
+            font-size: 13px;
+            color: var(--color-gray-600);
+            line-height: 1.5;
+        }
+
+        /* ===== GRILLE 4 SOLUTIONS (Pages courtes) - Layout centré ===== */
+        .solution-grid-4 {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: var(--space-md);
+        }
+
+        .solution-card-4 {
+            background: var(--color-white);
+            border: 1px solid var(--color-gray-200);
+            border-radius: var(--radius-lg);
+            padding: var(--space-md);
+            text-align: center;
+            transition: var(--transition);
+        }
+
+        .solution-card-4:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .solution-card-4 .solution-card__icon {
+            width: 56px;
+            height: 56px;
+            background: var(--color-gray-100);
+            border-radius: var(--radius-lg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            margin: 0 auto var(--space-sm);
+        }
+
+        .solution-card-4 .solution-card__title {
+            font-size: 15px;
+            font-weight: 600;
+            color: var(--color-black);
+            margin-bottom: var(--space-xs);
+        }
+
+        .solution-card-4 .solution-card__description {
+            font-size: 13px;
+            color: var(--color-gray-600);
+            line-height: 1.5;
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 1000px) {
+            .solution-grid-6 {
+                grid-template-columns: 1fr;
+            }
+
+            .solution-grid-4 {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 600px) {
+            body {
+                padding: var(--space-sm);
+            }
+
+            .solution-section {
+                padding: var(--space-md);
+            }
+
+            .solution-grid-4 {
+                grid-template-columns: 1fr;
+            }
+
+            .solution-section__title {
+                font-size: 22px;
+            }
+        }
+
+        /* ===== SÉPARATEUR EXEMPLES ===== */
+        .examples-divider {
+            text-align: center;
+            margin: var(--space-2xl) 0;
+            padding: var(--space-lg) 0;
+            border-top: 2px solid var(--color-gray-200);
+            border-bottom: 2px solid var(--color-gray-200);
+        }
+
+        .examples-divider h2 {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--color-black);
+            margin-bottom: var(--space-xs);
+        }
+
+        .examples-divider p {
+            color: var(--color-gray-400);
+        }
+
+        /* ===== DOCUMENTATION ===== */
+        .docs {
+            margin-top: var(--space-xl);
+            padding-top: var(--space-xl);
+            border-top: 1px solid var(--color-gray-200);
+        }
+
+        .docs h2 {
+            font-size: 20px;
+            font-weight: 600;
+            color: var(--color-black);
+            margin-bottom: var(--space-md);
+        }
+
+        .docs h3 {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--color-black);
+            margin: var(--space-md) 0 var(--space-sm);
+        }
+
+        .specs-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 13px;
+            background: var(--color-white);
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            box-shadow: var(--shadow-sm);
+            margin-bottom: var(--space-md);
+        }
+
+        .specs-table th {
+            background: var(--color-gray-100);
+            font-weight: 600;
+            text-align: left;
+            padding: 12px 16px;
+            color: var(--color-black);
+        }
+
+        .specs-table td {
+            padding: 12px 16px;
+            border-bottom: 1px solid var(--color-gray-200);
+        }
+
+        .specs-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .checklist {
+            list-style: none;
+            padding: 0;
+        }
+
+        .checklist li {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 0;
+            font-size: 14px;
+            color: var(--color-gray-600);
+        }
+
+        .checklist li::before {
+            content: '✓';
+            color: var(--color-success);
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Cards Solution — Uniformisées</h1>
+        <p class="subtitle">2 variantes (6 et 4 solutions) + exemples par page</p>
+
+        <!-- ═══════════════════════════════════════════════════════════════ -->
+        <!-- VARIANTE 6 SOLUTIONS -->
+        <!-- ═══════════════════════════════════════════════════════════════ -->
+        <div class="section">
+            <span class="section-label">📋 Variante 6 solutions — Pages longues (Académie, Prépa)</span>
+
+            <div class="solution-section">
+                <div class="solution-section__header">
+                    <span class="solution-section__badge">✨ La solution</span>
+                    <h2 class="solution-section__title">L'Académie a été conçue pour <span class="highlight">toi</span></h2>
+                    <p class="solution-section__subtitle">Nous avons créé l'Académie Jurible pour aider les étudiants en droit à réussir facilement. Une plateforme complète avec tout ce qu'il te faut pour comprendre, apprendre et réussir.</p>
+                </div>
+
+                <div class="solution-grid-6">
+                    <div class="solution-card-6">
+                        <div class="solution-card__icon">📱</div>
+                        <div class="solution-card__content">
+                            <h3 class="solution-card__title">Toutes tes ressources à portée de clic</h3>
+                            <p class="solution-card__description">Cours vidéo, fiches, annales, QCM... Tout est centralisé dans une seule plateforme accessible 24h/24.</p>
+                        </div>
+                    </div>
+
+                    <div class="solution-card-6">
+                        <div class="solution-card__icon">⏰</div>
+                        <div class="solution-card__content">
+                            <h3 class="solution-card__title">Libère du temps pour toi</h3>
+                            <p class="solution-card__description">Étudie quand et où tu veux. Dégage plus de temps pour tes loisirs.</p>
+                        </div>
+                    </div>
+
+                    <div class="solution-card-6">
+                        <div class="solution-card__icon">✅</div>
+                        <div class="solution-card__content">
+                            <h3 class="solution-card__title">Réduis le risque d'échec</h3>
+                            <p class="solution-card__description">Maximise tes chances de réussite avec toutes les ressources nécessaires.</p>
+                        </div>
+                    </div>
+
+                    <div class="solution-card-6">
+                        <div class="solution-card__icon">⭐</div>
+                        <div class="solution-card__content">
+                            <h3 class="solution-card__title">Maîtrise les points essentiels</h3>
+                            <p class="solution-card__description">Nos cours ciblent les notions qui tombent vraiment aux examens.</p>
+                        </div>
+                    </div>
+
+                    <div class="solution-card-6">
+                        <div class="solution-card__icon">📖</div>
+                        <div class="solution-card__content">
+                            <h3 class="solution-card__title">Améliore ta méthodologie</h3>
+                            <p class="solution-card__description">Accède à des cours de méthodo par des pros qui connaissent les attentes des correcteurs.</p>
+                        </div>
+                    </div>
+
+                    <div class="solution-card-6">
+                        <div class="solution-card__icon">👥</div>
+                        <div class="solution-card__content">
+                            <h3 class="solution-card__title">Tu n'es plus seul</h3>
+                            <p class="solution-card__description">Rejoins 25 000 étudiants motivés et bénéficie du soutien de notre équipe.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ═══════════════════════════════════════════════════════════════ -->
+        <!-- VARIANTE 4 SOLUTIONS -->
+        <!-- ═══════════════════════════════════════════════════════════════ -->
+        <div class="section">
+            <span class="section-label">⚡ Variante 4 solutions — Pages courtes (Homepage, Minos, Fiches...)</span>
+
+            <div class="solution-section">
+                <div class="solution-section__header">
+                    <span class="solution-section__badge">✨ La solution</span>
+                    <h2 class="solution-section__title">Un cours pensé pour votre <span class="highlight">réussite</span></h2>
+                    <p class="solution-section__subtitle">Tout ce dont vous avez besoin pour comprendre, pratiquer et réussir vos examens.</p>
+                </div>
+
+                <div class="solution-grid-4">
+                    <div class="solution-card-4">
+                        <div class="solution-card__icon">📱</div>
+                        <h3 class="solution-card__title">Apprenez à votre rythme</h3>
+                        <p class="solution-card__description">Vidéos claires et supports variés pour comprendre et mémoriser facilement.</p>
+                    </div>
+
+                    <div class="solution-card-4">
+                        <div class="solution-card__icon">✍️</div>
+                        <h3 class="solution-card__title">Exercez-vous régulièrement</h3>
+                        <p class="solution-card__description">Exercices corrigés, flashcards et QCM pour tester vos connaissances.</p>
+                    </div>
+
+                    <div class="solution-card-4">
+                        <div class="solution-card__icon">🎯</div>
+                        <h3 class="solution-card__title">Préparez vos examens</h3>
+                        <p class="solution-card__description">Contenus conçus par des enseignants pour réussir vos TD et partiels.</p>
+                    </div>
+
+                    <div class="solution-card-4">
+                        <div class="solution-card__icon">🏆</div>
+                        <h3 class="solution-card__title">Gagnez des points</h3>
+                        <p class="solution-card__description">Prenez de l'avance sur les autres étudiants dès les prochains partiels.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ═══════════════════════════════════════════════════════════════ -->
+        <!-- EXEMPLES PAR PAGE -->
+        <!-- ═══════════════════════════════════════════════════════════════ -->
+        <div class="examples-divider">
+            <h2>📄 Exemples par page</h2>
+            <p>Contenu spécifique pour chaque landing page Jurible</p>
+        </div>
+
+        <!-- HOMEPAGE -->
+        <div class="section">
+            <span class="page-label">🏠 Homepage</span>
+
+            <div class="solution-section">
+                <div class="solution-section__header">
+                    <span class="solution-section__badge">✨ La solution</span>
+                    <h2 class="solution-section__title">Jurible s'adapte à <span class="highlight">votre profil</span></h2>
+                    <p class="solution-section__subtitle">Que vous débutiez ou que vous soyez en fin de licence, nous vous accompagnons.</p>
+                </div>
+
+                <div class="solution-grid-4">
+                    <div class="solution-card-4">
+                        <div class="solution-card__icon">🎒</div>
+                        <h3 class="solution-card__title">Étudiants L1</h3>
+                        <p class="solution-card__description">Découvrez le droit avec des cours clairs et une méthodologie solide dès le départ.</p>
+                    </div>
+                    <div class="solution-card-4">
+                        <div class="solution-card__icon">📚</div>
+                        <h3 class="solution-card__title">L2 - L3</h3>
+                        <p class="solution-card__description">Approfondissez vos connaissances et préparez efficacement vos partiels.</p>
+                    </div>
+                    <div class="solution-card-4">
+                        <div class="solution-card__icon">🔄</div>
+                        <h3 class="solution-card__title">Reprise d'études</h3>
+                        <p class="solution-card__description">Remettez-vous à niveau à votre rythme avec des contenus accessibles 24h/24.</p>
+                    </div>
+                    <div class="solution-card-4">
+                        <div class="solution-card__icon">👨‍👩‍👧</div>
+                        <h3 class="solution-card__title">Parents</h3>
+                        <p class="solution-card__description">Offrez les meilleures ressources à votre enfant pour maximiser ses chances.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ACADÉMIE -->
+        <div class="section">
+            <span class="page-label">🎓 Académie</span>
+
+            <div class="solution-section">
+                <div class="solution-section__header">
+                    <span class="solution-section__badge">✨ La solution</span>
+                    <h2 class="solution-section__title">L'Académie a été conçue pour <span class="highlight">toi</span></h2>
+                    <p class="solution-section__subtitle">Une plateforme complète avec tout ce qu'il te faut pour comprendre, apprendre et réussir.</p>
+                </div>
+
+                <div class="solution-grid-6">
+                    <div class="solution-card-6">
+                        <div class="solution-card__icon">📱</div>
+                        <div class="solution-card__content">
+                            <h3 class="solution-card__title">Toutes tes ressources à portée de clic</h3>
+                            <p class="solution-card__description">Cours vidéo, fiches, annales, QCM... Tout est centralisé dans une seule plateforme accessible 24h/24.</p>
+                        </div>
+                    </div>
+                    <div class="solution-card-6">
+                        <div class="solution-card__icon">⏰</div>
+                        <div class="solution-card__content">
+                            <h3 class="solution-card__title">Libère du temps pour toi</h3>
+                            <p class="solution-card__description">Étudie quand et où tu veux. Dégage plus de temps pour tes loisirs.</p>
+                        </div>
+                    </div>
+                    <div class="solution-card-6">
+                        <div class="solution-card__icon">✅</div>
+                        <div class="solution-card__content">
+                            <h3 class="solution-card__title">Réduis le risque d'échec</h3>
+                            <p class="solution-card__description">Maximise tes chances de réussite avec toutes les ressources nécessaires.</p>
+                        </div>
+                    </div>
+                    <div class="solution-card-6">
+                        <div class="solution-card__icon">⭐</div>
+                        <div class="solution-card__content">
+                            <h3 class="solution-card__title">Maîtrise les points essentiels</h3>
+                            <p class="solution-card__description">Nos cours ciblent les notions qui tombent vraiment aux examens.</p>
+                        </div>
+                    </div>
+                    <div class="solution-card-6">
+                        <div class="solution-card__icon">📖</div>
+                        <div class="solution-card__content">
+                            <h3 class="solution-card__title">Améliore ta méthodologie</h3>
+                            <p class="solution-card__description">Accède à des cours de méthodo par des pros qui connaissent les attentes des correcteurs.</p>
+                        </div>
+                    </div>
+                    <div class="solution-card-6">
+                        <div class="solution-card__icon">👥</div>
+                        <div class="solution-card__content">
+                            <h3 class="solution-card__title">Tu n'es plus seul</h3>
+                            <p class="solution-card__description">Rejoins 25 000 étudiants motivés et bénéficie du soutien de notre équipe.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- MINOS (Suite IA) -->
+        <div class="section">
+            <span class="page-label">🤖 Minos (Suite IA)</span>
+
+            <div class="solution-section">
+                <div class="solution-section__header">
+                    <span class="solution-section__badge">✨ La solution</span>
+                    <h2 class="solution-section__title">Pourquoi choisir notre <span class="highlight">générateur</span> ?</h2>
+                    <p class="solution-section__subtitle">Une technologie de pointe au service de votre réussite.</p>
+                </div>
+
+                <div class="solution-grid-6">
+                    <div class="solution-card-6">
+                        <div class="solution-card__icon">⚡</div>
+                        <div class="solution-card__content">
+                            <h3 class="solution-card__title">Génération rapide</h3>
+                            <p class="solution-card__description">Obtenez votre fiche d'arrêt complète en moins de 10 secondes. Notre IA analyse instantanément le texte.</p>
+                        </div>
+                    </div>
+                    <div class="solution-card-6">
+                        <div class="solution-card__icon">✅</div>
+                        <div class="solution-card__content">
+                            <h3 class="solution-card__title">Structure parfaite</h3>
+                            <p class="solution-card__description">Respecte à 100% la méthodologie attendue en fac de droit. Créé et validé par des enseignants.</p>
+                        </div>
+                    </div>
+                    <div class="solution-card-6">
+                        <div class="solution-card__icon">🎓</div>
+                        <div class="solution-card__content">
+                            <h3 class="solution-card__title">IA spécialisée droit</h3>
+                            <p class="solution-card__description">Notre IA est spécialement entraînée sur le corpus juridique français. Analyse contextuelle et nuancée.</p>
+                        </div>
+                    </div>
+                    <div class="solution-card-6">
+                        <div class="solution-card__icon">📱</div>
+                        <div class="solution-card__content">
+                            <h3 class="solution-card__title">Accessible partout</h3>
+                            <p class="solution-card__description">Interface responsive optimisée pour tous vos appareils. Travaillez depuis votre ordinateur ou smartphone.</p>
+                        </div>
+                    </div>
+                    <div class="solution-card-6">
+                        <div class="solution-card__icon">💾</div>
+                        <div class="solution-card__content">
+                            <h3 class="solution-card__title">Sauvegarde automatique</h3>
+                            <p class="solution-card__description">Toutes vos fiches sont automatiquement sauvegardées et organisées par matière.</p>
+                        </div>
+                    </div>
+                    <div class="solution-card-6">
+                        <div class="solution-card__icon">🔒</div>
+                        <div class="solution-card__content">
+                            <h3 class="solution-card__title">Confidentialité garantie</h3>
+                            <p class="solution-card__description">Hébergement français sécurisé et conformité RGPD respectée. Vos données restent privées.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- FICHES PDF (Page générale) -->
+        <div class="section">
+            <span class="page-label">📄 Fiches PDF (Page générale)</span>
+
+            <div class="solution-section">
+                <div class="solution-section__header">
+                    <span class="solution-section__badge">✨ La solution</span>
+                    <h2 class="solution-section__title">Révisez plus efficacement avec <span class="highlight">moins d'efforts</span></h2>
+                    <p class="solution-section__subtitle">Des fiches prêtes à imprimer, conçues pour faciliter la compréhension et la mémorisation.</p>
+                </div>
+
+                <div class="solution-grid-4">
+                    <div class="solution-card-4">
+                        <div class="solution-card__icon">⚡</div>
+                        <h3 class="solution-card__title">Apprenez plus vite</h3>
+                        <p class="solution-card__description">Des fiches conçues pour faciliter la compréhension et la mémorisation.</p>
+                    </div>
+                    <div class="solution-card-4">
+                        <div class="solution-card__icon">💰</div>
+                        <h3 class="solution-card__title">Économisez du temps</h3>
+                        <p class="solution-card__description">Un cours synthétisé pour le prix d'une place de cinéma. Des heures économisées.</p>
+                    </div>
+                    <div class="solution-card-4">
+                        <div class="solution-card__icon">🎯</div>
+                        <h3 class="solution-card__title">Gagnez des points</h3>
+                        <p class="solution-card__description">Prenez de l'avance dès les prochains TD grâce à des fiches complètes et à jour.</p>
+                    </div>
+                    <div class="solution-card-4">
+                        <div class="solution-card__icon">📥</div>
+                        <h3 class="solution-card__title">PDF téléchargeable</h3>
+                        <p class="solution-card__description">Imprimez vos fiches et révisez sur papier, sans écran. Accès à vie.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- FICHES MATIÈRE -->
+        <div class="section">
+            <span class="page-label">📄 Fiches par matière (ex: Droit Constitutionnel)</span>
+
+            <div class="solution-section">
+                <div class="solution-section__header">
+                    <span class="solution-section__badge">✨ La solution</span>
+                    <h2 class="solution-section__title">Nos fiches de Droit constitutionnel vous font <span class="highlight">gagner du temps</span></h2>
+                    <p class="solution-section__subtitle">Tout le programme synthétisé par des enseignants en droit.</p>
+                </div>
+
+                <div class="solution-grid-4">
+                    <div class="solution-card-4">
+                        <div class="solution-card__icon">📋</div>
+                        <h3 class="solution-card__title">Programme complet</h3>
+                        <p class="solution-card__description">50 pages couvrant tout le programme officiel de la matière.</p>
+                    </div>
+                    <div class="solution-card-4">
+                        <div class="solution-card__icon">🧠</div>
+                        <h3 class="solution-card__title">5 mindmaps incluses</h3>
+                        <p class="solution-card__description">Visualisez les liens entre les concepts pour mieux mémoriser.</p>
+                    </div>
+                    <div class="solution-card-4">
+                        <div class="solution-card__icon">👨‍🏫</div>
+                        <h3 class="solution-card__title">Par des enseignants</h3>
+                        <p class="solution-card__description">Contenu vérifié et à jour, rédigé par des professionnels du droit.</p>
+                    </div>
+                    <div class="solution-card-4">
+                        <div class="solution-card__icon">🔄</div>
+                        <h3 class="solution-card__title">Mises à jour gratuites</h3>
+                        <p class="solution-card__description">Accès aux nouvelles versions en cas de réforme ou évolution.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- COURS PAR NIVEAU -->
+        <div class="section">
+            <span class="page-label">📚 Cours par niveau (ex: L1 Droit)</span>
+
+            <div class="solution-section">
+                <div class="solution-section__header">
+                    <span class="solution-section__badge">✨ La solution</span>
+                    <h2 class="solution-section__title">Ce que START DROIT vous <span class="highlight">apporte</span></h2>
+                    <p class="solution-section__subtitle">Des connaissances et compétences concrètes pour réussir dès la première année.</p>
+                </div>
+
+                <div class="solution-grid-4">
+                    <div class="solution-card-4">
+                        <div class="solution-card__icon">💬</div>
+                        <h3 class="solution-card__title">Maîtrisez le vocabulaire</h3>
+                        <p class="solution-card__description">Apprenez à parler et penser comme un juriste avant d'arriver en cours.</p>
+                    </div>
+                    <div class="solution-card-4">
+                        <div class="solution-card__icon">✍️</div>
+                        <h3 class="solution-card__title">Pratiquez les exercices</h3>
+                        <p class="solution-card__description">Fiche d'arrêt, dissertation, cas pratique : entraînez-vous avant d'être noté.</p>
+                    </div>
+                    <div class="solution-card-4">
+                        <div class="solution-card__icon">📚</div>
+                        <h3 class="solution-card__title">60% du programme</h3>
+                        <p class="solution-card__description">Abordez votre première année en maîtrisant déjà une grosse partie du programme.</p>
+                    </div>
+                    <div class="solution-card-4">
+                        <div class="solution-card__icon">📅</div>
+                        <h3 class="solution-card__title">Optimisez votre organisation</h3>
+                        <p class="solution-card__description">Prise de notes, planification : maîtrisez les méthodes qui font la différence.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- COURS PAR MATIÈRE -->
+        <div class="section">
+            <span class="page-label">📖 Cours par matière (ex: Droit des Obligations)</span>
+
+            <div class="solution-section">
+                <div class="solution-section__header">
+                    <span class="solution-section__badge">✨ La solution</span>
+                    <h2 class="solution-section__title">Un cours pensé pour votre <span class="highlight">réussite</span></h2>
+                    <p class="solution-section__subtitle">Tout ce dont vous avez besoin pour comprendre, pratiquer et réussir vos examens.</p>
+                </div>
+
+                <div class="solution-grid-4">
+                    <div class="solution-card-4">
+                        <div class="solution-card__icon">📱</div>
+                        <h3 class="solution-card__title">Apprenez à votre rythme</h3>
+                        <p class="solution-card__description">Vidéos claires et supports variés pour comprendre facilement sur PC ou mobile.</p>
+                    </div>
+                    <div class="solution-card-4">
+                        <div class="solution-card__icon">✍️</div>
+                        <h3 class="solution-card__title">Exercez-vous régulièrement</h3>
+                        <p class="solution-card__description">Exercices corrigés, flashcards et QCM pour tester vos connaissances.</p>
+                    </div>
+                    <div class="solution-card-4">
+                        <div class="solution-card__icon">🎯</div>
+                        <h3 class="solution-card__title">Préparez vos examens</h3>
+                        <p class="solution-card__description">Contenus conçus par des enseignants pour réussir vos TD et partiels du premier coup.</p>
+                    </div>
+                    <div class="solution-card-4">
+                        <div class="solution-card__icon">🏆</div>
+                        <h3 class="solution-card__title">Gagnez des points</h3>
+                        <p class="solution-card__description">Prenez de l'avance sur les autres étudiants dès les prochains partiels.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- MANUEL MÉTHODOLOGIE -->
+        <div class="section">
+            <span class="page-label">📕 Manuel Méthodologie</span>
+
+            <div class="solution-section">
+                <div class="solution-section__header">
+                    <span class="solution-section__badge">✨ La solution</span>
+                    <h2 class="solution-section__title">Pourquoi ce manuel va vous <span class="highlight">aider</span></h2>
+                    <p class="solution-section__subtitle">Toutes les clés méthodologiques pour maîtriser chaque exercice juridique.</p>
+                </div>
+
+                <div class="solution-grid-4">
+                    <div class="solution-card-4">
+                        <div class="solution-card__icon">🎯</div>
+                        <h3 class="solution-card__title">Comprendre les attentes</h3>
+                        <p class="solution-card__description">Savoir exactement ce qu'un correcteur attend, sur la forme et sur le fond.</p>
+                    </div>
+                    <div class="solution-card-4">
+                        <div class="solution-card__icon">⏱️</div>
+                        <h3 class="solution-card__title">Gagner du temps</h3>
+                        <p class="solution-card__description">Un cours synthétisé pour le prix d'une place de cinéma.</p>
+                    </div>
+                    <div class="solution-card-4">
+                        <div class="solution-card__icon">📈</div>
+                        <h3 class="solution-card__title">Gagner des points</h3>
+                        <p class="solution-card__description">Identifier les erreurs à ne pas commettre dès vos prochains partiels.</p>
+                    </div>
+                    <div class="solution-card-4">
+                        <div class="solution-card__icon">📝</div>
+                        <h3 class="solution-card__title">Maîtriser les étapes</h3>
+                        <p class="solution-card__description">Connaître chaque étape de rédaction et les difficultés courantes.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ═══════════════════════════════════════════════════════════════ -->
+        <!-- DOCUMENTATION -->
+        <!-- ═══════════════════════════════════════════════════════════════ -->
+        <div class="docs">
+            <h2>📋 Spécifications uniformisées</h2>
+
+            <h3>Règles uniformes (toutes les pages)</h3>
+            <table class="specs-table">
+                <tr>
+                    <th>Élément</th>
+                    <th>Valeur</th>
+                </tr>
+                <tr>
+                    <td>Badge section</td>
+                    <td>✨ La solution — Vert light #ECFDF5</td>
+                </tr>
+                <tr>
+                    <td>Mot-clé H2</td>
+                    <td>Gradient bordeaux→violet (text gradient)</td>
+                </tr>
+                <tr>
+                    <td>Fond emoji</td>
+                    <td>Gris clair #F3F4F6</td>
+                </tr>
+                <tr>
+                    <td>Fond carte</td>
+                    <td>Blanc #FFFFFF</td>
+                </tr>
+                <tr>
+                    <td>Border-radius section</td>
+                    <td>16px</td>
+                </tr>
+                <tr>
+                    <td>Border-radius cards</td>
+                    <td>12px</td>
+                </tr>
+            </table>
+
+            <h3>Choix de variante par page</h3>
+            <table class="specs-table">
+                <tr>
+                    <th>Page</th>
+                    <th>Variante</th>
+                    <th>Layout</th>
+                </tr>
+                <tr>
+                    <td>Homepage</td>
+                    <td>4 solutions</td>
+                    <td>4 colonnes (centré)</td>
+                </tr>
+                <tr>
+                    <td>Académie</td>
+                    <td>6 solutions</td>
+                    <td>2 colonnes (horizontal)</td>
+                </tr>
+                <tr>
+                    <td>Prépa</td>
+                    <td>6 solutions</td>
+                    <td>2 colonnes (horizontal)</td>
+                </tr>
+                <tr>
+                    <td>Minos (Suite IA)</td>
+                    <td>6 solutions</td>
+                    <td>2 colonnes (horizontal)</td>
+                </tr>
+                <tr>
+                    <td>Fiches PDF (générale)</td>
+                    <td>4 solutions</td>
+                    <td>4 colonnes (centré)</td>
+                </tr>
+                <tr>
+                    <td>Fiches par matière</td>
+                    <td>4 solutions</td>
+                    <td>4 colonnes (centré)</td>
+                </tr>
+                <tr>
+                    <td>Cours par niveau</td>
+                    <td>4 solutions</td>
+                    <td>4 colonnes (centré)</td>
+                </tr>
+                <tr>
+                    <td>Cours par matière</td>
+                    <td>4 solutions</td>
+                    <td>4 colonnes (centré)</td>
+                </tr>
+                <tr>
+                    <td>Manuel méthodologie</td>
+                    <td>4 solutions</td>
+                    <td>4 colonnes (centré)</td>
+                </tr>
+            </table>
+
+            <h3>Différences entre variantes</h3>
+            <table class="specs-table">
+                <tr>
+                    <th>Aspect</th>
+                    <th>6 solutions</th>
+                    <th>4 solutions</th>
+                </tr>
+                <tr>
+                    <td>Layout</td>
+                    <td>2 colonnes × 3 lignes</td>
+                    <td>4 colonnes × 1 ligne</td>
+                </tr>
+                <tr>
+                    <td>Alignement card</td>
+                    <td>Horizontal (icône à gauche)</td>
+                    <td>Centré (icône en haut)</td>
+                </tr>
+                <tr>
+                    <td>Taille icône</td>
+                    <td>48×48px</td>
+                    <td>56×56px</td>
+                </tr>
+                <tr>
+                    <td>Usage</td>
+                    <td>Académie, Prépa, Minos</td>
+                    <td>Homepage, Fiches, Cours, Manuel</td>
+                </tr>
+            </table>
+
+            <h3>✅ Design System respecté</h3>
+            <ul class="checklist">
+                <li>Badge "La solution" toujours vert light</li>
+                <li>Mot-clé H2 en gradient (pas juste violet)</li>
+                <li>Fond emoji gris clair (pas rose/violet)</li>
+                <li>Emojis (pas d'icônes SVG)</li>
+                <li>Hover : translateY(-4px) + shadow</li>
+                <li>Cards blanches avec bordure grise</li>
+            </ul>
+
+            <h3>📱 Responsive</h3>
+            <table class="specs-table">
+                <tr>
+                    <th>Breakpoint</th>
+                    <th>6 solutions</th>
+                    <th>4 solutions</th>
+                </tr>
+                <tr>
+                    <td>> 1000px</td>
+                    <td>2 colonnes</td>
+                    <td>4 colonnes</td>
+                </tr>
+                <tr>
+                    <td>600-1000px</td>
+                    <td>1 colonne</td>
+                    <td>2 colonnes</td>
+                </tr>
+                <tr>
+                    <td>< 600px</td>
+                    <td>1 colonne</td>
+                    <td>1 colonne</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</body>
+</html>

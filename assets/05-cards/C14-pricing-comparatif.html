@@ -1,0 +1,775 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cards Produits Comparatif — Version Améliorée</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* ===== DESIGN SYSTEM TOKENS ===== */
+        :root {
+            --color-primary: #B0001D;
+            --color-secondary: #7C3AED;
+            --color-black: #1A1A1A;
+            --color-white: #FFFFFF;
+            --color-gray-50: #F9FAFB;
+            --color-gray-100: #F3F4F6;
+            --color-gray-200: #E5E7EB;
+            --color-gray-400: #9CA3AF;
+            --color-gray-600: #4B5563;
+            --color-success: #10B981;
+            --color-success-light: #ECFDF5;
+            --color-success-dark: #065F46;
+            --color-warning: #F59E0B;
+            --color-warning-light: #FEF3C7;
+            --color-warning-dark: #92400E;
+            --color-secondary-light: #EDE9FE;
+            --color-secondary-dark: #5B21B6;
+            --gradient-primary: linear-gradient(135deg, #B0001D 0%, #7C3AED 100%);
+            --space-xs: 8px;
+            --space-sm: 16px;
+            --space-md: 24px;
+            --space-lg: 32px;
+            --space-xl: 48px;
+            --radius-sm: 6px;
+            --radius-md: 8px;
+            --radius-lg: 12px;
+            --radius-full: 9999px;
+            --shadow-sm: 0 1px 3px rgba(0,0,0,0.1), 0 1px 2px rgba(0,0,0,0.06);
+            --shadow-md: 0 4px 6px rgba(0,0,0,0.1), 0 2px 4px rgba(0,0,0,0.06);
+            --shadow-lg: 0 10px 15px rgba(0,0,0,0.1), 0 4px 6px rgba(0,0,0,0.05);
+            --shadow-primary: 0 4px 14px rgba(176, 0, 29, 0.2);
+            --transition: all 150ms ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: var(--color-gray-100);
+            padding: var(--space-xl);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--color-black);
+            margin-bottom: var(--space-xs);
+        }
+
+        .subtitle {
+            color: var(--color-gray-400);
+            margin-bottom: var(--space-lg);
+        }
+
+        .section-label {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: var(--color-secondary-light);
+            color: var(--color-secondary);
+            padding: 6px 14px;
+            border-radius: var(--radius-full);
+            font-size: 13px;
+            font-weight: 500;
+            margin-bottom: var(--space-md);
+        }
+
+        /* ===== GRILLE PRODUITS ===== */
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: var(--space-md);
+            align-items: stretch;
+        }
+
+        /* ===== CARD PRODUIT ===== */
+        .product-card {
+            position: relative;
+            background: var(--color-white);
+            border: 1px solid var(--color-gray-200);
+            border-radius: var(--radius-lg);
+            padding: var(--space-md);
+            display: flex;
+            flex-direction: column;
+            transition: var(--transition);
+            cursor: pointer;
+        }
+
+        .product-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-md);
+        }
+
+        /* Card Principale (Académie) */
+        .product-card--featured {
+            border: 2px solid transparent;
+            background: 
+                linear-gradient(white, white) padding-box,
+                var(--gradient-primary) border-box;
+            transform: scale(1.02);
+            box-shadow: var(--shadow-primary);
+        }
+
+        .product-card--featured:hover {
+            transform: scale(1.02) translateY(-4px);
+            box-shadow: var(--shadow-lg), var(--shadow-primary);
+        }
+
+        /* Ribbon offre principale */
+        .product-card__ribbon {
+            position: absolute;
+            top: -1px;
+            left: -1px;
+            right: -1px;
+            background: var(--gradient-primary);
+            color: var(--color-white);
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            padding: 8px var(--space-md);
+            border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+        }
+
+        .product-card--featured .product-card__content {
+            padding-top: var(--space-sm);
+        }
+
+        /* Badge type */
+        .product-card__type {
+            display: inline-flex;
+            align-items: center;
+            padding: 5px 12px;
+            border-radius: var(--radius-full);
+            font-size: 11px;
+            font-weight: 600;
+            margin-bottom: var(--space-sm);
+            width: fit-content;
+        }
+
+        .product-card__type--subscription {
+            background: var(--color-primary);
+            color: var(--color-white);
+        }
+
+        .product-card__type--formation {
+            background: var(--color-secondary-light);
+            color: var(--color-secondary);
+        }
+
+        .product-card__type--purchase {
+            background: var(--color-success-light);
+            color: var(--color-success-dark);
+        }
+
+        .product-card__type--credits {
+            background: var(--color-warning-light);
+            color: var(--color-warning-dark);
+        }
+
+        /* Titre */
+        .product-card__title {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--color-black);
+            margin-bottom: var(--space-xs);
+        }
+
+        /* Description */
+        .product-card__description {
+            font-size: 13px;
+            color: var(--color-gray-600);
+            line-height: 1.5;
+            margin-bottom: var(--space-sm);
+        }
+
+        /* Features */
+        .product-card__features {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            margin-bottom: var(--space-md);
+        }
+
+        .product-card__feature {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 12px;
+            color: var(--color-gray-600);
+        }
+
+        /* Prix */
+        .product-card__pricing {
+            margin-top: auto;
+            padding-top: var(--space-sm);
+            border-top: 1px solid var(--color-gray-200);
+            margin-bottom: var(--space-sm);
+        }
+
+        .product-card__price {
+            font-size: 32px;
+            font-weight: 700;
+            line-height: 1;
+        }
+
+        .product-card__price--primary { color: var(--color-primary); }
+        .product-card__price--secondary { color: var(--color-secondary); }
+        .product-card__price--success { color: var(--color-success); }
+        .product-card__price--warning { color: var(--color-warning); }
+
+        .product-card__price-suffix {
+            font-size: 16px;
+            font-weight: 500;
+            color: var(--color-gray-400);
+        }
+
+        .product-card__price-info {
+            font-size: 12px;
+            color: var(--color-gray-400);
+            margin-top: 4px;
+        }
+
+        /* Bonus abonnés */
+        .product-card__bonus {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: var(--color-secondary-light);
+            color: var(--color-secondary);
+            font-size: 11px;
+            font-weight: 500;
+            padding: 4px 10px;
+            border-radius: var(--radius-full);
+            margin-top: 8px;
+        }
+
+        /* Pour qui */
+        .product-card__target {
+            margin-bottom: var(--space-sm);
+        }
+
+        .product-card__target-label {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 10px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: var(--color-gray-400);
+            margin-bottom: 4px;
+        }
+
+        .product-card__target-text {
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--color-black);
+        }
+
+        /* Social proof */
+        .product-card__social {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 11px;
+            color: var(--color-gray-400);
+            margin-bottom: var(--space-sm);
+        }
+
+        /* CTA */
+        .product-card__cta {
+            width: 100%;
+            padding: 12px var(--space-md);
+            font-family: 'Poppins', sans-serif;
+            font-size: 14px;
+            font-weight: 600;
+            border-radius: var(--radius-md);
+            cursor: pointer;
+            transition: var(--transition);
+            text-align: center;
+        }
+
+        /* CTA Gradient (principal) */
+        .product-card__cta--gradient {
+            background: var(--gradient-primary);
+            color: var(--color-white);
+            border: none;
+        }
+
+        .product-card__cta--gradient:hover {
+            filter: brightness(1.1);
+            transform: translateY(-1px);
+        }
+
+        /* CTA Outline */
+        .product-card__cta--outline {
+            background: var(--color-white);
+            color: var(--color-black);
+            border: 1px solid var(--color-gray-200);
+        }
+
+        .product-card__cta--outline:hover {
+            border-color: var(--color-gray-400);
+            background: var(--color-gray-50);
+        }
+
+        /* CTA Outline avec couleur au hover */
+        .product-card__cta--outline-secondary:hover {
+            border-color: var(--color-secondary);
+            color: var(--color-secondary);
+            background: var(--color-secondary-light);
+        }
+
+        .product-card__cta--outline-success:hover {
+            border-color: var(--color-success);
+            color: var(--color-success-dark);
+            background: var(--color-success-light);
+        }
+
+        .product-card__cta--outline-warning:hover {
+            border-color: var(--color-warning);
+            color: var(--color-warning-dark);
+            background: var(--color-warning-light);
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 1100px) {
+            .products-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .product-card--featured {
+                transform: scale(1);
+            }
+
+            .product-card--featured:hover {
+                transform: translateY(-4px);
+            }
+        }
+
+        @media (max-width: 600px) {
+            body {
+                padding: var(--space-sm);
+            }
+
+            .products-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* ===== DOCUMENTATION ===== */
+        .docs {
+            margin-top: var(--space-xl);
+            padding-top: var(--space-xl);
+            border-top: 1px solid var(--color-gray-200);
+        }
+
+        .docs h2 {
+            font-size: 20px;
+            font-weight: 600;
+            color: var(--color-black);
+            margin-bottom: var(--space-md);
+        }
+
+        .docs h3 {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--color-black);
+            margin: var(--space-md) 0 var(--space-sm);
+        }
+
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 13px;
+            background: var(--color-white);
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            box-shadow: var(--shadow-sm);
+            margin-bottom: var(--space-md);
+        }
+
+        .comparison-table th {
+            background: var(--color-gray-100);
+            font-weight: 600;
+            text-align: left;
+            padding: 12px 16px;
+            color: var(--color-black);
+        }
+
+        .comparison-table td {
+            padding: 12px 16px;
+            border-bottom: 1px solid var(--color-gray-200);
+        }
+
+        .comparison-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .comparison-table .before {
+            color: var(--color-gray-400);
+            text-decoration: line-through;
+        }
+
+        .comparison-table .after {
+            color: var(--color-success-dark);
+            font-weight: 500;
+        }
+
+        .checklist {
+            list-style: none;
+            padding: 0;
+        }
+
+        .checklist li {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 0;
+            font-size: 14px;
+            color: var(--color-gray-600);
+        }
+
+        .checklist li::before {
+            content: '✓';
+            color: var(--color-success);
+            font-weight: 600;
+        }
+
+        code {
+            background: var(--color-gray-100);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-family: monospace;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Cards Produits (Comparatif) — Version Améliorée</h1>
+        <p class="subtitle">Homepage • Page Offres</p>
+
+        <span class="section-label">Avec features, social proof et hover couleur</span>
+
+        <!-- ===== GRILLE PRODUITS ===== -->
+        <div class="products-grid">
+            <!-- ACADÉMIE (Principal) -->
+            <div class="product-card product-card--featured">
+                <div class="product-card__ribbon">
+                    ⭐ Offre principale
+                </div>
+                
+                <div class="product-card__content">
+                    <span class="product-card__type product-card__type--subscription">Abonnement</span>
+                    
+                    <h3 class="product-card__title">Académie</h3>
+                    
+                    <p class="product-card__description">Cours vidéo, fiches, QCM et flashcards pour toutes les matières.</p>
+                    
+                    <div class="product-card__features">
+                        <div class="product-card__feature">
+                            ✅ 20 matières complètes
+                        </div>
+                        <div class="product-card__feature">
+                            ✅ 500+ heures de vidéo
+                        </div>
+                        <div class="product-card__feature">
+                            ✅ QCM, flashcards, mindmaps
+                        </div>
+                    </div>
+
+                    <div class="product-card__pricing">
+                        <div class="product-card__price product-card__price--primary">
+                            29€<span class="product-card__price-suffix"> /mois</span>
+                        </div>
+                        <p class="product-card__price-info">ou 140€ pour 6 mois (-20%)</p>
+                    </div>
+
+                    <div class="product-card__social">
+                        👥 25 000+ étudiants inscrits
+                    </div>
+
+                    <div class="product-card__target">
+                        <p class="product-card__target-label">
+                            👤 Pour qui ?
+                        </p>
+                        <p class="product-card__target-text">Étudiants en L1, L2, L3 ou Capacité</p>
+                    </div>
+
+                    <button class="product-card__cta product-card__cta--gradient">S'abonner à l'Académie</button>
+                </div>
+            </div>
+
+            <!-- PRÉPAS -->
+            <div class="product-card">
+                <span class="product-card__type product-card__type--formation">Formation intensive</span>
+                
+                <h3 class="product-card__title">Prépas</h3>
+                
+                <p class="product-card__description">Formation intensive avec accompagnement personnalisé.</p>
+                
+                <div class="product-card__features">
+                    <div class="product-card__feature">
+                        ✅ Coaching individuel
+                    </div>
+                    <div class="product-card__feature">
+                        ✅ Corrections personnalisées
+                    </div>
+                    <div class="product-card__feature">
+                        ✅ Accès Académie inclus
+                    </div>
+                </div>
+
+                <div class="product-card__pricing">
+                    <div class="product-card__price product-card__price--secondary">
+                        1 300€
+                    </div>
+                    <p class="product-card__price-info">Formation complète</p>
+                </div>
+
+                <div class="product-card__target">
+                    <p class="product-card__target-label">
+                        👤 Pour qui ?
+                    </p>
+                    <p class="product-card__target-text">Reconversion, redoublants, concours</p>
+                </div>
+
+                <button class="product-card__cta product-card__cta--outline product-card__cta--outline-secondary">Découvrir les Prépas</button>
+            </div>
+
+            <!-- FICHES PDF -->
+            <div class="product-card">
+                <span class="product-card__type product-card__type--purchase">Achat unique</span>
+                
+                <h3 class="product-card__title">Fiches PDF</h3>
+                
+                <p class="product-card__description">Fiches téléchargeables et imprimables.</p>
+                
+                <div class="product-card__features">
+                    <div class="product-card__feature">
+                        ✅ Format PDF imprimable
+                    </div>
+                    <div class="product-card__feature">
+                        ✅ Mindmaps incluses
+                    </div>
+                    <div class="product-card__feature">
+                        ✅ Accès à vie
+                    </div>
+                </div>
+
+                <div class="product-card__pricing">
+                    <div class="product-card__price product-card__price--success">
+                        19€
+                    </div>
+                    <p class="product-card__price-info">par matière • Accès à vie</p>
+                </div>
+
+                <div class="product-card__target">
+                    <p class="product-card__target-label">
+                        👤 Pour qui ?
+                    </p>
+                    <p class="product-card__target-text">Ceux qui préfèrent réviser sur papier</p>
+                </div>
+
+                <button class="product-card__cta product-card__cta--outline product-card__cta--outline-success">Voir les Fiches PDF</button>
+            </div>
+
+            <!-- MINOS (IA) -->
+            <div class="product-card">
+                <span class="product-card__type product-card__type--credits">Crédits IA</span>
+                
+                <h3 class="product-card__title">Minos</h3>
+                
+                <p class="product-card__description">4 outils IA pour générer vos exercices juridiques.</p>
+                
+                <div class="product-card__features">
+                    <div class="product-card__feature">
+                        ✅ Fiche d'arrêt
+                    </div>
+                    <div class="product-card__feature">
+                        ✅ Dissertation
+                    </div>
+                    <div class="product-card__feature">
+                        ✅ Cas pratique
+                    </div>
+                    <div class="product-card__feature">
+                        ✅ Commentaire d'arrêt
+                    </div>
+                </div>
+
+                <div class="product-card__pricing">
+                    <div class="product-card__price product-card__price--warning">
+                        5€
+                    </div>
+                    <p class="product-card__price-info">à partir de • 30 crédits</p>
+                    <span class="product-card__bonus">
+                        🎁 10 crédits offerts aux abonnés Académie
+                    </span>
+                </div>
+
+                <div class="product-card__target">
+                    <p class="product-card__target-label">
+                        👤 Pour qui ?
+                    </p>
+                    <p class="product-card__target-text">Ceux qui veulent gagner du temps</p>
+                </div>
+
+                <button class="product-card__cta product-card__cta--outline product-card__cta--outline-warning">Découvrir Minos</button>
+            </div>
+        </div>
+
+        <!-- ===== DOCUMENTATION ===== -->
+        <div class="docs">
+            <h2>📋 Améliorations appliquées</h2>
+
+            <table class="comparison-table">
+                <tr>
+                    <th>Élément</th>
+                    <th>Avant</th>
+                    <th>Après</th>
+                </tr>
+                <tr>
+                    <td>Ribbon "OFFRE PRINCIPALE"</td>
+                    <td class="before">Rouge uni</td>
+                    <td class="after">✓ Gradient bordeaux→violet</td>
+                </tr>
+                <tr>
+                    <td>Card Académie</td>
+                    <td class="before">Même niveau</td>
+                    <td class="after">✓ scale(1.02) + shadow + bordure gradient</td>
+                </tr>
+                <tr>
+                    <td>Hauteur cards</td>
+                    <td class="before">Variables</td>
+                    <td class="after">✓ Égales (flex stretch)</td>
+                </tr>
+                <tr>
+                    <td>Section "POUR QUI ?"</td>
+                    <td class="before">Texte seul</td>
+                    <td class="after">✓ Avec icône 👤</td>
+                </tr>
+                <tr>
+                    <td>Features</td>
+                    <td class="before">Absentes</td>
+                    <td class="after">✓ 3 points clés par produit</td>
+                </tr>
+                <tr>
+                    <td>Hover cards</td>
+                    <td class="before">Aucun</td>
+                    <td class="after">✓ translateY(-4px) + shadow</td>
+                </tr>
+                <tr>
+                    <td>CTA hover</td>
+                    <td class="before">Gris</td>
+                    <td class="after">✓ Couleur du produit</td>
+                </tr>
+                <tr>
+                    <td>Social proof</td>
+                    <td class="before">Absent</td>
+                    <td class="after">✓ "25 000+ étudiants" sur Académie</td>
+                </tr>
+                <tr>
+                    <td>Minos (ex Suite IA)</td>
+                    <td class="before">"Essai gratuit"</td>
+                    <td class="after">✓ "10 crédits offerts aux abonnés Académie"</td>
+                </tr>
+                <tr>
+                    <td>Features Minos</td>
+                    <td class="before">3 outils génériques</td>
+                    <td class="after">✓ 4 générateurs : Fiche d'arrêt, Dissertation, Cas pratique, Commentaire</td>
+                </tr>
+                <tr>
+                    <td>Icônes</td>
+                    <td class="before">SVG</td>
+                    <td class="after">✓ Emojis (design system)</td>
+                </tr>
+                <tr>
+                    <td>Prépas</td>
+                    <td class="before">"Paiement 3x"</td>
+                    <td class="after">✓ "Formation complète"</td>
+                </tr>
+            </table>
+
+            <h3>🎨 Couleurs par produit</h3>
+            <table class="comparison-table">
+                <tr>
+                    <th>Produit</th>
+                    <th>Badge</th>
+                    <th>Prix</th>
+                    <th>CTA hover</th>
+                </tr>
+                <tr>
+                    <td>Académie</td>
+                    <td>Primary #B0001D</td>
+                    <td>Primary</td>
+                    <td>Gradient</td>
+                </tr>
+                <tr>
+                    <td>Prépas</td>
+                    <td>Secondary light #EDE9FE</td>
+                    <td>Secondary #7C3AED</td>
+                    <td>Secondary</td>
+                </tr>
+                <tr>
+                    <td>Fiches PDF</td>
+                    <td>Success light #ECFDF5</td>
+                    <td>Success #10B981</td>
+                    <td>Success</td>
+                </tr>
+                <tr>
+                    <td>Minos</td>
+                    <td>Warning light #FEF3C7</td>
+                    <td>Warning #F59E0B</td>
+                    <td>Warning</td>
+                </tr>
+            </table>
+
+            <h3>✅ Points conservés</h3>
+            <ul class="checklist">
+                <li>Couleurs différenciées par produit</li>
+                <li>Badge type (Abonnement, Formation, Achat unique, Crédits)</li>
+                <li>CTA gradient sur l'offre principale</li>
+                <li>Structure claire et lisible</li>
+            </ul>
+
+            <h3>📱 Responsive</h3>
+            <table class="comparison-table">
+                <tr>
+                    <th>Breakpoint</th>
+                    <th>Layout</th>
+                </tr>
+                <tr>
+                    <td>> 1100px</td>
+                    <td>4 colonnes</td>
+                </tr>
+                <tr>
+                    <td>600-1100px</td>
+                    <td>2 colonnes</td>
+                </tr>
+                <tr>
+                    <td>< 600px</td>
+                    <td>1 colonne</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</body>
+</html>

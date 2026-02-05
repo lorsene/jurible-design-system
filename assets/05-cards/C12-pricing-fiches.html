@@ -1,0 +1,981 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cards Fiches — Pack & Unité</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* ===== DESIGN SYSTEM TOKENS ===== */
+        :root {
+            --color-primary: #B0001D;
+            --color-secondary: #7C3AED;
+            --color-black: #1A1A1A;
+            --color-white: #FFFFFF;
+            --color-gray-50: #F9FAFB;
+            --color-gray-100: #F3F4F6;
+            --color-gray-200: #E5E7EB;
+            --color-gray-400: #9CA3AF;
+            --color-gray-600: #4B5563;
+            --color-success: #10B981;
+            --color-success-light: #ECFDF5;
+            --color-success-dark: #065F46;
+            --color-warning: #F59E0B;
+            --color-warning-light: #FEF3C7;
+            --color-warning-dark: #92400E;
+            --color-secondary-light: #EDE9FE;
+            --color-secondary-dark: #5B21B6;
+            --gradient-primary: linear-gradient(135deg, #B0001D 0%, #7C3AED 100%);
+            --gradient-fiches: linear-gradient(135deg, #B0001D 0%, #7C3AED 100%);
+            --space-xs: 8px;
+            --space-sm: 16px;
+            --space-md: 24px;
+            --space-lg: 32px;
+            --space-xl: 48px;
+            --radius-sm: 6px;
+            --radius-md: 8px;
+            --radius-lg: 12px;
+            --radius-full: 9999px;
+            --shadow-sm: 0 1px 3px rgba(0,0,0,0.1), 0 1px 2px rgba(0,0,0,0.06);
+            --shadow-md: 0 4px 6px rgba(0,0,0,0.1), 0 2px 4px rgba(0,0,0,0.06);
+            --shadow-lg: 0 10px 15px rgba(0,0,0,0.1), 0 4px 6px rgba(0,0,0,0.05);
+            --transition: all 150ms ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: var(--color-gray-100);
+            padding: var(--space-xl);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--color-black);
+            margin-bottom: var(--space-xs);
+        }
+
+        .subtitle {
+            color: var(--color-gray-400);
+            margin-bottom: var(--space-lg);
+        }
+
+        .section {
+            margin-bottom: var(--space-xl);
+        }
+
+        .section-label {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: var(--color-success-light);
+            color: var(--color-success-dark);
+            padding: 6px 14px;
+            border-radius: var(--radius-full);
+            font-size: 13px;
+            font-weight: 500;
+            margin-bottom: var(--space-md);
+        }
+
+        /* ===== CARD PACK FICHES ===== */
+        .pack-card {
+            display: grid;
+            grid-template-columns: 1fr 1.2fr;
+            background: var(--color-white);
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            box-shadow: var(--shadow-sm);
+            transition: var(--transition);
+        }
+
+        .pack-card:hover {
+            box-shadow: var(--shadow-md);
+            transform: translateY(-4px);
+        }
+
+        /* Colonne gauche - Visuel */
+        .pack-card__visual {
+            position: relative;
+            padding: var(--space-md);
+            background: var(--color-gray-50);
+            display: flex;
+            flex-direction: column;
+            min-height: 450px;
+        }
+
+        .pack-card__badge-promo {
+            position: absolute;
+            top: var(--space-sm);
+            left: var(--space-sm);
+            background: var(--color-primary);
+            color: var(--color-white);
+            font-size: 12px;
+            font-weight: 600;
+            padding: 6px 12px;
+            border-radius: var(--radius-md);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            z-index: 2;
+        }
+
+        .pack-card__mockup {
+            background: var(--color-white);
+            border-radius: var(--radius-lg);
+            padding: var(--space-md);
+            box-shadow: var(--shadow-sm);
+            margin-bottom: var(--space-sm);
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .pack-card__mockup-header {
+            height: 60px;
+            background: var(--gradient-primary);
+            border-radius: var(--radius-md) var(--radius-md) 0 0;
+            margin: calc(-1 * var(--space-md));
+            margin-bottom: var(--space-md);
+        }
+
+        .pack-card__mockup-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            flex: 1;
+            padding: var(--space-md) 0;
+        }
+
+        .pack-card__mockup-icon {
+            font-size: 48px;
+            margin-bottom: var(--space-xs);
+        }
+
+        .pack-card__mockup-label {
+            font-size: 14px;
+            color: var(--color-gray-400);
+        }
+
+        .pack-card__mockup-lines {
+            width: 80%;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            margin-top: var(--space-md);
+        }
+
+        .pack-card__mockup-line {
+            height: 8px;
+            background: var(--color-gray-200);
+            border-radius: 4px;
+        }
+
+        .pack-card__mockup-line:nth-child(2) { width: 85%; }
+        .pack-card__mockup-line:nth-child(3) { width: 70%; }
+        .pack-card__mockup-line:nth-child(4) { width: 90%; }
+        .pack-card__mockup-line:nth-child(5) { width: 60%; }
+        .pack-card__mockup-line:nth-child(6) { width: 75%; }
+
+        .pack-card__thumbnails {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 8px;
+        }
+
+        .pack-card__thumbnail {
+            background: var(--color-white);
+            border: 1px solid var(--color-gray-200);
+            border-radius: var(--radius-sm);
+            padding: 10px 6px;
+            text-align: center;
+            font-size: 10px;
+            color: var(--color-gray-600);
+            transition: var(--transition);
+        }
+
+        .pack-card__thumbnail:hover {
+            border-color: var(--color-success);
+            background: var(--color-success-light);
+        }
+
+        /* Colonne droite - Infos */
+        .pack-card__info {
+            padding: var(--space-lg);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .pack-card__tags {
+            display: flex;
+            gap: var(--space-xs);
+            margin-bottom: var(--space-sm);
+        }
+
+        .pack-card__tag {
+            padding: 5px 12px;
+            border-radius: var(--radius-full);
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .pack-card__tag--pack {
+            background: var(--color-success);
+            color: var(--color-white);
+        }
+
+        .pack-card__tag--level {
+            background: var(--color-white);
+            color: var(--color-gray-600);
+            border: 1px solid var(--color-gray-200);
+        }
+
+        .pack-card__title {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--color-black);
+            margin-bottom: var(--space-xs);
+        }
+
+        .pack-card__description {
+            font-size: 14px;
+            color: var(--color-gray-600);
+            margin-bottom: var(--space-sm);
+        }
+
+        .pack-card__rating {
+            display: flex;
+            align-items: center;
+            gap: var(--space-xs);
+            margin-bottom: var(--space-md);
+            font-size: 14px;
+            color: var(--color-gray-600);
+        }
+
+        .pack-card__stars {
+            color: var(--color-warning);
+        }
+
+        .pack-card__rating-score {
+            font-weight: 600;
+            color: var(--color-black);
+        }
+
+        /* Bloc prix */
+        .pack-card__pricing {
+            background: var(--color-gray-50);
+            border-radius: var(--radius-lg);
+            padding: var(--space-md);
+            margin-bottom: var(--space-md);
+        }
+
+        .pack-card__price-row {
+            display: flex;
+            align-items: center;
+            gap: var(--space-sm);
+            margin-bottom: var(--space-xs);
+        }
+
+        .pack-card__price {
+            font-size: 36px;
+            font-weight: 700;
+            color: var(--color-black);
+        }
+
+        .pack-card__price-old {
+            font-size: 18px;
+            color: var(--color-gray-400);
+            text-decoration: line-through;
+        }
+
+        .pack-card__price-discount {
+            background: var(--color-success-light);
+            color: var(--color-success-dark);
+            font-size: 14px;
+            font-weight: 700;
+            padding: 4px 10px;
+            border-radius: var(--radius-md);
+        }
+
+        .pack-card__savings {
+            font-size: 14px;
+            color: var(--color-success);
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        .pack-card__payment-info {
+            font-size: 12px;
+            color: var(--color-gray-400);
+        }
+
+        /* CTA */
+        .pack-card__cta {
+            width: 100%;
+            padding: 14px var(--space-md);
+            font-family: 'Poppins', sans-serif;
+            font-size: 15px;
+            font-weight: 600;
+            border-radius: var(--radius-md);
+            cursor: pointer;
+            transition: var(--transition);
+            text-align: center;
+            background: var(--gradient-primary);
+            color: var(--color-white);
+            border: none;
+            margin-bottom: var(--space-xs);
+        }
+
+        .pack-card__cta:hover {
+            filter: brightness(1.1);
+            transform: translateY(-1px);
+        }
+
+        .pack-card__secure {
+            font-size: 12px;
+            color: var(--color-gray-400);
+            text-align: center;
+            margin-bottom: var(--space-md);
+        }
+
+        /* Réassurance */
+        .pack-card__reassurance {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-xs);
+            margin-top: auto;
+        }
+
+        .pack-card__guarantee {
+            display: flex;
+            align-items: center;
+            gap: var(--space-sm);
+            background: var(--color-success-light);
+            border-radius: var(--radius-md);
+            padding: var(--space-sm);
+        }
+
+        .pack-card__guarantee--author {
+            background: var(--color-secondary-light);
+        }
+
+        .pack-card__guarantee-icon {
+            width: 40px;
+            height: 40px;
+            background: var(--color-success);
+            border-radius: var(--radius-md);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            flex-shrink: 0;
+        }
+
+        .pack-card__guarantee-icon--violet {
+            background: var(--color-secondary);
+        }
+
+        .pack-card__guarantee-text {
+            font-size: 13px;
+        }
+
+        .pack-card__guarantee-title {
+            font-weight: 600;
+            color: var(--color-success-dark);
+        }
+
+        .pack-card__guarantee-title--violet {
+            color: var(--color-secondary-dark);
+        }
+
+        .pack-card__guarantee-desc {
+            color: var(--color-success-dark);
+            opacity: 0.8;
+        }
+
+        .pack-card__guarantee--author .pack-card__guarantee-desc {
+            color: var(--color-secondary-dark);
+        }
+
+        /* ===== CARD FICHE UNITÉ ===== */
+        .fiches-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: var(--space-md);
+        }
+
+        .fiche-card {
+            background: var(--color-white);
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            box-shadow: var(--shadow-sm);
+            transition: var(--transition);
+        }
+
+        .fiche-card:hover {
+            box-shadow: var(--shadow-md);
+            transform: translateY(-4px);
+        }
+
+        .fiche-card__visual {
+            position: relative;
+            padding: var(--space-sm);
+            background: var(--color-gray-50);
+        }
+
+        .fiche-card__badge-level {
+            position: absolute;
+            top: var(--space-sm);
+            left: var(--space-sm);
+            background: var(--color-primary);
+            color: var(--color-white);
+            font-size: 10px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            padding: 4px 10px;
+            border-radius: var(--radius-sm);
+            z-index: 2;
+        }
+
+        .fiche-card__mockup {
+            background: var(--color-white);
+            border-radius: var(--radius-md);
+            padding: var(--space-md);
+            box-shadow: var(--shadow-sm);
+            margin: var(--space-md) auto;
+            width: 80%;
+            aspect-ratio: 3/4;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .fiche-card__mockup-header {
+            width: 100%;
+            height: 30px;
+            background: var(--gradient-primary);
+            border-radius: var(--radius-sm) var(--radius-sm) 0 0;
+            margin-top: calc(-1 * var(--space-md));
+            margin-bottom: var(--space-sm);
+        }
+
+        .fiche-card__mockup-lines {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            padding: 0 var(--space-xs);
+        }
+
+        .fiche-card__mockup-line {
+            height: 6px;
+            background: var(--color-gray-200);
+            border-radius: 3px;
+        }
+
+        .fiche-card__mockup-line:nth-child(2) { width: 85%; }
+        .fiche-card__mockup-line:nth-child(3) { width: 70%; }
+        .fiche-card__mockup-line:nth-child(4) { width: 90%; }
+        .fiche-card__mockup-line:nth-child(5) { width: 60%; }
+
+        .fiche-card__info {
+            padding: var(--space-md);
+        }
+
+        .fiche-card__title {
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--color-black);
+            margin-bottom: var(--space-xs);
+        }
+
+        .fiche-card__stats {
+            display: flex;
+            align-items: center;
+            gap: var(--space-sm);
+            font-size: 12px;
+            color: var(--color-gray-600);
+            margin-bottom: var(--space-sm);
+        }
+
+        .fiche-card__price {
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--color-black);
+            margin-bottom: var(--space-sm);
+        }
+
+        .fiche-card__download {
+            font-size: 11px;
+            color: var(--color-gray-600);
+            margin-bottom: var(--space-sm);
+        }
+
+        .fiche-card__cta {
+            width: 100%;
+            padding: 10px var(--space-sm);
+            font-family: 'Poppins', sans-serif;
+            font-size: 13px;
+            font-weight: 600;
+            border-radius: var(--radius-md);
+            cursor: pointer;
+            transition: var(--transition);
+            text-align: center;
+            background: var(--gradient-primary);
+            color: var(--color-white);
+            border: none;
+            margin-bottom: var(--space-xs);
+        }
+
+        .fiche-card__cta:hover {
+            filter: brightness(1.1);
+            transform: translateY(-1px);
+        }
+
+        .fiche-card__link {
+            display: block;
+            text-align: center;
+            font-size: 13px;
+            color: var(--color-gray-600);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .fiche-card__link:hover {
+            color: var(--color-secondary);
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 1000px) {
+            .pack-card {
+                grid-template-columns: 1fr;
+            }
+
+            .fiches-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 600px) {
+            body {
+                padding: var(--space-sm);
+            }
+
+            .fiches-grid {
+                grid-template-columns: 1fr;
+                max-width: 320px;
+                margin: 0 auto;
+            }
+        }
+
+        /* ===== DOCUMENTATION ===== */
+        .docs {
+            margin-top: var(--space-xl);
+            padding-top: var(--space-xl);
+            border-top: 1px solid var(--color-gray-200);
+        }
+
+        .docs h2 {
+            font-size: 20px;
+            font-weight: 600;
+            color: var(--color-black);
+            margin-bottom: var(--space-md);
+        }
+
+        .docs h3 {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--color-black);
+            margin: var(--space-md) 0 var(--space-sm);
+        }
+
+        .specs-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 13px;
+            background: var(--color-white);
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            box-shadow: var(--shadow-sm);
+            margin-bottom: var(--space-md);
+        }
+
+        .specs-table th {
+            background: var(--color-gray-100);
+            font-weight: 600;
+            text-align: left;
+            padding: 12px 16px;
+            color: var(--color-black);
+        }
+
+        .specs-table td {
+            padding: 12px 16px;
+            border-bottom: 1px solid var(--color-gray-200);
+        }
+
+        .specs-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .checklist {
+            list-style: none;
+            padding: 0;
+        }
+
+        .checklist li {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 0;
+            font-size: 14px;
+            color: var(--color-gray-600);
+        }
+
+        .checklist li::before {
+            content: '✓';
+            color: var(--color-success);
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Cards Fiches — Pack & Unité</h1>
+        <p class="subtitle">Pages Pack Fiches (L1, L2, L3) • Catalogue Fiches</p>
+
+        <!-- ===== SECTION PACK FICHES ===== -->
+        <div class="section">
+            <span class="section-label">📦 Card Pack Fiches — Page Pack Fiches (L1, L2, L3)</span>
+
+            <div class="pack-card">
+                <!-- Colonne gauche - Visuel -->
+                <div class="pack-card__visual">
+                    <span class="pack-card__badge-promo">🎁 1 matière offerte</span>
+                    
+                    <div class="pack-card__mockup">
+                        <div class="pack-card__mockup-header"></div>
+                        <div class="pack-card__mockup-content">
+                            <span class="pack-card__mockup-icon">📚</span>
+                            <span class="pack-card__mockup-label">Pack Fiches L1</span>
+                            <div class="pack-card__mockup-lines">
+                                <div class="pack-card__mockup-line"></div>
+                                <div class="pack-card__mockup-line"></div>
+                                <div class="pack-card__mockup-line"></div>
+                                <div class="pack-card__mockup-line"></div>
+                                <div class="pack-card__mockup-line"></div>
+                                <div class="pack-card__mockup-line"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="pack-card__thumbnails">
+                        <div class="pack-card__thumbnail">Constit S1</div>
+                        <div class="pack-card__thumbnail">Constit S2</div>
+                        <div class="pack-card__thumbnail">Intro</div>
+                        <div class="pack-card__thumbnail">Famille</div>
+                        <div class="pack-card__thumbnail">Personnes</div>
+                        <div class="pack-card__thumbnail">Instit.</div>
+                        <div class="pack-card__thumbnail">Biens</div>
+                        <div class="pack-card__thumbnail">Histoire</div>
+                    </div>
+                </div>
+
+                <!-- Colonne droite - Infos -->
+                <div class="pack-card__info">
+                    <div class="pack-card__tags">
+                        <span class="pack-card__tag pack-card__tag--pack">Pack complet</span>
+                        <span class="pack-card__tag pack-card__tag--level">L1 Droit</span>
+                    </div>
+
+                    <h2 class="pack-card__title">Pack Fiches L1 Droit</h2>
+                    <p class="pack-card__description">8 matières complètes pour réussir vos partiels.</p>
+
+                    <div class="pack-card__rating">
+                        <span class="pack-card__stars">⭐⭐⭐⭐⭐</span>
+                        <span class="pack-card__rating-score">4,7/5</span>
+                        <span>— 150+ avis vérifiés</span>
+                    </div>
+
+                    <div class="pack-card__pricing">
+                        <div class="pack-card__price-row">
+                            <span class="pack-card__price">133€</span>
+                            <span class="pack-card__price-old">152€</span>
+                            <span class="pack-card__price-discount">-19€</span>
+                        </div>
+                        <p class="pack-card__savings">✨ Économisez 19€ (1 matière offerte)</p>
+                        <p class="pack-card__payment-info">Paiement unique · Accès à vie · 📥 PDF téléchargeables</p>
+                    </div>
+
+                    <button class="pack-card__cta">📚 Acheter — 133€</button>
+                    <p class="pack-card__secure">🔒 Paiement sécurisé</p>
+
+                    <div class="pack-card__reassurance">
+                        <div class="pack-card__guarantee">
+                            <div class="pack-card__guarantee-icon">🛡️</div>
+                            <div class="pack-card__guarantee-text">
+                                <p class="pack-card__guarantee-title">Garantie "Réussite ou Remboursé"</p>
+                                <p class="pack-card__guarantee-desc">Pas la moyenne ? On vous rembourse.</p>
+                            </div>
+                        </div>
+
+                        <div class="pack-card__guarantee pack-card__guarantee--author">
+                            <div class="pack-card__guarantee-icon pack-card__guarantee-icon--violet">👨‍🏫</div>
+                            <div class="pack-card__guarantee-text">
+                                <p class="pack-card__guarantee-title pack-card__guarantee-title--violet">Rédigé par des enseignants en droit</p>
+                                <p class="pack-card__guarantee-desc">Contenu vérifié et à jour.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ===== SECTION FICHES UNITÉ ===== -->
+        <div class="section">
+            <span class="section-label">📄 Card Fiche à l'unité — Page Catalogue Fiches</span>
+
+            <div class="fiches-grid">
+                <!-- Fiche 1 -->
+                <div class="fiche-card">
+                    <div class="fiche-card__visual">
+                        <span class="fiche-card__badge-level">L1 Droit</span>
+                        <div class="fiche-card__mockup">
+                            <div class="fiche-card__mockup-header"></div>
+                            <div class="fiche-card__mockup-lines">
+                                <div class="fiche-card__mockup-line"></div>
+                                <div class="fiche-card__mockup-line"></div>
+                                <div class="fiche-card__mockup-line"></div>
+                                <div class="fiche-card__mockup-line"></div>
+                                <div class="fiche-card__mockup-line"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="fiche-card__info">
+                        <h3 class="fiche-card__title">Droit Constitutionnel S1</h3>
+                        <p class="fiche-card__stats">📄 50 pages • 🧠 5 mindmaps</p>
+                        <p class="fiche-card__price">19€</p>
+                        <p class="fiche-card__download">📥 PDF téléchargeable</p>
+                        <button class="fiche-card__cta">Acheter — 19€</button>
+                        <a href="#" class="fiche-card__link">Voir les fiches →</a>
+                    </div>
+                </div>
+
+                <!-- Fiche 2 -->
+                <div class="fiche-card">
+                    <div class="fiche-card__visual">
+                        <span class="fiche-card__badge-level">L1 Droit</span>
+                        <div class="fiche-card__mockup">
+                            <div class="fiche-card__mockup-header"></div>
+                            <div class="fiche-card__mockup-lines">
+                                <div class="fiche-card__mockup-line"></div>
+                                <div class="fiche-card__mockup-line"></div>
+                                <div class="fiche-card__mockup-line"></div>
+                                <div class="fiche-card__mockup-line"></div>
+                                <div class="fiche-card__mockup-line"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="fiche-card__info">
+                        <h3 class="fiche-card__title">Droit Constitutionnel S2</h3>
+                        <p class="fiche-card__stats">📄 45 pages • 🧠 4 mindmaps</p>
+                        <p class="fiche-card__price">19€</p>
+                        <p class="fiche-card__download">📥 PDF téléchargeable</p>
+                        <button class="fiche-card__cta">Acheter — 19€</button>
+                        <a href="#" class="fiche-card__link">Voir les fiches →</a>
+                    </div>
+                </div>
+
+                <!-- Fiche 3 -->
+                <div class="fiche-card">
+                    <div class="fiche-card__visual">
+                        <span class="fiche-card__badge-level">L2 Droit</span>
+                        <div class="fiche-card__mockup">
+                            <div class="fiche-card__mockup-header"></div>
+                            <div class="fiche-card__mockup-lines">
+                                <div class="fiche-card__mockup-line"></div>
+                                <div class="fiche-card__mockup-line"></div>
+                                <div class="fiche-card__mockup-line"></div>
+                                <div class="fiche-card__mockup-line"></div>
+                                <div class="fiche-card__mockup-line"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="fiche-card__info">
+                        <h3 class="fiche-card__title">Droit Administratif</h3>
+                        <p class="fiche-card__stats">📄 65 pages • 🧠 6 mindmaps</p>
+                        <p class="fiche-card__price">19€</p>
+                        <p class="fiche-card__download">📥 PDF téléchargeable</p>
+                        <button class="fiche-card__cta">Acheter — 19€</button>
+                        <a href="#" class="fiche-card__link">Voir les fiches →</a>
+                    </div>
+                </div>
+
+                <!-- Fiche 4 -->
+                <div class="fiche-card">
+                    <div class="fiche-card__visual">
+                        <span class="fiche-card__badge-level">L3 Droit</span>
+                        <div class="fiche-card__mockup">
+                            <div class="fiche-card__mockup-header"></div>
+                            <div class="fiche-card__mockup-lines">
+                                <div class="fiche-card__mockup-line"></div>
+                                <div class="fiche-card__mockup-line"></div>
+                                <div class="fiche-card__mockup-line"></div>
+                                <div class="fiche-card__mockup-line"></div>
+                                <div class="fiche-card__mockup-line"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="fiche-card__info">
+                        <h3 class="fiche-card__title">Droit des Affaires</h3>
+                        <p class="fiche-card__stats">📄 55 pages • 🧠 5 mindmaps</p>
+                        <p class="fiche-card__price">19€</p>
+                        <p class="fiche-card__download">📥 PDF téléchargeable</p>
+                        <button class="fiche-card__cta">Acheter — 19€</button>
+                        <a href="#" class="fiche-card__link">Voir les fiches →</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ===== DOCUMENTATION ===== -->
+        <div class="docs">
+            <h2>📋 Spécifications des Cards Fiches</h2>
+
+            <h3>Card Pack Fiches</h3>
+            <table class="specs-table">
+                <tr>
+                    <th>Élément</th>
+                    <th>Valeur</th>
+                </tr>
+                <tr>
+                    <td>Layout</td>
+                    <td>2 colonnes (1fr / 1.2fr)</td>
+                </tr>
+                <tr>
+                    <td>Badge promo</td>
+                    <td>Primary #B0001D + emoji 🎁</td>
+                </tr>
+                <tr>
+                    <td>Mockup header</td>
+                    <td>Gradient bordeaux→violet</td>
+                </tr>
+                <tr>
+                    <td>Thumbnails</td>
+                    <td>Grille 4×2, hover vert</td>
+                </tr>
+                <tr>
+                    <td>Prix</td>
+                    <td>Noir #1A1A1A</td>
+                </tr>
+                <tr>
+                    <td>Badge économie</td>
+                    <td>Success light + dark</td>
+                </tr>
+                <tr>
+                    <td>CTA</td>
+                    <td>Gradient + emoji 📚</td>
+                </tr>
+                <tr>
+                    <td>Réassurance 1</td>
+                    <td>🛡️ Garantie Réussite (vert)</td>
+                </tr>
+                <tr>
+                    <td>Réassurance 2</td>
+                    <td>👨‍🏫 Rédigé par enseignants (violet)</td>
+                </tr>
+            </table>
+
+            <h3>Card Fiche à l'unité</h3>
+            <table class="specs-table">
+                <tr>
+                    <th>Élément</th>
+                    <th>Valeur</th>
+                </tr>
+                <tr>
+                    <td>Layout</td>
+                    <td>Vertical, grille 4 colonnes</td>
+                </tr>
+                <tr>
+                    <td>Badge niveau</td>
+                    <td>Primary #B0001D, uppercase</td>
+                </tr>
+                <tr>
+                    <td>Mockup</td>
+                    <td>Header gradient + lignes grises</td>
+                </tr>
+                <tr>
+                    <td>Stats</td>
+                    <td>Emojis 📄 🧠</td>
+                </tr>
+                <tr>
+                    <td>Prix</td>
+                    <td>Noir #1A1A1A, 28px</td>
+                </tr>
+                <tr>
+                    <td>Mention téléchargement</td>
+                    <td>📥 PDF téléchargeable</td>
+                </tr>
+                <tr>
+                    <td>CTA</td>
+                    <td>Gradient</td>
+                </tr>
+                <tr>
+                    <td>Lien secondaire</td>
+                    <td>Gris → violet hover</td>
+                </tr>
+            </table>
+
+            <h3>✅ Uniformisation appliquée</h3>
+            <ul class="checklist">
+                <li>Mockups avec header gradient bordeaux→violet</li>
+                <li>Prix en noir sur les deux cards</li>
+                <li>CTA gradient identique</li>
+                <li>Badge niveau en bordeaux uppercase</li>
+                <li>Réassurance "Rédigé par enseignants" en bas du Pack (violet)</li>
+                <li>Mention "PDF téléchargeable" claire</li>
+                <li>Emojis cohérents (📄, 🧠, 📚, 🎁, 🛡️, 👨‍🏫, 📥)</li>
+                <li>Hover translateY(-4px) + shadow</li>
+                <li>Border-radius 12px uniforme</li>
+            </ul>
+
+            <h3>📱 Responsive</h3>
+            <table class="specs-table">
+                <tr>
+                    <th>Breakpoint</th>
+                    <th>Pack Fiches</th>
+                    <th>Fiches Unité</th>
+                </tr>
+                <tr>
+                    <td>> 1000px</td>
+                    <td>2 colonnes</td>
+                    <td>4 colonnes</td>
+                </tr>
+                <tr>
+                    <td>600-1000px</td>
+                    <td>1 colonne</td>
+                    <td>2 colonnes</td>
+                </tr>
+                <tr>
+                    <td>< 600px</td>
+                    <td>1 colonne</td>
+                    <td>1 colonne</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</body>
+</html>

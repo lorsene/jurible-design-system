@@ -1,0 +1,1020 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blocs Enseignants — Design System Jurible</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* ═══════════════════════════════════════════════════════════════ */
+        /* DESIGN SYSTEM TOKENS                                            */
+        /* ═══════════════════════════════════════════════════════════════ */
+        :root {
+            /* Couleurs */
+            --color-primary: #B0001D;
+            --color-primary-hover: #9A0019;
+            --color-secondary: #7C3AED;
+            --color-secondary-light: #EDE9FE;
+            --color-success: #10B981;
+            --color-warning: #F59E0B;
+            --color-error: #EF4444;
+            --color-info: #3B82F6;
+            
+            /* Texte */
+            --color-text-dark: #1A1A1A;
+            --color-text-gray: #4A4A4A;
+            --color-text-muted: #9CA3AF;
+            
+            /* Fonds */
+            --color-white: #FFFFFF;
+            --color-background: #F9FAFB;
+            --color-muted: #F3F4F6;
+            --color-border: #E5E7EB;
+            
+            /* Gradient */
+            --gradient-primary: linear-gradient(135deg, #B0001D 0%, #7C3AED 100%);
+            
+            /* Espacements */
+            --space-xs: 8px;
+            --space-sm: 16px;
+            --space-md: 24px;
+            --space-lg: 32px;
+            --space-xl: 48px;
+            --space-2xl: 64px;
+            
+            /* Border Radius */
+            --radius-xs: 4px;
+            --radius-sm: 6px;
+            --radius-md: 8px;
+            --radius-lg: 12px;
+            --radius-xl: 16px;
+            --radius-full: 9999px;
+            
+            /* Shadows */
+            --shadow-sm: 0 1px 3px rgba(0,0,0,0.1), 0 1px 2px rgba(0,0,0,0.06);
+            --shadow-md: 0 4px 6px rgba(0,0,0,0.1), 0 2px 4px rgba(0,0,0,0.06);
+            --shadow-lg: 0 10px 15px rgba(0,0,0,0.1), 0 4px 6px rgba(0,0,0,0.05);
+            
+            /* Transitions */
+            --transition: all 150ms ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: var(--color-background);
+            color: var(--color-text-dark);
+            padding: var(--space-xl);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* Page Header */
+        .page-header {
+            margin-bottom: var(--space-xl);
+        }
+
+        .page-title {
+            font-size: 32px;
+            font-weight: 700;
+            color: var(--color-text-dark);
+            margin-bottom: var(--space-xs);
+        }
+
+        .page-divider {
+            width: 80px;
+            height: 4px;
+            background: var(--gradient-primary);
+            border-radius: var(--radius-full);
+            margin-bottom: var(--space-xs);
+        }
+
+        .page-subtitle {
+            font-size: 15px;
+            color: var(--color-text-muted);
+        }
+
+        /* Section */
+        .section {
+            margin-bottom: var(--space-2xl);
+        }
+
+        .section-label {
+            display: inline-flex;
+            align-items: center;
+            gap: var(--space-xs);
+            background: var(--color-muted);
+            color: var(--color-text-gray);
+            padding: 6px 14px;
+            border-radius: var(--radius-full);
+            font-size: 13px;
+            font-weight: 500;
+            margin-bottom: var(--space-md);
+        }
+
+        /* ═══════════════════════════════════════════════════════════════ */
+        /* BOUTONS (Design System)                                         */
+        /* ═══════════════════════════════════════════════════════════════ */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: var(--space-xs);
+            padding: 12px 24px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 14px;
+            font-weight: 500;
+            border-radius: var(--radius-md);
+            text-decoration: none;
+            cursor: pointer;
+            transition: var(--transition);
+            border: none;
+        }
+
+        /* Primary : Gradient */
+        .btn--primary {
+            background: var(--gradient-primary);
+            color: var(--color-white);
+            box-shadow: var(--shadow-sm);
+        }
+        .btn--primary:hover {
+            box-shadow: var(--shadow-md);
+            transform: translateY(-1px);
+        }
+
+        /* Secondary : Fond noir */
+        .btn--secondary {
+            background: var(--color-text-dark);
+            color: var(--color-white);
+        }
+        .btn--secondary:hover {
+            background: #0F0F0F;
+        }
+
+        /* Outline : Bordure bordeaux */
+        .btn--outline {
+            background: transparent;
+            color: var(--color-primary);
+            border: 2px solid var(--color-primary);
+        }
+        .btn--outline:hover {
+            background: var(--color-primary);
+            color: var(--color-white);
+        }
+
+        /* Ghost : Transparent */
+        .btn--ghost {
+            background: transparent;
+            color: var(--color-text-dark);
+        }
+        .btn--ghost:hover {
+            background: var(--color-muted);
+        }
+
+        /* Link : Texte souligné */
+        .btn--link {
+            background: transparent;
+            color: var(--color-primary);
+            padding: 0;
+            font-weight: 600;
+            text-decoration: none;
+        }
+        .btn--link:hover {
+            text-decoration: underline;
+        }
+
+        /* ═══════════════════════════════════════════════════════════════ */
+        /* BASE SECTION ENSEIGNANTS                                        */
+        /* ═══════════════════════════════════════════════════════════════ */
+        .enseignants-section {
+            background: var(--color-white);
+            border-radius: var(--radius-xl);
+            padding: var(--space-xl);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .enseignants-section__header {
+            text-align: center;
+            margin-bottom: var(--space-lg);
+        }
+
+        .enseignants-section__badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 6px 14px;
+            border-radius: var(--radius-full);
+            font-size: 12px;
+            font-weight: 600;
+            margin-bottom: var(--space-sm);
+            background: var(--color-secondary-light);
+            color: var(--color-secondary);
+        }
+
+        .enseignants-section__title {
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--color-text-dark);
+            margin-bottom: var(--space-sm);
+            line-height: 1.3;
+        }
+
+        .enseignants-section__title .highlight {
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .enseignants-section__subtitle {
+            font-size: 15px;
+            color: var(--color-text-gray);
+            max-width: 700px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+        /* ═══════════════════════════════════════════════════════════════ */
+        /* BLOC 1 : ÉQUIPE VIDÉO                                           */
+        /* Grille 2×2, citations colorées, lien vers cours                 */
+        /* ═══════════════════════════════════════════════════════════════ */
+        .equipe-video__grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: var(--space-md);
+            margin-bottom: var(--space-lg);
+        }
+
+        .equipe-video__card {
+            background: var(--color-muted);
+            border-radius: var(--radius-lg);
+            padding: var(--space-md);
+            display: flex;
+            align-items: flex-end;
+            gap: var(--space-md);
+            min-height: 200px;
+            transition: var(--transition);
+        }
+
+        .equipe-video__card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .equipe-video__content {
+            flex: 1;
+        }
+
+        .equipe-video__quote {
+            font-size: 18px;
+            font-weight: 700;
+            line-height: 1.3;
+            margin-bottom: var(--space-md);
+        }
+
+        /* Couleurs citations (Design System) */
+        .equipe-video__quote--primary { color: var(--color-primary); }
+        .equipe-video__quote--secondary { color: var(--color-secondary); }
+        .equipe-video__quote--warning { color: var(--color-warning); }
+        .equipe-video__quote--success { color: var(--color-success); }
+
+        .equipe-video__name {
+            font-size: 15px;
+            font-weight: 600;
+            color: var(--color-text-dark);
+            margin-bottom: 2px;
+        }
+
+        .equipe-video__role {
+            font-size: 11px;
+            color: var(--color-text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+            line-height: 1.4;
+        }
+
+        .equipe-video__course-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--color-primary);
+            margin-top: var(--space-xs);
+            text-decoration: none;
+        }
+
+        .equipe-video__course-link:hover {
+            text-decoration: underline;
+        }
+
+        .equipe-video__photo {
+            position: relative;
+            flex-shrink: 0;
+        }
+
+        .equipe-video__img-placeholder {
+            width: 140px;
+            height: 160px;
+            background: var(--color-border);
+            border-radius: var(--radius-md);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            color: var(--color-text-muted);
+        }
+
+        .equipe-video__play {
+            position: absolute;
+            bottom: var(--space-sm);
+            right: var(--space-sm);
+            width: 44px;
+            height: 44px;
+            background: var(--color-white);
+            border-radius: var(--radius-full);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: var(--shadow-md);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .equipe-video__play:hover {
+            transform: scale(1.1);
+        }
+
+        .equipe-video__play-icon {
+            width: 0;
+            height: 0;
+            border-left: 12px solid var(--color-primary);
+            border-top: 7px solid transparent;
+            border-bottom: 7px solid transparent;
+            margin-left: 3px;
+        }
+
+        .equipe-video__footer {
+            text-align: center;
+        }
+
+        /* ═══════════════════════════════════════════════════════════════ */
+        /* BLOC 2 : ÉQUIPE TEASER                                          */
+        /* Avatars photos, H2 gradient, btn-secondary                      */
+        /* ═══════════════════════════════════════════════════════════════ */
+        .equipe-teaser {
+            text-align: center;
+            padding: var(--space-lg);
+        }
+
+        .equipe-teaser__avatars {
+            display: flex;
+            justify-content: center;
+            margin-bottom: var(--space-md);
+        }
+
+        .equipe-teaser__avatar {
+            width: 56px;
+            height: 56px;
+            border-radius: var(--radius-full);
+            border: 3px solid var(--color-white);
+            margin-left: -16px;
+            overflow: hidden;
+            box-shadow: var(--shadow-sm);
+            background: var(--color-border);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 11px;
+            color: var(--color-text-muted);
+        }
+
+        .equipe-teaser__avatar:first-child {
+            margin-left: 0;
+        }
+
+        .equipe-teaser__avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .equipe-teaser__avatar--more {
+            background: var(--color-primary);
+            color: var(--color-white);
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .equipe-teaser__title {
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--color-text-dark);
+            margin-bottom: var(--space-sm);
+            line-height: 1.3;
+        }
+
+        .equipe-teaser__title .highlight {
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .equipe-teaser__desc {
+            font-size: 15px;
+            color: var(--color-text-gray);
+            margin-bottom: var(--space-lg);
+            max-width: 550px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.6;
+        }
+
+        /* ═══════════════════════════════════════════════════════════════ */
+        /* BLOC 3 : ENSEIGNANT SPÉCIFIQUE                                  */
+        /* Avatar rond, credentials, citation                              */
+        /* ═══════════════════════════════════════════════════════════════ */
+        .enseignant-specifique {
+            display: flex;
+            gap: var(--space-lg);
+            align-items: flex-start;
+            max-width: 700px;
+            margin: 0 auto;
+            background: var(--color-muted);
+            border-radius: var(--radius-lg);
+            padding: var(--space-lg);
+        }
+
+        .enseignant-specifique__photo {
+            flex-shrink: 0;
+        }
+
+        .enseignant-specifique__avatar-placeholder {
+            width: 100px;
+            height: 100px;
+            border-radius: var(--radius-full);
+            background: var(--color-border);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            color: var(--color-text-muted);
+        }
+
+        .enseignant-specifique__content {
+            flex: 1;
+        }
+
+        .enseignant-specifique__name {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--color-text-dark);
+            margin-bottom: 4px;
+        }
+
+        .enseignant-specifique__role {
+            font-size: 14px;
+            color: var(--color-text-gray);
+            margin-bottom: var(--space-sm);
+        }
+
+        .enseignant-specifique__credentials {
+            list-style: none;
+            margin-bottom: var(--space-sm);
+        }
+
+        .enseignant-specifique__credentials li {
+            display: flex;
+            align-items: center;
+            gap: var(--space-xs);
+            font-size: 13px;
+            color: var(--color-text-gray);
+            padding: 4px 0;
+        }
+
+        .enseignant-specifique__credentials li::before {
+            content: '✓';
+            color: var(--color-success);
+            font-weight: 600;
+        }
+
+        .enseignant-specifique__quote {
+            font-size: 14px;
+            font-style: italic;
+            color: var(--color-primary);
+            padding-left: var(--space-sm);
+            border-left: 3px solid var(--color-primary);
+            margin-top: var(--space-sm);
+        }
+
+        .enseignant-specifique__footer {
+            text-align: center;
+            margin-top: var(--space-md);
+            padding-top: var(--space-md);
+            border-top: 1px solid var(--color-border);
+        }
+
+        .enseignant-specifique__footer-text {
+            font-size: 13px;
+            color: var(--color-text-gray);
+            margin-bottom: var(--space-xs);
+        }
+
+        .enseignant-specifique__footer-text strong {
+            color: var(--color-text-dark);
+        }
+
+        /* ═══════════════════════════════════════════════════════════════ */
+        /* BLOC 4 : AUTEUR COMPACT                                         */
+        /* Conteneur gris + card blanche, bas d'article                    */
+        /* ═══════════════════════════════════════════════════════════════ */
+        .auteur-wrapper {
+            background: var(--color-muted);
+            border-radius: var(--radius-xl);
+            padding: var(--space-lg);
+        }
+
+        .auteur-compact {
+            display: flex;
+            align-items: flex-start;
+            gap: var(--space-md);
+            padding: var(--space-md);
+            background: var(--color-white);
+            border-radius: var(--radius-lg);
+            max-width: 600px;
+        }
+
+        .auteur-compact__photo-placeholder {
+            width: 56px;
+            height: 56px;
+            border-radius: var(--radius-full);
+            background: var(--color-border);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 10px;
+            color: var(--color-text-muted);
+            flex-shrink: 0;
+        }
+
+        .auteur-compact__content {
+            flex: 1;
+        }
+
+        .auteur-compact__label {
+            font-size: 11px;
+            color: var(--color-text-muted);
+            margin-bottom: 2px;
+        }
+
+        .auteur-compact__name {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--color-text-dark);
+            margin-bottom: var(--space-xs);
+        }
+
+        .auteur-compact__bio {
+            font-size: 13px;
+            color: var(--color-text-gray);
+            line-height: 1.5;
+            margin-bottom: var(--space-xs);
+        }
+
+        /* ═══════════════════════════════════════════════════════════════ */
+        /* RESPONSIVE                                                      */
+        /* ═══════════════════════════════════════════════════════════════ */
+        @media (max-width: 900px) {
+            .equipe-video__grid {
+                grid-template-columns: 1fr;
+            }
+
+            .enseignant-specifique {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+            }
+
+            .enseignant-specifique__credentials {
+                display: inline-block;
+                text-align: left;
+            }
+
+            .enseignant-specifique__quote {
+                text-align: left;
+            }
+        }
+
+        @media (max-width: 600px) {
+            body {
+                padding: var(--space-sm);
+            }
+
+            .enseignants-section {
+                padding: var(--space-md);
+            }
+
+            .enseignants-section__title,
+            .equipe-teaser__title {
+                font-size: 22px;
+            }
+
+            .equipe-video__card {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .equipe-video__photo {
+                align-self: flex-end;
+            }
+
+            .auteur-compact {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .auteur-compact__photo-placeholder {
+                margin: 0 auto;
+            }
+        }
+
+        /* ═══════════════════════════════════════════════════════════════ */
+        /* DOCUMENTATION                                                   */
+        /* ═══════════════════════════════════════════════════════════════ */
+        .docs {
+            margin-top: var(--space-xl);
+            padding-top: var(--space-xl);
+            border-top: 1px solid var(--color-border);
+        }
+
+        .docs h2 {
+            font-size: 20px;
+            font-weight: 600;
+            color: var(--color-text-dark);
+            margin-bottom: var(--space-md);
+        }
+
+        .docs h3 {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--color-text-dark);
+            margin: var(--space-md) 0 var(--space-sm);
+        }
+
+        .specs-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 13px;
+            background: var(--color-white);
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            box-shadow: var(--shadow-sm);
+            margin-bottom: var(--space-md);
+        }
+
+        .specs-table th {
+            background: var(--color-muted);
+            font-weight: 600;
+            text-align: left;
+            padding: 12px 16px;
+            color: var(--color-text-dark);
+        }
+
+        .specs-table td {
+            padding: 12px 16px;
+            border-bottom: 1px solid var(--color-border);
+        }
+
+        .specs-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .specs-table code {
+            background: var(--color-muted);
+            padding: 2px 6px;
+            border-radius: var(--radius-xs);
+            font-size: 12px;
+        }
+
+        .color-swatch {
+            display: inline-flex;
+            align-items: center;
+            gap: var(--space-xs);
+            margin-right: var(--space-sm);
+            margin-bottom: var(--space-xs);
+        }
+
+        .color-swatch__preview {
+            width: 20px;
+            height: 20px;
+            border-radius: var(--radius-xs);
+            border: 1px solid var(--color-border);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Page Header -->
+        <div class="page-header">
+            <h1 class="page-title">Blocs Enseignants</h1>
+            <div class="page-divider"></div>
+            <p class="page-subtitle">4 formats selon le contexte d'utilisation</p>
+        </div>
+
+        <!-- ═══════════════════════════════════════════════════════════════ -->
+        <!-- BLOC 1 : ÉQUIPE VIDÉO                                           -->
+        <!-- ═══════════════════════════════════════════════════════════════ -->
+        <div class="section">
+            <span class="section-label">🎬 Bloc 1 — Équipe vidéo (Homepage, Académie)</span>
+
+            <div class="enseignants-section">
+                <div class="enseignants-section__header">
+                    <span class="enseignants-section__badge">👨‍🏫 Notre équipe</span>
+                    <h2 class="enseignants-section__title">Une équipe de <span class="highlight">professionnels diplômés</span></h2>
+                    <p class="enseignants-section__subtitle">Nos 11 enseignants — avocats, doctorants et chargés d'enseignement — sont tous titulaires d'un Master 2 minimum et vous transmettent les clés de la réussite.</p>
+                </div>
+
+                <div class="equipe-video__grid">
+                    <!-- Card 1 -->
+                    <div class="equipe-video__card">
+                        <div class="equipe-video__content">
+                            <p class="equipe-video__quote equipe-video__quote--warning">"Une grosse pression pèse sur vos petites épaules !"</p>
+                            <h3 class="equipe-video__name">Julie Ramsamy</h3>
+                            <p class="equipe-video__role">Avocate en droit public et chargée d'enseignement</p>
+                            <a href="#" class="equipe-video__course-link">Voir le cours de Droit administratif →</a>
+                        </div>
+                        <div class="equipe-video__photo">
+                            <div class="equipe-video__img-placeholder">Photo</div>
+                            <div class="equipe-video__play">
+                                <div class="equipe-video__play-icon"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Card 2 -->
+                    <div class="equipe-video__card">
+                        <div class="equipe-video__content">
+                            <p class="equipe-video__quote equipe-video__quote--success">"Connaître les bases du droit constitutionnel relève de la culture générale !"</p>
+                            <h3 class="equipe-video__name">Raphaël Briguet-Lamarre</h3>
+                            <p class="equipe-video__role">Avocat de formation, ex chargé d'enseignement</p>
+                            <a href="#" class="equipe-video__course-link">Voir le cours de Droit constitutionnel →</a>
+                        </div>
+                        <div class="equipe-video__photo">
+                            <div class="equipe-video__img-placeholder">Photo</div>
+                            <div class="equipe-video__play">
+                                <div class="equipe-video__play-icon"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Card 3 -->
+                    <div class="equipe-video__card">
+                        <div class="equipe-video__content">
+                            <p class="equipe-video__quote equipe-video__quote--primary">"Il faut prendre conscience que le droit pénal est PARTOUT"</p>
+                            <h3 class="equipe-video__name">Megan Léonard</h3>
+                            <p class="equipe-video__role">Doctorante et chargée d'enseignement</p>
+                            <a href="#" class="equipe-video__course-link">Voir le cours de Droit pénal →</a>
+                        </div>
+                        <div class="equipe-video__photo">
+                            <div class="equipe-video__img-placeholder">Photo</div>
+                            <div class="equipe-video__play">
+                                <div class="equipe-video__play-icon"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Card 4 -->
+                    <div class="equipe-video__card">
+                        <div class="equipe-video__content">
+                            <p class="equipe-video__quote equipe-video__quote--secondary">"Le cours d'institutions juridictionnelles vous servira tout le long de vos études !"</p>
+                            <h3 class="equipe-video__name">Didier Okpo</h3>
+                            <p class="equipe-video__role">Avocat en droit fiscal, fondateur "Point Fiscal"</p>
+                            <a href="#" class="equipe-video__course-link">Voir le cours d'Institutions juridictionnelles →</a>
+                        </div>
+                        <div class="equipe-video__photo">
+                            <div class="equipe-video__img-placeholder">Photo</div>
+                            <div class="equipe-video__play">
+                                <div class="equipe-video__play-icon"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="equipe-video__footer">
+                    <button class="btn btn--secondary">Découvrir tous nos enseignants →</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- ═══════════════════════════════════════════════════════════════ -->
+        <!-- BLOC 2 : ÉQUIPE TEASER                                          -->
+        <!-- ═══════════════════════════════════════════════════════════════ -->
+        <div class="section">
+            <span class="section-label">👥 Bloc 2 — Équipe teaser (Prépa, pages secondaires)</span>
+
+            <div class="enseignants-section">
+                <div class="equipe-teaser">
+                    <div class="equipe-teaser__avatars">
+                        <div class="equipe-teaser__avatar">Photo</div>
+                        <div class="equipe-teaser__avatar">Photo</div>
+                        <div class="equipe-teaser__avatar">Photo</div>
+                        <div class="equipe-teaser__avatar">Photo</div>
+                        <div class="equipe-teaser__avatar">Photo</div>
+                        <div class="equipe-teaser__avatar equipe-teaser__avatar--more">+6</div>
+                    </div>
+
+                    <h2 class="equipe-teaser__title">Des enseignants <span class="highlight">passionnés</span></h2>
+                    <p class="equipe-teaser__desc">Tous les contenus sont rédigés par 11 professionnels du droit — avocats, doctorants et chargés d'enseignement — tous titulaires d'un Master 2 minimum.</p>
+
+                    <button class="btn btn--secondary">Découvrir nos enseignants →</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- ═══════════════════════════════════════════════════════════════ -->
+        <!-- BLOC 3 : ENSEIGNANT SPÉCIFIQUE                                  -->
+        <!-- ═══════════════════════════════════════════════════════════════ -->
+        <div class="section">
+            <span class="section-label">🎯 Bloc 3 — Enseignant spécifique (Cours/Fiches par matière)</span>
+
+            <div class="enseignants-section">
+                <div class="enseignants-section__header">
+                    <span class="enseignants-section__badge">👨‍🏫 Votre enseignant</span>
+                    <h2 class="enseignants-section__title">Un cours créé par des <span class="highlight">experts</span></h2>
+                </div>
+
+                <div class="enseignant-specifique">
+                    <div class="enseignant-specifique__photo">
+                        <div class="enseignant-specifique__avatar-placeholder">Photo</div>
+                    </div>
+                    <div class="enseignant-specifique__content">
+                        <h3 class="enseignant-specifique__name">Raphaël Briguet-Lamarre</h3>
+                        <p class="enseignant-specifique__role">Responsable pédagogique — Droit constitutionnel</p>
+                        <ul class="enseignant-specifique__credentials">
+                            <li>Ex-chargé d'enseignement Université de Nice</li>
+                            <li>Ancien avocat inscrit au barreau</li>
+                            <li>Master 2 Droit et pratiques des relations de travail (Assas)</li>
+                        </ul>
+                        <p class="enseignant-specifique__quote">"Connaître les bases du droit constitutionnel relève de la culture générale !"</p>
+                    </div>
+                </div>
+
+                <div class="enseignant-specifique__footer">
+                    <p class="enseignant-specifique__footer-text">Notre équipe pédagogique de <strong>11 enseignants</strong> — avocats, doctorants et chargés d'enseignement — assure la qualité du contenu.</p>
+                    <a href="#" class="btn--link">Découvrir toute l'équipe →</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- ═══════════════════════════════════════════════════════════════ -->
+        <!-- BLOC 4 : AUTEUR COMPACT                                         -->
+        <!-- ═══════════════════════════════════════════════════════════════ -->
+        <div class="section">
+            <span class="section-label">✍️ Bloc 4 — Auteur compact (bas d'article, Fiches PDF, Blog)</span>
+
+            <div class="auteur-wrapper">
+                <div class="auteur-compact">
+                    <div class="auteur-compact__photo-placeholder">Photo</div>
+                    <div class="auteur-compact__content">
+                        <span class="auteur-compact__label">Rédigé par</span>
+                        <h4 class="auteur-compact__name">Raphaël Briguet-Lamarre</h4>
+                        <p class="auteur-compact__bio">Avocat de formation et ancien chargé d'enseignement à l'Université de Nice. Titulaire d'un Master 2 de l'Université Panthéon-Assas Paris II, il met son expertise juridique au service des étudiants.</p>
+                        <a href="#" class="btn--link">Voir tous ses articles →</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ═══════════════════════════════════════════════════════════════ -->
+        <!-- DOCUMENTATION                                                   -->
+        <!-- ═══════════════════════════════════════════════════════════════ -->
+        <div class="docs">
+            <h2>📋 Spécifications — Design System</h2>
+
+            <h3>Tokens utilisés</h3>
+            <table class="specs-table">
+                <tr>
+                    <th>Token</th>
+                    <th>Valeur</th>
+                    <th>Usage</th>
+                </tr>
+                <tr>
+                    <td><code>--radius-md</code></td>
+                    <td>8px</td>
+                    <td>Boutons</td>
+                </tr>
+                <tr>
+                    <td><code>--radius-lg</code></td>
+                    <td>12px</td>
+                    <td>Cards</td>
+                </tr>
+                <tr>
+                    <td><code>--radius-xl</code></td>
+                    <td>16px</td>
+                    <td>Sections</td>
+                </tr>
+                <tr>
+                    <td><code>--radius-full</code></td>
+                    <td>9999px</td>
+                    <td>Avatars, badges</td>
+                </tr>
+            </table>
+
+            <h3>Boutons</h3>
+            <table class="specs-table">
+                <tr>
+                    <th>Type</th>
+                    <th>Style</th>
+                    <th>Classe</th>
+                </tr>
+                <tr>
+                    <td>Primary</td>
+                    <td>Gradient bordeaux→violet</td>
+                    <td><code>.btn--primary</code></td>
+                </tr>
+                <tr>
+                    <td>Secondary</td>
+                    <td>Fond noir #1A1A1A</td>
+                    <td><code>.btn--secondary</code></td>
+                </tr>
+                <tr>
+                    <td>Outline</td>
+                    <td>Bordure bordeaux</td>
+                    <td><code>.btn--outline</code></td>
+                </tr>
+                <tr>
+                    <td>Link</td>
+                    <td>Texte bordeaux</td>
+                    <td><code>.btn--link</code></td>
+                </tr>
+            </table>
+
+            <h3>Couleurs citations</h3>
+            <div style="margin-bottom: var(--space-md);">
+                <div class="color-swatch">
+                    <div class="color-swatch__preview" style="background: #B0001D;"></div>
+                    <span>Primary #B0001D</span>
+                </div>
+                <div class="color-swatch">
+                    <div class="color-swatch__preview" style="background: #7C3AED;"></div>
+                    <span>Secondary #7C3AED</span>
+                </div>
+                <div class="color-swatch">
+                    <div class="color-swatch__preview" style="background: #F59E0B;"></div>
+                    <span>Warning #F59E0B</span>
+                </div>
+                <div class="color-swatch">
+                    <div class="color-swatch__preview" style="background: #10B981;"></div>
+                    <span>Success #10B981</span>
+                </div>
+            </div>
+
+            <h3>4 Blocs disponibles</h3>
+            <table class="specs-table">
+                <tr>
+                    <th>Bloc</th>
+                    <th>Format</th>
+                    <th>Usage</th>
+                </tr>
+                <tr>
+                    <td><strong>Équipe vidéo</strong></td>
+                    <td>Grille 2×2 + citations + lien cours + btn-secondary</td>
+                    <td>Homepage, Académie</td>
+                </tr>
+                <tr>
+                    <td><strong>Équipe teaser</strong></td>
+                    <td>Avatars 56px + H2 gradient + btn-secondary</td>
+                    <td>Prépa, pages secondaires</td>
+                </tr>
+                <tr>
+                    <td><strong>Enseignant spécifique</strong></td>
+                    <td>Avatar rond 100px + credentials + citation</td>
+                    <td>Cours par matière, Fiches</td>
+                </tr>
+                <tr>
+                    <td><strong>Auteur compact</strong></td>
+                    <td>Conteneur gris + card blanche + avatar 56px</td>
+                    <td>Bas d'article, Blog</td>
+                </tr>
+            </table>
+
+            <h3>⚠️ Mention obligatoire</h3>
+            <table class="specs-table">
+                <tr>
+                    <td>"avocats, doctorants et chargés d'enseignement — tous titulaires d'un Master 2 minimum"</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</body>
+</html>

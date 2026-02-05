@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jurible Design System — Hero Simple (Type D)</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --color-primary: #B0001D;
+            --color-secondary: #7C3AED;
+            --color-text-dark: #1A1A1A;
+            --color-text-gray: #4A4A4A;
+            --color-text-muted: #9CA3AF;
+            --color-background: #FFFFFF;
+            --color-muted: #F3F4F6;
+            --color-border: #E5E7EB;
+            --gradient-jurible: linear-gradient(135deg, #B0001D 0%, #DC2626 50%, #7C3AED 100%);
+            --gradient-hero-bg: linear-gradient(180deg, #FFFFFF 0%, #FAFAFE 50%, #F5F3FF 100%);
+            --space-xs: 8px; --space-sm: 16px; --space-md: 24px; --space-lg: 32px;
+            --space-xl: 48px; --space-3xl: 80px;
+            --radius-lg: 12px; --radius-full: 9999px;
+            --font-family: 'Poppins', sans-serif;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: var(--font-family); background: var(--color-background); color: var(--color-text-dark); line-height: 1.5; }
+        .page-container { max-width: 1400px; margin: 0 auto; padding: var(--space-xl); }
+        .page-header { margin-bottom: var(--space-xl); }
+        .page-title { font-size: 42px; font-weight: 700; margin-bottom: var(--space-xs); }
+        .page-divider { height: 3px; width: 120px; background: var(--gradient-jurible); border-radius: var(--radius-full); }
+        .section { margin-bottom: var(--space-3xl); }
+        .section-header { margin-bottom: var(--space-lg); }
+        .section-title { font-size: 24px; font-weight: 600; margin-bottom: 4px; }
+        .section-divider { height: 1px; background: var(--color-border); margin: var(--space-3xl) 0; }
+        .component-label { font-size: 11px; color: var(--color-text-muted); text-transform: uppercase; letter-spacing: 0.5px; font-weight: 600; display: inline-block; background: var(--color-muted); padding: 4px 10px; border-radius: 4px; }
+        .preview-row { display: flex; flex-direction: column; gap: var(--space-lg); }
+        .preview-desktop { border: 1px solid var(--color-border); border-radius: var(--radius-lg); overflow: hidden; background: white; }
+        .preview-mobile { width: 375px; border: 1px solid var(--color-border); border-radius: var(--radius-lg); overflow: hidden; background: white; }
+
+        /* ==================== HERO D — TEMPLATE UNIQUE ==================== */
+        .hero-d {
+            background: var(--gradient-hero-bg);
+            padding: var(--space-xl) var(--space-xl) var(--space-lg);
+            text-align: center;
+        }
+        .hero-d__container { max-width: 640px; margin: 0 auto; }
+        .hero-d__badge {
+            display: inline-flex; align-items: center; gap: 6px;
+            background: rgba(124,58,237,0.1); border: 1px solid rgba(124,58,237,0.2);
+            color: var(--color-secondary); font-size: 13px; font-weight: 600;
+            padding: 5px 14px; border-radius: var(--radius-full); margin-bottom: var(--space-sm);
+            animation: fadeInUp .5s ease both; animation-delay: .05s;
+        }
+        .hero-d__title {
+            font-size: 36px; font-weight: 800; line-height: 1.15;
+            color: var(--color-text-dark); margin-bottom: var(--space-sm);
+            animation: fadeInUp .5s ease both; animation-delay: .1s;
+        }
+        .hero-d__subtitle {
+            font-size: 16px; color: var(--color-text-gray); line-height: 1.7;
+            max-width: 520px; margin: 0 auto;
+            animation: fadeInUp .5s ease both; animation-delay: .15s;
+        }
+        .hero-d__separator {
+            width: 48px; height: 3px; background: var(--gradient-jurible);
+            border-radius: var(--radius-full); margin: var(--space-md) auto 0;
+            animation: fadeInUp .5s ease both; animation-delay: .2s;
+        }
+
+        .hero-d--mobile { padding: var(--space-md) var(--space-sm) var(--space-sm); }
+        .hero-d--mobile .hero-d__title { font-size: 26px; }
+        .hero-d--mobile .hero-d__subtitle { font-size: 14px; }
+        .hero-d--mobile .hero-d__badge { font-size: 12px; }
+
+        @keyframes fadeInUp { from{opacity:0;transform:translateY(12px)} to{opacity:1;transform:translateY(0)} }
+        @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration: 0.01ms !important; } }
+    </style>
+</head>
+<body>
+<div class="page-container">
+    <header class="page-header">
+        <h1 class="page-title">Hero Simple (Type D)</h1>
+        <div class="page-divider"></div>
+        <p style="margin-top:12px;font-size:14px;color:var(--color-text-muted);">Template unique — Badge + Titre + Sous-titre + Séparateur gradient · Centré, fond lilas léger</p>
+    </header>
+
+    <!-- À PROPOS -->
+    <section class="section">
+        <div class="section-header"><h2 class="section-title">D — À propos / Équipe</h2></div>
+        <div class="preview-row">
+            <div class="preview-desktop">
+                <span class="component-label" style="margin:16px;">Desktop</span>
+                <div class="hero-d"><div class="hero-d__container">
+                    <span class="hero-d__badge">🏛️ Notre mission</span>
+                    <h1 class="hero-d__title">Qui sommes-nous ?</h1>
+                    <p class="hero-d__subtitle">Jurible est né d'une conviction : chaque étudiant en droit mérite des outils de qualité pour réussir sa licence. Découvrez l'équipe et le projet derrière la plateforme.</p>
+                    <div class="hero-d__separator"></div>
+                </div></div>
+            </div>
+            <div class="preview-mobile">
+                <span class="component-label" style="margin:12px;">Mobile 375px</span>
+                <div class="hero-d hero-d--mobile"><div class="hero-d__container">
+                    <span class="hero-d__badge">🏛️ Notre mission</span>
+                    <h1 class="hero-d__title">Qui sommes-nous ?</h1>
+                    <p class="hero-d__subtitle">Découvrez l'équipe et le projet derrière Jurible.</p>
+                    <div class="hero-d__separator"></div>
+                </div></div>
+            </div>
+        </div>
+    </section>
+
+    <div class="section-divider"></div>
+
+    <!-- CONTACT -->
+    <section class="section">
+        <div class="section-header"><h2 class="section-title">D — Contact</h2></div>
+        <div class="preview-row">
+            <div class="preview-desktop">
+                <span class="component-label" style="margin:16px;">Desktop</span>
+                <div class="hero-d"><div class="hero-d__container">
+                    <span class="hero-d__badge">✉️ Contact</span>
+                    <h1 class="hero-d__title">Une question ? Écrivez-nous</h1>
+                    <p class="hero-d__subtitle">Notre équipe vous répond sous 48h. Que ce soit pour une question sur votre abonnement, un problème technique ou une suggestion, nous sommes là pour vous.</p>
+                    <div class="hero-d__separator"></div>
+                </div></div>
+            </div>
+        </div>
+    </section>
+
+    <div class="section-divider"></div>
+
+    <!-- FAQ -->
+    <section class="section">
+        <div class="section-header"><h2 class="section-title">D — FAQ / Centre d'aide</h2></div>
+        <div class="preview-row">
+            <div class="preview-desktop">
+                <span class="component-label" style="margin:16px;">Desktop</span>
+                <div class="hero-d"><div class="hero-d__container">
+                    <span class="hero-d__badge">❓ Centre d'aide</span>
+                    <h1 class="hero-d__title">Questions fréquentes</h1>
+                    <p class="hero-d__subtitle">Retrouvez les réponses aux questions les plus posées sur l'abonnement, les cours, les fiches et les outils Jurible.</p>
+                    <div class="hero-d__separator"></div>
+                </div></div>
+            </div>
+        </div>
+    </section>
+
+    <div class="section-divider"></div>
+
+    <!-- CGV -->
+    <section class="section">
+        <div class="section-header"><h2 class="section-title">D — Conditions Générales de Vente</h2></div>
+        <div class="preview-row">
+            <div class="preview-desktop">
+                <span class="component-label" style="margin:16px;">Desktop</span>
+                <div class="hero-d"><div class="hero-d__container">
+                    <span class="hero-d__badge">📜 Juridique</span>
+                    <h1 class="hero-d__title">Conditions Générales de Vente</h1>
+                    <p class="hero-d__subtitle">Dernière mise à jour : 15 janvier 2026</p>
+                    <div class="hero-d__separator"></div>
+                </div></div>
+            </div>
+        </div>
+    </section>
+
+    <div class="section-divider"></div>
+
+    <!-- CGU -->
+    <section class="section">
+        <div class="section-header"><h2 class="section-title">D — Conditions Générales d'Utilisation</h2></div>
+        <div class="preview-row">
+            <div class="preview-desktop">
+                <span class="component-label" style="margin:16px;">Desktop</span>
+                <div class="hero-d"><div class="hero-d__container">
+                    <span class="hero-d__badge">📜 Juridique</span>
+                    <h1 class="hero-d__title">Conditions Générales d'Utilisation</h1>
+                    <p class="hero-d__subtitle">Dernière mise à jour : 15 janvier 2026</p>
+                    <div class="hero-d__separator"></div>
+                </div></div>
+            </div>
+        </div>
+    </section>
+
+    <div class="section-divider"></div>
+
+    <!-- MENTIONS LÉGALES -->
+    <section class="section">
+        <div class="section-header"><h2 class="section-title">D — Mentions légales</h2></div>
+        <div class="preview-row">
+            <div class="preview-desktop">
+                <span class="component-label" style="margin:16px;">Desktop</span>
+                <div class="hero-d"><div class="hero-d__container">
+                    <span class="hero-d__badge">📜 Juridique</span>
+                    <h1 class="hero-d__title">Mentions légales</h1>
+                    <p class="hero-d__subtitle">Dernière mise à jour : 10 décembre 2025</p>
+                    <div class="hero-d__separator"></div>
+                </div></div>
+            </div>
+        </div>
+    </section>
+
+    <div class="section-divider"></div>
+
+    <!-- CONFIDENTIALITÉ -->
+    <section class="section">
+        <div class="section-header"><h2 class="section-title">D — Politique de confidentialité</h2></div>
+        <div class="preview-row">
+            <div class="preview-desktop">
+                <span class="component-label" style="margin:16px;">Desktop</span>
+                <div class="hero-d"><div class="hero-d__container">
+                    <span class="hero-d__badge">📜 Juridique</span>
+                    <h1 class="hero-d__title">Politique de confidentialité</h1>
+                    <p class="hero-d__subtitle">Dernière mise à jour : 10 décembre 2025</p>
+                    <div class="hero-d__separator"></div>
+                </div></div>
+            </div>
+        </div>
+    </section>
+
+    <div class="section-divider"></div>
+
+    <!-- RÉCAPITULATIF -->
+    <section class="section">
+        <div class="section-header"><h2 class="section-title">📋 Récapitulatif Type D</h2></div>
+        <div style="background:rgba(124,58,237,0.05);border:1px solid rgba(124,58,237,0.2);border-radius:var(--radius-lg);padding:var(--space-md);margin-bottom:var(--space-lg);">
+            <p style="font-weight:600;margin-bottom:12px;">🔑 Template unique — Contenu variable</p>
+            <table style="width:100%;border-collapse:collapse;font-size:13px;">
+                <thead>
+                    <tr style="background:var(--color-muted);">
+                        <th style="padding:10px;text-align:left;border:1px solid var(--color-border);">Page</th>
+                        <th style="padding:10px;text-align:left;border:1px solid var(--color-border);">Badge</th>
+                        <th style="padding:10px;text-align:left;border:1px solid var(--color-border);">Titre</th>
+                        <th style="padding:10px;text-align:left;border:1px solid var(--color-border);">Sous-titre</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td style="padding:10px;border:1px solid var(--color-border);font-weight:600;">À propos</td><td style="padding:10px;border:1px solid var(--color-border);">🏛️ Notre mission</td><td style="padding:10px;border:1px solid var(--color-border);">Qui sommes-nous ?</td><td style="padding:10px;border:1px solid var(--color-border);">Description équipe + projet</td></tr>
+                    <tr><td style="padding:10px;border:1px solid var(--color-border);font-weight:600;">Contact</td><td style="padding:10px;border:1px solid var(--color-border);">✉️ Contact</td><td style="padding:10px;border:1px solid var(--color-border);">Une question ? Écrivez-nous</td><td style="padding:10px;border:1px solid var(--color-border);">Réponse sous 48h</td></tr>
+                    <tr><td style="padding:10px;border:1px solid var(--color-border);font-weight:600;">FAQ</td><td style="padding:10px;border:1px solid var(--color-border);">❓ Centre d'aide</td><td style="padding:10px;border:1px solid var(--color-border);">Questions fréquentes</td><td style="padding:10px;border:1px solid var(--color-border);">Description contenu FAQ</td></tr>
+                    <tr><td style="padding:10px;border:1px solid var(--color-border);font-weight:600;">CGV</td><td style="padding:10px;border:1px solid var(--color-border);">📜 Juridique</td><td style="padding:10px;border:1px solid var(--color-border);">Conditions Générales de Vente</td><td style="padding:10px;border:1px solid var(--color-border);">Date de mise à jour</td></tr>
+                    <tr><td style="padding:10px;border:1px solid var(--color-border);font-weight:600;">CGU</td><td style="padding:10px;border:1px solid var(--color-border);">📜 Juridique</td><td style="padding:10px;border:1px solid var(--color-border);">Conditions Générales d'Utilisation</td><td style="padding:10px;border:1px solid var(--color-border);">Date de mise à jour</td></tr>
+                    <tr><td style="padding:10px;border:1px solid var(--color-border);font-weight:600;">Mentions</td><td style="padding:10px;border:1px solid var(--color-border);">📜 Juridique</td><td style="padding:10px;border:1px solid var(--color-border);">Mentions légales</td><td style="padding:10px;border:1px solid var(--color-border);">Date de mise à jour</td></tr>
+                    <tr><td style="padding:10px;border:1px solid var(--color-border);font-weight:600;">Confidentialité</td><td style="padding:10px;border:1px solid var(--color-border);">📜 Juridique</td><td style="padding:10px;border:1px solid var(--color-border);">Politique de confidentialité</td><td style="padding:10px;border:1px solid var(--color-border);">Date de mise à jour</td></tr>
+                </tbody>
+            </table>
+        </div>
+        <div style="background:var(--color-muted);border-radius:var(--radius-lg);padding:var(--space-md);">
+            <p style="font-weight:600;margin-bottom:8px;">📐 Anatomie du template</p>
+            <p style="font-size:13px;color:var(--color-text-gray);line-height:1.8;">
+                1. <strong>Badge</strong> — emoji + label contextuel<br>
+                2. <strong>Titre</strong> — h1, 36px desktop / 26px mobile<br>
+                3. <strong>Sous-titre</strong> — description ou date de mise à jour<br>
+                4. <strong>Séparateur</strong> — trait gradient Jurible 48px
+            </p>
+        </div>
+    </section>
+</div>
+</body>
+</html>

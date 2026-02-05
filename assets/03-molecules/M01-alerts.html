@@ -1,0 +1,821 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jurible Design System — Alerts</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            /* Colors */
+            --color-primary: #B0001D;
+            --color-secondary: #7C3AED;
+            --color-text-dark: #1A1A1A;
+            --color-text-gray: #4A4A4A;
+            --color-text-muted: #9CA3AF;
+            --color-background: #FFFFFF;
+            --color-muted: #F3F4F6;
+            --color-border: #E5E7EB;
+            
+            /* Semantic Colors */
+            --color-info: #3B82F6;
+            --color-info-bg: #EFF6FF;
+            --color-info-text: #1E40AF;
+            
+            --color-success: #10B981;
+            --color-success-bg: #ECFDF5;
+            --color-success-text: #065F46;
+            
+            --color-warning: #F59E0B;
+            --color-warning-bg: #FFFBEB;
+            --color-warning-text: #92400E;
+            
+            --color-error: #EF4444;
+            --color-error-bg: #FEF2F2;
+            --color-error-text: #991B1B;
+            
+            --color-accent-bg: #F5F3FF;
+            --color-accent-text: #5B21B6;
+            
+            --font-family: 'Poppins', sans-serif;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: var(--font-family);
+            background: var(--color-background);
+            color: var(--color-text-dark);
+            padding: 48px 80px;
+            max-width: 1280px;
+            margin: 0 auto;
+        }
+
+        .page-header { margin-bottom: 48px; }
+
+        .page-title {
+            font-size: 48px;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .page-divider {
+            height: 3px;
+            width: 120px;
+            background: linear-gradient(90deg, #B0001D 0%, #DC2626 50%, #7C3AED 100%);
+            border-radius: 9999px;
+        }
+
+        .section {
+            margin-bottom: 48px;
+        }
+
+        .section-title {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 24px;
+            color: var(--color-text-dark);
+        }
+
+        .section-divider {
+            height: 1px;
+            background: var(--color-border);
+            margin: 48px 0;
+        }
+
+        .component-label {
+            font-size: 12px;
+            color: var(--color-text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-weight: 500;
+            margin-bottom: 12px;
+        }
+
+        .alerts-stack {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        /* ==================== ALERT BASE ==================== */
+        .alert {
+            display: flex;
+            align-items: flex-start;
+            gap: 16px;
+            padding: 16px;
+            border-radius: 12px;
+            position: relative;
+        }
+
+        .alert-icon {
+            width: 20px;
+            height: 20px;
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+
+        .alert-content {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .alert-title {
+            font-size: 14px;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .alert-description {
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+        .alert-actions {
+            display: flex;
+            gap: 16px;
+            margin-top: 16px;
+        }
+
+        .alert-close {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            opacity: 0.5;
+            transition: opacity 0.15s ease;
+        }
+
+        .alert-close:hover {
+            opacity: 1;
+        }
+
+        /* Alert Buttons */
+        .alert-btn {
+            padding: 8px 16px;
+            font-family: var(--font-family);
+            font-size: 13px;
+            font-weight: 500;
+            border-radius: 6px;
+            border: none;
+            cursor: pointer;
+            transition: all 0.15s ease;
+        }
+
+        .alert-btn--primary {
+            color: white;
+        }
+
+        .alert-btn--secondary {
+            background: transparent;
+            border: 1px solid;
+        }
+
+        /* ==================== INFO ALERT ==================== */
+        .alert--info {
+            background: var(--color-info-bg);
+        }
+
+        .alert--info .alert-icon {
+            color: var(--color-info);
+        }
+
+        .alert--info .alert-title {
+            color: var(--color-info);
+        }
+
+        .alert--info .alert-description {
+            color: var(--color-info-text);
+        }
+
+        .alert--info .alert-close {
+            color: var(--color-info);
+        }
+
+        .alert--info .alert-btn--primary {
+            background: var(--color-info);
+        }
+
+        .alert--info .alert-btn--secondary {
+            color: var(--color-info);
+            border-color: var(--color-info);
+        }
+
+        /* ==================== SUCCESS ALERT ==================== */
+        .alert--success {
+            background: var(--color-success-bg);
+        }
+
+        .alert--success .alert-icon {
+            color: var(--color-success);
+        }
+
+        .alert--success .alert-title {
+            color: var(--color-success);
+        }
+
+        .alert--success .alert-description {
+            color: var(--color-success-text);
+        }
+
+        .alert--success .alert-close {
+            color: var(--color-success);
+        }
+
+        .alert--success .alert-btn--primary {
+            background: var(--color-success);
+        }
+
+        .alert--success .alert-btn--secondary {
+            color: var(--color-success);
+            border-color: var(--color-success);
+        }
+
+        /* ==================== WARNING ALERT ==================== */
+        .alert--warning {
+            background: var(--color-warning-bg);
+        }
+
+        .alert--warning .alert-icon {
+            color: var(--color-warning);
+        }
+
+        .alert--warning .alert-title {
+            color: var(--color-warning);
+        }
+
+        .alert--warning .alert-description {
+            color: var(--color-warning-text);
+        }
+
+        .alert--warning .alert-close {
+            color: var(--color-warning);
+        }
+
+        .alert--warning .alert-btn--primary {
+            background: var(--color-warning);
+        }
+
+        .alert--warning .alert-btn--secondary {
+            color: var(--color-warning);
+            border-color: var(--color-warning);
+        }
+
+        /* ==================== ERROR ALERT ==================== */
+        .alert--error {
+            background: var(--color-error-bg);
+        }
+
+        .alert--error .alert-icon {
+            color: var(--color-error);
+        }
+
+        .alert--error .alert-title {
+            color: var(--color-error);
+        }
+
+        .alert--error .alert-description {
+            color: var(--color-error-text);
+        }
+
+        .alert--error .alert-close {
+            color: var(--color-error);
+        }
+
+        .alert--error .alert-btn--primary {
+            background: var(--color-error);
+        }
+
+        .alert--error .alert-btn--secondary {
+            color: var(--color-error);
+            border-color: var(--color-error);
+        }
+
+        /* ==================== ACCENT ALERT ==================== */
+        .alert--accent {
+            background: var(--color-accent-bg);
+        }
+
+        .alert--accent .alert-icon {
+            color: var(--color-secondary);
+        }
+
+        .alert--accent .alert-title {
+            color: var(--color-secondary);
+        }
+
+        .alert--accent .alert-description {
+            color: var(--color-accent-text);
+        }
+
+        .alert--accent .alert-close {
+            color: var(--color-secondary);
+        }
+
+        .alert--accent .alert-btn--primary {
+            background: var(--color-secondary);
+        }
+
+        .alert--accent .alert-btn--secondary {
+            color: var(--color-secondary);
+            border-color: var(--color-secondary);
+        }
+
+        /* ==================== INLINE ALERT (compact) ==================== */
+        .alert--inline {
+            padding: 16px;
+            align-items: center;
+        }
+
+        .alert--inline .alert-icon {
+            margin-top: 0;
+        }
+
+        .alert--inline .alert-title {
+            margin-bottom: 0;
+            font-size: 14px;
+        }
+
+        /* ==================== INFO BOX ==================== */
+        .info-box {
+            background: var(--color-muted);
+            border-radius: 12px;
+            padding: 24px;
+            margin-top: 24px;
+        }
+
+        .info-box--dark {
+            background: var(--color-text-dark);
+            color: white;
+        }
+
+        .info-title {
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 16px;
+        }
+
+        .specs-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 8px 24px;
+            font-size: 13px;
+        }
+
+        .specs-item {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .specs-label {
+            color: var(--color-text-muted);
+        }
+
+        .specs-value {
+            font-weight: 500;
+            font-family: 'SF Mono', monospace;
+            font-size: 12px;
+        }
+
+        /* Color swatches */
+        .color-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 16px;
+            margin-top: 24px;
+        }
+
+        .color-item {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .color-swatch {
+            height: 48px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .color-swatch span {
+            font-size: 11px;
+            font-weight: 600;
+        }
+
+        .color-name {
+            font-size: 12px;
+            font-weight: 500;
+            color: var(--color-text-dark);
+        }
+
+        .color-hex {
+            font-size: 11px;
+            color: var(--color-text-muted);
+            font-family: 'SF Mono', monospace;
+        }
+    </style>
+</head>
+<body>
+
+<div class="page-header">
+    <h1 class="page-title">alerts</h1>
+    <div class="page-divider"></div>
+</div>
+
+<!-- ==================== ALERT TYPES ==================== -->
+<div class="section">
+    <h2 class="section-title">Types</h2>
+    
+    <div class="alerts-stack">
+        <!-- Info -->
+        <p class="component-label">Info</p>
+        <div class="alert alert--info">
+            <svg class="alert-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="10"></circle>
+                <path d="M12 16v-4"></path>
+                <path d="M12 8h.01"></path>
+            </svg>
+            <div class="alert-content">
+                <p class="alert-title">Information</p>
+                <p class="alert-description">Votre essai gratuit de 7 jours vous donne accès à l'ensemble des ressources de la plateforme.</p>
+                <div class="alert-actions">
+                    <button class="alert-btn alert-btn--primary">Découvrir les cours</button>
+                    <button class="alert-btn alert-btn--secondary">En savoir plus</button>
+                </div>
+            </div>
+            <div class="alert-close">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M18 6 6 18"></path>
+                    <path d="m6 6 12 12"></path>
+                </svg>
+            </div>
+        </div>
+
+        <!-- Success -->
+        <p class="component-label" style="margin-top: 24px;">Success</p>
+        <div class="alert alert--success">
+            <svg class="alert-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="10"></circle>
+                <path d="m9 12 2 2 4-4"></path>
+            </svg>
+            <div class="alert-content">
+                <p class="alert-title">Inscription confirmée</p>
+                <p class="alert-description">Félicitations ! Votre compte a été créé avec succès. Vous pouvez maintenant accéder à tous vos cours.</p>
+                <div class="alert-actions">
+                    <button class="alert-btn alert-btn--primary">Accéder à mes cours</button>
+                    <button class="alert-btn alert-btn--secondary">Voir mon profil</button>
+                </div>
+            </div>
+            <div class="alert-close">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M18 6 6 18"></path>
+                    <path d="m6 6 12 12"></path>
+                </svg>
+            </div>
+        </div>
+
+        <!-- Warning -->
+        <p class="component-label" style="margin-top: 24px;">Warning</p>
+        <div class="alert alert--warning">
+            <svg class="alert-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"></path>
+                <path d="M12 9v4"></path>
+                <path d="M12 17h.01"></path>
+            </svg>
+            <div class="alert-content">
+                <p class="alert-title">Essai bientôt terminé</p>
+                <p class="alert-description">Votre période d'essai expire dans 3 jours. Abonnez-vous pour continuer à accéder à toutes les ressources.</p>
+                <div class="alert-actions">
+                    <button class="alert-btn alert-btn--primary">S'abonner maintenant</button>
+                    <button class="alert-btn alert-btn--secondary">Voir les formules</button>
+                </div>
+            </div>
+            <div class="alert-close">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M18 6 6 18"></path>
+                    <path d="m6 6 12 12"></path>
+                </svg>
+            </div>
+        </div>
+
+        <!-- Error -->
+        <p class="component-label" style="margin-top: 24px;">Error</p>
+        <div class="alert alert--error">
+            <svg class="alert-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="10"></circle>
+                <path d="m15 9-6 6"></path>
+                <path d="m9 9 6 6"></path>
+            </svg>
+            <div class="alert-content">
+                <p class="alert-title">Échec du paiement</p>
+                <p class="alert-description">Votre paiement n'a pas pu être traité. Veuillez vérifier vos informations bancaires et réessayer.</p>
+                <div class="alert-actions">
+                    <button class="alert-btn alert-btn--primary">Réessayer</button>
+                    <button class="alert-btn alert-btn--secondary">Contacter le support</button>
+                </div>
+            </div>
+            <div class="alert-close">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M18 6 6 18"></path>
+                    <path d="m6 6 12 12"></path>
+                </svg>
+            </div>
+        </div>
+
+        <!-- Accent -->
+        <p class="component-label" style="margin-top: 24px;">Accent (Nouveau / Promo)</p>
+        <div class="alert alert--accent">
+            <svg class="alert-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M9.937 15.5A2 2 0 0 0 8.5 14.063l-6.135-1.582a.5.5 0 0 1 0-.962L8.5 9.936A2 2 0 0 0 9.937 8.5l1.582-6.135a.5.5 0 0 1 .963 0L14.063 8.5A2 2 0 0 0 15.5 9.937l6.135 1.581a.5.5 0 0 1 0 .964L15.5 14.063a2 2 0 0 0-1.437 1.437l-1.582 6.135a.5.5 0 0 1-.963 0z"></path>
+            </svg>
+            <div class="alert-content">
+                <p class="alert-title">Nouveau : Flashcards disponibles !</p>
+                <p class="alert-description">Révisez efficacement avec nos nouvelles flashcards interactives pour chaque matière.</p>
+                <div class="alert-actions">
+                    <button class="alert-btn alert-btn--primary">Découvrir</button>
+                    <button class="alert-btn alert-btn--secondary">En savoir plus</button>
+                </div>
+            </div>
+            <div class="alert-close">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M18 6 6 18"></path>
+                    <path d="m6 6 12 12"></path>
+                </svg>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="section-divider"></div>
+
+<!-- ==================== INLINE ALERTS ==================== -->
+<div class="section">
+    <h2 class="section-title">Inline (compact)</h2>
+    <p style="color: var(--color-text-muted); font-size: 14px; margin-bottom: 24px;">Sans boutons, pour les notifications courtes</p>
+    
+    <div class="alerts-stack">
+        <div class="alert alert--info alert--inline">
+            <svg class="alert-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="10"></circle>
+                <path d="M12 16v-4"></path>
+                <path d="M12 8h.01"></path>
+            </svg>
+            <div class="alert-content">
+                <p class="alert-title">Maintenance prévue le 15 janvier de 2h à 4h.</p>
+            </div>
+            <div class="alert-close">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M18 6 6 18"></path>
+                    <path d="m6 6 12 12"></path>
+                </svg>
+            </div>
+        </div>
+
+        <div class="alert alert--success alert--inline">
+            <svg class="alert-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="10"></circle>
+                <path d="m9 12 2 2 4-4"></path>
+            </svg>
+            <div class="alert-content">
+                <p class="alert-title">Votre fiche de révision a été téléchargée avec succès.</p>
+            </div>
+            <div class="alert-close">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M18 6 6 18"></path>
+                    <path d="m6 6 12 12"></path>
+                </svg>
+            </div>
+        </div>
+
+        <div class="alert alert--warning alert--inline">
+            <svg class="alert-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"></path>
+                <path d="M12 9v4"></path>
+                <path d="M12 17h.01"></path>
+            </svg>
+            <div class="alert-content">
+                <p class="alert-title">Complétez votre profil pour bénéficier de recommandations personnalisées.</p>
+            </div>
+            <div class="alert-close">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M18 6 6 18"></path>
+                    <path d="m6 6 12 12"></path>
+                </svg>
+            </div>
+        </div>
+
+        <div class="alert alert--error alert--inline">
+            <svg class="alert-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="10"></circle>
+                <path d="m15 9-6 6"></path>
+                <path d="m9 9 6 6"></path>
+            </svg>
+            <div class="alert-content">
+                <p class="alert-title">Identifiants incorrects. Veuillez vérifier votre email et mot de passe.</p>
+            </div>
+            <div class="alert-close">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M18 6 6 18"></path>
+                    <path d="m6 6 12 12"></path>
+                </svg>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="section-divider"></div>
+
+<!-- ==================== SPECIFICATIONS ==================== -->
+<div class="info-box">
+    <p class="info-title">Specifications</p>
+    <div class="specs-grid">
+        <div class="specs-item">
+            <span class="specs-label">Padding</span>
+            <span class="specs-value">16px (sm)</span>
+        </div>
+        <div class="specs-item">
+            <span class="specs-label">Gap icon-content</span>
+            <span class="specs-value">16px (sm)</span>
+        </div>
+        <div class="specs-item">
+            <span class="specs-label">Border Radius</span>
+            <span class="specs-value">12px (l)</span>
+        </div>
+        <div class="specs-item">
+            <span class="specs-label">Icon Size</span>
+            <span class="specs-value">20px</span>
+        </div>
+        <div class="specs-item">
+            <span class="specs-label">Title</span>
+            <span class="specs-value">14px / 700</span>
+        </div>
+        <div class="specs-item">
+            <span class="specs-label">Title margin-bottom</span>
+            <span class="specs-value">8px (xs)</span>
+        </div>
+        <div class="specs-item">
+            <span class="specs-label">Description</span>
+            <span class="specs-value">14px / 400</span>
+        </div>
+        <div class="specs-item">
+            <span class="specs-label">Actions gap</span>
+            <span class="specs-value">16px (sm)</span>
+        </div>
+    </div>
+</div>
+
+<!-- ==================== COLORS ==================== -->
+<div class="section" style="margin-top: 32px;">
+    <h2 class="section-title">Colors</h2>
+    
+    <div class="color-grid">
+        <!-- Info -->
+        <div class="color-item">
+            <div class="color-swatch" style="background: #EFF6FF;">
+                <span style="color: #3B82F6;">Info</span>
+            </div>
+            <p class="color-name">Background</p>
+            <p class="color-hex">#EFF6FF</p>
+        </div>
+        
+        <!-- Success -->
+        <div class="color-item">
+            <div class="color-swatch" style="background: #ECFDF5;">
+                <span style="color: #10B981;">Success</span>
+            </div>
+            <p class="color-name">Background</p>
+            <p class="color-hex">#ECFDF5</p>
+        </div>
+        
+        <!-- Warning -->
+        <div class="color-item">
+            <div class="color-swatch" style="background: #FFFBEB;">
+                <span style="color: #F59E0B;">Warning</span>
+            </div>
+            <p class="color-name">Background</p>
+            <p class="color-hex">#FFFBEB</p>
+        </div>
+        
+        <!-- Error -->
+        <div class="color-item">
+            <div class="color-swatch" style="background: #FEF2F2;">
+                <span style="color: #EF4444;">Error</span>
+            </div>
+            <p class="color-name">Background</p>
+            <p class="color-hex">#FEF2F2</p>
+        </div>
+        
+        <!-- Accent -->
+        <div class="color-item">
+            <div class="color-swatch" style="background: #F5F3FF;">
+                <span style="color: #7C3AED;">Accent</span>
+            </div>
+            <p class="color-name">Background</p>
+            <p class="color-hex">#F5F3FF</p>
+        </div>
+    </div>
+
+    <div class="color-grid" style="margin-top: 16px;">
+        <!-- Info Icon -->
+        <div class="color-item">
+            <div class="color-swatch" style="background: #3B82F6;">
+                <span style="color: white;">Icon</span>
+            </div>
+            <p class="color-name">Icon / Title</p>
+            <p class="color-hex">#3B82F6</p>
+        </div>
+        
+        <!-- Success Icon -->
+        <div class="color-item">
+            <div class="color-swatch" style="background: #10B981;">
+                <span style="color: white;">Icon</span>
+            </div>
+            <p class="color-name">Icon / Title</p>
+            <p class="color-hex">#10B981</p>
+        </div>
+        
+        <!-- Warning Icon -->
+        <div class="color-item">
+            <div class="color-swatch" style="background: #F59E0B;">
+                <span style="color: white;">Icon</span>
+            </div>
+            <p class="color-name">Icon / Title</p>
+            <p class="color-hex">#F59E0B</p>
+        </div>
+        
+        <!-- Error Icon -->
+        <div class="color-item">
+            <div class="color-swatch" style="background: #EF4444;">
+                <span style="color: white;">Icon</span>
+            </div>
+            <p class="color-name">Icon / Title</p>
+            <p class="color-hex">#EF4444</p>
+        </div>
+        
+        <!-- Accent Icon -->
+        <div class="color-item">
+            <div class="color-swatch" style="background: #7C3AED;">
+                <span style="color: white;">Icon</span>
+            </div>
+            <p class="color-name">Icon / Title</p>
+            <p class="color-hex">#7C3AED</p>
+        </div>
+    </div>
+
+    <div class="color-grid" style="margin-top: 16px;">
+        <!-- Info Text -->
+        <div class="color-item">
+            <div class="color-swatch" style="background: #1E40AF;">
+                <span style="color: white;">Text</span>
+            </div>
+            <p class="color-name">Description</p>
+            <p class="color-hex">#1E40AF</p>
+        </div>
+        
+        <!-- Success Text -->
+        <div class="color-item">
+            <div class="color-swatch" style="background: #065F46;">
+                <span style="color: white;">Text</span>
+            </div>
+            <p class="color-name">Description</p>
+            <p class="color-hex">#065F46</p>
+        </div>
+        
+        <!-- Warning Text -->
+        <div class="color-item">
+            <div class="color-swatch" style="background: #92400E;">
+                <span style="color: white;">Text</span>
+            </div>
+            <p class="color-name">Description</p>
+            <p class="color-hex">#92400E</p>
+        </div>
+        
+        <!-- Error Text -->
+        <div class="color-item">
+            <div class="color-swatch" style="background: #991B1B;">
+                <span style="color: white;">Text</span>
+            </div>
+            <p class="color-name">Description</p>
+            <p class="color-hex">#991B1B</p>
+        </div>
+        
+        <!-- Accent Text -->
+        <div class="color-item">
+            <div class="color-swatch" style="background: #5B21B6;">
+                <span style="color: white;">Text</span>
+            </div>
+            <p class="color-name">Description</p>
+            <p class="color-hex">#5B21B6</p>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

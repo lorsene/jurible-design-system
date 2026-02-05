@@ -1,0 +1,735 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jurible Design System — Emoji Library</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --color-primary: #B0001D;
+            --color-secondary: #7C3AED;
+            --color-text-dark: #1A1A1A;
+            --color-text-gray: #4A4A4A;
+            --color-text-muted: #9CA3AF;
+            --color-background: #FFFFFF;
+            --color-muted: #F3F4F6;
+            --color-border: #E5E7EB;
+            --font-family: 'Poppins', sans-serif;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: var(--font-family);
+            background: var(--color-background);
+            color: var(--color-text-dark);
+            padding: 48px 80px;
+            max-width: 1440px;
+            margin: 0 auto;
+        }
+
+        .page-header {
+            margin-bottom: 48px;
+        }
+
+        .page-title {
+            font-size: 48px;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .page-divider {
+            height: 3px;
+            width: 120px;
+            background: linear-gradient(90deg, #B0001D 0%, #DC2626 50%, #7C3AED 100%);
+            border-radius: 9999px;
+        }
+
+        .page-subtitle {
+            font-size: 16px;
+            color: var(--color-text-muted);
+            margin-top: 16px;
+        }
+
+        .section {
+            margin-bottom: 40px;
+        }
+
+        .category-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 16px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid var(--color-border);
+        }
+
+        .category-icon {
+            font-size: 24px;
+        }
+
+        .category-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--color-text-dark);
+        }
+
+        .category-count {
+            font-size: 12px;
+            color: var(--color-text-muted);
+            background: var(--color-muted);
+            padding: 2px 8px;
+            border-radius: 12px;
+        }
+
+        .emoji-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(64px, 1fr));
+            gap: 8px;
+        }
+
+        .emoji-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 12px 8px;
+            border: 1px solid transparent;
+            border-radius: 8px;
+            transition: all 0.15s ease;
+            cursor: pointer;
+        }
+
+        .emoji-item:hover {
+            border-color: var(--color-border);
+            background: var(--color-muted);
+        }
+
+        .emoji-icon {
+            font-size: 28px;
+            line-height: 1;
+        }
+
+        .section-divider {
+            height: 1px;
+            background: var(--color-border);
+            margin: 40px 0;
+        }
+
+        /* Quick Reference */
+        .quick-ref {
+            background: var(--color-muted);
+            border-radius: 12px;
+            padding: 24px;
+            margin-bottom: 48px;
+        }
+
+        .quick-ref-title {
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 16px;
+        }
+
+        .quick-ref-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 12px;
+        }
+
+        .quick-ref-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 13px;
+            color: var(--color-text-gray);
+        }
+
+        .quick-ref-emoji {
+            font-size: 18px;
+        }
+
+        /* Tailles */
+        .sizes-section {
+            background: var(--color-text-dark);
+            border-radius: 12px;
+            padding: 24px;
+            margin-top: 48px;
+            color: white;
+        }
+
+        .sizes-title {
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 16px;
+        }
+
+        .sizes-row {
+            display: flex;
+            align-items: flex-end;
+            gap: 32px;
+        }
+
+        .size-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .size-label {
+            font-size: 11px;
+            color: var(--color-text-muted);
+            font-family: 'SF Mono', monospace;
+        }
+    </style>
+</head>
+<body>
+
+<div class="page-header">
+    <h1 class="page-title">emoji library</h1>
+    <div class="page-divider"></div>
+    <p class="page-subtitle">Bibliothèque complète d'emojis pour l'interface Jurible</p>
+</div>
+
+<!-- Quick Reference -->
+<div class="quick-ref">
+    <p class="quick-ref-title">Emojis les plus utilisés</p>
+    <div class="quick-ref-grid">
+        <div class="quick-ref-item"><span class="quick-ref-emoji">✅</span> Succès / Validé</div>
+        <div class="quick-ref-item"><span class="quick-ref-emoji">❌</span> Erreur / Fermé</div>
+        <div class="quick-ref-item"><span class="quick-ref-emoji">⚠️</span> Attention</div>
+        <div class="quick-ref-item"><span class="quick-ref-emoji">💡</span> Astuce / Info</div>
+        <div class="quick-ref-item"><span class="quick-ref-emoji">🎯</span> Objectif</div>
+        <div class="quick-ref-item"><span class="quick-ref-emoji">🚀</span> Lancer / Go</div>
+        <div class="quick-ref-item"><span class="quick-ref-emoji">✨</span> Nouveau / IA</div>
+        <div class="quick-ref-item"><span class="quick-ref-emoji">🔒</span> Premium</div>
+    </div>
+</div>
+
+<!-- ==================== UI / ICÔNES ==================== -->
+<div class="section">
+    <div class="category-header">
+        <span class="category-icon">🎨</span>
+        <span class="category-title">UI / Icônes</span>
+        <span class="category-count">48</span>
+    </div>
+    <div class="emoji-grid">
+        <div class="emoji-item"><span class="emoji-icon">✅</span></div>
+        <div class="emoji-item"><span class="emoji-icon">☑️</span></div>
+        <div class="emoji-item"><span class="emoji-icon">✔️</span></div>
+        <div class="emoji-item"><span class="emoji-icon">❌</span></div>
+        <div class="emoji-item"><span class="emoji-icon">❎</span></div>
+        <div class="emoji-item"><span class="emoji-icon">⭕</span></div>
+        <div class="emoji-item"><span class="emoji-icon">⚠️</span></div>
+        <div class="emoji-item"><span class="emoji-icon">🚫</span></div>
+        <div class="emoji-item"><span class="emoji-icon">⛔</span></div>
+        <div class="emoji-item"><span class="emoji-icon">🔴</span></div>
+        <div class="emoji-item"><span class="emoji-icon">🟠</span></div>
+        <div class="emoji-item"><span class="emoji-icon">🟡</span></div>
+        <div class="emoji-item"><span class="emoji-icon">🟢</span></div>
+        <div class="emoji-item"><span class="emoji-icon">🔵</span></div>
+        <div class="emoji-item"><span class="emoji-icon">🟣</span></div>
+        <div class="emoji-item"><span class="emoji-icon">⚫</span></div>
+        <div class="emoji-item"><span class="emoji-icon">⚪</span></div>
+        <div class="emoji-item"><span class="emoji-icon">🔘</span></div>
+        <div class="emoji-item"><span class="emoji-icon">ℹ️</span></div>
+        <div class="emoji-item"><span class="emoji-icon">❓</span></div>
+        <div class="emoji-item"><span class="emoji-icon">❔</span></div>
+        <div class="emoji-item"><span class="emoji-icon">❗</span></div>
+        <div class="emoji-item"><span class="emoji-icon">❕</span></div>
+        <div class="emoji-item"><span class="emoji-icon">💬</span></div>
+        <div class="emoji-item"><span class="emoji-icon">💭</span></div>
+        <div class="emoji-item"><span class="emoji-icon">🗨️</span></div>
+        <div class="emoji-item"><span class="emoji-icon">🗯️</span></div>
+        <div class="emoji-item"><span class="emoji-icon">⭐</span></div>
+        <div class="emoji-item"><span class="emoji-icon">🌟</span></div>
+        <div class="emoji-item"><span class="emoji-icon">✨</span></div>
+        <div class="emoji-item"><span class="emoji-icon">💫</span></div>
+        <div class="emoji-item"><span class="emoji-icon">⚡</span></div>
+        <div class="emoji-item"><span class="emoji-icon">🔥</span></div>
+        <div class="emoji-item"><span class="emoji-icon">💡</span></div>
+        <div class="emoji-item"><span class="emoji-icon">🔔</span></div>
+        <div class="emoji-item"><span class="emoji-icon">🔕</span></div>
+        <div class="emoji-item"><span class="emoji-icon">🔗</span></div>
+        <div class="emoji-item"><span class="emoji-icon">📎</span></div>
+        <div class="emoji-item"><span class="emoji-icon">📌</span></div>
+        <div class="emoji-item"><span class="emoji-icon">📍</span></div>
+        <div class="emoji-item"><span class="emoji-icon">🏷️</span></div>
+        <div class="emoji-item"><span class="emoji-icon">🆕</span></div>
+        <div class="emoji-item"><span class="emoji-icon">🆓</span></div>
+        <div class="emoji-item"><span class="emoji-icon">🆙</span></div>
+        <div class="emoji-item"><span class="emoji-icon">🆗</span></div>
+        <div class="emoji-item"><span class="emoji-icon">🆒</span></div>
+        <div class="emoji-item"><span class="emoji-icon">🔤</span></div>
+        <div class="emoji-item"><span class="emoji-icon">🔢</span></div>
+    </div>
+</div>
+
+<!-- ==================== FLÈCHES / NAVIGATION ==================== -->
+<div class="section">
+    <div class="category-header">
+        <span class="category-icon">➡️</span>
+        <span class="category-title">Flèches / Navigation</span>
+        <span class="category-count">32</span>
+    </div>
+    <div class="emoji-grid">
+        <div class="emoji-item"><span class="emoji-icon">⬆️</span></div>
+        <div class="emoji-item"><span class="emoji-icon">⬇️</span></div>
+        <div class="emoji-item"><span class="emoji-icon">⬅️</span></div>
+        <div class="emoji-item"><span class="emoji-icon">➡️</span></div>
+        <div class="emoji-item"><span class="emoji-icon">↗️</span></div>
+        <div class="emoji-item"><span class="emoji-icon">↘️</span></div>
+        <div class="emoji-item"><span class="emoji-icon">↙️</span></div>
+        <div class="emoji-item"><span class="emoji-icon">↖️</span></div>
+        <div class="emoji-item"><span class="emoji-icon">↕️</span></div>
+        <div class="emoji-item"><span class="emoji-icon">↔️</span></div>
+        <div class="emoji-item"><span class="emoji-icon">🔄</span></div>
+        <div class="emoji-item"><span class="emoji-icon">🔃</span></div>
+        <div class="emoji-item"><span class="emoji-icon">🔙</span></div>
+        <div class="emoji-item"><span class="emoji-icon">🔚</span></div>
+        <div class="emoji-item"><span class="emoji-icon">🔛</span></div>
+        <div class="emoji-item"><span class="emoji-icon">🔜</span></div>
+        <div class="emoji-item"><span class="emoji-icon">🔝</span></div>
+        <div class="emoji-item"><span class="emoji-icon">⏩</span></div>
+        <div class="emoji-item"><span class="emoji-icon">⏪</span></div>
+        <div class="emoji-item"><span class="emoji-icon">⏫</span></div>
+        <div class="emoji-item"><span class="emoji-icon">⏬</span></div>
+        <div class="emoji-item"><span class="emoji-icon">▶️</span></div>
+        <div class="emoji-item"><span class="emoji-icon">◀️</span></div>
+        <div class="emoji-item"><span class="emoji-icon">⏸️</span></div>
+        <div class="emoji-item"><span class="emoji-icon">⏹️</span></div>
+        <div class="emoji-item"><span class="emoji-icon">⏺️</span></div>
+        <div class="emoji-item"><span class="emoji-icon">⏭️</span></div>
+        <div class="emoji-item"><span class="emoji-icon">⏮️</span></div>
+        <div class="emoji-item"><span class="emoji-icon">🔀</span></div>
+        <div class="emoji-item"><span class="emoji-icon">🔁</span></div>
+        <div class="emoji-item"><span class="emoji-icon">🔂</span></div>
+        <div class="emoji-item"><span class="emoji-icon">➕</span></div>
+        <div class="emoji-item"><span class="emoji-icon">➖</span></div>
+        <div class="emoji-item"><span class="emoji-icon">➗</span></div>
+        <div class="emoji-item"><span class="emoji-icon">✖️</span></div>
+    </div>
+</div>
+
+<!-- ==================== RÉUSSITE / SUCCÈS ==================== -->
+<div class="section">
+    <div class="category-header">
+        <span class="category-icon">🏆</span>
+        <span class="category-title">Réussite / Succès</span>
+        <span class="category-count">28</span>
+    </div>
+    <div class="emoji-grid">
+        <div class="emoji-item"><span class="emoji-icon">🏆</span></div>
+        <div class="emoji-item"><span class="emoji-icon">🥇</span></div>
+        <div class="emoji-item"><span class="emoji-icon">🥈</span></div>
+        <div class="emoji-item"><span class="emoji-icon">🥉</span></div>
+        <div class="emoji-item"><span class="emoji-icon">🎖️</span></div>
+        <div class="emoji-item"><span class="emoji-icon">🏅</span></div>
+        <div class="emoji-item"><span class="emoji-icon">🎗️</span></div>
+        <div class="emoji-item"><span class="emoji-icon">👑</span></div>
+        <div class="emoji-item"><span class="emoji-icon">💎</span></div>
+        <div class="emoji-item"><span class="emoji-icon">🌟</span></div>
+        <div class="emoji-item"><span class="emoji-icon">⭐</span></div>
+        <div class="emoji-item"><span class="emoji-icon">✨</span></div>
+        <div class="emoji-item"><span class="emoji-icon">🎉</span></div>
+        <div class="emoji-item"><span class="emoji-icon">🎊</span></div>
+        <div class="emoji-item"><span class="emoji-icon">🎯</span></div>
+        <div class="emoji-item"><span class="emoji-icon">🚀</span></div>
+        <div class="emoji-item"><span class="emoji-icon">💪</span></div>
+        <div class="emoji-item"><span class="emoji-icon">👏</span></div>
+        <div class="emoji-item"><span class="emoji-icon">👍</span></div>
+        <div class="emoji-item"><span class="emoji-icon">🙌</span></div>
+        <div class="emoji-item"><span class="emoji-icon">🤩</span></div>
+        <div class="emoji-item"><span class="emoji-icon">😎</span></div>
+        <div class="emoji-item"><span class="emoji-icon">🔥</span></div>
+        <div class="emoji-item"><span class="emoji-icon">💯</span></div>
+        <div class="emoji-item"><span class="emoji-icon">🎓</span></div>
+        <div class="emoji-item"><span class="emoji-icon">📈</span></div>
+        <div class="emoji-item"><span class="emoji-icon">✅</span></div>
+        <div class="emoji-item"><span class="emoji-icon">🌈</span></div>
+    </div>
+</div>
+
+<!-- ==================== OBJECTIFS / PROGRESSION ==================== -->
+<div class="section">
+    <div class="category-header">
+        <span class="category-icon">🎯</span>
+        <span class="category-title">Objectifs / Progression</span>
+        <span class="category-count">24</span>
+    </div>
+    <div class="emoji-grid">
+        <div class="emoji-item"><span class="emoji-icon">🎯</span></div>
+        <div class="emoji-item"><span class="emoji-icon">🎪</span></div>
+        <div class="emoji-item"><span class="emoji-icon">🏁</span></div>
+        <div class="emoji-item"><span class="emoji-icon">🚩</span></div>
+        <div class="emoji-item"><span class="emoji-icon">📊</span></div>
+        <div class="emoji-item"><span class="emoji-icon">📈</span></div>
+        <div class="emoji-item"><span class="emoji-icon">📉</span></div>
+        <div class="emoji-item"><span class="emoji-icon">📋</span></div>
+        <div class="emoji-item"><span class="emoji-icon">📝</span></div>
+        <div class="emoji-item"><span class="emoji-icon">✏️</span></div>
+        <div class="emoji-item"><span class="emoji-icon">📌</span></div>
+        <div class="emoji-item"><span class="emoji-icon">🗓️</span></div>
+        <div class="emoji-item"><span class="emoji-icon">📅</span></div>
+        <div class="emoji-item"><span class="emoji-icon">⏰</span></div>
+        <div class="emoji-item"><span class="emoji-icon">⏱️</span></div>
+        <div class="emoji-item"><span class="emoji-icon">⌛</span></div>
+        <div class="emoji-item"><span class="emoji-icon">⏳</span></div>
+        <div class="emoji-item"><span class="emoji-icon">🔜</span></div>
+        <div class="emoji-item"><span class="emoji-icon">🔛</span></div>
+        <div class="emoji-item"><span class="emoji-icon">🔚</span></div>
+        <div class="emoji-item"><span class="emoji-icon">🔄</span></div>
+        <div class="emoji-item"><span class="emoji-icon">📍</span></div>
+        <div class="emoji-item"><span class="emoji-icon">🗺️</span></div>
+        <div class="emoji-item"><span class="emoji-icon">🧭</span></div>
+    </div>
+</div>
+
+<!-- ==================== ÉDUCATION / ENSEIGNEMENT ==================== -->
+<div class="section">
+    <div class="category-header">
+        <span class="category-icon">📚</span>
+        <span class="category-title">Éducation / Enseignement</span>
+        <span class="category-count">36</span>
+    </div>
+    <div class="emoji-grid">
+        <div class="emoji-item"><span class="emoji-icon">📚</span></div>
+        <div class="emoji-item"><span class="emoji-icon">📖</span></div>
+        <div class="emoji-item"><span class="emoji-icon">📕</span></div>
+        <div class="emoji-item"><span class="emoji-icon">📗</span></div>
+        <div class="emoji-item"><span class="emoji-icon">📘</span></div>
+        <div class="emoji-item"><span class="emoji-icon">📙</span></div>
+        <div class="emoji-item"><span class="emoji-icon">📓</span></div>
+        <div class="emoji-item"><span class="emoji-icon">📒</span></div>
+        <div class="emoji-item"><span class="emoji-icon">📔</span></div>
+        <div class="emoji-item"><span class="emoji-icon">📝</span></div>
+        <div class="emoji-item"><span class="emoji-icon">📄</span></div>
+        <div class="emoji-item"><span class="emoji-icon">📃</span></div>
+        <div class="emoji-item"><span class="emoji-icon">📑</span></div>
+        <div class="emoji-item"><span class="emoji-icon">🗂️</span></div>
+        <div class="emoji-item"><span class="emoji-icon">📂</span></div>
+        <div class="emoji-item"><span class="emoji-icon">📁</span></div>
+        <div class="emoji-item"><span class="emoji-icon">🎓</span></div>
+        <div class="emoji-item"><span class="emoji-icon">🏫</span></div>
+        <div class="emoji-item"><span class="emoji-icon">🏛️</span></div>
+        <div class="emoji-item"><span class="emoji-icon">✏️</span></div>
+        <div class="emoji-item"><span class="emoji-icon">🖊️</span></div>
+        <div class="emoji-item"><span class="emoji-icon">🖋️</span></div>
+        <div class="emoji-item"><span class="emoji-icon">✒️</span></div>
+        <div class="emoji-item"><span class="emoji-icon">📏</span></div>
+        <div class="emoji-item"><span class="emoji-icon">📐</span></div>
+        <div class="emoji-item"><span class="emoji-icon">🔖</span></div>
+        <div class="emoji-item"><span class="emoji-icon">🏷️</span></div>
+        <div class="emoji-item"><span class="emoji-icon">👨‍🏫</span></div>
+        <div class="emoji-item"><span class="emoji-icon">👩‍🏫</span></div>
+        <div class="emoji-item"><span class="emoji-icon">👨‍🎓</span></div>
+        <div class="emoji-item"><span class="emoji-icon">👩‍🎓</span></div>
+        <div class="emoji-item"><span class="emoji-icon">🧑‍🎓</span></div>
+        <div class="emoji-item"><span class="emoji-icon">🧠</span></div>
+        <div class="emoji-item"><span class="emoji-icon">💭</span></div>
+        <div class="emoji-item"><span class="emoji-icon">💡</span></div>
+        <div class="emoji-item"><span class="emoji-icon">🎴</span></div>
+    </div>
+</div>
+
+<!-- ==================== DROIT / JURIDIQUE ==================== -->
+<div class="section">
+    <div class="category-header">
+        <span class="category-icon">⚖️</span>
+        <span class="category-title">Droit / Juridique</span>
+        <span class="category-count">20</span>
+    </div>
+    <div class="emoji-grid">
+        <div class="emoji-item"><span class="emoji-icon">⚖️</span></div>
+        <div class="emoji-item"><span class="emoji-icon">📜</span></div>
+        <div class="emoji-item"><span class="emoji-icon">📋</span></div>
+        <div class="emoji-item"><span class="emoji-icon">🏛️</span></div>
+        <div class="emoji-item"><span class="emoji-icon">🏢</span></div>
+        <div class="emoji-item"><span class="emoji-icon">👨‍⚖️</span></div>
+        <div class="emoji-item"><span class="emoji-icon">👩‍⚖️</span></div>
+        <div class="emoji-item"><span class="emoji-icon">👨‍💼</span></div>
+        <div class="emoji-item"><span class="emoji-icon">👩‍💼</span></div>
+        <div class="emoji-item"><span class="emoji-icon">🔏</span></div>
+        <div class="emoji-item"><span class="emoji-icon">🔐</span></div>
+        <div class="emoji-item"><span class="emoji-icon">🔒</span></div>
+        <div class="emoji-item"><span class="emoji-icon">🔓</span></div>
+        <div class="emoji-item"><span class="emoji-icon">📰</span></div>
+        <div class="emoji-item"><span class="emoji-icon">🗞️</span></div>
+        <div class="emoji-item"><span class="emoji-icon">✍️</span></div>
+        <div class="emoji-item"><span class="emoji-icon">🖋️</span></div>
+        <div class="emoji-item"><span class="emoji-icon">🤝</span></div>
+        <div class="emoji-item"><span class="emoji-icon">💼</span></div>
+        <div class="emoji-item"><span class="emoji-icon">🗳️</span></div>
+    </div>
+</div>
+
+<!-- ==================== TECHNOLOGIE / IA ==================== -->
+<div class="section">
+    <div class="category-header">
+        <span class="category-icon">🤖</span>
+        <span class="category-title">Technologie / IA</span>
+        <span class="category-count">32</span>
+    </div>
+    <div class="emoji-grid">
+        <div class="emoji-item"><span class="emoji-icon">🤖</span></div>
+        <div class="emoji-item"><span class="emoji-icon">🧠</span></div>
+        <div class="emoji-item"><span class="emoji-icon">✨</span></div>
+        <div class="emoji-item"><span class="emoji-icon">💫</span></div>
+        <div class="emoji-item"><span class="emoji-icon">⚡</span></div>
+        <div class="emoji-item"><span class="emoji-icon">🔮</span></div>
+        <div class="emoji-item"><span class="emoji-icon">💻</span></div>
+        <div class="emoji-item"><span class="emoji-icon">🖥️</span></div>
+        <div class="emoji-item"><span class="emoji-icon">📱</span></div>
+        <div class="emoji-item"><span class="emoji-icon">📲</span></div>
+        <div class="emoji-item"><span class="emoji-icon">⌨️</span></div>
+        <div class="emoji-item"><span class="emoji-icon">🖱️</span></div>
+        <div class="emoji-item"><span class="emoji-icon">💾</span></div>
+        <div class="emoji-item"><span class="emoji-icon">💿</span></div>
+        <div class="emoji-item"><span class="emoji-icon">📀</span></div>
+        <div class="emoji-item"><span class="emoji-icon">🔌</span></div>
+        <div class="emoji-item"><span class="emoji-icon">🔋</span></div>
+        <div class="emoji-item"><span class="emoji-icon">📡</span></div>
+        <div class="emoji-item"><span class="emoji-icon">🛰️</span></div>
+        <div class="emoji-item"><span class="emoji-icon">🌐</span></div>
+        <div class="emoji-item"><span class="emoji-icon">🔗</span></div>
+        <div class="emoji-item"><span class="emoji-icon">⚙️</span></div>
+        <div class="emoji-item"><span class="emoji-icon">🔧</span></div>
+        <div class="emoji-item"><span class="emoji-icon">🔩</span></div>
+        <div class="emoji-item"><span class="emoji-icon">🛠️</span></div>
+        <div class="emoji-item"><span class="emoji-icon">📊</span></div>
+        <div class="emoji-item"><span class="emoji-icon">📈</span></div>
+        <div class="emoji-item"><span class="emoji-icon">🔬</span></div>
+        <div class="emoji-item"><span class="emoji-icon">🔭</span></div>
+        <div class="emoji-item"><span class="emoji-icon">💎</span></div>
+        <div class="emoji-item"><span class="emoji-icon">🧪</span></div>
+        <div class="emoji-item"><span class="emoji-icon">🧬</span></div>
+    </div>
+</div>
+
+<!-- ==================== RECHERCHE / ANALYSE ==================== -->
+<div class="section">
+    <div class="category-header">
+        <span class="category-icon">🔍</span>
+        <span class="category-title">Recherche / Analyse</span>
+        <span class="category-count">20</span>
+    </div>
+    <div class="emoji-grid">
+        <div class="emoji-item"><span class="emoji-icon">🔍</span></div>
+        <div class="emoji-item"><span class="emoji-icon">🔎</span></div>
+        <div class="emoji-item"><span class="emoji-icon">🔬</span></div>
+        <div class="emoji-item"><span class="emoji-icon">🔭</span></div>
+        <div class="emoji-item"><span class="emoji-icon">📊</span></div>
+        <div class="emoji-item"><span class="emoji-icon">📈</span></div>
+        <div class="emoji-item"><span class="emoji-icon">📉</span></div>
+        <div class="emoji-item"><span class="emoji-icon">🧮</span></div>
+        <div class="emoji-item"><span class="emoji-icon">📋</span></div>
+        <div class="emoji-item"><span class="emoji-icon">📑</span></div>
+        <div class="emoji-item"><span class="emoji-icon">🗂️</span></div>
+        <div class="emoji-item"><span class="emoji-icon">🗃️</span></div>
+        <div class="emoji-item"><span class="emoji-icon">🗄️</span></div>
+        <div class="emoji-item"><span class="emoji-icon">👁️</span></div>
+        <div class="emoji-item"><span class="emoji-icon">👀</span></div>
+        <div class="emoji-item"><span class="emoji-icon">🧐</span></div>
+        <div class="emoji-item"><span class="emoji-icon">🤔</span></div>
+        <div class="emoji-item"><span class="emoji-icon">💭</span></div>
+        <div class="emoji-item"><span class="emoji-icon">🧠</span></div>
+        <div class="emoji-item"><span class="emoji-icon">📝</span></div>
+    </div>
+</div>
+
+<!-- ==================== COMMUNICATION ==================== -->
+<div class="section">
+    <div class="category-header">
+        <span class="category-icon">💬</span>
+        <span class="category-title">Communication</span>
+        <span class="category-count">24</span>
+    </div>
+    <div class="emoji-grid">
+        <div class="emoji-item"><span class="emoji-icon">💬</span></div>
+        <div class="emoji-item"><span class="emoji-icon">💭</span></div>
+        <div class="emoji-item"><span class="emoji-icon">🗨️</span></div>
+        <div class="emoji-item"><span class="emoji-icon">🗯️</span></div>
+        <div class="emoji-item"><span class="emoji-icon">📢</span></div>
+        <div class="emoji-item"><span class="emoji-icon">📣</span></div>
+        <div class="emoji-item"><span class="emoji-icon">📯</span></div>
+        <div class="emoji-item"><span class="emoji-icon">🔔</span></div>
+        <div class="emoji-item"><span class="emoji-icon">🔕</span></div>
+        <div class="emoji-item"><span class="emoji-icon">📧</span></div>
+        <div class="emoji-item"><span class="emoji-icon">📨</span></div>
+        <div class="emoji-item"><span class="emoji-icon">📩</span></div>
+        <div class="emoji-item"><span class="emoji-icon">📤</span></div>
+        <div class="emoji-item"><span class="emoji-icon">📥</span></div>
+        <div class="emoji-item"><span class="emoji-icon">📬</span></div>
+        <div class="emoji-item"><span class="emoji-icon">📭</span></div>
+        <div class="emoji-item"><span class="emoji-icon">📮</span></div>
+        <div class="emoji-item"><span class="emoji-icon">✉️</span></div>
+        <div class="emoji-item"><span class="emoji-icon">📝</span></div>
+        <div class="emoji-item"><span class="emoji-icon">🖊️</span></div>
+        <div class="emoji-item"><span class="emoji-icon">📞</span></div>
+        <div class="emoji-item"><span class="emoji-icon">📲</span></div>
+        <div class="emoji-item"><span class="emoji-icon">🎙️</span></div>
+        <div class="emoji-item"><span class="emoji-icon">🎤</span></div>
+    </div>
+</div>
+
+<!-- ==================== MÉDIAS / CONTENUS ==================== -->
+<div class="section">
+    <div class="category-header">
+        <span class="category-icon">🎬</span>
+        <span class="category-title">Médias / Contenus</span>
+        <span class="category-count">28</span>
+    </div>
+    <div class="emoji-grid">
+        <div class="emoji-item"><span class="emoji-icon">🎬</span></div>
+        <div class="emoji-item"><span class="emoji-icon">📹</span></div>
+        <div class="emoji-item"><span class="emoji-icon">📽️</span></div>
+        <div class="emoji-item"><span class="emoji-icon">🎥</span></div>
+        <div class="emoji-item"><span class="emoji-icon">📺</span></div>
+        <div class="emoji-item"><span class="emoji-icon">📷</span></div>
+        <div class="emoji-item"><span class="emoji-icon">📸</span></div>
+        <div class="emoji-item"><span class="emoji-icon">🖼️</span></div>
+        <div class="emoji-item"><span class="emoji-icon">🎧</span></div>
+        <div class="emoji-item"><span class="emoji-icon">🎵</span></div>
+        <div class="emoji-item"><span class="emoji-icon">🎶</span></div>
+        <div class="emoji-item"><span class="emoji-icon">🎙️</span></div>
+        <div class="emoji-item"><span class="emoji-icon">🎤</span></div>
+        <div class="emoji-item"><span class="emoji-icon">🔊</span></div>
+        <div class="emoji-item"><span class="emoji-icon">🔉</span></div>
+        <div class="emoji-item"><span class="emoji-icon">🔈</span></div>
+        <div class="emoji-item"><span class="emoji-icon">🔇</span></div>
+        <div class="emoji-item"><span class="emoji-icon">📄</span></div>
+        <div class="emoji-item"><span class="emoji-icon">📃</span></div>
+        <div class="emoji-item"><span class="emoji-icon">📑</span></div>
+        <div class="emoji-item"><span class="emoji-icon">📰</span></div>
+        <div class="emoji-item"><span class="emoji-icon">🗞️</span></div>
+        <div class="emoji-item"><span class="emoji-icon">📊</span></div>
+        <div class="emoji-item"><span class="emoji-icon">📈</span></div>
+        <div class="emoji-item"><span class="emoji-icon">🎨</span></div>
+        <div class="emoji-item"><span class="emoji-icon">🖌️</span></div>
+        <div class="emoji-item"><span class="emoji-icon">🖍️</span></div>
+        <div class="emoji-item"><span class="emoji-icon">📐</span></div>
+    </div>
+</div>
+
+<!-- ==================== ACCÈS / SÉCURITÉ ==================== -->
+<div class="section">
+    <div class="category-header">
+        <span class="category-icon">🔒</span>
+        <span class="category-title">Accès / Sécurité</span>
+        <span class="category-count">20</span>
+    </div>
+    <div class="emoji-grid">
+        <div class="emoji-item"><span class="emoji-icon">🔒</span></div>
+        <div class="emoji-item"><span class="emoji-icon">🔓</span></div>
+        <div class="emoji-item"><span class="emoji-icon">🔐</span></div>
+        <div class="emoji-item"><span class="emoji-icon">🔏</span></div>
+        <div class="emoji-item"><span class="emoji-icon">🔑</span></div>
+        <div class="emoji-item"><span class="emoji-icon">🗝️</span></div>
+        <div class="emoji-item"><span class="emoji-icon">🛡️</span></div>
+        <div class="emoji-item"><span class="emoji-icon">⚔️</span></div>
+        <div class="emoji-item"><span class="emoji-icon">🚪</span></div>
+        <div class="emoji-item"><span class="emoji-icon">👤</span></div>
+        <div class="emoji-item"><span class="emoji-icon">👥</span></div>
+        <div class="emoji-item"><span class="emoji-icon">🧑‍💻</span></div>
+        <div class="emoji-item"><span class="emoji-icon">👁️</span></div>
+        <div class="emoji-item"><span class="emoji-icon">🔕</span></div>
+        <div class="emoji-item"><span class="emoji-icon">🚫</span></div>
+        <div class="emoji-item"><span class="emoji-icon">⛔</span></div>
+        <div class="emoji-item"><span class="emoji-icon">🆔</span></div>
+        <div class="emoji-item"><span class="emoji-icon">🪪</span></div>
+        <div class="emoji-item"><span class="emoji-icon">✅</span></div>
+        <div class="emoji-item"><span class="emoji-icon">❌</span></div>
+    </div>
+</div>
+
+<!-- ==================== NIVEAUX / CHIFFRES ==================== -->
+<div class="section">
+    <div class="category-header">
+        <span class="category-icon">🔢</span>
+        <span class="category-title">Niveaux / Chiffres</span>
+        <span class="category-count">15</span>
+    </div>
+    <div class="emoji-grid">
+        <div class="emoji-item"><span class="emoji-icon">0️⃣</span></div>
+        <div class="emoji-item"><span class="emoji-icon">1️⃣</span></div>
+        <div class="emoji-item"><span class="emoji-icon">2️⃣</span></div>
+        <div class="emoji-item"><span class="emoji-icon">3️⃣</span></div>
+        <div class="emoji-item"><span class="emoji-icon">4️⃣</span></div>
+        <div class="emoji-item"><span class="emoji-icon">5️⃣</span></div>
+        <div class="emoji-item"><span class="emoji-icon">6️⃣</span></div>
+        <div class="emoji-item"><span class="emoji-icon">7️⃣</span></div>
+        <div class="emoji-item"><span class="emoji-icon">8️⃣</span></div>
+        <div class="emoji-item"><span class="emoji-icon">9️⃣</span></div>
+        <div class="emoji-item"><span class="emoji-icon">🔟</span></div>
+        <div class="emoji-item"><span class="emoji-icon">#️⃣</span></div>
+        <div class="emoji-item"><span class="emoji-icon">*️⃣</span></div>
+        <div class="emoji-item"><span class="emoji-icon">🔢</span></div>
+        <div class="emoji-item"><span class="emoji-icon">🔤</span></div>
+    </div>
+</div>
+
+<!-- ==================== ÉMOTIONS / FEEDBACK ==================== -->
+<div class="section">
+    <div class="category-header">
+        <span class="category-icon">😊</span>
+        <span class="category-title">Émotions / Feedback</span>
+        <span class="category-count">24</span>
+    </div>
+    <div class="emoji-grid">
+        <div class="emoji-item"><span class="emoji-icon">😊</span></div>
+        <div class="emoji-item"><span class="emoji-icon">😃</span></div>
+        <div class="emoji-item"><span class="emoji-icon">😄</span></div>
+        <div class="emoji-item"><span class="emoji-icon">🙂</span></div>
+        <div class="emoji-item"><span class="emoji-icon">😉</span></div>
+        <div class="emoji-item"><span class="emoji-icon">😎</span></div>
+        <div class="emoji-item"><span class="emoji-icon">🤩</span></div>
+        <div class="emoji-item"><span class="emoji-icon">🥳</span></div>
+        <div class="emoji-item"><span class="emoji-icon">😇</span></div>
+        <div class="emoji-item"><span class="emoji-icon">🤔</span></div>
+        <div class="emoji-item"><span class="emoji-icon">🧐</span></div>
+        <div class="emoji-item"><span class="emoji-icon">😐</span></div>
+        <div class="emoji-item"><span class="emoji-icon">😕</span></div>
+        <div class="emoji-item"><span class="emoji-icon">😟</span></div>
+        <div class="emoji-item"><span class="emoji-icon">😢</span></div>
+        <div class="emoji-item"><span class="emoji-icon">😤</span></div>
+        <div class="emoji-item"><span class="emoji-icon">👍</span></div>
+        <div class="emoji-item"><span class="emoji-icon">👎</span></div>
+        <div class="emoji-item"><span class="emoji-icon">👏</span></div>
+        <div class="emoji-item"><span class="emoji-icon">🙌</span></div>
+        <div class="emoji-item"><span class="emoji-icon">🤝</span></div>
+        <div class="emoji-item"><span class="emoji-icon">💪</span></div>
+        <div class="emoji-item"><span class="emoji-icon">❤️</span></div>
+        <div class="emoji-item"><span class="emoji-icon">💜</span></div>
+    </div>
+</div>
+
+<!-- Tailles -->
+<div class="sizes-section">
+    <p class="sizes-title">Tailles recommandées</p>
+    <div class="sizes-row">
+        <div class="size-item">
+            <span style="font-size: 16px;">📚</span>
+            <span class="size-label">16px — inline</span>
+        </div>
+        <div class="size-item">
+            <span style="font-size: 20px;">📚</span>
+            <span class="size-label">20px — tags</span>
+        </div>
+        <div class="size-item">
+            <span style="font-size: 24px;">📚</span>
+            <span class="size-label">24px — cards</span>
+        </div>
+        <div class="size-item">
+            <span style="font-size: 32px;">📚</span>
+            <span class="size-label">32px — headers</span>
+        </div>
+        <div class="size-item">
+            <span style="font-size: 48px;">📚</span>
+            <span class="size-label">48px — hero</span>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

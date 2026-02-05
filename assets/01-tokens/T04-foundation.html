@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jurible Design System — Foundations</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --color-primary: #B0001D;
+            --color-secondary: #7C3AED;
+            --color-text-dark: #1A1A1A;
+            --color-text-gray: #4A4A4A;
+            --color-text-muted: #9CA3AF;
+            --color-background: #FFFFFF;
+            --color-muted: #F3F4F6;
+            --color-border: #E5E7EB;
+            --font-family: 'Poppins', sans-serif;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: var(--font-family);
+            background: var(--color-background);
+            color: var(--color-text-dark);
+            padding: 48px 80px;
+            max-width: 1280px;
+            margin: 0 auto;
+        }
+
+        .page-header { margin-bottom: 48px; }
+
+        .page-title {
+            font-size: 48px;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .page-divider {
+            height: 3px;
+            width: 120px;
+            background: linear-gradient(90deg, #B0001D 0%, #DC2626 50%, #7C3AED 100%);
+            border-radius: 9999px;
+        }
+
+        .section {
+            margin-bottom: 48px;
+        }
+
+        .section-title {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 24px;
+            color: var(--color-text-dark);
+        }
+
+        .section-divider {
+            height: 1px;
+            background: var(--color-border);
+            margin: 48px 0;
+        }
+
+        /* ==================== TABLES ==================== */
+        .specs-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 13px;
+        }
+
+        .specs-table th {
+            text-align: left;
+            font-size: 11px;
+            font-weight: 600;
+            color: white;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            padding: 12px 16px;
+            background: var(--color-text-dark);
+        }
+
+        .specs-table th:first-child { border-radius: 8px 0 0 0; }
+        .specs-table th:last-child { border-radius: 0 8px 0 0; }
+
+        .specs-table td {
+            padding: 12px 16px;
+            border-bottom: 1px solid var(--color-border);
+            vertical-align: middle;
+        }
+
+        .specs-table tr:last-child td { border-bottom: none; }
+
+        .specs-table code {
+            font-family: 'SF Mono', monospace;
+            font-size: 11px;
+            background: var(--color-muted);
+            padding: 2px 6px;
+            border-radius: 4px;
+        }
+
+        /* ==================== SPACING VISUAL ==================== */
+        .spacing-row {
+            display: flex;
+            align-items: center;
+            gap: 24px;
+            margin-bottom: 16px;
+        }
+
+        .spacing-box {
+            background: var(--color-primary);
+            opacity: 0.2;
+        }
+
+        .spacing-label {
+            width: 80px;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .spacing-value {
+            font-size: 13px;
+            color: var(--color-text-muted);
+            font-family: 'SF Mono', monospace;
+        }
+
+        /* ==================== RADIUS VISUAL ==================== */
+        .radius-grid {
+            display: flex;
+            gap: 24px;
+            flex-wrap: wrap;
+        }
+
+        .radius-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .radius-box {
+            width: 80px;
+            height: 80px;
+            background: var(--color-muted);
+            border: 2px solid var(--color-primary);
+        }
+
+        .radius-label {
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        .radius-value {
+            font-size: 12px;
+            color: var(--color-text-muted);
+            font-family: 'SF Mono', monospace;
+        }
+
+        /* ==================== CODE BOX ==================== */
+        .code-box {
+            background: var(--color-text-dark);
+            border-radius: 12px;
+            padding: 24px;
+            margin-top: 24px;
+        }
+
+        .code-title {
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--color-text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 16px;
+        }
+
+        .code-content {
+            font-family: 'SF Mono', 'Monaco', 'Consolas', monospace;
+            font-size: 12px;
+            color: #E5E7EB;
+            line-height: 1.8;
+        }
+
+        .code-comment { color: var(--color-text-muted); }
+        .code-value { color: #7C3AED; }
+        .code-property { color: #10B981; }
+
+        /* ==================== INFO BOX ==================== */
+        .info-box {
+            background: #FEF2F2;
+            border-radius: 12px;
+            padding: 24px;
+            margin-top: 24px;
+        }
+
+        .info-title {
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: var(--color-primary);
+        }
+
+        .info-text {
+            font-size: 13px;
+            color: var(--color-text-gray);
+            line-height: 1.6;
+        }
+    </style>
+</head>
+<body>
+
+<div class="page-header">
+    <h1 class="page-title">foundations</h1>
+    <div class="page-divider"></div>
+</div>
+
+<!-- ==================== SPACING ==================== -->
+<div class="section">
+    <h2 class="section-title">Spacing</h2>
+    
+    <div style="margin-bottom: 32px;">
+        <div class="spacing-row">
+            <span class="spacing-label">xs</span>
+            <div class="spacing-box" style="width: 8px; height: 8px;"></div>
+            <span class="spacing-value">8px</span>
+        </div>
+        <div class="spacing-row">
+            <span class="spacing-label">sm</span>
+            <div class="spacing-box" style="width: 16px; height: 16px;"></div>
+            <span class="spacing-value">16px</span>
+        </div>
+        <div class="spacing-row">
+            <span class="spacing-label">md</span>
+            <div class="spacing-box" style="width: 24px; height: 24px;"></div>
+            <span class="spacing-value">24px</span>
+        </div>
+        <div class="spacing-row">
+            <span class="spacing-label">lg</span>
+            <div class="spacing-box" style="width: 32px; height: 32px;"></div>
+            <span class="spacing-value">32px</span>
+        </div>
+        <div class="spacing-row">
+            <span class="spacing-label">xl</span>
+            <div class="spacing-box" style="width: 48px; height: 48px;"></div>
+            <span class="spacing-value">48px</span>
+        </div>
+    </div>
+
+    <table class="specs-table" style="max-width: 600px;">
+        <thead>
+            <tr>
+                <th>Token</th>
+                <th>Value</th>
+                <th>Usage</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><strong>xs</strong></td>
+                <td><code>8px</code></td>
+                <td>Gap icon-text, petits espacements internes</td>
+            </tr>
+            <tr>
+                <td><strong>sm</strong></td>
+                <td><code>16px</code></td>
+                <td>Padding boutons, gap entre éléments, marges internes</td>
+            </tr>
+            <tr>
+                <td><strong>md</strong></td>
+                <td><code>24px</code></td>
+                <td>Padding cards, sections internes</td>
+            </tr>
+            <tr>
+                <td><strong>lg</strong></td>
+                <td><code>32px</code></td>
+                <td>Gap entre sections, marges de blocs</td>
+            </tr>
+            <tr>
+                <td><strong>xl</strong></td>
+                <td><code>48px</code></td>
+                <td>Marges de page, séparations majeures</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="info-box">
+        <p class="info-title">⚠️ Règle stricte</p>
+        <p class="info-text">Utiliser <strong>uniquement</strong> ces 5 valeurs. Pas de 4px, 12px, 20px, etc. Cela garantit la cohérence visuelle.</p>
+    </div>
+</div>
+
+<div class="section-divider"></div>
+
+<!-- ==================== BORDER RADIUS ==================== -->
+<div class="section">
+    <h2 class="section-title">Border Radius</h2>
+    
+    <div class="radius-grid" style="margin-bottom: 32px;">
+        <div class="radius-item">
+            <div class="radius-box" style="border-radius: 4px;"></div>
+            <span class="radius-label">xs</span>
+            <span class="radius-value">4px</span>
+        </div>
+        <div class="radius-item">
+            <div class="radius-box" style="border-radius: 6px;"></div>
+            <span class="radius-label">sm</span>
+            <span class="radius-value">6px</span>
+        </div>
+        <div class="radius-item">
+            <div class="radius-box" style="border-radius: 8px;"></div>
+            <span class="radius-label">md</span>
+            <span class="radius-value">8px</span>
+        </div>
+        <div class="radius-item">
+            <div class="radius-box" style="border-radius: 12px;"></div>
+            <span class="radius-label">lg</span>
+            <span class="radius-value">12px</span>
+        </div>
+        <div class="radius-item">
+            <div class="radius-box" style="border-radius: 9999px;"></div>
+            <span class="radius-label">full</span>
+            <span class="radius-value">9999px</span>
+        </div>
+    </div>
+
+    <table class="specs-table" style="max-width: 600px;">
+        <thead>
+            <tr>
+                <th>Token</th>
+                <th>Value</th>
+                <th>Usage</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><strong>xs</strong></td>
+                <td><code>4px</code></td>
+                <td>Checkboxes, petits éléments</td>
+            </tr>
+            <tr>
+                <td><strong>sm</strong></td>
+                <td><code>6px</code></td>
+                <td>Tags, badges</td>
+            </tr>
+            <tr>
+                <td><strong>md</strong></td>
+                <td><code>8px</code></td>
+                <td>Boutons, inputs, tabs</td>
+            </tr>
+            <tr>
+                <td><strong>lg</strong></td>
+                <td><code>12px</code></td>
+                <td>Cards, modals, containers</td>
+            </tr>
+            <tr>
+                <td><strong>full</strong></td>
+                <td><code>9999px</code></td>
+                <td>Chips, avatars, pills</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<div class="section-divider"></div>
+
+<!-- ==================== BREAKPOINTS ==================== -->
+<div class="section">
+    <h2 class="section-title">Breakpoints</h2>
+    
+    <table class="specs-table" style="max-width: 600px;">
+        <thead>
+            <tr>
+                <th>Token</th>
+                <th>Value</th>
+                <th>Usage</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><strong>mobile</strong></td>
+                <td><code>< 768px</code></td>
+                <td>Smartphones</td>
+            </tr>
+            <tr>
+                <td><strong>tablet</strong></td>
+                <td><code>768px → 1024px</code></td>
+                <td>Tablettes</td>
+            </tr>
+            <tr>
+                <td><strong>desktop</strong></td>
+                <td><code>> 1024px</code></td>
+                <td>Desktop</td>
+            </tr>
+            <tr>
+                <td><strong>wide</strong></td>
+                <td><code>> 1280px</code></td>
+                <td>Large screens</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<div class="section-divider"></div>
+
+<!-- ==================== Z-INDEX ==================== -->
+<div class="section">
+    <h2 class="section-title">Z-Index</h2>
+    
+    <table class="specs-table" style="max-width: 600px;">
+        <thead>
+            <tr>
+                <th>Token</th>
+                <th>Value</th>
+                <th>Usage</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><strong>dropdown</strong></td>
+                <td><code>100</code></td>
+                <td>Menus déroulants, selects</td>
+            </tr>
+            <tr>
+                <td><strong>sticky</strong></td>
+                <td><code>200</code></td>
+                <td>Header sticky, éléments fixes</td>
+            </tr>
+            <tr>
+                <td><strong>modal-backdrop</strong></td>
+                <td><code>300</code></td>
+                <td>Fond sombre derrière modal</td>
+            </tr>
+            <tr>
+                <td><strong>modal</strong></td>
+                <td><code>400</code></td>
+                <td>Modals, dialogs</td>
+            </tr>
+            <tr>
+                <td><strong>toast</strong></td>
+                <td><code>500</code></td>
+                <td>Notifications toast</td>
+            </tr>
+            <tr>
+                <td><strong>tooltip</strong></td>
+                <td><code>600</code></td>
+                <td>Tooltips (toujours au-dessus)</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<div class="section-divider"></div>
+
+<!-- ==================== TRANSITIONS ==================== -->
+<div class="section">
+    <h2 class="section-title">Transitions</h2>
+    
+    <table class="specs-table" style="max-width: 600px;">
+        <thead>
+            <tr>
+                <th>Token</th>
+                <th>Value</th>
+                <th>Usage</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><strong>fast</strong></td>
+                <td><code>0.1s ease</code></td>
+                <td>Hover sur petits éléments</td>
+            </tr>
+            <tr>
+                <td><strong>default</strong></td>
+                <td><code>0.15s ease</code></td>
+                <td>Boutons, inputs, tabs</td>
+            </tr>
+            <tr>
+                <td><strong>slow</strong></td>
+                <td><code>0.3s ease</code></td>
+                <td>Modals, accordions, grandes animations</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<div class="section-divider"></div>
+
+<!-- ==================== CSS VARIABLES ==================== -->
+<div class="code-box">
+    <p class="code-title">📋 CSS Variables (copier-coller)</p>
+    <div class="code-content">
+        <span class="code-comment">/* Spacing */</span><br>
+        <span class="code-property">--space-xs:</span> <span class="code-value">8px</span>;<br>
+        <span class="code-property">--space-sm:</span> <span class="code-value">16px</span>;<br>
+        <span class="code-property">--space-md:</span> <span class="code-value">24px</span>;<br>
+        <span class="code-property">--space-lg:</span> <span class="code-value">32px</span>;<br>
+        <span class="code-property">--space-xl:</span> <span class="code-value">48px</span>;<br><br>
+
+        <span class="code-comment">/* Border Radius */</span><br>
+        <span class="code-property">--radius-xs:</span> <span class="code-value">4px</span>;<br>
+        <span class="code-property">--radius-sm:</span> <span class="code-value">6px</span>;<br>
+        <span class="code-property">--radius-md:</span> <span class="code-value">8px</span>;<br>
+        <span class="code-property">--radius-lg:</span> <span class="code-value">12px</span>;<br>
+        <span class="code-property">--radius-full:</span> <span class="code-value">9999px</span>;<br><br>
+
+        <span class="code-comment">/* Z-Index */</span><br>
+        <span class="code-property">--z-dropdown:</span> <span class="code-value">100</span>;<br>
+        <span class="code-property">--z-sticky:</span> <span class="code-value">200</span>;<br>
+        <span class="code-property">--z-modal-backdrop:</span> <span class="code-value">300</span>;<br>
+        <span class="code-property">--z-modal:</span> <span class="code-value">400</span>;<br>
+        <span class="code-property">--z-toast:</span> <span class="code-value">500</span>;<br>
+        <span class="code-property">--z-tooltip:</span> <span class="code-value">600</span>;<br><br>
+
+        <span class="code-comment">/* Transitions */</span><br>
+        <span class="code-property">--transition-fast:</span> <span class="code-value">0.1s ease</span>;<br>
+        <span class="code-property">--transition-default:</span> <span class="code-value">0.15s ease</span>;<br>
+        <span class="code-property">--transition-slow:</span> <span class="code-value">0.3s ease</span>;<br>
+    </div>
+</div>
+
+</body>
+</html>

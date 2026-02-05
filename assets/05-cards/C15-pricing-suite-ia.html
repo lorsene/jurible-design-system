@@ -1,0 +1,664 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cards Minos — Version Améliorée</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* ===== DESIGN SYSTEM TOKENS ===== */
+        :root {
+            --color-primary: #B0001D;
+            --color-secondary: #7C3AED;
+            --color-black: #1A1A1A;
+            --color-white: #FFFFFF;
+            --color-gray-50: #F9FAFB;
+            --color-gray-100: #F3F4F6;
+            --color-gray-200: #E5E7EB;
+            --color-gray-400: #9CA3AF;
+            --color-gray-600: #4B5563;
+            --color-success: #10B981;
+            --color-success-light: #ECFDF5;
+            --color-success-dark: #065F46;
+            --color-warning: #F59E0B;
+            --color-warning-light: #FEF3C7;
+            --color-warning-dark: #92400E;
+            --color-secondary-light: #EDE9FE;
+            --color-secondary-dark: #5B21B6;
+            --gradient-primary: linear-gradient(135deg, #B0001D 0%, #7C3AED 100%);
+            --space-xs: 8px;
+            --space-sm: 16px;
+            --space-md: 24px;
+            --space-lg: 32px;
+            --space-xl: 48px;
+            --radius-sm: 6px;
+            --radius-md: 8px;
+            --radius-lg: 12px;
+            --radius-full: 9999px;
+            --shadow-sm: 0 1px 3px rgba(0,0,0,0.1), 0 1px 2px rgba(0,0,0,0.06);
+            --shadow-md: 0 4px 6px rgba(0,0,0,0.1), 0 2px 4px rgba(0,0,0,0.06);
+            --shadow-lg: 0 10px 15px rgba(0,0,0,0.1), 0 4px 6px rgba(0,0,0,0.05);
+            --shadow-primary: 0 4px 14px rgba(124, 58, 237, 0.25);
+            --transition: all 150ms ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: var(--color-gray-100);
+            padding: var(--space-xl);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--color-black);
+            margin-bottom: var(--space-xs);
+        }
+
+        .subtitle {
+            color: var(--color-gray-400);
+            margin-bottom: var(--space-lg);
+        }
+
+        .section-label {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: var(--color-warning-light);
+            color: var(--color-warning-dark);
+            padding: 6px 14px;
+            border-radius: var(--radius-full);
+            font-size: 13px;
+            font-weight: 500;
+            margin-bottom: var(--space-md);
+        }
+
+        /* ===== GRILLE MINOS ===== */
+        .minos-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: var(--space-md);
+            align-items: stretch;
+        }
+
+        /* ===== CARD MINOS ===== */
+        .minos-card {
+            position: relative;
+            background: var(--color-white);
+            border: 1px solid var(--color-gray-200);
+            border-radius: var(--radius-lg);
+            padding: var(--space-md);
+            display: flex;
+            flex-direction: column;
+            transition: var(--transition);
+            cursor: pointer;
+        }
+
+        .minos-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-md);
+        }
+
+        /* Card Pro (Meilleure valeur) */
+        .minos-card--featured {
+            border: 2px solid transparent;
+            background: 
+                linear-gradient(white, white) padding-box,
+                var(--gradient-primary) border-box;
+            transform: scale(1.03);
+            box-shadow: var(--shadow-primary);
+        }
+
+        .minos-card--featured:hover {
+            transform: scale(1.03) translateY(-4px);
+            box-shadow: var(--shadow-lg), var(--shadow-primary);
+        }
+
+        /* Ribbon Meilleure valeur */
+        .minos-card__ribbon {
+            position: absolute;
+            top: -1px;
+            left: -1px;
+            right: -1px;
+            background: var(--gradient-primary);
+            color: var(--color-white);
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            padding: 8px var(--space-md);
+            border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+        }
+
+        .minos-card--featured .minos-card__credits {
+            margin-top: var(--space-md);
+        }
+
+        /* Badge crédits */
+        .minos-card__credits {
+            display: inline-flex;
+            align-items: center;
+            padding: 5px 12px;
+            border-radius: var(--radius-full);
+            font-size: 12px;
+            font-weight: 600;
+            margin-bottom: var(--space-sm);
+            width: fit-content;
+        }
+
+        .minos-card__credits--standard {
+            background: var(--color-warning-light);
+            color: var(--color-warning-dark);
+        }
+
+        .minos-card__credits--pro {
+            background: var(--color-warning);
+            color: var(--color-white);
+        }
+
+        .minos-card__credits--bonus {
+            background: var(--color-secondary-light);
+            color: var(--color-secondary);
+        }
+
+        /* Header avec titre + badge */
+        .minos-card__header {
+            display: flex;
+            align-items: center;
+            gap: var(--space-xs);
+            margin-bottom: var(--space-xs);
+            flex-wrap: wrap;
+        }
+
+        .minos-card__title {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--color-black);
+        }
+
+        /* Badge Populaire */
+        .minos-card__badge {
+            display: inline-flex;
+            align-items: center;
+            padding: 4px 10px;
+            border-radius: var(--radius-full);
+            font-size: 10px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .minos-card__badge--popular {
+            background: var(--gradient-primary);
+            color: var(--color-white);
+        }
+
+        /* Description */
+        .minos-card__description {
+            font-size: 13px;
+            color: var(--color-gray-600);
+            margin-bottom: var(--space-md);
+        }
+
+        /* Prix */
+        .minos-card__pricing {
+            margin-bottom: var(--space-sm);
+        }
+
+        .minos-card__price-row {
+            display: flex;
+            align-items: center;
+            gap: var(--space-xs);
+            margin-bottom: 4px;
+        }
+
+        .minos-card__price {
+            font-size: 36px;
+            font-weight: 700;
+            color: var(--color-black);
+            line-height: 1;
+        }
+
+        .minos-card__price--success {
+            color: var(--color-success);
+        }
+
+        /* Badge économie -30% */
+        .minos-card__discount {
+            display: inline-flex;
+            align-items: center;
+            background: var(--color-success-light);
+            color: var(--color-success-dark);
+            font-size: 14px;
+            font-weight: 700;
+            padding: 6px 12px;
+            border-radius: var(--radius-md);
+        }
+
+        /* Prix par crédit */
+        .minos-card__per-credit {
+            font-size: 13px;
+            color: var(--color-gray-400);
+        }
+
+        .minos-card__per-credit--highlight {
+            background: var(--color-success-light);
+            color: var(--color-success-dark);
+            padding: 4px 10px;
+            border-radius: var(--radius-full);
+            font-weight: 600;
+            font-size: 12px;
+        }
+
+        .minos-card__price-info {
+            font-size: 12px;
+            color: var(--color-gray-400);
+            margin-top: 4px;
+        }
+
+        /* Section Inclus */
+        .minos-card__includes {
+            margin-bottom: var(--space-md);
+            flex: 1;
+        }
+
+        .minos-card__includes-label {
+            font-size: 10px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: var(--color-gray-400);
+            margin-bottom: var(--space-xs);
+        }
+
+        .minos-card__includes-list {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .minos-card__include-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 13px;
+            color: var(--color-gray-600);
+        }
+
+        /* CTA */
+        .minos-card__cta {
+            width: 100%;
+            padding: 12px var(--space-md);
+            font-family: 'Poppins', sans-serif;
+            font-size: 14px;
+            font-weight: 600;
+            border-radius: var(--radius-md);
+            cursor: pointer;
+            transition: var(--transition);
+            text-align: center;
+            margin-top: auto;
+        }
+
+        .minos-card__cta--gradient {
+            background: var(--gradient-primary);
+            color: var(--color-white);
+            border: none;
+        }
+
+        .minos-card__cta--gradient:hover {
+            filter: brightness(1.1);
+            transform: translateY(-1px);
+        }
+
+        .minos-card__cta--outline {
+            background: var(--color-white);
+            color: var(--color-black);
+            border: 1px solid var(--color-gray-200);
+        }
+
+        .minos-card__cta--outline:hover {
+            border-color: var(--color-warning);
+            color: var(--color-warning-dark);
+            background: var(--color-warning-light);
+        }
+
+        .minos-card__cta--outline-primary {
+            border-color: var(--color-primary);
+            color: var(--color-primary);
+        }
+
+        .minos-card__cta--outline-primary:hover {
+            background: var(--color-primary);
+            color: var(--color-white);
+            border-color: var(--color-primary);
+        }
+
+        /* Note sous CTA */
+        .minos-card__note {
+            font-size: 11px;
+            color: var(--color-gray-400);
+            text-align: center;
+            margin-top: var(--space-xs);
+        }
+
+        .minos-card__note a {
+            color: var(--color-secondary);
+            text-decoration: underline;
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 900px) {
+            .minos-grid {
+                grid-template-columns: 1fr;
+                max-width: 400px;
+                margin: 0 auto;
+            }
+
+            .minos-card--featured {
+                transform: scale(1);
+                order: -1;
+            }
+
+            .minos-card--featured:hover {
+                transform: translateY(-4px);
+            }
+        }
+
+        /* ===== DOCUMENTATION ===== */
+        .docs {
+            margin-top: var(--space-xl);
+            padding-top: var(--space-xl);
+            border-top: 1px solid var(--color-gray-200);
+        }
+
+        .docs h2 {
+            font-size: 20px;
+            font-weight: 600;
+            color: var(--color-black);
+            margin-bottom: var(--space-md);
+        }
+
+        .docs h3 {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--color-black);
+            margin: var(--space-md) 0 var(--space-sm);
+        }
+
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 13px;
+            background: var(--color-white);
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            box-shadow: var(--shadow-sm);
+            margin-bottom: var(--space-md);
+        }
+
+        .comparison-table th {
+            background: var(--color-gray-100);
+            font-weight: 600;
+            text-align: left;
+            padding: 12px 16px;
+            color: var(--color-black);
+        }
+
+        .comparison-table td {
+            padding: 12px 16px;
+            border-bottom: 1px solid var(--color-gray-200);
+        }
+
+        .comparison-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .comparison-table .before {
+            color: var(--color-gray-400);
+            text-decoration: line-through;
+        }
+
+        .comparison-table .after {
+            color: var(--color-success-dark);
+            font-weight: 500;
+        }
+
+        .checklist {
+            list-style: none;
+            padding: 0;
+        }
+
+        .checklist li {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 0;
+            font-size: 14px;
+            color: var(--color-gray-600);
+        }
+
+        .checklist li::before {
+            content: '✓';
+            color: var(--color-success);
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Cards Minos — Version Améliorée</h1>
+        <p class="subtitle">Page Minos uniquement</p>
+
+        <span class="section-label">🤖 Pro mis en avant — Badge -30% visible — Emojis</span>
+
+        <!-- ===== GRILLE MINOS ===== -->
+        <div class="minos-grid">
+            <!-- STANDARD -->
+            <div class="minos-card">
+                <span class="minos-card__credits minos-card__credits--standard">30 crédits</span>
+                
+                <div class="minos-card__header">
+                    <h3 class="minos-card__title">Standard</h3>
+                    <span class="minos-card__badge minos-card__badge--popular">Populaire</span>
+                </div>
+                
+                <p class="minos-card__description">Pour une utilisation régulière.</p>
+
+                <div class="minos-card__pricing">
+                    <div class="minos-card__price-row">
+                        <span class="minos-card__price">5€</span>
+                    </div>
+                </div>
+
+                <div class="minos-card__includes">
+                    <p class="minos-card__includes-label">Inclus</p>
+                    <div class="minos-card__includes-list">
+                        <div class="minos-card__include-item">✅ Accès aux 4 générateurs</div>
+                        <div class="minos-card__include-item">✅ ~20 devoirs générés</div>
+                        <div class="minos-card__include-item">✅ Sauvegarde illimitée</div>
+                        <div class="minos-card__include-item">✅ Crédits sans expiration</div>
+                    </div>
+                </div>
+
+                <button class="minos-card__cta minos-card__cta--outline">Acheter 30 crédits</button>
+            </div>
+
+            <!-- PRO (Meilleure valeur) -->
+            <div class="minos-card minos-card--featured">
+                <div class="minos-card__ribbon">💎 Meilleure valeur</div>
+                
+                <span class="minos-card__credits minos-card__credits--pro">100 crédits</span>
+                
+                <div class="minos-card__header">
+                    <h3 class="minos-card__title">Pro</h3>
+                </div>
+                
+                <p class="minos-card__description">Pour les gros consommateurs.</p>
+
+                <div class="minos-card__pricing">
+                    <div class="minos-card__price-row">
+                        <span class="minos-card__price">17€</span>
+                        <span class="minos-card__discount">-30%</span>
+                    </div>
+                </div>
+
+                <div class="minos-card__includes">
+                    <p class="minos-card__includes-label">Inclus</p>
+                    <div class="minos-card__includes-list">
+                        <div class="minos-card__include-item">✅ Accès aux 4 générateurs</div>
+                        <div class="minos-card__include-item">✅ ~70 devoirs générés</div>
+                        <div class="minos-card__include-item">✅ Sauvegarde illimitée</div>
+                        <div class="minos-card__include-item">✅ Crédits sans expiration</div>
+                    </div>
+                </div>
+
+                <button class="minos-card__cta minos-card__cta--gradient">Acheter 100 crédits</button>
+            </div>
+
+            <!-- ABONNÉS -->
+            <div class="minos-card">
+                <span class="minos-card__credits minos-card__credits--bonus">🎁 Bonus Académie</span>
+                
+                <div class="minos-card__header">
+                    <h3 class="minos-card__title">Abonnés</h3>
+                </div>
+                
+                <p class="minos-card__description">Avantage réservé aux abonnés.</p>
+
+                <div class="minos-card__pricing">
+                    <div class="minos-card__price-row">
+                        <span class="minos-card__price minos-card__price--success">Gratuit</span>
+                    </div>
+                    <p class="minos-card__price-info">10 crédits offerts / mois</p>
+                </div>
+
+                <div class="minos-card__includes">
+                    <p class="minos-card__includes-label">Inclus</p>
+                    <div class="minos-card__includes-list">
+                        <div class="minos-card__include-item">✅ 10 crédits IA offerts</div>
+                        <div class="minos-card__include-item">✅ Renouvelés chaque mois</div>
+                        <div class="minos-card__include-item">✅ Cumulables avec achats</div>
+                    </div>
+                </div>
+
+                <button class="minos-card__cta minos-card__cta--outline minos-card__cta--outline-primary">S'abonner à l'Académie</button>
+                <p class="minos-card__note">Déjà abonné ? <a href="#">Connectez-vous</a></p>
+            </div>
+        </div>
+
+        <!-- ===== DOCUMENTATION ===== -->
+        <div class="docs">
+            <h2>📋 Améliorations appliquées</h2>
+
+            <table class="comparison-table">
+                <tr>
+                    <th>Élément</th>
+                    <th>Avant</th>
+                    <th>Après</th>
+                </tr>
+                <tr>
+                    <td>Titre section</td>
+                    <td class="before">Cards Suite IA</td>
+                    <td class="after">✓ Cards Minos</td>
+                </tr>
+                <tr>
+                    <td>Card mise en avant</td>
+                    <td class="before">Standard</td>
+                    <td class="after">✓ Pro (meilleure valeur)</td>
+                </tr>
+                <tr>
+                    <td>Bordure Pro</td>
+                    <td class="before">Aucune</td>
+                    <td class="after">✓ Gradient bordeaux→violet</td>
+                </tr>
+                <tr>
+                    <td>Badge "POPULAIRE"</td>
+                    <td class="before">Vert uni</td>
+                    <td class="after">✓ Gradient bordeaux→violet</td>
+                </tr>
+                <tr>
+                    <td>Badges crédits</td>
+                    <td class="before">Rouge/Vert/Violet</td>
+                    <td class="after">✓ Orange (warning) pour cohérence Minos</td>
+                </tr>
+                <tr>
+                    <td>Badge -30%</td>
+                    <td class="before">Petit, inline</td>
+                    <td class="after">✓ Plus gros, vert (économie)</td>
+                </tr>
+                <tr>
+                    <td>Prix /crédit Pro</td>
+                    <td class="before">Texte gris</td>
+                    <td class="after">✓ Badge highlight avec 🔥</td>
+                </tr>
+                <tr>
+                    <td>Hover cards</td>
+                    <td class="before">Aucun</td>
+                    <td class="after">✓ translateY(-4px) + shadow</td>
+                </tr>
+                <tr>
+                    <td>Card Abonnés</td>
+                    <td class="before">Juste CTA</td>
+                    <td class="after">✓ "Déjà abonné ? Connectez-vous"</td>
+                </tr>
+                <tr>
+                    <td>Icônes</td>
+                    <td class="before">✔ vertes</td>
+                    <td class="after">✓ Emojis ✅</td>
+                </tr>
+            </table>
+
+            <h3>🎨 Hiérarchie des cards</h3>
+            <table class="comparison-table">
+                <tr>
+                    <th>Card</th>
+                    <th>Mise en avant</th>
+                    <th>Stratégie</th>
+                </tr>
+                <tr>
+                    <td>Standard</td>
+                    <td>Badge "Populaire"</td>
+                    <td>Entrée de gamme, volume</td>
+                </tr>
+                <tr>
+                    <td><strong>Pro</strong></td>
+                    <td><strong>Ribbon + bordure gradient + scale</strong></td>
+                    <td><strong>Meilleure marge, -30%</strong></td>
+                </tr>
+                <tr>
+                    <td>Abonnés</td>
+                    <td>Badge "Bonus Académie"</td>
+                    <td>Fidélisation, upsell Académie</td>
+                </tr>
+            </table>
+
+            <h3>✅ Design System respecté</h3>
+            <ul class="checklist">
+                <li>Couleurs : Warning (orange) pour Minos, Gradient pour mise en avant</li>
+                <li>Emojis : ✅ 💎 🔥 🎁 (pas d'icônes SVG)</li>
+                <li>Border-radius : 12px (--radius-lg)</li>
+                <li>Shadows : sm, md, lg + primary</li>
+                <li>Transitions : 150ms ease</li>
+                <li>Responsive : 1 colonne sur mobile, Pro en premier</li>
+            </ul>
+        </div>
+    </div>
+</body>
+</html>

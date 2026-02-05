@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jurible Design System — Shadows</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --color-primary: #B0001D;
+            --color-secondary: #7C3AED;
+            --color-text-dark: #1A1A1A;
+            --color-text-gray: #4A4A4A;
+            --color-text-muted: #9CA3AF;
+            --color-background: #FFFFFF;
+            --color-muted: #F3F4F6;
+            --color-border: #E5E7EB;
+            --color-error: #EF4444;
+            --font-family: 'Poppins', sans-serif;
+
+            /* Shadows - Neutral */
+            --shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.05);
+            --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.1), 0 1px 2px rgba(0, 0, 0, 0.06);
+            --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1), 0 2px 4px rgba(0, 0, 0, 0.06);
+            --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1), 0 4px 6px rgba(0, 0, 0, 0.05);
+            --shadow-xl: 0 20px 25px rgba(0, 0, 0, 0.1), 0 10px 10px rgba(0, 0, 0, 0.04);
+
+            /* Shadows - CTA (Primary) */
+            --shadow-cta: 0 4px 14px rgba(176, 0, 29, 0.25);
+            --shadow-cta-hover: 0 6px 20px rgba(176, 0, 29, 0.35);
+
+            /* Shadows - Accent (Secondary) */
+            --shadow-accent: 0 4px 14px rgba(124, 58, 237, 0.25);
+            --shadow-accent-hover: 0 6px 20px rgba(124, 58, 237, 0.35);
+
+            /* Shadows - Destructive */
+            --shadow-destructive: 0 4px 14px rgba(239, 68, 68, 0.25);
+            --shadow-destructive-hover: 0 6px 20px rgba(239, 68, 68, 0.35);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: var(--font-family);
+            background: var(--color-background);
+            color: var(--color-text-dark);
+            padding: 48px 80px;
+            max-width: 1280px;
+            margin: 0 auto;
+        }
+
+        .page-header { margin-bottom: 48px; }
+
+        .page-title {
+            font-size: 48px;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .page-divider {
+            height: 3px;
+            width: 120px;
+            background: linear-gradient(90deg, #B0001D 0%, #DC2626 50%, #7C3AED 100%);
+            border-radius: 9999px;
+        }
+
+        .section {
+            margin-bottom: 48px;
+        }
+
+        .section-title {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 24px;
+            color: var(--color-text-dark);
+        }
+
+        .section-divider {
+            height: 1px;
+            background: var(--color-border);
+            margin: 48px 0;
+        }
+
+        /* ==================== SHADOW GRID ==================== */
+        .shadow-grid {
+            display: flex;
+            gap: 32px;
+            flex-wrap: wrap;
+        }
+
+        .shadow-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .shadow-box {
+            width: 96px;
+            height: 96px;
+            background: white;
+            border-radius: 12px;
+        }
+
+        .shadow-box--xs { box-shadow: var(--shadow-xs); }
+        .shadow-box--sm { box-shadow: var(--shadow-sm); }
+        .shadow-box--md { box-shadow: var(--shadow-md); }
+        .shadow-box--lg { box-shadow: var(--shadow-lg); }
+        .shadow-box--xl { box-shadow: var(--shadow-xl); }
+
+        .shadow-box--cta { box-shadow: var(--shadow-cta); }
+        .shadow-box--cta-hover { box-shadow: var(--shadow-cta-hover); }
+
+        .shadow-box--accent { box-shadow: var(--shadow-accent); }
+        .shadow-box--accent-hover { box-shadow: var(--shadow-accent-hover); }
+
+        .shadow-box--destructive { box-shadow: var(--shadow-destructive); }
+        .shadow-box--destructive-hover { box-shadow: var(--shadow-destructive-hover); }
+
+        .shadow-label {
+            text-align: center;
+        }
+
+        .shadow-name {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--color-text-dark);
+        }
+
+        .shadow-usage {
+            font-size: 12px;
+            color: var(--color-text-muted);
+        }
+
+        /* ==================== TABLE ==================== */
+        .table-wrapper {
+            overflow-x: auto;
+        }
+
+        .specs-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 14px;
+        }
+
+        .specs-table th {
+            text-align: left;
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--color-text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            padding: 16px;
+            background: var(--color-text-dark);
+            color: white;
+        }
+
+        .specs-table th:first-child {
+            border-radius: 8px 0 0 0;
+        }
+
+        .specs-table th:last-child {
+            border-radius: 0 8px 0 0;
+        }
+
+        .specs-table td {
+            padding: 16px;
+            border-bottom: 1px solid var(--color-border);
+            vertical-align: middle;
+        }
+
+        .specs-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .specs-table tr:last-child td:first-child {
+            border-radius: 0 0 0 8px;
+        }
+
+        .specs-table tr:last-child td:last-child {
+            border-radius: 0 0 8px 0;
+        }
+
+        .table-name {
+            font-weight: 600;
+        }
+
+        .table-color {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .table-color-dot {
+            width: 16px;
+            height: 16px;
+            border-radius: 4px;
+        }
+
+        .table-color-hex {
+            font-family: 'SF Mono', 'Monaco', monospace;
+            font-size: 12px;
+            color: var(--color-text-muted);
+        }
+
+        /* ==================== SUMMARY TABLE ==================== */
+        .summary-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 14px;
+            margin-top: 32px;
+        }
+
+        .summary-table th {
+            text-align: left;
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            padding: 16px;
+            background: var(--color-primary);
+            color: white;
+        }
+
+        .summary-table th:first-child {
+            border-radius: 8px 0 0 0;
+        }
+
+        .summary-table th:last-child {
+            border-radius: 0 8px 0 0;
+        }
+
+        .summary-table td {
+            padding: 16px;
+            border-bottom: 1px solid var(--color-border);
+            background: var(--color-muted);
+        }
+
+        .summary-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .summary-table tr:last-child td:first-child {
+            border-radius: 0 0 0 8px;
+        }
+
+        .summary-table tr:last-child td:last-child {
+            border-radius: 0 0 8px 0;
+        }
+
+        .summary-category {
+            font-weight: 600;
+        }
+
+        /* ==================== CODE BOX ==================== */
+        .code-box {
+            background: var(--color-text-dark);
+            border-radius: 12px;
+            padding: 24px;
+            margin-top: 48px;
+        }
+
+        .code-title {
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--color-text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 16px;
+        }
+
+        .code-content {
+            font-family: 'SF Mono', 'Monaco', 'Consolas', monospace;
+            font-size: 13px;
+            color: #E5E7EB;
+            line-height: 1.8;
+        }
+
+        .code-comment {
+            color: var(--color-text-muted);
+        }
+
+        .code-value {
+            color: #7C3AED;
+        }
+
+        .code-property {
+            color: #10B981;
+        }
+    </style>
+</head>
+<body>
+
+<div class="page-header">
+    <h1 class="page-title">shadows</h1>
+    <div class="page-divider"></div>
+</div>
+
+<!-- ==================== NEUTRAL SHADOWS ==================== -->
+<div class="section">
+    <h2 class="section-title">Neutral (Noir)</h2>
+    
+    <div class="shadow-grid">
+        <div class="shadow-item">
+            <div class="shadow-box shadow-box--xs"></div>
+            <div class="shadow-label">
+                <p class="shadow-name">XS</p>
+                <p class="shadow-usage">Header scrolled</p>
+            </div>
+        </div>
+        <div class="shadow-item">
+            <div class="shadow-box shadow-box--sm"></div>
+            <div class="shadow-label">
+                <p class="shadow-name">SM</p>
+                <p class="shadow-usage">Cards default</p>
+            </div>
+        </div>
+        <div class="shadow-item">
+            <div class="shadow-box shadow-box--md"></div>
+            <div class="shadow-label">
+                <p class="shadow-name">MD</p>
+                <p class="shadow-usage">Dropdowns, élévation</p>
+            </div>
+        </div>
+        <div class="shadow-item">
+            <div class="shadow-box shadow-box--lg"></div>
+            <div class="shadow-label">
+                <p class="shadow-name">LG</p>
+                <p class="shadow-usage">Cards hover</p>
+            </div>
+        </div>
+        <div class="shadow-item">
+            <div class="shadow-box shadow-box--xl"></div>
+            <div class="shadow-label">
+                <p class="shadow-name">XL</p>
+                <p class="shadow-usage">Mega menu, modals</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="section-divider"></div>
+
+<!-- ==================== CTA SHADOWS ==================== -->
+<div class="section">
+    <h2 class="section-title">CTA (Primary - Rouge)</h2>
+    
+    <div class="shadow-grid">
+        <div class="shadow-item">
+            <div class="shadow-box shadow-box--cta"></div>
+            <div class="shadow-label">
+                <p class="shadow-name">CTA</p>
+                <p class="shadow-usage">Button/Primary default</p>
+            </div>
+        </div>
+        <div class="shadow-item">
+            <div class="shadow-box shadow-box--cta-hover"></div>
+            <div class="shadow-label">
+                <p class="shadow-name">CTA Hover</p>
+                <p class="shadow-usage">Button/Primary hover</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="section-divider"></div>
+
+<!-- ==================== ACCENT SHADOWS ==================== -->
+<div class="section">
+    <h2 class="section-title">Accent (Secondary - Violet)</h2>
+    
+    <div class="shadow-grid">
+        <div class="shadow-item">
+            <div class="shadow-box shadow-box--accent"></div>
+            <div class="shadow-label">
+                <p class="shadow-name">Accent</p>
+                <p class="shadow-usage">Button/Accent default</p>
+            </div>
+        </div>
+        <div class="shadow-item">
+            <div class="shadow-box shadow-box--accent-hover"></div>
+            <div class="shadow-label">
+                <p class="shadow-name">Accent Hover</p>
+                <p class="shadow-usage">Button/Accent hover</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="section-divider"></div>
+
+<!-- ==================== DESTRUCTIVE SHADOWS ==================== -->
+<div class="section">
+    <h2 class="section-title">Destructive (Error - Rouge vif)</h2>
+    
+    <div class="shadow-grid">
+        <div class="shadow-item">
+            <div class="shadow-box shadow-box--destructive"></div>
+            <div class="shadow-label">
+                <p class="shadow-name">Destructive</p>
+                <p class="shadow-usage">Button/Destructive default</p>
+            </div>
+        </div>
+        <div class="shadow-item">
+            <div class="shadow-box shadow-box--destructive-hover"></div>
+            <div class="shadow-label">
+                <p class="shadow-name">Destructive Hover</p>
+                <p class="shadow-usage">Button/Destructive hover</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="section-divider"></div>
+
+<!-- ==================== SPECS TABLE ==================== -->
+<div class="section">
+    <h2 class="section-title">Specifications</h2>
+    
+    <div class="table-wrapper">
+        <table class="specs-table">
+            <thead>
+                <tr>
+                    <th>Nom</th>
+                    <th>Couleur</th>
+                    <th>Valeur CSS</th>
+                    <th>Usage</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="table-name">Shadow/XS</td>
+                    <td>
+                        <div class="table-color">
+                            <div class="table-color-dot" style="background: #000;"></div>
+                            <span>Noir</span>
+                        </div>
+                    </td>
+                    <td><span class="table-color-hex">0 1px 2px rgba(0,0,0,0.05)</span></td>
+                    <td>Header scrolled</td>
+                </tr>
+                <tr>
+                    <td class="table-name">Shadow/SM</td>
+                    <td>
+                        <div class="table-color">
+                            <div class="table-color-dot" style="background: #000;"></div>
+                            <span>Noir</span>
+                        </div>
+                    </td>
+                    <td><span class="table-color-hex">0 1px 3px rgba(0,0,0,0.1), 0 1px 2px rgba(0,0,0,0.06)</span></td>
+                    <td>Cards default</td>
+                </tr>
+                <tr>
+                    <td class="table-name">Shadow/MD</td>
+                    <td>
+                        <div class="table-color">
+                            <div class="table-color-dot" style="background: #000;"></div>
+                            <span>Noir</span>
+                        </div>
+                    </td>
+                    <td><span class="table-color-hex">0 4px 6px rgba(0,0,0,0.1), 0 2px 4px rgba(0,0,0,0.06)</span></td>
+                    <td>Élévation moyenne, dropdowns</td>
+                </tr>
+                <tr>
+                    <td class="table-name">Shadow/LG</td>
+                    <td>
+                        <div class="table-color">
+                            <div class="table-color-dot" style="background: #000;"></div>
+                            <span>Noir</span>
+                        </div>
+                    </td>
+                    <td><span class="table-color-hex">0 10px 15px rgba(0,0,0,0.1), 0 4px 6px rgba(0,0,0,0.05)</span></td>
+                    <td>Cards hover</td>
+                </tr>
+                <tr>
+                    <td class="table-name">Shadow/XL</td>
+                    <td>
+                        <div class="table-color">
+                            <div class="table-color-dot" style="background: #000;"></div>
+                            <span>Noir</span>
+                        </div>
+                    </td>
+                    <td><span class="table-color-hex">0 20px 25px rgba(0,0,0,0.1), 0 10px 10px rgba(0,0,0,0.04)</span></td>
+                    <td>Mega menu, modals</td>
+                </tr>
+                <tr>
+                    <td class="table-name">Shadow/CTA</td>
+                    <td>
+                        <div class="table-color">
+                            <div class="table-color-dot" style="background: #B0001D;"></div>
+                            <span>Rouge</span>
+                            <span class="table-color-hex">#B0001D</span>
+                        </div>
+                    </td>
+                    <td><span class="table-color-hex">0 4px 14px rgba(176,0,29,0.25)</span></td>
+                    <td>Button/Primary default</td>
+                </tr>
+                <tr>
+                    <td class="table-name">Shadow/CTA Hover</td>
+                    <td>
+                        <div class="table-color">
+                            <div class="table-color-dot" style="background: #B0001D;"></div>
+                            <span>Rouge</span>
+                            <span class="table-color-hex">#B0001D</span>
+                        </div>
+                    </td>
+                    <td><span class="table-color-hex">0 6px 20px rgba(176,0,29,0.35)</span></td>
+                    <td>Button/Primary hover</td>
+                </tr>
+                <tr>
+                    <td class="table-name">Shadow/Accent</td>
+                    <td>
+                        <div class="table-color">
+                            <div class="table-color-dot" style="background: #7C3AED;"></div>
+                            <span>Violet</span>
+                            <span class="table-color-hex">#7C3AED</span>
+                        </div>
+                    </td>
+                    <td><span class="table-color-hex">0 4px 14px rgba(124,58,237,0.25)</span></td>
+                    <td>Button/Accent default</td>
+                </tr>
+                <tr>
+                    <td class="table-name">Shadow/Accent Hover</td>
+                    <td>
+                        <div class="table-color">
+                            <div class="table-color-dot" style="background: #7C3AED;"></div>
+                            <span>Violet</span>
+                            <span class="table-color-hex">#7C3AED</span>
+                        </div>
+                    </td>
+                    <td><span class="table-color-hex">0 6px 20px rgba(124,58,237,0.35)</span></td>
+                    <td>Button/Accent hover</td>
+                </tr>
+                <tr>
+                    <td class="table-name">Shadow/Destructive</td>
+                    <td>
+                        <div class="table-color">
+                            <div class="table-color-dot" style="background: #EF4444;"></div>
+                            <span>Rouge vif</span>
+                            <span class="table-color-hex">#EF4444</span>
+                        </div>
+                    </td>
+                    <td><span class="table-color-hex">0 4px 14px rgba(239,68,68,0.25)</span></td>
+                    <td>Button/Destructive default</td>
+                </tr>
+                <tr>
+                    <td class="table-name">Shadow/Destructive Hover</td>
+                    <td>
+                        <div class="table-color">
+                            <div class="table-color-dot" style="background: #EF4444;"></div>
+                            <span>Rouge vif</span>
+                            <span class="table-color-hex">#EF4444</span>
+                        </div>
+                    </td>
+                    <td><span class="table-color-hex">0 6px 20px rgba(239,68,68,0.35)</span></td>
+                    <td>Button/Destructive hover</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<!-- ==================== SUMMARY TABLE ==================== -->
+<div class="section">
+    <h2 class="section-title">📋 Résumé par catégorie</h2>
+    
+    <table class="summary-table">
+        <thead>
+            <tr>
+                <th>Catégorie</th>
+                <th>Ombres</th>
+                <th>Composants</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td class="summary-category">Neutres</td>
+                <td>XS, SM, MD, LG, XL</td>
+                <td>Header, Cards, Dropdowns, Modals</td>
+            </tr>
+            <tr>
+                <td class="summary-category">CTA</td>
+                <td>CTA, CTA Hover</td>
+                <td>Button/Primary</td>
+            </tr>
+            <tr>
+                <td class="summary-category">Accent</td>
+                <td>Accent, Accent Hover</td>
+                <td>Button/Accent</td>
+            </tr>
+            <tr>
+                <td class="summary-category">Destructive</td>
+                <td>Destructive, Destructive Hover</td>
+                <td>Button/Destructive</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<!-- ==================== CSS VARIABLES ==================== -->
+<div class="code-box">
+    <p class="code-title">📋 CSS Variables (pour le dev)</p>
+    <div class="code-content">
+        <span class="code-comment">/* Shadows - Neutral */</span><br>
+        <span class="code-property">--shadow-xs:</span> <span class="code-value">0 1px 2px rgba(0, 0, 0, 0.05)</span>;<br>
+        <span class="code-property">--shadow-sm:</span> <span class="code-value">0 1px 3px rgba(0, 0, 0, 0.1), 0 1px 2px rgba(0, 0, 0, 0.06)</span>;<br>
+        <span class="code-property">--shadow-md:</span> <span class="code-value">0 4px 6px rgba(0, 0, 0, 0.1), 0 2px 4px rgba(0, 0, 0, 0.06)</span>;<br>
+        <span class="code-property">--shadow-lg:</span> <span class="code-value">0 10px 15px rgba(0, 0, 0, 0.1), 0 4px 6px rgba(0, 0, 0, 0.05)</span>;<br>
+        <span class="code-property">--shadow-xl:</span> <span class="code-value">0 20px 25px rgba(0, 0, 0, 0.1), 0 10px 10px rgba(0, 0, 0, 0.04)</span>;<br><br>
+        
+        <span class="code-comment">/* Shadows - CTA (Primary) */</span><br>
+        <span class="code-property">--shadow-cta:</span> <span class="code-value">0 4px 14px rgba(176, 0, 29, 0.25)</span>;<br>
+        <span class="code-property">--shadow-cta-hover:</span> <span class="code-value">0 6px 20px rgba(176, 0, 29, 0.35)</span>;<br><br>
+        
+        <span class="code-comment">/* Shadows - Accent (Secondary) */</span><br>
+        <span class="code-property">--shadow-accent:</span> <span class="code-value">0 4px 14px rgba(124, 58, 237, 0.25)</span>;<br>
+        <span class="code-property">--shadow-accent-hover:</span> <span class="code-value">0 6px 20px rgba(124, 58, 237, 0.35)</span>;<br><br>
+        
+        <span class="code-comment">/* Shadows - Destructive */</span><br>
+        <span class="code-property">--shadow-destructive:</span> <span class="code-value">0 4px 14px rgba(239, 68, 68, 0.25)</span>;<br>
+        <span class="code-property">--shadow-destructive-hover:</span> <span class="code-value">0 6px 20px rgba(239, 68, 68, 0.35)</span>;<br>
+    </div>
+</div>
+
+</body>
+</html>

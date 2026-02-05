@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jurible Design System — Tabs</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --color-primary: #B0001D;
+            --color-primary-light: rgba(176, 0, 29, 0.1);
+            --color-secondary: #7C3AED;
+            --color-text-dark: #1A1A1A;
+            --color-text-gray: #4A4A4A;
+            --color-text-muted: #9CA3AF;
+            --color-background: #FFFFFF;
+            --color-muted: #F3F4F6;
+            --color-border: #E5E7EB;
+
+            --space-xs: 8px;
+            --space-sm: 16px;
+            --space-md: 24px;
+            --space-lg: 32px;
+            --space-xl: 48px;
+
+            --radius-sm: 6px;
+            --radius-md: 8px;
+            --radius-lg: 12px;
+            --radius-full: 9999px;
+
+            --font-family: 'Poppins', sans-serif;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: var(--font-family);
+            background: var(--color-background);
+            color: var(--color-text-dark);
+            padding: var(--space-xl) 80px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .page-header { margin-bottom: var(--space-xl); }
+        .page-title { font-size: 48px; font-weight: 700; margin-bottom: var(--space-xs); }
+        .page-divider { height: 3px; width: 120px; background: linear-gradient(90deg, #B0001D 0%, #DC2626 50%, #7C3AED 100%); border-radius: var(--radius-full); }
+
+        .section { margin-bottom: var(--space-xl); }
+        .section-title { font-size: 24px; font-weight: 600; margin-bottom: var(--space-xs); }
+        .section-subtitle { font-size: 14px; color: var(--color-text-muted); margin-bottom: var(--space-md); }
+        .section-divider { height: 1px; background: var(--color-border); margin: var(--space-xl) 0; }
+
+        .component-label { font-size: 11px; color: var(--color-text-muted); text-transform: uppercase; letter-spacing: 0.5px; font-weight: 600; margin-bottom: var(--space-sm); display: inline-block; background: var(--color-muted); padding: 4px 8px; border-radius: 4px; }
+
+        .preview-box { background: var(--color-muted); border-radius: var(--radius-lg); padding: var(--space-lg); margin-bottom: var(--space-md); }
+        .preview-white { background: white; border: 1px solid var(--color-border); }
+
+        /* ==================== TABS BASE ==================== */
+        .tabs {
+            display: flex;
+            align-items: center;
+            gap: 0;
+        }
+
+        .tab {
+            display: inline-flex;
+            align-items: center;
+            gap: var(--space-xs);
+            padding: 12px var(--space-md);
+            font-family: var(--font-family);
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--color-text-muted);
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            transition: all 0.15s ease;
+            white-space: nowrap;
+        }
+
+        .tab:hover {
+            color: var(--color-text-dark);
+        }
+
+        /* ==================== 1. GRADIENT — Pages de vente ==================== */
+        .tabs--gradient .tab.active {
+            color: white;
+            background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 100%);
+            border-radius: var(--radius-md);
+        }
+
+        .tabs--gradient .tab:hover:not(.active) {
+            color: var(--color-primary);
+        }
+
+        /* Gradient Vertical (Mobile) */
+        .tabs--gradient.tabs--vertical {
+            flex-direction: column;
+            align-items: stretch;
+            gap: var(--space-xs);
+        }
+
+        .tabs--gradient.tabs--vertical .tab {
+            justify-content: flex-start;
+            border-radius: var(--radius-md);
+        }
+
+        /* ==================== 2. UNDERLINE — Blocs info, sommaire ==================== */
+        .tabs--underline {
+            border-bottom: 1px solid var(--color-border);
+        }
+
+        .tabs--underline .tab {
+            border-bottom: 2px solid transparent;
+            margin-bottom: -1px;
+            padding: 14px var(--space-md);
+        }
+
+        .tabs--underline .tab.active {
+            color: var(--color-primary);
+            border-bottom-color: var(--color-primary);
+        }
+
+        .tabs--underline .tab:hover:not(.active) {
+            color: var(--color-primary);
+        }
+
+        /* Underline Vertical (Mobile) */
+        .tabs--underline.tabs--vertical {
+            flex-direction: column;
+            align-items: stretch;
+            border-bottom: none;
+            border-left: 2px solid var(--color-border);
+        }
+
+        .tabs--underline.tabs--vertical .tab {
+            justify-content: flex-start;
+            border-bottom: none;
+            border-left: 2px solid transparent;
+            margin-left: -2px;
+            margin-bottom: 0;
+        }
+
+        .tabs--underline.tabs--vertical .tab.active {
+            color: var(--color-primary);
+            background: var(--color-primary-light);
+            border-left-color: var(--color-primary);
+        }
+
+        /* ==================== TAB CONTENT ==================== */
+        .tab-content {
+            padding: var(--space-md);
+            background: white;
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-md);
+            margin-top: var(--space-sm);
+        }
+
+        .tabs--underline + .tab-content {
+            border-top: none;
+            border-radius: 0 0 var(--radius-md) var(--radius-md);
+            margin-top: 0;
+        }
+
+        /* ==================== SPECS ==================== */
+        .specs-table { width: 100%; border-collapse: collapse; font-size: 13px; margin-top: var(--space-md); }
+        .specs-table th { text-align: left; font-size: 11px; font-weight: 600; color: white; text-transform: uppercase; letter-spacing: 0.5px; padding: 12px var(--space-sm); background: var(--color-text-dark); }
+        .specs-table th:first-child { border-radius: var(--radius-md) 0 0 0; }
+        .specs-table th:last-child { border-radius: 0 var(--radius-md) 0 0; }
+        .specs-table td { padding: 12px var(--space-sm); border-bottom: 1px solid var(--color-border); }
+        .specs-table tr:last-child td { border-bottom: none; }
+        .specs-table code { font-family: 'SF Mono', monospace; font-size: 11px; background: var(--color-muted); padding: 2px 6px; border-radius: 4px; }
+
+        .info-box { background: var(--color-muted); border-radius: var(--radius-lg); padding: var(--space-md); margin-top: var(--space-md); }
+        .info-box__title { font-size: 14px; font-weight: 600; margin-bottom: var(--space-sm); }
+        .info-box ul { font-size: 13px; color: var(--color-text-gray); line-height: 1.8; padding-left: 20px; }
+
+        .usage-tag { display: inline-block; font-size: 11px; font-weight: 600; padding: 4px 10px; border-radius: var(--radius-full); margin-bottom: var(--space-sm); }
+        .usage-tag--gradient { background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 100%); color: white; }
+        .usage-tag--underline { background: var(--color-primary-light); color: var(--color-primary); }
+    </style>
+</head>
+<body>
+
+<div class="page-header">
+    <h1 class="page-title">tabs</h1>
+    <div class="page-divider"></div>
+</div>
+
+<!-- 1. GRADIENT — Pages de vente -->
+<div class="section">
+    <h2 class="section-title">1. Gradient</h2>
+    <span class="usage-tag usage-tag--gradient">Pages de vente</span>
+    <p class="section-subtitle">Navigation principale sur les pages de vente (formations, offres)</p>
+
+    <span class="component-label">Desktop — Horizontal</span>
+    <div class="preview-box preview-white">
+        <div class="tabs tabs--gradient">
+            <button class="tab active">Présentation</button>
+            <button class="tab">Programme</button>
+            <button class="tab">Tarifs</button>
+            <button class="tab">Avis</button>
+            <button class="tab">FAQ</button>
+        </div>
+    </div>
+
+    <span class="component-label">Mobile — Vertical</span>
+    <div class="preview-box preview-white" style="max-width: 320px;">
+        <div class="tabs tabs--gradient tabs--vertical">
+            <button class="tab active">Présentation</button>
+            <button class="tab">Programme</button>
+            <button class="tab">Tarifs</button>
+            <button class="tab">Avis</button>
+            <button class="tab">FAQ</button>
+        </div>
+    </div>
+
+    <span class="component-label">Avec contenu</span>
+    <div class="preview-box preview-white">
+        <div class="tabs tabs--gradient">
+            <button class="tab active">Présentation</button>
+            <button class="tab">Programme</button>
+            <button class="tab">Tarifs</button>
+        </div>
+        <div class="tab-content">
+            <p style="color: var(--color-text-gray); font-size: 14px;"><strong>Maîtrisez le droit civil en 8 semaines</strong><br><br>Cette formation complète vous accompagne pas à pas dans l'apprentissage des fondamentaux du droit civil...</p>
+        </div>
+    </div>
+</div>
+
+<div class="section-divider"></div>
+
+<!-- 2. UNDERLINE — Blocs info, sommaire -->
+<div class="section">
+    <h2 class="section-title">2. Underline</h2>
+    <span class="usage-tag usage-tag--underline">Blocs info & sommaire</span>
+    <p class="section-subtitle">Navigation secondaire dans les blocs de contenu (fiches, articles, cours)</p>
+
+    <span class="component-label">Desktop — Horizontal</span>
+    <div class="preview-box preview-white">
+        <div class="tabs tabs--underline">
+            <button class="tab active">Introduction</button>
+            <button class="tab">Définition</button>
+            <button class="tab">Exemples</button>
+            <button class="tab">Jurisprudence</button>
+        </div>
+    </div>
+
+    <span class="component-label">Mobile — Vertical</span>
+    <div class="preview-box preview-white" style="max-width: 320px;">
+        <div class="tabs tabs--underline tabs--vertical">
+            <button class="tab active">Introduction</button>
+            <button class="tab">Définition</button>
+            <button class="tab">Exemples</button>
+            <button class="tab">Jurisprudence</button>
+        </div>
+    </div>
+
+    <span class="component-label">Avec contenu — Sommaire fiche</span>
+    <div class="preview-box preview-white">
+        <div class="tabs tabs--underline">
+            <button class="tab active">Résumé</button>
+            <button class="tab">Plan détaillé</button>
+            <button class="tab">Points clés</button>
+        </div>
+        <div class="tab-content">
+            <p style="color: var(--color-text-gray); font-size: 14px;">Le contrat est un accord de volontés entre deux ou plusieurs personnes destiné à créer, modifier, transmettre ou éteindre des obligations...</p>
+        </div>
+    </div>
+</div>
+
+<div class="section-divider"></div>
+
+<!-- 3. RÉCAPITULATIF -->
+<div class="section">
+    <h2 class="section-title">📋 Récapitulatif</h2>
+
+    <table class="specs-table">
+        <thead>
+            <tr>
+                <th>Variante</th>
+                <th>Classe CSS</th>
+                <th>Usage</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><strong>Gradient</strong></td>
+                <td><code>.tabs--gradient</code></td>
+                <td>Pages de vente (formations, offres)</td>
+            </tr>
+            <tr>
+                <td><strong>Underline</strong></td>
+                <td><code>.tabs--underline</code></td>
+                <td>Blocs info, sommaire, fiches, articles</td>
+            </tr>
+            <tr>
+                <td><strong>Vertical</strong></td>
+                <td><code>.tabs--vertical</code></td>
+                <td>Mobile (combinable avec gradient ou underline)</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <table class="specs-table" style="margin-top: var(--space-md);">
+        <thead>
+            <tr>
+                <th>Propriété</th>
+                <th>Valeur</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr><td>Padding</td><td><code>12px 24px</code></td></tr>
+            <tr><td>Font size</td><td><code>14px</code></td></tr>
+            <tr><td>Font weight</td><td><code>500 (Medium)</code></td></tr>
+            <tr><td>Border radius (gradient)</td><td><code>8px</code></td></tr>
+            <tr><td>Border (underline active)</td><td><code>2px solid #B0001D</code></td></tr>
+            <tr><td>Gradient</td><td><code>#B0001D → #7C3AED (135deg)</code></td></tr>
+            <tr><td>Transition</td><td><code>all 0.15s ease</code></td></tr>
+        </tbody>
+    </table>
+
+    <div class="info-box" style="margin-top: var(--space-md);">
+        <p class="info-box__title">💡 Quand utiliser quoi ?</p>
+        <ul>
+            <li><strong>Gradient</strong> → Pages de vente, landing pages, navigation principale (impact visuel fort)</li>
+            <li><strong>Underline</strong> → Sommaires, fiches, articles, blocs info (discret, ne vole pas la vedette au contenu)</li>
+            <li><strong>Vertical</strong> → Ajouter <code>.tabs--vertical</code> pour mobile (<768px)</li>
+        </ul>
+    </div>
+</div>
+
+</body>
+</html>

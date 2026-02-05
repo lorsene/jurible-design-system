@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jurible Design System — Media</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --color-primary: #B0001D;
+            --color-primary-light: rgba(176, 0, 29, 0.1);
+            --color-secondary: #7C3AED;
+            --color-text-dark: #1A1A1A;
+            --color-text-gray: #4A4A4A;
+            --color-text-muted: #9CA3AF;
+            --color-background: #FFFFFF;
+            --color-muted: #F3F4F6;
+            --color-border: #E5E7EB;
+
+            --space-xs: 8px;
+            --space-sm: 16px;
+            --space-md: 24px;
+            --space-lg: 32px;
+            --space-xl: 48px;
+
+            --radius-sm: 6px;
+            --radius-md: 8px;
+            --radius-lg: 12px;
+            --radius-xl: 16px;
+            --radius-full: 9999px;
+
+            --font-family: 'Poppins', sans-serif;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: var(--font-family);
+            background: var(--color-background);
+            color: var(--color-text-dark);
+            padding: var(--space-xl) 80px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .page-header { margin-bottom: var(--space-xl); }
+        .page-title { font-size: 48px; font-weight: 700; margin-bottom: var(--space-xs); }
+        .page-divider { height: 3px; width: 120px; background: linear-gradient(90deg, #B0001D 0%, #DC2626 50%, #7C3AED 100%); border-radius: var(--radius-full); }
+
+        .section { margin-bottom: var(--space-xl); }
+        .section-title { font-size: 24px; font-weight: 600; margin-bottom: var(--space-xs); }
+        .section-subtitle { font-size: 14px; color: var(--color-text-muted); margin-bottom: var(--space-md); }
+        .section-divider { height: 1px; background: var(--color-border); margin: var(--space-xl) 0; }
+
+        .component-label { font-size: 11px; color: var(--color-text-muted); text-transform: uppercase; letter-spacing: 0.5px; font-weight: 600; margin-bottom: var(--space-sm); display: inline-block; background: var(--color-muted); padding: 4px 8px; border-radius: 4px; }
+
+        .preview-box { background: var(--color-muted); border-radius: var(--radius-lg); padding: var(--space-lg); margin-bottom: var(--space-md); }
+        .preview-white { background: white; border: 1px solid var(--color-border); }
+        .preview-row { display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--space-lg); }
+        .preview-row-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-lg); }
+        .preview-row-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--space-md); }
+
+        /* ==================== IMAGES ==================== */
+        .img { display: block; width: 100%; height: auto; object-fit: cover; background: var(--color-muted); }
+        .img--rounded { border-radius: var(--radius-md); }
+        .img--rounded-lg { border-radius: var(--radius-lg); }
+        .img--rounded-xl { border-radius: var(--radius-xl); }
+        .img--circle { border-radius: var(--radius-full); }
+
+        /* Placeholder pour démo */
+        .img-placeholder { background: linear-gradient(135deg, var(--color-muted) 0%, var(--color-border) 100%); display: flex; align-items: center; justify-content: center; color: var(--color-text-muted); font-size: 14px; font-weight: 500; }
+
+        /* Ratios */
+        .img--ratio-16-9 { aspect-ratio: 16 / 9; }
+        .img--ratio-4-3 { aspect-ratio: 4 / 3; }
+        .img--ratio-1-1 { aspect-ratio: 1 / 1; }
+        .img--ratio-3-2 { aspect-ratio: 3 / 2; }
+
+        /* Tailles fixes */
+        .img--hero { width: 100%; max-height: 480px; }
+        .img--card { width: 100%; aspect-ratio: 16 / 9; }
+        .img--thumbnail { width: 120px; height: 80px; }
+        .img--avatar-sm { width: 32px; height: 32px; }
+        .img--avatar-md { width: 48px; height: 48px; }
+        .img--avatar-lg { width: 64px; height: 64px; }
+        .img--avatar-xl { width: 96px; height: 96px; }
+
+        /* Figure avec caption */
+        .figure { margin: 0; }
+        .figure__caption { font-size: 13px; color: var(--color-text-muted); margin-top: var(--space-xs); text-align: center; }
+
+        /* ==================== LOGOS PARTENAIRES ==================== */
+        .logos-grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: var(--space-md); align-items: center; }
+        .logos-row { display: flex; align-items: center; justify-content: center; gap: var(--space-xl); flex-wrap: wrap; }
+        .logo-item { display: flex; align-items: center; justify-content: center; }
+        .logo-img { width: 120px; height: 48px; object-fit: contain; filter: grayscale(100%); opacity: 0.6; transition: all 0.2s ease; }
+        .logo-item:hover .logo-img { filter: grayscale(0%); opacity: 1; }
+        .logo-item--light .logo-img { border-radius: var(--radius-sm); padding: var(--space-xs); }
+
+        /* ==================== GALERIE ==================== */
+        .gallery { display: grid; gap: var(--space-sm); }
+        .gallery--2 { grid-template-columns: repeat(2, 1fr); }
+        .gallery--3 { grid-template-columns: repeat(3, 1fr); }
+        .gallery--4 { grid-template-columns: repeat(4, 1fr); }
+        .gallery__item { overflow: hidden; border-radius: var(--radius-md); }
+        .gallery__item .img { transition: transform 0.3s ease; }
+        .gallery__item:hover .img { transform: scale(1.05); }
+
+        /* ==================== VIDEO ==================== */
+        .video-wrapper { position: relative; width: 100%; aspect-ratio: 16 / 9; background: #000; border-radius: var(--radius-lg); overflow: hidden; }
+        .video-wrapper video, .video-wrapper iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
+        
+        .video-placeholder { position: relative; width: 100%; aspect-ratio: 16 / 9; background: linear-gradient(135deg, #1A1A1A 0%, #2D2D2D 100%); border-radius: var(--radius-lg); overflow: hidden; display: flex; align-items: center; justify-content: center; cursor: pointer; }
+        .video-placeholder__play { width: 80px; height: 80px; background: rgba(255,255,255,0.95); border-radius: var(--radius-full); display: flex; align-items: center; justify-content: center; transition: transform 0.2s ease, box-shadow 0.2s ease; }
+        .video-placeholder__play::after { content: ""; width: 0; height: 0; border-style: solid; border-width: 14px 0 14px 24px; border-color: transparent transparent transparent var(--color-primary); margin-left: 6px; }
+        .video-placeholder:hover .video-placeholder__play { transform: scale(1.1); box-shadow: 0 8px 30px rgba(0,0,0,0.3); }
+        .video-placeholder__duration { position: absolute; bottom: var(--space-sm); right: var(--space-sm); background: rgba(0,0,0,0.8); color: white; font-size: 12px; font-weight: 500; padding: 4px 8px; border-radius: 4px; }
+        .video-placeholder__title { position: absolute; bottom: var(--space-sm); left: var(--space-sm); color: white; font-size: 14px; font-weight: 500; text-shadow: 0 1px 3px rgba(0,0,0,0.5); }
+
+        /* ==================== LOGOS PARTENAIRES ==================== */
+        .logos-row { display: flex; align-items: center; justify-content: center; gap: var(--space-xl); flex-wrap: wrap; }
+        .logo-item { opacity: 0.6; transition: opacity 0.2s ease; }
+        .logo-item:hover { opacity: 1; }
+        .logo-item img { display: block; height: 40px; width: auto; object-fit: contain; filter: grayscale(100%); transition: filter 0.2s ease; }
+        .logo-item:hover img { filter: grayscale(0%); }
+
+        /* Placeholder pour démo */
+        .logo-placeholder { background: var(--color-muted); border-radius: var(--radius-sm); display: flex; align-items: center; justify-content: center; color: var(--color-text-muted); font-size: 11px; font-weight: 500; width: 120px; height: 40px; }
+        .logo--sm { width: 80px; height: 32px; font-size: 10px; }
+        .logo--md { width: 120px; height: 40px; }
+        .logo--lg { width: 160px; height: 48px; font-size: 12px; }
+
+        /* ==================== SPECS ==================== */
+        .specs-table { width: 100%; border-collapse: collapse; font-size: 13px; margin-top: var(--space-md); }
+        .specs-table th { text-align: left; font-size: 11px; font-weight: 600; color: white; text-transform: uppercase; letter-spacing: 0.5px; padding: 12px var(--space-sm); background: var(--color-text-dark); }
+        .specs-table th:first-child { border-radius: var(--radius-md) 0 0 0; }
+        .specs-table th:last-child { border-radius: 0 var(--radius-md) 0 0; }
+        .specs-table td { padding: 12px var(--space-sm); border-bottom: 1px solid var(--color-border); }
+        .specs-table tr:last-child td { border-bottom: none; }
+        .specs-table code { font-family: 'SF Mono', monospace; font-size: 11px; background: var(--color-muted); padding: 2px 6px; border-radius: 4px; }
+
+        .info-box { background: var(--color-muted); border-radius: var(--radius-lg); padding: var(--space-md); margin-top: var(--space-md); }
+        .info-box__title { font-size: 14px; font-weight: 600; margin-bottom: var(--space-sm); }
+        .info-box ul { font-size: 13px; color: var(--color-text-gray); line-height: 1.8; padding-left: 20px; }
+
+        .size-label { font-size: 11px; color: var(--color-text-muted); margin-top: 6px; text-align: center; }
+    </style>
+</head>
+<body>
+
+<div class="page-header">
+    <h1 class="page-title">media</h1>
+    <div class="page-divider"></div>
+</div>
+
+<!-- 1. TAILLES IMAGES -->
+<div class="section">
+    <h2 class="section-title">1. Tailles images</h2>
+    <p class="section-subtitle">Dimensions standards selon le contexte</p>
+
+    <span class="component-label">Hero — Page de vente (100% × max 480px)</span>
+    <div class="preview-box preview-white">
+        <div class="img img-placeholder img--hero img--rounded-lg" style="max-height: 240px;">1200 × 480</div>
+    </div>
+
+    <span class="component-label">Article / Fiche (100% × ratio 16:9)</span>
+    <div class="preview-box preview-white" style="max-width: 800px;">
+        <div class="img img-placeholder img--ratio-16-9 img--rounded-lg">800 × 450</div>
+    </div>
+
+    <span class="component-label">Card (100% × ratio 16:9)</span>
+    <div class="preview-row" style="margin-bottom: var(--space-md);">
+        <div class="preview-box preview-white">
+            <div class="img img-placeholder img--card img--rounded-md">Card image</div>
+        </div>
+        <div class="preview-box preview-white">
+            <div class="img img-placeholder img--card img--rounded-md">Card image</div>
+        </div>
+    </div>
+
+    <span class="component-label">Thumbnail (120 × 80px)</span>
+    <div class="preview-box preview-white">
+        <div style="display: flex; gap: var(--space-sm);">
+            <div class="img img-placeholder img--thumbnail img--rounded-md">120×80</div>
+            <div class="img img-placeholder img--thumbnail img--rounded-md">120×80</div>
+            <div class="img img-placeholder img--thumbnail img--rounded-md">120×80</div>
+        </div>
+    </div>
+
+    <span class="component-label">Avatars</span>
+    <div class="preview-box preview-white">
+        <div style="display: flex; gap: var(--space-md); align-items: end;">
+            <div style="text-align: center;">
+                <div class="img img-placeholder img--avatar-sm img--circle">SM</div>
+                <p class="size-label">32px</p>
+            </div>
+            <div style="text-align: center;">
+                <div class="img img-placeholder img--avatar-md img--circle">MD</div>
+                <p class="size-label">48px</p>
+            </div>
+            <div style="text-align: center;">
+                <div class="img img-placeholder img--avatar-lg img--circle">LG</div>
+                <p class="size-label">64px</p>
+            </div>
+            <div style="text-align: center;">
+                <div class="img img-placeholder img--avatar-xl img--circle">XL</div>
+                <p class="size-label">96px</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="section-divider"></div>
+
+<!-- 2. RATIOS -->
+<div class="section">
+    <h2 class="section-title">2. Ratios</h2>
+    <p class="section-subtitle">Proportions standards</p>
+
+    <div class="preview-row-4">
+        <div>
+            <span class="component-label">16:9</span>
+            <div class="img img-placeholder img--ratio-16-9 img--rounded-md">16:9</div>
+            <p class="size-label">Vidéo, hero</p>
+        </div>
+        <div>
+            <span class="component-label">4:3</span>
+            <div class="img img-placeholder img--ratio-4-3 img--rounded-md">4:3</div>
+            <p class="size-label">Photos classiques</p>
+        </div>
+        <div>
+            <span class="component-label">3:2</span>
+            <div class="img img-placeholder img--ratio-3-2 img--rounded-md">3:2</div>
+            <p class="size-label">Photos, prints</p>
+        </div>
+        <div>
+            <span class="component-label">1:1</span>
+            <div class="img img-placeholder img--ratio-1-1 img--rounded-md">1:1</div>
+            <p class="size-label">Avatars, icônes</p>
+        </div>
+    </div>
+</div>
+
+<div class="section-divider"></div>
+
+<!-- 3. FIGURE AVEC CAPTION -->
+<div class="section">
+    <h2 class="section-title">3. Figure avec légende</h2>
+    <p class="section-subtitle">Image accompagnée d'une description</p>
+
+    <div class="preview-box preview-white" style="max-width: 600px;">
+        <figure class="figure">
+            <div class="img img-placeholder img--ratio-16-9 img--rounded-lg">Image illustrative</div>
+            <figcaption class="figure__caption">Schéma explicatif du principe de responsabilité civile — Source : Jurible</figcaption>
+        </figure>
+    </div>
+</div>
+
+<div class="section-divider"></div>
+
+<!-- 4. LOGOS PARTENAIRES -->
+<div class="section">
+    <h2 class="section-title">4. Logos partenaires</h2>
+    <p class="section-subtitle">Section "Ils nous font confiance"</p>
+
+    <span class="component-label">Grille de logos</span>
+    <div class="preview-box preview-white">
+        <div class="logos-grid">
+            <div class="logo-item"><div class="img img-placeholder logo-img">Logo 1</div></div>
+            <div class="logo-item"><div class="img img-placeholder logo-img">Logo 2</div></div>
+            <div class="logo-item"><div class="img img-placeholder logo-img">Logo 3</div></div>
+            <div class="logo-item"><div class="img img-placeholder logo-img">Logo 4</div></div>
+            <div class="logo-item"><div class="img img-placeholder logo-img">Logo 5</div></div>
+            <div class="logo-item"><div class="img img-placeholder logo-img">Logo 6</div></div>
+        </div>
+    </div>
+
+    <span class="component-label">Ligne de logos (scroll horizontal mobile)</span>
+    <div class="preview-box preview-white">
+        <div class="logos-row">
+            <div class="logo-item"><div class="img img-placeholder logo-img">BPI France</div></div>
+            <div class="logo-item"><div class="img img-placeholder logo-img">Paris II</div></div>
+            <div class="logo-item"><div class="img img-placeholder logo-img">Partenaire</div></div>
+            <div class="logo-item"><div class="img img-placeholder logo-img">Partenaire</div></div>
+            <div class="logo-item"><div class="img img-placeholder logo-img">Partenaire</div></div>
+        </div>
+    </div>
+
+    <span class="component-label">Logos avec fond (sur dark background)</span>
+    <div class="preview-box" style="background: var(--color-text-dark); padding: var(--space-lg);">
+        <div class="logos-row">
+            <div class="logo-item logo-item--light"><div class="img img-placeholder logo-img" style="background: white;">Logo</div></div>
+            <div class="logo-item logo-item--light"><div class="img img-placeholder logo-img" style="background: white;">Logo</div></div>
+            <div class="logo-item logo-item--light"><div class="img img-placeholder logo-img" style="background: white;">Logo</div></div>
+            <div class="logo-item logo-item--light"><div class="img img-placeholder logo-img" style="background: white;">Logo</div></div>
+        </div>
+    </div>
+</div>
+
+<div class="section-divider"></div>
+
+<!-- 5. GALERIE -->
+<div class="section">
+    <h2 class="section-title">5. Galerie</h2>
+    <p class="section-subtitle">Grilles d'images</p>
+
+    <span class="component-label">2 colonnes</span>
+    <div class="preview-box preview-white">
+        <div class="gallery gallery--2">
+            <div class="gallery__item"><div class="img img-placeholder img--ratio-16-9">Image 1</div></div>
+            <div class="gallery__item"><div class="img img-placeholder img--ratio-16-9">Image 2</div></div>
+        </div>
+    </div>
+
+    <span class="component-label">3 colonnes</span>
+    <div class="preview-box preview-white">
+        <div class="gallery gallery--3">
+            <div class="gallery__item"><div class="img img-placeholder img--ratio-4-3">Image 1</div></div>
+            <div class="gallery__item"><div class="img img-placeholder img--ratio-4-3">Image 2</div></div>
+            <div class="gallery__item"><div class="img img-placeholder img--ratio-4-3">Image 3</div></div>
+        </div>
+    </div>
+
+    <span class="component-label">4 colonnes (thumbnails)</span>
+    <div class="preview-box preview-white">
+        <div class="gallery gallery--4">
+            <div class="gallery__item"><div class="img img-placeholder img--ratio-1-1">1</div></div>
+            <div class="gallery__item"><div class="img img-placeholder img--ratio-1-1">2</div></div>
+            <div class="gallery__item"><div class="img img-placeholder img--ratio-1-1">3</div></div>
+            <div class="gallery__item"><div class="img img-placeholder img--ratio-1-1">4</div></div>
+        </div>
+    </div>
+</div>
+
+<div class="section-divider"></div>
+
+<!-- 6. VIDEO -->
+<div class="section">
+    <h2 class="section-title">6. Lecteur vidéo</h2>
+    <p class="section-subtitle">Placeholder vidéo avec bouton play (ratio 16:9)</p>
+
+    <span class="component-label">Placeholder vidéo — Page de vente</span>
+    <div class="preview-box preview-white">
+        <div class="video-placeholder">
+            <div class="video-placeholder__play"></div>
+            <span class="video-placeholder__duration">12:34</span>
+        </div>
+    </div>
+
+    <span class="component-label">Avec titre</span>
+    <div class="preview-box preview-white" style="max-width: 600px;">
+        <div class="video-placeholder">
+            <div class="video-placeholder__play"></div>
+            <span class="video-placeholder__title">Introduction au droit civil</span>
+            <span class="video-placeholder__duration">08:15</span>
+        </div>
+    </div>
+
+    <span class="component-label">Embed (iframe)</span>
+    <div class="preview-box preview-white" style="max-width: 800px;">
+        <div class="video-wrapper">
+            <div class="img img-placeholder" style="width: 100%; height: 100%; position: absolute;">Iframe YouTube / Vimeo / Bunny</div>
+        </div>
+    </div>
+</div>
+
+<div class="section-divider"></div>
+
+<!-- 6. LOGOS PARTENAIRES -->
+<div class="section">
+    <h2 class="section-title">6. Logos partenaires</h2>
+    <p class="section-subtitle">Section "Ils nous font confiance" — logos clients, universités, médias</p>
+
+    <span class="component-label">Bande de logos — Monochrome</span>
+    <div class="preview-box preview-white">
+        <p style="text-align: center; font-size: 13px; color: var(--color-text-muted); text-transform: uppercase; letter-spacing: 1px; margin-bottom: var(--space-md);">Ils nous font confiance</p>
+        <div class="logos-row">
+            <div class="logo-item"><div class="logo-placeholder">Paris II</div></div>
+            <div class="logo-item"><div class="logo-placeholder">BPI France</div></div>
+            <div class="logo-item"><div class="logo-placeholder">Assas</div></div>
+            <div class="logo-item"><div class="logo-placeholder">Logo 4</div></div>
+            <div class="logo-item"><div class="logo-placeholder">Logo 5</div></div>
+        </div>
+    </div>
+
+    <span class="component-label">Avec fond gris</span>
+    <div class="preview-box" style="background: var(--color-muted); border: none;">
+        <p style="text-align: center; font-size: 13px; color: var(--color-text-muted); text-transform: uppercase; letter-spacing: 1px; margin-bottom: var(--space-md);">Reconnu par</p>
+        <div class="logos-row">
+            <div class="logo-item"><div class="logo-placeholder">Université</div></div>
+            <div class="logo-item"><div class="logo-placeholder">Média</div></div>
+            <div class="logo-item"><div class="logo-placeholder">Partenaire</div></div>
+            <div class="logo-item"><div class="logo-placeholder">Institution</div></div>
+        </div>
+    </div>
+
+    <span class="component-label">Tailles de logos</span>
+    <div class="preview-box preview-white">
+        <div style="display: flex; gap: var(--space-lg); align-items: end;">
+            <div style="text-align: center;">
+                <div class="logo-placeholder logo--sm">SM</div>
+                <p class="size-label">80 × 32px</p>
+            </div>
+            <div style="text-align: center;">
+                <div class="logo-placeholder logo--md">MD</div>
+                <p class="size-label">120 × 40px</p>
+            </div>
+            <div style="text-align: center;">
+                <div class="logo-placeholder logo--lg">LG</div>
+                <p class="size-label">160 × 48px</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="section-divider"></div>
+
+<!-- 7. RÉCAPITULATIF -->
+<div class="section">
+    <h2 class="section-title">📋 Récapitulatif</h2>
+
+    <table class="specs-table">
+        <thead>
+            <tr>
+                <th>Usage</th>
+                <th>Classe CSS</th>
+                <th>Dimensions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr><td>Hero (page de vente)</td><td><code>.img--hero</code></td><td>100% × max 480px</td></tr>
+            <tr><td>Article / Fiche</td><td><code>.img--ratio-16-9</code></td><td>100% × ratio 16:9</td></tr>
+            <tr><td>Card</td><td><code>.img--card</code></td><td>100% × ratio 16:9</td></tr>
+            <tr><td>Thumbnail</td><td><code>.img--thumbnail</code></td><td>120 × 80px</td></tr>
+            <tr><td>Avatar SM</td><td><code>.img--avatar-sm</code></td><td>32 × 32px</td></tr>
+            <tr><td>Avatar MD</td><td><code>.img--avatar-md</code></td><td>48 × 48px</td></tr>
+            <tr><td>Avatar LG</td><td><code>.img--avatar-lg</code></td><td>64 × 64px</td></tr>
+            <tr><td>Avatar XL</td><td><code>.img--avatar-xl</code></td><td>96 × 96px</td></tr>
+            <tr><td>Logo partenaire</td><td><code>.logo-img</code></td><td>120 × 48px</td></tr>
+            <tr><td>Logo SM</td><td><code>.logo--sm</code></td><td>80 × 32px</td></tr>
+            <tr><td>Logo MD (default)</td><td><code>.logo--md</code></td><td>120 × 40px</td></tr>
+            <tr><td>Logo LG</td><td><code>.logo--lg</code></td><td>160 × 48px</td></tr>
+        </tbody>
+    </table>
+
+    <table class="specs-table" style="margin-top: var(--space-md);">
+        <thead>
+            <tr>
+                <th>Élément</th>
+                <th>Classe CSS</th>
+                <th>Usage</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr><td>Border radius</td><td><code>.img--rounded-md</code></td><td>8px (cards, thumbnails)</td></tr>
+            <tr><td>Border radius large</td><td><code>.img--rounded-lg</code></td><td>12px (hero, articles)</td></tr>
+            <tr><td>Cercle</td><td><code>.img--circle</code></td><td>Avatars</td></tr>
+            <tr><td>Galerie</td><td><code>.gallery--2/3/4</code></td><td>Grilles de 2, 3 ou 4 colonnes</td></tr>
+            <tr><td>Logos grille</td><td><code>.logos-grid</code></td><td>6 colonnes (desktop)</td></tr>
+            <tr><td>Logos ligne</td><td><code>.logos-row</code></td><td>Ligne centrée flex</td></tr>
+            <tr><td>Logos row</td><td><code>.logos-row</code></td><td>Bande de logos partenaires</td></tr>
+            <tr><td>Vidéo</td><td><code>.video-placeholder</code></td><td>Placeholder avec play button</td></tr>
+            <tr><td>Vidéo embed</td><td><code>.video-wrapper</code></td><td>Container pour iframe</td></tr>
+        </tbody>
+    </table>
+
+    <div class="info-box" style="margin-top: var(--space-md);">
+        <p class="info-box__title">💡 Bonnes pratiques</p>
+        <ul>
+            <li><strong>Hero</strong> : utiliser <code>object-fit: cover</code> pour éviter la déformation</li>
+            <li><strong>Vidéo</strong> : toujours ratio 16:9, afficher la durée</li>
+            <li><strong>Galerie</strong> : 2 colonnes sur mobile, 3-4 sur desktop</li>
+            <li><strong>Avatars</strong> : toujours ronds (<code>.img--circle</code>)</li>
+            <li><strong>Logos</strong> : grayscale par défaut, couleur au hover, taille 120×48px</li>
+            <li><strong>Logos</strong> : grayscale par défaut, couleur au hover, hauteur fixe 40px</li>
+            <li><strong>Lazy loading</strong> : ajouter <code>loading="lazy"</code> aux images</li>
+        </ul>
+    </div>
+</div>
+
+</body>
+</html>

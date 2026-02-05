@@ -1,0 +1,738 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jurible — Bloc Paragraphe + Média</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        /* =====================================================
+           JURIBLE DESIGN SYSTEM — TOKENS
+           ===================================================== */
+        :root {
+            --color-primary: #B0001D;
+            --color-primary-hover: #8B0016;
+            --color-secondary: #7C3AED;
+            --color-secondary-hover: #6D28D9;
+            --color-success: #10B981;
+            --gradient-jurible: linear-gradient(135deg, #B0001D 0%, #DC2626 50%, #7C3AED 100%);
+            --text-dark: #1A1A1A;
+            --text-gray: #4A4A4A;
+            --text-muted: #6B7280;
+            --text-light: #9CA3AF;
+            --bg-white: #FFFFFF;
+            --bg-light: #F9FAFB;
+            --bg-gray: #F3F4F6;
+            --bg-violet-light: #EDE9FE;
+            --border-light: #E5E7EB;
+            --border-default: #D1D5DB;
+            --shadow-sm: 0 1px 3px rgba(0,0,0,0.1), 0 1px 2px rgba(0,0,0,0.06);
+            --shadow-md: 0 4px 6px rgba(0,0,0,0.07), 0 2px 4px rgba(0,0,0,0.06);
+            --shadow-lg: 0 10px 15px rgba(0,0,0,0.1), 0 4px 6px rgba(0,0,0,0.05);
+            --shadow-cta: 0 2px 8px rgba(176,0,29,0.25);
+            --shadow-cta-hover: 0 4px 12px rgba(176,0,29,0.35);
+            --radius-sm: 4px;
+            --radius-md: 8px;
+            --radius-lg: 12px;
+            --radius-full: 9999px;
+            --space-xs: 4px;
+            --space-sm: 8px;
+            --space-md: 16px;
+            --space-lg: 24px;
+            --space-xl: 32px;
+            --space-2xl: 48px;
+            --space-3xl: 64px;
+        }
+
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            color: var(--text-dark);
+            background-color: var(--bg-white);
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* =====================================================
+           BLOC PARAGRAPHE + MÉDIA — COMPOSANT UNIQUE
+           ===================================================== */
+        .bloc-para {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: var(--space-3xl) 80px;
+            position: relative;
+        }
+
+        /* ---- Accent décoratif subtil en arrière-plan ---- */
+        .bloc-para::before {
+            content: '';
+            position: absolute;
+            top: 40px;
+            right: 0;
+            width: 260px;
+            height: 260px;
+            background: radial-gradient(circle, rgba(124,58,237,0.04) 0%, transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        /* ---- Layout principal ---- */
+        .bloc-para__row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--space-3xl);
+            align-items: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Variante inversée : ajouter .bloc-para__row--reversed */
+        .bloc-para__row--reversed {
+            direction: rtl;
+        }
+        .bloc-para__row--reversed > * {
+            direction: ltr;
+        }
+        /* Déplacer l'accent décoratif à gauche quand inversé */
+        .bloc-para--accent-left::before {
+            right: auto;
+            left: 0;
+        }
+
+        /* =====================================================
+           COLONNE TEXTE
+           ===================================================== */
+        .bloc-para__text {
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Badge / Label */
+        .bloc-para__badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 12px;
+            font-weight: 500;
+            line-height: 140%;
+            padding: 4px 14px;
+            border-radius: var(--radius-full);
+            align-self: flex-start;
+            margin-bottom: var(--space-md);
+        }
+
+        .bloc-para__badge {
+            color: var(--color-secondary);
+            background-color: var(--bg-violet-light);
+        }
+
+        /* Titre */
+        .bloc-para__title {
+            font-family: 'Poppins', sans-serif;
+            font-size: 40px;
+            font-weight: 700;
+            color: var(--text-dark);
+            line-height: 130%;
+            margin-bottom: var(--space-lg);
+        }
+        .bloc-para__title span {
+            background: var(--gradient-jurible);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* Sous-titre / intro */
+        .bloc-para__subtitle {
+            font-family: 'Poppins', sans-serif;
+            font-size: 16px;
+            font-weight: 400;
+            color: var(--text-muted);
+            line-height: 160%;
+            margin-bottom: var(--space-md);
+        }
+
+        /* Paragraphes */
+        .bloc-para__paragraph {
+            font-family: 'Poppins', sans-serif;
+            font-size: 16px;
+            font-weight: 400;
+            color: var(--text-gray);
+            line-height: 160%;
+            margin-bottom: var(--space-md);
+        }
+        .bloc-para__paragraph:last-child {
+            margin-bottom: 0;
+        }
+
+        /* Intro avec poids plus lourd */
+        .bloc-para__intro {
+            font-family: 'Poppins', sans-serif;
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--text-gray);
+            line-height: 150%;
+            margin-bottom: var(--space-md);
+        }
+
+        /* ---- Features list (emoji bullets) ---- */
+        .bloc-para__features {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+            margin-top: var(--space-sm);
+            margin-bottom: var(--space-lg);
+        }
+
+        .bloc-para__features li {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 14px;
+            font-weight: 400;
+            color: var(--text-gray);
+            line-height: 150%;
+        }
+
+        .bloc-para__features li .bullet-emoji {
+            font-size: 16px;
+            line-height: 1.4;
+            flex-shrink: 0;
+        }
+
+        /* ---- Closing / phrase italique ---- */
+        .bloc-para__closing {
+            font-family: 'Poppins', sans-serif;
+            font-size: 14px;
+            font-weight: 400;
+            font-style: italic;
+            color: var(--color-success);
+            line-height: 150%;
+        }
+
+        /* ---- Blockquote avec barre latérale ---- */
+        .bloc-para__blockquote {
+            border-left: 3px solid var(--color-primary);
+            padding-left: var(--space-md);
+            margin-top: var(--space-sm);
+        }
+        .bloc-para__blockquote p {
+            font-family: 'Poppins', sans-serif;
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--text-dark);
+            line-height: 150%;
+        }
+
+        /* ---- Citation inline ---- */
+        .bloc-para__quote {
+            font-style: italic;
+            color: var(--text-gray);
+        }
+
+        /* =====================================================
+           COLONNE MÉDIA
+           ===================================================== */
+        .bloc-para__media {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-sm);
+        }
+
+        .bloc-para__media-wrapper {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 4 / 3;
+            background-color: var(--bg-gray);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-sm);
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: box-shadow 200ms ease, transform 200ms ease;
+        }
+
+        .bloc-para__media-wrapper:hover {
+            box-shadow: var(--shadow-lg);
+            transform: translateY(-2px);
+        }
+
+        .bloc-para__media-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .bloc-para__media-wrapper video,
+        .bloc-para__media-wrapper iframe {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            border: none;
+        }
+
+        /* Placeholder (en attendant le vrai média) */
+        .bloc-para__media-placeholder {
+            text-align: center;
+            color: var(--text-light);
+            font-family: 'Poppins', sans-serif;
+            font-size: 14px;
+            font-weight: 400;
+            line-height: 1.6;
+        }
+        .bloc-para__media-placeholder span {
+            display: block;
+            font-size: 32px;
+            margin-bottom: 8px;
+        }
+
+        /* Caption */
+        .bloc-para__media-caption {
+            font-family: 'Poppins', sans-serif;
+            font-size: 12px;
+            font-weight: 400;
+            font-style: italic;
+            color: var(--text-light);
+            text-align: center;
+        }
+
+        /* ---- Variante vidéo : ratio 16:9 ---- */
+        .bloc-para__media-wrapper--video {
+            aspect-ratio: 16 / 9;
+        }
+
+        /* ---- Bouton Play overlay (pour vidéo thumbnail) ---- */
+        .bloc-para__play-btn {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 64px;
+            height: 64px;
+            background: rgba(255,255,255,0.92);
+            border-radius: var(--radius-full);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: var(--shadow-md);
+            cursor: pointer;
+            transition: all 200ms ease;
+            z-index: 3;
+        }
+        .bloc-para__play-btn:hover {
+            background: #FFFFFF;
+            box-shadow: var(--shadow-lg);
+            transform: translate(-50%, -50%) scale(1.08);
+        }
+        .bloc-para__play-btn svg {
+            width: 24px;
+            height: 24px;
+            color: var(--color-primary);
+            margin-left: 3px; /* optical center */
+        }
+
+        /* =====================================================
+           DEMO — SÉPARATEUR (pour cette page de démo uniquement)
+           ===================================================== */
+        .demo-sep {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 80px;
+        }
+        .demo-sep hr {
+            border: none;
+            height: 1px;
+            background: var(--border-light);
+        }
+        .demo-label {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 16px 80px 0;
+            font-family: 'Poppins', sans-serif;
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            color: var(--text-light);
+        }
+
+        /* =====================================================
+           RESPONSIVE
+           ===================================================== */
+        @media (max-width: 900px) {
+            .bloc-para {
+                padding: var(--space-2xl) 32px;
+            }
+            .bloc-para__row {
+                gap: var(--space-xl);
+            }
+            .bloc-para__title {
+                font-size: 30px;
+            }
+            .bloc-para::before {
+                width: 180px;
+                height: 180px;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .bloc-para {
+                padding: var(--space-xl) 20px;
+            }
+            .bloc-para__row {
+                grid-template-columns: 1fr;
+                gap: var(--space-xl);
+            }
+            /* En mobile : toujours texte en premier */
+            .bloc-para__row--reversed {
+                direction: ltr;
+            }
+            .bloc-para__title {
+                font-size: 28px;
+            }
+            .bloc-para__paragraph,
+            .bloc-para__intro {
+                font-size: 16px;
+            }
+            .bloc-para__features li {
+                font-size: 14px;
+            }
+            .bloc-para__media-wrapper {
+                aspect-ratio: 16 / 10;
+            }
+            .bloc-para::before {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- =====================================================
+         EXEMPLE 1 : Texte gauche + Image droite
+         Usage → Page Start Droit, pages produits
+         ===================================================== -->
+    <p class="demo-label">Exemple 1 — Texte + Image (features + closing)</p>
+
+    <section class="bloc-para">
+        <div class="bloc-para__row">
+
+            <!-- Texte -->
+            <div class="bloc-para__text">
+                <span class="bloc-para__badge">💡 La solution</span>
+                <h2 class="bloc-para__title">Qu'est-ce que <span>START DROIT</span> ?</h2>
+                <p class="bloc-para__paragraph">START DROIT est une prépa intensive, 100% en ligne, pour préparer tous les futurs étudiants (nouveaux bacheliers, reconversions professionnelles, reprises d'études) à réussir leur première année de droit.</p>
+                <p class="bloc-para__intro">Le programme comprend notamment :</p>
+                <ul class="bloc-para__features">
+                    <li>
+                        <span class="bullet-emoji">✅</span>
+                        De nombreux cours de droit en vidéo et par écrit (institutions juridictionnelles, introduction au droit, droit constitutionnel, méthode, organisation, rédaction…).
+                    </li>
+                    <li>
+                        <span class="bullet-emoji">✅</span>
+                        10 travaux dirigés (TD) à réaliser avec corrections individuelles par des enseignants (fiche d'arrêt, cas pratique, dissertation…).
+                    </li>
+                    <li>
+                        <span class="bullet-emoji">✅</span>
+                        Près de 600 QCM pour tester vos connaissances.
+                    </li>
+                    <li>
+                        <span class="bullet-emoji">✅</span>
+                        La méthodologie complète des exercices juridiques en vidéos et par écrit.
+                    </li>
+                </ul>
+                <p class="bloc-para__closing">Nos cours de droit ont permis à des milliers d'étudiants de réussir leurs partiels.</p>
+            </div>
+
+            <!-- Média — IMAGE -->
+            <div class="bloc-para__media">
+                <div class="bloc-para__media-wrapper">
+                    <div class="bloc-para__media-placeholder">
+                        <span>🖥️</span>
+                        Aperçu de la plateforme<br>Vidéos + Interface
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <div class="demo-sep"><hr></div>
+
+    <!-- =====================================================
+         EXEMPLE 2 : Image gauche + Texte droite (reversed)
+         Usage → Page À propos, pages fondateurs
+         ===================================================== -->
+    <p class="demo-label">Exemple 2 — Image + Texte (blockquote), layout inversé</p>
+
+    <section class="bloc-para bloc-para--accent-left">
+        <div class="bloc-para__row bloc-para__row--reversed">
+
+            <!-- Texte -->
+            <div class="bloc-para__text">
+                <span class="bloc-para__badge">Les fondateurs</span>
+                <h2 class="bloc-para__title">Une histoire de famille</h2>
+                <p class="bloc-para__subtitle">Frère et sœur, unis par la passion de transmettre</p>
+                <p class="bloc-para__paragraph">Avant de créer Jurible ensemble, Raphaël et Laura ont grandi côte à côte dans le sud de la France. Déjà enfants, Raphaël — l'aîné studieux — aidait sa petite sœur à faire ses devoirs.</p>
+                <p class="bloc-para__paragraph">Des années plus tard, leurs chemins professionnels se croisent à nouveau. Raphaël, devenu avocat puis enseignant, partage sa frustration : <em class="bloc-para__quote">"Trop d'étudiants brillants échouent par manque de méthode et d'accompagnement."</em></p>
+                <p class="bloc-para__paragraph">Laura, forte de son expérience en communication et gestion de projet, lui lance : <em class="bloc-para__quote">"Et si on créait quelque chose ensemble ?"</em></p>
+                <blockquote class="bloc-para__blockquote">
+                    <p>En 2018, aideauxtd.com voit le jour dans leur salon. Le reste appartient à l'histoire.</p>
+                </blockquote>
+            </div>
+
+            <!-- Média — IMAGE -->
+            <div class="bloc-para__media">
+                <div class="bloc-para__media-wrapper">
+                    <div class="bloc-para__media-placeholder">
+                        <span>👫</span>
+                        Photo Raphaël &amp; Laura
+                    </div>
+                </div>
+                <p class="bloc-para__media-caption">Raphaël &amp; Laura, 1995</p>
+            </div>
+
+        </div>
+    </section>
+
+    <div class="demo-sep"><hr></div>
+
+    <!-- =====================================================
+         EXEMPLE 3 : Texte gauche + Vidéo droite (ratio 16:9)
+         Usage → Pages matières, pages prépas
+         ===================================================== -->
+    <p class="demo-label">Exemple 3 — Texte + Vidéo (avec bouton play)</p>
+
+    <section class="bloc-para">
+        <div class="bloc-para__row">
+
+            <!-- Texte -->
+            <div class="bloc-para__text">
+                <span class="bloc-para__badge">📚 L'Académie</span>
+                <h2 class="bloc-para__title">Apprenez le droit <span>autrement</span></h2>
+                <p class="bloc-para__paragraph">L'Académie Jurible vous donne accès à l'ensemble de nos cours de droit en vidéo, des fiches de révision interactives et des centaines de QCM pour valider vos acquis.</p>
+                <ul class="bloc-para__features">
+                    <li>
+                        <span class="bullet-emoji">✅</span>
+                        +500 heures de cours vidéo par des enseignants qualifiés
+                    </li>
+                    <li>
+                        <span class="bullet-emoji">✅</span>
+                        Fiches de révision sous chaque vidéo
+                    </li>
+                    <li>
+                        <span class="bullet-emoji">✅</span>
+                        +2 000 QCM et flashcards interactives
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Média — VIDÉO avec bouton play -->
+            <div class="bloc-para__media">
+                <div class="bloc-para__media-wrapper bloc-para__media-wrapper--video">
+                    <div class="bloc-para__media-placeholder">
+                        <span>🎬</span>
+                        Vidéo de présentation
+                    </div>
+                    <!-- Bouton Play overlay -->
+                    <button class="bloc-para__play-btn" aria-label="Lire la vidéo">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5.14v14l11-7-11-7z"/></svg>
+                    </button>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+
+    <!-- =====================================================
+         SPÉCIFICATIONS COMPOSANT — VISIBLE POUR EXPORT FIGMA
+         ===================================================== -->
+    <section style="max-width:1280px; margin:80px auto 0; padding:0 80px 64px; font-family:'Poppins',sans-serif;">
+        <hr style="border:none; height:2px; background:linear-gradient(90deg,#B0001D,#7C3AED); margin-bottom:40px;">
+        <h2 style="font-size:24px; font-weight:800; color:#1A1A1A; margin-bottom:24px;">📐 Spécifications — PARA-01 : Bloc Paragraphe + Média</h2>
+
+        <!-- 1. Description -->
+        <div style="margin-bottom:32px;">
+            <h3 style="font-size:16px; font-weight:700; color:#B0001D; margin-bottom:8px;">1. Description</h3>
+            <p style="font-size:14px; color:#4A4A4A; line-height:1.7;">
+                Bloc réutilisable en 2 colonnes : texte d'un côté, média (image ou vidéo) de l'autre. Utilisable sur toutes les pages (produits, à propos, matières, prépas…). Le layout peut être inversé via la classe <code style="background:#F3F4F6;padding:2px 6px;border-radius:4px;font-size:12px;">.bloc-para__row--reversed</code>. Le média supporte image, vidéo embarquée ou thumbnail avec bouton play.
+            </p>
+        </div>
+
+        <!-- 2. Structure HTML -->
+        <div style="margin-bottom:32px;">
+            <h3 style="font-size:16px; font-weight:700; color:#B0001D; margin-bottom:8px;">2. Structure HTML</h3>
+            <pre style="background:#F9FAFB; border:1px solid #E5E7EB; border-radius:8px; padding:16px; font-size:12px; line-height:1.6; overflow-x:auto; color:#1A1A1A;">
+section.bloc-para
+└── div.bloc-para__row  [ajouter .bloc-para__row--reversed pour inverser]
+    ├── div.bloc-para__text
+    │   ├── span.bloc-para__badge         → Label violet clair (TOUJOURS #EDE9FE + #7C3AED)
+    │   ├── h2.bloc-para__title           → Titre, &lt;span&gt; pour gradient text
+    │   ├── p.bloc-para__subtitle         → Sous-titre optionnel (muted)
+    │   ├── p.bloc-para__paragraph (×n)   → Paragraphes de texte
+    │   ├── p.bloc-para__intro            → Introduction features (weight 500)
+    │   ├── ul.bloc-para__features        → Liste avec puces emoji (optionnel)
+    │   │   └── li (×n)                   → span.bullet-emoji + texte
+    │   ├── p.bloc-para__closing          → Phrase italique success (optionnel)
+    │   └── blockquote.bloc-para__blockquote → Barre latérale rouge (optionnel)
+    └── div.bloc-para__media
+        ├── div.bloc-para__media-wrapper  [ajouter --video pour 16:9]
+        │   ├── img / video / iframe      → Le média
+        │   └── button.bloc-para__play-btn → Bouton play (optionnel, vidéo)
+        └── p.bloc-para__media-caption    → Légende (optionnel)
+            </pre>
+        </div>
+
+        <!-- 3. Éléments optionnels -->
+        <div style="margin-bottom:32px;">
+            <h3 style="font-size:16px; font-weight:700; color:#B0001D; margin-bottom:8px;">3. Éléments optionnels</h3>
+            <table style="width:100%; border-collapse:collapse; font-size:13px;">
+                <thead><tr style="background:#F9FAFB;"><th style="text-align:left;padding:10px;border:1px solid #E5E7EB;">Élément</th><th style="text-align:left;padding:10px;border:1px solid #E5E7EB;">Usage</th><th style="text-align:left;padding:10px;border:1px solid #E5E7EB;">Classe</th></tr></thead>
+                <tbody>
+                    <tr><td style="padding:10px;border:1px solid #E5E7EB;">Badge</td><td style="padding:10px;border:1px solid #E5E7EB;">Catégoriser la section</td><td style="padding:10px;border:1px solid #E5E7EB;">.bloc-para__badge (toujours violet clair)</td></tr>
+                    <tr><td style="padding:10px;border:1px solid #E5E7EB;">Sous-titre</td><td style="padding:10px;border:1px solid #E5E7EB;">Compléter le H2</td><td style="padding:10px;border:1px solid #E5E7EB;">.bloc-para__subtitle</td></tr>
+                    <tr><td style="padding:10px;border:1px solid #E5E7EB;">Features list</td><td style="padding:10px;border:1px solid #E5E7EB;">Lister les points forts</td><td style="padding:10px;border:1px solid #E5E7EB;">.bloc-para__features</td></tr>
+                    <tr><td style="padding:10px;border:1px solid #E5E7EB;">Closing</td><td style="padding:10px;border:1px solid #E5E7EB;">Phrase conclusion en vert</td><td style="padding:10px;border:1px solid #E5E7EB;">.bloc-para__closing</td></tr>
+                    <tr><td style="padding:10px;border:1px solid #E5E7EB;">Blockquote</td><td style="padding:10px;border:1px solid #E5E7EB;">Citation avec barre rouge</td><td style="padding:10px;border:1px solid #E5E7EB;">.bloc-para__blockquote</td></tr>
+                    <tr><td style="padding:10px;border:1px solid #E5E7EB;">Bouton Play</td><td style="padding:10px;border:1px solid #E5E7EB;">Overlay sur vidéo thumbnail</td><td style="padding:10px;border:1px solid #E5E7EB;">.bloc-para__play-btn</td></tr>
+                    <tr><td style="padding:10px;border:1px solid #E5E7EB;">Caption</td><td style="padding:10px;border:1px solid #E5E7EB;">Légende sous le média</td><td style="padding:10px;border:1px solid #E5E7EB;">.bloc-para__media-caption</td></tr>
+                    <tr><td style="padding:10px;border:1px solid #E5E7EB;">Accent décoratif</td><td style="padding:10px;border:1px solid #E5E7EB;">Halo violet subtil (arrière-plan)</td><td style="padding:10px;border:1px solid #E5E7EB;">.bloc-para--accent-left pour côté gauche</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- 4. Comportement -->
+        <div style="margin-bottom:32px;">
+            <h3 style="font-size:16px; font-weight:700; color:#B0001D; margin-bottom:8px;">4. Comportement / Interactions</h3>
+            <table style="width:100%; border-collapse:collapse; font-size:13px;">
+                <thead><tr style="background:#F9FAFB;"><th style="text-align:left;padding:10px;border:1px solid #E5E7EB;">Interaction</th><th style="text-align:left;padding:10px;border:1px solid #E5E7EB;">Effet</th></tr></thead>
+                <tbody>
+                    <tr><td style="padding:10px;border:1px solid #E5E7EB;">Hover média</td><td style="padding:10px;border:1px solid #E5E7EB;">shadow-sm → shadow-lg + translateY(-2px), 200ms ease</td></tr>
+                    <tr><td style="padding:10px;border:1px solid #E5E7EB;">Hover bouton play</td><td style="padding:10px;border:1px solid #E5E7EB;">Fond 100% blanc, shadow-lg, scale(1.08), 200ms ease</td></tr>
+                    <tr><td style="padding:10px;border:1px solid #E5E7EB;">Inversion layout</td><td style="padding:10px;border:1px solid #E5E7EB;">Ajouter .bloc-para__row--reversed → média passe à gauche</td></tr>
+                    <tr><td style="padding:10px;border:1px solid #E5E7EB;">Figma</td><td style="padding:10px;border:1px solid #E5E7EB;">Auto Layout horizontal (gap 64). 2 variants : Default / Reversed. Le média est un composant enfant avec 2 variants : Image / Video.</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- 5. Design System Tokens -->
+        <div style="margin-bottom:32px;">
+            <h3 style="font-size:16px; font-weight:700; color:#B0001D; margin-bottom:8px;">5. Design System Tokens</h3>
+
+            <h4 style="font-size:14px; font-weight:600; color:#1A1A1A; margin:16px 0 8px;">Couleurs</h4>
+            <table style="width:100%; border-collapse:collapse; font-size:13px;">
+                <thead><tr style="background:#F9FAFB;"><th style="text-align:left;padding:10px;border:1px solid #E5E7EB;">Élément</th><th style="text-align:left;padding:10px;border:1px solid #E5E7EB;">Valeur</th><th style="text-align:left;padding:10px;border:1px solid #E5E7EB;">Aperçu</th></tr></thead>
+                <tbody>
+                    <tr><td style="padding:10px;border:1px solid #E5E7EB;">Badge fond (UNIQUE)</td><td style="padding:10px;border:1px solid #E5E7EB;">#EDE9FE (violet-light)</td><td style="padding:10px;border:1px solid #E5E7EB;"><span style="display:inline-block;width:24px;height:24px;background:#EDE9FE;border-radius:4px;"></span></td></tr>
+                    <tr><td style="padding:10px;border:1px solid #E5E7EB;">Badge texte (UNIQUE)</td><td style="padding:10px;border:1px solid #E5E7EB;">#7C3AED (violet)</td><td style="padding:10px;border:1px solid #E5E7EB;"><span style="display:inline-block;width:24px;height:24px;background:#7C3AED;border-radius:4px;"></span></td></tr>
+                    <tr><td style="padding:10px;border:1px solid #E5E7EB;">Puces features</td><td style="padding:10px;border:1px solid #E5E7EB;">Emoji ✅ (ou emoji au choix)</td><td style="padding:10px;border:1px solid #E5E7EB;">✅</td></tr>
+                    <tr><td style="padding:10px;border:1px solid #E5E7EB;">Blockquote barre</td><td style="padding:10px;border:1px solid #E5E7EB;">#B0001D (primary)</td><td style="padding:10px;border:1px solid #E5E7EB;"><span style="display:inline-block;width:24px;height:24px;background:#B0001D;border-radius:4px;"></span></td></tr>
+                    <tr><td style="padding:10px;border:1px solid #E5E7EB;">Bouton play fond</td><td style="padding:10px;border:1px solid #E5E7EB;">rgba(255,255,255,0.92)</td><td style="padding:10px;border:1px solid #E5E7EB;"><span style="display:inline-block;width:24px;height:24px;background:rgba(255,255,255,0.92);border-radius:50%;border:1px solid #E5E7EB;"></span></td></tr>
+                    <tr><td style="padding:10px;border:1px solid #E5E7EB;">Bouton play icône</td><td style="padding:10px;border:1px solid #E5E7EB;">#B0001D</td><td style="padding:10px;border:1px solid #E5E7EB;"><span style="display:inline-block;width:24px;height:24px;background:#B0001D;border-radius:4px;"></span></td></tr>
+                    <tr><td style="padding:10px;border:1px solid #E5E7EB;">Accent décoratif</td><td style="padding:10px;border:1px solid #E5E7EB;">radial-gradient rgba(124,58,237,0.04)</td><td style="padding:10px;border:1px solid #E5E7EB;"><span style="display:inline-block;width:24px;height:24px;background:radial-gradient(circle,rgba(124,58,237,0.06),transparent);border-radius:50%;"></span></td></tr>
+                </tbody>
+            </table>
+
+            <h4 style="font-size:14px; font-weight:600; color:#1A1A1A; margin:16px 0 8px;">Typographie</h4>
+            <table style="width:100%; border-collapse:collapse; font-size:13px;">
+                <thead><tr style="background:#F9FAFB;"><th style="text-align:left;padding:10px;border:1px solid #E5E7EB;">Élément</th><th style="text-align:left;padding:10px;border:1px solid #E5E7EB;">Style DS</th><th style="text-align:left;padding:10px;border:1px solid #E5E7EB;">Taille</th><th style="text-align:left;padding:10px;border:1px solid #E5E7EB;">Poids</th><th style="text-align:left;padding:10px;border:1px solid #E5E7EB;">Line-height</th></tr></thead>
+                <tbody>
+                    <tr><td style="padding:10px;border:1px solid #E5E7EB;">Badge</td><td style="padding:10px;border:1px solid #E5E7EB;">Label</td><td style="padding:10px;border:1px solid #E5E7EB;">12px</td><td style="padding:10px;border:1px solid #E5E7EB;">Medium 500</td><td style="padding:10px;border:1px solid #E5E7EB;">140%</td></tr>
+                    <tr><td style="padding:10px;border:1px solid #E5E7EB;">Titre H2</td><td style="padding:10px;border:1px solid #E5E7EB;">Heading H2</td><td style="padding:10px;border:1px solid #E5E7EB;">40px (mobile 28px)</td><td style="padding:10px;border:1px solid #E5E7EB;">Bold 700</td><td style="padding:10px;border:1px solid #E5E7EB;">130%</td></tr>
+                    <tr><td style="padding:10px;border:1px solid #E5E7EB;">Sous-titre</td><td style="padding:10px;border:1px solid #E5E7EB;">Body Regular</td><td style="padding:10px;border:1px solid #E5E7EB;">16px</td><td style="padding:10px;border:1px solid #E5E7EB;">Regular 400</td><td style="padding:10px;border:1px solid #E5E7EB;">160%</td></tr>
+                    <tr><td style="padding:10px;border:1px solid #E5E7EB;">Paragraphe</td><td style="padding:10px;border:1px solid #E5E7EB;">Body Regular</td><td style="padding:10px;border:1px solid #E5E7EB;">16px</td><td style="padding:10px;border:1px solid #E5E7EB;">Regular 400</td><td style="padding:10px;border:1px solid #E5E7EB;">160%</td></tr>
+                    <tr><td style="padding:10px;border:1px solid #E5E7EB;">Intro</td><td style="padding:10px;border:1px solid #E5E7EB;">Body Bold</td><td style="padding:10px;border:1px solid #E5E7EB;">16px</td><td style="padding:10px;border:1px solid #E5E7EB;">Bold 700</td><td style="padding:10px;border:1px solid #E5E7EB;">150%</td></tr>
+                    <tr><td style="padding:10px;border:1px solid #E5E7EB;">Features</td><td style="padding:10px;border:1px solid #E5E7EB;">Body Small</td><td style="padding:10px;border:1px solid #E5E7EB;">14px</td><td style="padding:10px;border:1px solid #E5E7EB;">Regular 400</td><td style="padding:10px;border:1px solid #E5E7EB;">150%</td></tr>
+                    <tr><td style="padding:10px;border:1px solid #E5E7EB;">Closing</td><td style="padding:10px;border:1px solid #E5E7EB;">Body Small italic</td><td style="padding:10px;border:1px solid #E5E7EB;">14px</td><td style="padding:10px;border:1px solid #E5E7EB;">Regular 400</td><td style="padding:10px;border:1px solid #E5E7EB;">150%</td></tr>
+                    <tr><td style="padding:10px;border:1px solid #E5E7EB;">Blockquote</td><td style="padding:10px;border:1px solid #E5E7EB;">Body Bold</td><td style="padding:10px;border:1px solid #E5E7EB;">16px</td><td style="padding:10px;border:1px solid #E5E7EB;">Bold 700</td><td style="padding:10px;border:1px solid #E5E7EB;">150%</td></tr>
+                    <tr><td style="padding:10px;border:1px solid #E5E7EB;">Caption</td><td style="padding:10px;border:1px solid #E5E7EB;">Caption</td><td style="padding:10px;border:1px solid #E5E7EB;">12px</td><td style="padding:10px;border:1px solid #E5E7EB;">Regular 400</td><td style="padding:10px;border:1px solid #E5E7EB;">140%</td></tr>
+                </tbody>
+            </table>
+
+            <h4 style="font-size:14px; font-weight:600; color:#1A1A1A; margin:16px 0 8px;">Radius</h4>
+            <table style="width:100%; border-collapse:collapse; font-size:13px;">
+                <thead><tr style="background:#F9FAFB;"><th style="text-align:left;padding:10px;border:1px solid #E5E7EB;">Élément</th><th style="text-align:left;padding:10px;border:1px solid #E5E7EB;">Token</th><th style="text-align:left;padding:10px;border:1px solid #E5E7EB;">Valeur</th></tr></thead>
+                <tbody>
+                    <tr><td style="padding:10px;border:1px solid #E5E7EB;">Média wrapper</td><td style="padding:10px;border:1px solid #E5E7EB;">radius-lg</td><td style="padding:10px;border:1px solid #E5E7EB;">12px</td></tr>
+                    <tr><td style="padding:10px;border:1px solid #E5E7EB;">Badge</td><td style="padding:10px;border:1px solid #E5E7EB;">radius-full</td><td style="padding:10px;border:1px solid #E5E7EB;">9999px</td></tr>
+                    <tr><td style="padding:10px;border:1px solid #E5E7EB;">Bouton play</td><td style="padding:10px;border:1px solid #E5E7EB;">radius-full</td><td style="padding:10px;border:1px solid #E5E7EB;">9999px</td></tr>
+                </tbody>
+            </table>
+
+            <h4 style="font-size:14px; font-weight:600; color:#1A1A1A; margin:16px 0 8px;">Shadows</h4>
+            <table style="width:100%; border-collapse:collapse; font-size:13px;">
+                <thead><tr style="background:#F9FAFB;"><th style="text-align:left;padding:10px;border:1px solid #E5E7EB;">État</th><th style="text-align:left;padding:10px;border:1px solid #E5E7EB;">Token</th><th style="text-align:left;padding:10px;border:1px solid #E5E7EB;">Valeur</th></tr></thead>
+                <tbody>
+                    <tr><td style="padding:10px;border:1px solid #E5E7EB;">Média default</td><td style="padding:10px;border:1px solid #E5E7EB;">shadow-sm</td><td style="padding:10px;border:1px solid #E5E7EB;">0 1px 3px rgba(0,0,0,0.1), 0 1px 2px rgba(0,0,0,0.06)</td></tr>
+                    <tr><td style="padding:10px;border:1px solid #E5E7EB;">Média hover</td><td style="padding:10px;border:1px solid #E5E7EB;">shadow-lg</td><td style="padding:10px;border:1px solid #E5E7EB;">0 10px 15px rgba(0,0,0,0.1), 0 4px 6px rgba(0,0,0,0.05)</td></tr>
+                    <tr><td style="padding:10px;border:1px solid #E5E7EB;">Play btn default</td><td style="padding:10px;border:1px solid #E5E7EB;">shadow-md</td><td style="padding:10px;border:1px solid #E5E7EB;">0 4px 6px rgba(0,0,0,0.07), 0 2px 4px rgba(0,0,0,0.06)</td></tr>
+                    <tr><td style="padding:10px;border:1px solid #E5E7EB;">Play btn hover</td><td style="padding:10px;border:1px solid #E5E7EB;">shadow-lg</td><td style="padding:10px;border:1px solid #E5E7EB;">0 10px 15px rgba(0,0,0,0.1), 0 4px 6px rgba(0,0,0,0.05)</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- 6. Responsive -->
+        <div style="margin-bottom:32px;">
+            <h3 style="font-size:16px; font-weight:700; color:#B0001D; margin-bottom:8px;">6. Responsive</h3>
+            <table style="width:100%; border-collapse:collapse; font-size:13px;">
+                <thead><tr style="background:#F9FAFB;"><th style="text-align:left;padding:10px;border:1px solid #E5E7EB;">Propriété</th><th style="text-align:left;padding:10px;border:1px solid #E5E7EB;">Desktop (>900px)</th><th style="text-align:left;padding:10px;border:1px solid #E5E7EB;">Tablette (≤900px)</th><th style="text-align:left;padding:10px;border:1px solid #E5E7EB;">Mobile (≤640px)</th></tr></thead>
+                <tbody>
+                    <tr><td style="padding:10px;border:1px solid #E5E7EB;">Grid</td><td style="padding:10px;border:1px solid #E5E7EB;">2 colonnes 1fr 1fr</td><td style="padding:10px;border:1px solid #E5E7EB;">2 colonnes</td><td style="padding:10px;border:1px solid #E5E7EB;">1 colonne empilée</td></tr>
+                    <tr><td style="padding:10px;border:1px solid #E5E7EB;">Gap</td><td style="padding:10px;border:1px solid #E5E7EB;">64px</td><td style="padding:10px;border:1px solid #E5E7EB;">32px</td><td style="padding:10px;border:1px solid #E5E7EB;">32px</td></tr>
+                    <tr><td style="padding:10px;border:1px solid #E5E7EB;">Section padding</td><td style="padding:10px;border:1px solid #E5E7EB;">64px 80px</td><td style="padding:10px;border:1px solid #E5E7EB;">48px 32px</td><td style="padding:10px;border:1px solid #E5E7EB;">32px 20px</td></tr>
+                    <tr><td style="padding:10px;border:1px solid #E5E7EB;">Layout inversé</td><td style="padding:10px;border:1px solid #E5E7EB;">Média à gauche</td><td style="padding:10px;border:1px solid #E5E7EB;">Média à gauche</td><td style="padding:10px;border:1px solid #E5E7EB;">Texte toujours en premier</td></tr>
+                    <tr><td style="padding:10px;border:1px solid #E5E7EB;">Titre H2</td><td style="padding:10px;border:1px solid #E5E7EB;">40px / 700</td><td style="padding:10px;border:1px solid #E5E7EB;">30px</td><td style="padding:10px;border:1px solid #E5E7EB;">28px</td></tr>
+                    <tr><td style="padding:10px;border:1px solid #E5E7EB;">Média ratio image</td><td style="padding:10px;border:1px solid #E5E7EB;">4:3</td><td style="padding:10px;border:1px solid #E5E7EB;">4:3</td><td style="padding:10px;border:1px solid #E5E7EB;">16:10</td></tr>
+                    <tr><td style="padding:10px;border:1px solid #E5E7EB;">Média ratio vidéo</td><td style="padding:10px;border:1px solid #E5E7EB;">16:9</td><td style="padding:10px;border:1px solid #E5E7EB;">16:9</td><td style="padding:10px;border:1px solid #E5E7EB;">16:10</td></tr>
+                    <tr><td style="padding:10px;border:1px solid #E5E7EB;">Accent décoratif</td><td style="padding:10px;border:1px solid #E5E7EB;">260px</td><td style="padding:10px;border:1px solid #E5E7EB;">180px</td><td style="padding:10px;border:1px solid #E5E7EB;">Masqué</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- 7. Variantes média -->
+        <div style="margin-bottom:32px;">
+            <h3 style="font-size:16px; font-weight:700; color:#B0001D; margin-bottom:8px;">7. Variantes média</h3>
+            <table style="width:100%; border-collapse:collapse; font-size:13px;">
+                <thead><tr style="background:#F9FAFB;"><th style="text-align:left;padding:10px;border:1px solid #E5E7EB;">Type</th><th style="text-align:left;padding:10px;border:1px solid #E5E7EB;">Classe</th><th style="text-align:left;padding:10px;border:1px solid #E5E7EB;">Ratio</th><th style="text-align:left;padding:10px;border:1px solid #E5E7EB;">Contenu</th></tr></thead>
+                <tbody>
+                    <tr><td style="padding:10px;border:1px solid #E5E7EB;">Image</td><td style="padding:10px;border:1px solid #E5E7EB;">.bloc-para__media-wrapper</td><td style="padding:10px;border:1px solid #E5E7EB;">4:3</td><td style="padding:10px;border:1px solid #E5E7EB;">&lt;img&gt; en object-fit: cover</td></tr>
+                    <tr><td style="padding:10px;border:1px solid #E5E7EB;">Vidéo</td><td style="padding:10px;border:1px solid #E5E7EB;">.bloc-para__media-wrapper--video</td><td style="padding:10px;border:1px solid #E5E7EB;">16:9</td><td style="padding:10px;border:1px solid #E5E7EB;">&lt;video&gt; ou &lt;iframe&gt; + bouton play optionnel</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- 8. Détails stylisation -->
+        <div style="margin-bottom:32px;">
+            <h3 style="font-size:16px; font-weight:700; color:#B0001D; margin-bottom:8px;">8. Détails de stylisation</h3>
+            <ul style="font-size:13px; color:#4A4A4A; line-height:2; padding-left:20px;">
+                <li><strong>Accent décoratif :</strong> radial-gradient violet très léger (4% opacité) en arrière-plan, 260px de diamètre. Positionné en haut à droite (ou gauche avec .bloc-para--accent-left). Masqué en mobile.</li>
+                <li><strong>Hover média :</strong> Élévation progressive (shadow-sm → shadow-lg + translateY -2px). Donne de la vie sans distraire du contenu texte.</li>
+                <li><strong>Bouton play :</strong> 64px, fond blanc 92%, shadow-md. Au hover : fond 100% blanc + scale 1.08. Icône play en bordeaux #B0001D, décalée de 3px à droite pour centrage optique.</li>
+            </ul>
+        </div>
+
+        <!-- 9. Notes dev / Figma -->
+        <div>
+            <h3 style="font-size:16px; font-weight:700; color:#B0001D; margin-bottom:8px;">9. Notes dev / Figma</h3>
+            <ul style="font-size:13px; color:#4A4A4A; line-height:2; padding-left:20px;">
+                <li><strong>Figma :</strong> Composant avec Auto Layout horizontal, gap 64. Property "Layout" : Default / Reversed. Property "Média" : Image / Video. Slots texte flexibles (badge, titre, paragraphes, features, blockquote = tous optionnels).</li>
+                <li><strong>WordPress FSE :</strong> Bloc "Media & Text" natif peut servir de base. Customiser via block.json + CSS additionnel pour l'accent décoratif et le bouton play.</li>
+                <li><strong>Inversion :</strong> L'inversion utilise <code style="background:#F3F4F6;padding:2px 6px;border-radius:4px;font-size:12px;">direction: rtl</code> sur le parent avec <code style="background:#F3F4F6;padding:2px 6px;border-radius:4px;font-size:12px;">direction: ltr</code> sur les enfants pour préserver l'alignement texte. En mobile (≤640px), l'inversion est neutralisée → texte toujours en premier.</li>
+                <li><strong>Accessibilité :</strong> Le bouton play a un <code style="background:#F3F4F6;padding:2px 6px;border-radius:4px;font-size:12px;">aria-label="Lire la vidéo"</code>. Les images doivent avoir un alt descriptif.</li>
+            </ul>
+        </div>
+
+    </section>
+
+</body>
+</html>

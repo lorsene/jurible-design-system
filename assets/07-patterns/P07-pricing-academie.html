@@ -1,0 +1,1086 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bloc Pricing Académie — Jurible</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        /* ===== DESIGN SYSTEM TOKENS ===== */
+        :root {
+            --color-primary: #B0001D;
+            --color-secondary: #7C3AED;
+            --color-black: #1A1A1A;
+            --color-white: #FFFFFF;
+            --color-gray-50: #F9FAFB;
+            --color-gray-100: #F3F4F6;
+            --color-gray-200: #E5E7EB;
+            --color-gray-400: #9CA3AF;
+            --color-gray-600: #4B5563;
+            --color-success: #10B981;
+            --color-success-light: #ECFDF5;
+            --color-success-dark: #065F46;
+            --color-secondary-light: #EDE9FE;
+            --color-secondary-dark: #5B21B6;
+            --gradient-primary: linear-gradient(135deg, #B0001D 0%, #7C3AED 100%);
+            --space-xs: 8px;
+            --space-sm: 16px;
+            --space-md: 24px;
+            --space-lg: 32px;
+            --space-xl: 48px;
+            --radius-sm: 6px;
+            --radius-md: 8px;
+            --radius-lg: 12px;
+            --radius-full: 9999px;
+            --shadow-sm: 0 1px 3px rgba(0,0,0,0.1), 0 1px 2px rgba(0,0,0,0.06);
+            --shadow-md: 0 4px 6px rgba(0,0,0,0.1), 0 2px 4px rgba(0,0,0,0.06);
+            --shadow-lg: 0 10px 15px rgba(0,0,0,0.1), 0 4px 6px rgba(0,0,0,0.05);
+            --shadow-primary: 0 4px 14px rgba(124, 58, 237, 0.3);
+            --transition: all 150ms ease;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: var(--color-gray-100);
+            padding: var(--space-lg);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: var(--space-lg);
+        }
+
+        /* ===== BLOC PRINCIPAL ===== */
+        .pricing-block {
+            max-width: 1100px;
+            width: 100%;
+            background: var(--color-white);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-sm);
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* Bordure gradient top */
+        .pricing-block::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--gradient-primary);
+            border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+        }
+
+        /* ===== HEADER ===== */
+        .pricing-header {
+            text-align: center;
+            padding: var(--space-xl) var(--space-lg) var(--space-lg);
+        }
+
+        .pricing-header__title {
+            font-size: 36px;
+            font-weight: 800;
+            color: var(--color-black);
+            margin-bottom: var(--space-xs);
+            letter-spacing: -0.5px;
+        }
+
+        .pricing-header__subtitle {
+            font-size: 16px;
+            color: var(--color-gray-400);
+            font-weight: 400;
+        }
+
+        /* ===== FEATURES ===== */
+        .features-section {
+            padding: 0 var(--space-xl) var(--space-lg);
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: var(--space-sm) var(--space-md);
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .feature-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+        }
+
+        .feature-item__icon {
+            width: 24px;
+            height: 24px;
+            min-width: 24px;
+            background: var(--color-success-light);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: 2px;
+        }
+
+        .feature-item__icon svg {
+            width: 14px;
+            height: 14px;
+            color: var(--color-success);
+        }
+
+        .feature-item__text strong {
+            display: block;
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--color-black);
+            line-height: 1.3;
+        }
+
+        .feature-item__text span {
+            font-size: 13px;
+            color: var(--color-gray-400);
+            line-height: 1.3;
+        }
+
+        /* ===== SÉPARATEUR ===== */
+        .pricing-divider {
+            width: calc(100% - 96px);
+            height: 1px;
+            background: var(--color-gray-200);
+            margin: var(--space-md) auto;
+        }
+
+        /* ===== PRICING CARDS ===== */
+        .pricing-cards-section {
+            padding: var(--space-md) var(--space-xl) var(--space-lg);
+        }
+
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: var(--space-md);
+            align-items: end;
+        }
+
+        /* Card durée */
+        .duration-card {
+            position: relative;
+            background: var(--color-white);
+            border: 1px solid var(--color-gray-200);
+            border-radius: var(--radius-lg);
+            padding: var(--space-md);
+            text-align: center;
+            transition: var(--transition);
+            cursor: pointer;
+        }
+
+        .duration-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-md);
+            border-color: var(--color-gray-400);
+        }
+
+        /* Card Populaire */
+        .duration-card--popular {
+            border: 2px solid transparent;
+            background:
+                linear-gradient(white, white) padding-box,
+                var(--gradient-primary) border-box;
+            transform: scale(1.05);
+            box-shadow: var(--shadow-primary);
+        }
+
+        .duration-card--popular:hover {
+            transform: scale(1.07) translateY(-4px);
+            box-shadow: var(--shadow-lg), var(--shadow-primary);
+        }
+
+        /* Badge Populaire */
+        .duration-card__badge {
+            position: absolute;
+            top: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--gradient-primary);
+            color: var(--color-white);
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            padding: 5px 14px;
+            border-radius: var(--radius-full);
+            white-space: nowrap;
+        }
+
+        /* Durée */
+        .duration-card__duration {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--color-black);
+            margin-bottom: var(--space-sm);
+            margin-top: 8px;
+        }
+
+        .duration-card--popular .duration-card__duration {
+            margin-top: 16px;
+        }
+
+        /* Prix */
+        .duration-card__price-wrapper {
+            margin-bottom: var(--space-xs);
+        }
+
+        .duration-card__price-old {
+            font-size: 14px;
+            color: var(--color-gray-400);
+            text-decoration: line-through;
+            margin-bottom: 2px;
+        }
+
+        .duration-card__price {
+            font-size: 42px;
+            font-weight: 700;
+            color: var(--color-black);
+            line-height: 1;
+        }
+
+        .duration-card__price span {
+            font-size: 24px;
+        }
+
+        .duration-card__monthly {
+            font-size: 14px;
+            color: var(--color-gray-600);
+            margin-bottom: var(--space-sm);
+        }
+
+        /* Badge économie */
+        .duration-card__savings {
+            display: inline-flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 2px;
+            background: var(--color-success-light);
+            color: var(--color-success-dark);
+            font-size: 12px;
+            font-weight: 600;
+            padding: 6px 12px;
+            border-radius: var(--radius-md);
+            margin-bottom: var(--space-sm);
+            min-height: 44px;
+            justify-content: center;
+        }
+
+        .duration-card__savings-percent {
+            font-size: 14px;
+            font-weight: 700;
+        }
+
+        .duration-card__savings-amount {
+            font-size: 11px;
+            font-weight: 500;
+            opacity: 0.9;
+        }
+
+        .duration-card__savings-placeholder {
+            height: 44px;
+            margin-bottom: var(--space-sm);
+        }
+
+        /* CTA */
+        .duration-card__cta {
+            width: 100%;
+            padding: 12px var(--space-md);
+            font-family: 'Poppins', sans-serif;
+            font-size: 14px;
+            font-weight: 600;
+            border-radius: var(--radius-md);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .duration-card__cta--outline {
+            background: var(--color-white);
+            color: var(--color-black);
+            border: 1px solid var(--color-gray-200);
+        }
+
+        .duration-card__cta--outline:hover {
+            background: var(--color-gray-50);
+            border-color: var(--color-gray-400);
+        }
+
+        .duration-card__cta--gradient {
+            background: var(--gradient-primary);
+            color: var(--color-white);
+            border: none;
+        }
+
+        .duration-card__cta--gradient:hover {
+            filter: brightness(1.1);
+            transform: translateY(-1px);
+        }
+
+        /* ===== RÉASSURANCE ===== */
+        .reassurance {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: var(--space-lg);
+            padding: var(--space-md) var(--space-lg) var(--space-lg);
+            flex-wrap: wrap;
+        }
+
+        .reassurance__item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 14px;
+            color: var(--color-gray-600);
+            font-weight: 500;
+        }
+
+        .reassurance__icon {
+            width: 22px;
+            height: 22px;
+            min-width: 22px;
+            background: var(--color-success-light);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .reassurance__icon svg {
+            width: 13px;
+            height: 13px;
+            color: var(--color-success);
+        }
+
+        /* ===== PREVIEW LABELS ===== */
+        .preview-label {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: var(--color-secondary);
+            color: white;
+            padding: 8px 16px;
+            border-radius: var(--radius-full);
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: var(--space-md);
+        }
+
+        .preview-label--mobile {
+            background: var(--color-primary);
+        }
+
+        .preview-section {
+            width: 100%;
+            max-width: 1100px;
+            margin-bottom: var(--space-xl);
+        }
+
+        /* ===== MOBILE FRAME ===== */
+        .mobile-preview-wrapper {
+            display: flex;
+            justify-content: center;
+            padding: var(--space-lg);
+        }
+
+        .mobile-frame {
+            width: 375px;
+            background: var(--color-black);
+            border-radius: 40px;
+            padding: 12px;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.25);
+        }
+
+        .mobile-frame__notch {
+            width: 150px;
+            height: 30px;
+            background: var(--color-black);
+            border-radius: 0 0 20px 20px;
+            margin: 0 auto 10px;
+            position: relative;
+            top: -2px;
+        }
+
+        .mobile-frame__screen {
+            background: var(--color-gray-100);
+            border-radius: 28px;
+            overflow: hidden;
+            padding: 12px;
+        }
+
+        /* ===== MOBILE FRAME OVERRIDES ===== */
+        .mobile-frame .pricing-block {
+            border-radius: var(--radius-md);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .mobile-frame .pricing-block::before {
+            border-radius: var(--radius-md) var(--radius-md) 0 0;
+        }
+
+        .mobile-frame .pricing-header {
+            padding: var(--space-md) var(--space-sm) var(--space-sm);
+        }
+
+        .mobile-frame .pricing-header__title {
+            font-size: 18px;
+        }
+
+        .mobile-frame .pricing-header__subtitle {
+            font-size: 12px;
+        }
+
+        .mobile-frame .features-section {
+            padding: 0 var(--space-sm) var(--space-sm);
+        }
+
+        .mobile-frame .features-grid {
+            grid-template-columns: 1fr 1fr;
+            gap: 10px 12px;
+        }
+
+        .mobile-frame .feature-item__icon {
+            width: 18px;
+            height: 18px;
+            min-width: 18px;
+        }
+
+        .mobile-frame .feature-item__icon svg {
+            width: 10px;
+            height: 10px;
+        }
+
+        .mobile-frame .feature-item__text strong {
+            font-size: 10px;
+        }
+
+        .mobile-frame .feature-item__text span {
+            font-size: 9px;
+        }
+
+        .mobile-frame .feature-item {
+            gap: 6px;
+        }
+
+        .mobile-frame .pricing-divider {
+            width: calc(100% - 24px);
+            margin: var(--space-xs) auto;
+        }
+
+        .mobile-frame .pricing-cards-section {
+            padding: var(--space-xs) var(--space-sm) var(--space-sm);
+        }
+
+        .mobile-frame .pricing-grid {
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+
+        .mobile-frame .duration-card {
+            padding: 10px 6px;
+            border-radius: var(--radius-md);
+        }
+
+        .mobile-frame .duration-card--popular {
+            transform: scale(1);
+            order: -1;
+        }
+
+        .mobile-frame .duration-card--popular:hover {
+            transform: translateY(-2px);
+        }
+
+        .mobile-frame .duration-card__badge {
+            font-size: 8px;
+            padding: 3px 8px;
+            top: -9px;
+        }
+
+        .mobile-frame .duration-card__duration {
+            font-size: 12px;
+            margin-bottom: 6px;
+            margin-top: 4px;
+        }
+
+        .mobile-frame .duration-card--popular .duration-card__duration {
+            margin-top: 8px;
+        }
+
+        .mobile-frame .duration-card__price-old {
+            font-size: 10px;
+        }
+
+        .mobile-frame .duration-card__price {
+            font-size: 24px;
+        }
+
+        .mobile-frame .duration-card__price span {
+            font-size: 14px;
+        }
+
+        .mobile-frame .duration-card__monthly {
+            font-size: 10px;
+            margin-bottom: 6px;
+        }
+
+        .mobile-frame .duration-card__savings {
+            padding: 3px 6px;
+            min-height: 30px;
+            margin-bottom: 6px;
+        }
+
+        .mobile-frame .duration-card__savings-percent {
+            font-size: 11px;
+        }
+
+        .mobile-frame .duration-card__savings-amount {
+            font-size: 8px;
+        }
+
+        .mobile-frame .duration-card__savings-placeholder {
+            height: 30px;
+            margin-bottom: 6px;
+        }
+
+        .mobile-frame .duration-card__cta {
+            padding: 7px 10px;
+            font-size: 11px;
+            border-radius: var(--radius-sm);
+        }
+
+        .mobile-frame .reassurance {
+            flex-direction: column;
+            gap: 6px;
+            padding: var(--space-xs) var(--space-sm) var(--space-sm);
+        }
+
+        .mobile-frame .reassurance__item {
+            font-size: 11px;
+        }
+
+        .mobile-frame .reassurance__icon {
+            width: 18px;
+            height: 18px;
+            min-width: 18px;
+        }
+
+        .mobile-frame .reassurance__icon svg {
+            width: 10px;
+            height: 10px;
+        }
+        @media (max-width: 900px) {
+            .features-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: var(--space-sm);
+            }
+
+            .pricing-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: var(--space-sm);
+            }
+
+            .duration-card--popular {
+                transform: scale(1);
+                order: -1;
+            }
+
+            .duration-card--popular:hover {
+                transform: translateY(-4px);
+            }
+
+            .pricing-header__title {
+                font-size: 28px;
+            }
+
+            .pricing-cards-section,
+            .features-section {
+                padding-left: var(--space-lg);
+                padding-right: var(--space-lg);
+            }
+        }
+
+        /* ===== RESPONSIVE MOBILE ===== */
+        @media (max-width: 540px) {
+            body {
+                padding: var(--space-sm);
+            }
+
+            .pricing-block {
+                border-radius: var(--radius-md);
+            }
+
+            .pricing-header {
+                padding: var(--space-lg) var(--space-sm) var(--space-md);
+            }
+
+            .pricing-header__title {
+                font-size: 24px;
+            }
+
+            .pricing-header__subtitle {
+                font-size: 14px;
+            }
+
+            .features-section {
+                padding: 0 var(--space-sm) var(--space-sm);
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 12px 16px;
+            }
+
+            .feature-item__icon {
+                width: 20px;
+                height: 20px;
+                min-width: 20px;
+            }
+
+            .feature-item__icon svg {
+                width: 12px;
+                height: 12px;
+            }
+
+            .feature-item__text strong {
+                font-size: 12px;
+            }
+
+            .feature-item__text span {
+                font-size: 11px;
+            }
+
+            .pricing-divider {
+                width: calc(100% - 32px);
+            }
+
+            .pricing-cards-section {
+                padding: var(--space-sm);
+            }
+
+            .pricing-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 10px;
+            }
+
+            .duration-card {
+                padding: 12px 8px;
+                border-radius: var(--radius-md);
+            }
+
+            .duration-card--popular {
+                transform: scale(1);
+                order: -1;
+            }
+
+            .duration-card--popular:hover {
+                transform: translateY(-2px);
+            }
+
+            .duration-card__badge {
+                font-size: 9px;
+                padding: 4px 10px;
+                top: -10px;
+            }
+
+            .duration-card__duration {
+                font-size: 13px;
+                margin-bottom: 8px;
+                margin-top: 4px;
+            }
+
+            .duration-card--popular .duration-card__duration {
+                margin-top: 10px;
+            }
+
+            .duration-card__price-old {
+                font-size: 11px;
+            }
+
+            .duration-card__price {
+                font-size: 28px;
+            }
+
+            .duration-card__price span {
+                font-size: 16px;
+            }
+
+            .duration-card__monthly {
+                font-size: 11px;
+                margin-bottom: 8px;
+            }
+
+            .duration-card__savings {
+                padding: 4px 8px;
+                min-height: 36px;
+                margin-bottom: 8px;
+            }
+
+            .duration-card__savings-percent {
+                font-size: 12px;
+            }
+
+            .duration-card__savings-amount {
+                font-size: 9px;
+            }
+
+            .duration-card__savings-placeholder {
+                height: 36px;
+                margin-bottom: 8px;
+            }
+
+            .duration-card__cta {
+                padding: 8px 12px;
+                font-size: 12px;
+                border-radius: var(--radius-sm);
+            }
+
+            .reassurance {
+                flex-direction: column;
+                gap: var(--space-xs);
+                padding: var(--space-sm);
+            }
+
+            .reassurance__item {
+                font-size: 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ===== VERSION DESKTOP ===== -->
+    <div class="preview-section">
+        <span class="preview-label">💻 Version Desktop (1100px)</span>
+
+    <div class="pricing-block">
+        <!-- HEADER -->
+        <div class="pricing-header">
+            <h2 class="pricing-header__title">L'abonnement Jurible</h2>
+            <p class="pricing-header__subtitle">Accès illimité à toutes les matières de Licence</p>
+        </div>
+
+        <!-- FEATURES -->
+        <div class="features-section">
+            <div class="features-grid">
+                <!-- Ligne 1 -->
+                <div class="feature-item">
+                    <div class="feature-item__icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                    </div>
+                    <div class="feature-item__text">
+                        <strong>16 cours complets</strong>
+                        <span>Matières + méthodologie + organisation</span>
+                    </div>
+                </div>
+
+                <div class="feature-item">
+                    <div class="feature-item__icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                    </div>
+                    <div class="feature-item__text">
+                        <strong>180+ vidéos de cours</strong>
+                        <span>Explications claires et pédagogiques</span>
+                    </div>
+                </div>
+
+                <div class="feature-item">
+                    <div class="feature-item__icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                    </div>
+                    <div class="feature-item__text">
+                        <strong>Cours écrit complet</strong>
+                        <span>Synthèses + mindmaps</span>
+                    </div>
+                </div>
+
+                <div class="feature-item">
+                    <div class="feature-item__icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                    </div>
+                    <div class="feature-item__text">
+                        <strong>Fiches animées en vidéo</strong>
+                        <span>Mémorisation visuelle</span>
+                    </div>
+                </div>
+
+                <!-- Ligne 2 -->
+                <div class="feature-item">
+                    <div class="feature-item__icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                    </div>
+                    <div class="feature-item__text">
+                        <strong>2000+ QCM interactifs</strong>
+                        <span>Testez vos connaissances</span>
+                    </div>
+                </div>
+
+                <div class="feature-item">
+                    <div class="feature-item__icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                    </div>
+                    <div class="feature-item__text">
+                        <strong>2000+ flashcards</strong>
+                        <span>Mémorisation efficace</span>
+                    </div>
+                </div>
+
+                <div class="feature-item">
+                    <div class="feature-item__icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                    </div>
+                    <div class="feature-item__text">
+                        <strong>Annales corrigées</strong>
+                        <span>Dissertations + commentaires</span>
+                    </div>
+                </div>
+
+                <div class="feature-item">
+                    <div class="feature-item__icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                    </div>
+                    <div class="feature-item__text">
+                        <strong>100h de contenus vidéo</strong>
+                        <span>Cours + fiches animées</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SÉPARATEUR -->
+        <div class="pricing-divider"></div>
+
+        <!-- PRICING CARDS -->
+        <div class="pricing-cards-section">
+            <div class="pricing-grid">
+                <!-- 1 mois -->
+                <div class="duration-card">
+                    <p class="duration-card__duration">1 mois</p>
+                    <div class="duration-card__price-wrapper">
+                        <p class="duration-card__price-old">&nbsp;</p>
+                        <p class="duration-card__price">29<span>€</span></p>
+                    </div>
+                    <p class="duration-card__monthly">29€/mois</p>
+                    <div class="duration-card__savings-placeholder"></div>
+                    <button class="duration-card__cta duration-card__cta--outline">Commencer</button>
+                </div>
+
+                <!-- 3 mois -->
+                <div class="duration-card">
+                    <p class="duration-card__duration">3 mois</p>
+                    <div class="duration-card__price-wrapper">
+                        <p class="duration-card__price-old">87€</p>
+                        <p class="duration-card__price">78<span>€</span></p>
+                    </div>
+                    <p class="duration-card__monthly">26€/mois</p>
+                    <div class="duration-card__savings">
+                        <span class="duration-card__savings-percent">-10%</span>
+                        <span class="duration-card__savings-amount">Économisez 9€</span>
+                    </div>
+                    <button class="duration-card__cta duration-card__cta--outline">Commencer</button>
+                </div>
+
+                <!-- 6 mois (POPULAIRE) -->
+                <div class="duration-card duration-card--popular">
+                    <span class="duration-card__badge">Populaire</span>
+                    <p class="duration-card__duration">6 mois</p>
+                    <div class="duration-card__price-wrapper">
+                        <p class="duration-card__price-old">174€</p>
+                        <p class="duration-card__price">140<span>€</span></p>
+                    </div>
+                    <p class="duration-card__monthly">23€/mois</p>
+                    <div class="duration-card__savings">
+                        <span class="duration-card__savings-percent">-20%</span>
+                        <span class="duration-card__savings-amount">Économisez 34€</span>
+                    </div>
+                    <button class="duration-card__cta duration-card__cta--gradient">Commencer</button>
+                </div>
+
+                <!-- 12 mois -->
+                <div class="duration-card">
+                    <p class="duration-card__duration">12 mois</p>
+                    <div class="duration-card__price-wrapper">
+                        <p class="duration-card__price-old">348€</p>
+                        <p class="duration-card__price">240<span>€</span></p>
+                    </div>
+                    <p class="duration-card__monthly">20€/mois</p>
+                    <div class="duration-card__savings">
+                        <span class="duration-card__savings-percent">-31%</span>
+                        <span class="duration-card__savings-amount">Économisez 108€</span>
+                    </div>
+                    <button class="duration-card__cta duration-card__cta--outline">Commencer</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- RÉASSURANCE -->
+        <div class="reassurance">
+            <div class="reassurance__item">
+                <div class="reassurance__icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                </div>
+                Sans engagement
+            </div>
+            <div class="reassurance__item">
+                <div class="reassurance__icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                </div>
+                Annulable en 1 clic
+            </div>
+            <div class="reassurance__item">
+                <div class="reassurance__icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                </div>
+                -20% code JURIBLE20
+            </div>
+        </div>
+    </div><!-- /pricing-block -->
+    </div><!-- /preview-section desktop -->
+
+    <!-- ===== VERSION MOBILE ===== -->
+    <div class="preview-section" style="display:flex;flex-direction:column;align-items:center;">
+        <span class="preview-label preview-label--mobile">📱 Version Mobile (375px)</span>
+
+        <div class="mobile-preview-wrapper">
+            <div class="mobile-frame">
+                <div class="mobile-frame__notch"></div>
+                <div class="mobile-frame__screen">
+
+                    <div class="pricing-block">
+                        <div class="pricing-header">
+                            <h2 class="pricing-header__title">L'abonnement Jurible</h2>
+                            <p class="pricing-header__subtitle">Accès illimité à toutes les matières de Licence</p>
+                        </div>
+
+                        <div class="features-section">
+                            <div class="features-grid">
+                                <div class="feature-item">
+                                    <div class="feature-item__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+                                    <div class="feature-item__text"><strong>16 cours complets</strong><span>Matières + méthodo + orga</span></div>
+                                </div>
+                                <div class="feature-item">
+                                    <div class="feature-item__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+                                    <div class="feature-item__text"><strong>180+ vidéos de cours</strong><span>Claires et pédagogiques</span></div>
+                                </div>
+                                <div class="feature-item">
+                                    <div class="feature-item__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+                                    <div class="feature-item__text"><strong>Cours écrit complet</strong><span>Synthèses + mindmaps</span></div>
+                                </div>
+                                <div class="feature-item">
+                                    <div class="feature-item__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+                                    <div class="feature-item__text"><strong>Fiches animées vidéo</strong><span>Mémorisation visuelle</span></div>
+                                </div>
+                                <div class="feature-item">
+                                    <div class="feature-item__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+                                    <div class="feature-item__text"><strong>2000+ QCM</strong><span>Testez vos connaissances</span></div>
+                                </div>
+                                <div class="feature-item">
+                                    <div class="feature-item__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+                                    <div class="feature-item__text"><strong>2000+ flashcards</strong><span>Mémorisation efficace</span></div>
+                                </div>
+                                <div class="feature-item">
+                                    <div class="feature-item__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+                                    <div class="feature-item__text"><strong>Annales corrigées</strong><span>Dissert. + commentaires</span></div>
+                                </div>
+                                <div class="feature-item">
+                                    <div class="feature-item__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+                                    <div class="feature-item__text"><strong>100h de vidéo</strong><span>Cours + fiches animées</span></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="pricing-divider"></div>
+
+                        <div class="pricing-cards-section">
+                            <div class="pricing-grid">
+                                <!-- 6 mois POPULAIRE (1er en mobile) -->
+                                <div class="duration-card duration-card--popular">
+                                    <span class="duration-card__badge">Populaire</span>
+                                    <p class="duration-card__duration">6 mois</p>
+                                    <div class="duration-card__price-wrapper">
+                                        <p class="duration-card__price-old">174€</p>
+                                        <p class="duration-card__price">140<span>€</span></p>
+                                    </div>
+                                    <p class="duration-card__monthly">23€/mois</p>
+                                    <div class="duration-card__savings">
+                                        <span class="duration-card__savings-percent">-20%</span>
+                                        <span class="duration-card__savings-amount">-34€</span>
+                                    </div>
+                                    <button class="duration-card__cta duration-card__cta--gradient">Commencer</button>
+                                </div>
+
+                                <!-- 12 mois -->
+                                <div class="duration-card">
+                                    <p class="duration-card__duration">12 mois</p>
+                                    <div class="duration-card__price-wrapper">
+                                        <p class="duration-card__price-old">348€</p>
+                                        <p class="duration-card__price">240<span>€</span></p>
+                                    </div>
+                                    <p class="duration-card__monthly">20€/mois</p>
+                                    <div class="duration-card__savings">
+                                        <span class="duration-card__savings-percent">-31%</span>
+                                        <span class="duration-card__savings-amount">-108€</span>
+                                    </div>
+                                    <button class="duration-card__cta duration-card__cta--outline">Commencer</button>
+                                </div>
+
+                                <!-- 1 mois -->
+                                <div class="duration-card">
+                                    <p class="duration-card__duration">1 mois</p>
+                                    <div class="duration-card__price-wrapper">
+                                        <p class="duration-card__price-old">&nbsp;</p>
+                                        <p class="duration-card__price">29<span>€</span></p>
+                                    </div>
+                                    <p class="duration-card__monthly">29€/mois</p>
+                                    <div class="duration-card__savings-placeholder"></div>
+                                    <button class="duration-card__cta duration-card__cta--outline">Commencer</button>
+                                </div>
+
+                                <!-- 3 mois -->
+                                <div class="duration-card">
+                                    <p class="duration-card__duration">3 mois</p>
+                                    <div class="duration-card__price-wrapper">
+                                        <p class="duration-card__price-old">87€</p>
+                                        <p class="duration-card__price">78<span>€</span></p>
+                                    </div>
+                                    <p class="duration-card__monthly">26€/mois</p>
+                                    <div class="duration-card__savings">
+                                        <span class="duration-card__savings-percent">-10%</span>
+                                        <span class="duration-card__savings-amount">-9€</span>
+                                    </div>
+                                    <button class="duration-card__cta duration-card__cta--outline">Commencer</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="reassurance">
+                            <div class="reassurance__item">
+                                <div class="reassurance__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+                                Sans engagement
+                            </div>
+                            <div class="reassurance__item">
+                                <div class="reassurance__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+                                Annulable en 1 clic
+                            </div>
+                            <div class="reassurance__item">
+                                <div class="reassurance__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+                                -20% code JURIBLE20
+                            </div>
+                        </div>
+                    </div><!-- /pricing-block mobile -->
+
+                </div><!-- /screen -->
+            </div><!-- /mobile-frame -->
+        </div>
+    </div><!-- /preview-section mobile -->
+
+</body>
+</html>
