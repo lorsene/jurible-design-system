@@ -1,801 +1,698 @@
-# T-HOMEPAGE (v2 — Optimisée)
+# T-HOMEPAGE (v3 — Blocs Figma validés)
 
-> Page d'accueil et landing principale de Jurible.
+> Page d'accueil de Jurible.
 > **URL** : `/`
-> **Mise à jour** : 6 février 2026
-> **Statut** : Corrigé + optimisé
+> **Version** : 3.0 — Blocs Figma reconstitués le 6 février 2026
+> **Principe** : chaque section = 1 bloc Figma identifié. Le dev pioche le bloc, l'adapte légèrement. Laura ajuste le texte.
 
 ---
 
-## Objectifs de la page
+## Référence rapide
 
-| Objectif | KPI cible | Levier |
-|----------|-----------|--------|
-| **Clarté** | < 10s pour comprendre l'offre | Hero H1 + stats + screenshot |
-| **Confiance** | Taux de rebond < 45% | Logos, stats, témoignages, équipe |
-| **Conversion** | CTR vers /nos-offres > 8% | Funnel : désir → compréhension → offre → action |
-| **SEO** | Top 3 "cours droit en ligne" | H1 sémantique, FAQ structurée, maillage interne |
-
----
-
-## Diagnostic vs maquette originale
-
-### Erreurs de mapping corrigées
-
-| Ancien ID (v1) | Problème | Nouveau ID (v2) |
-|-----------------|----------|------------------|
-| C01 (Cards Offres) | C01 = CTA Bannière/Lead Magnet, pas des cards produit | **P05** (Quelle offre choisir) |
-| C08 (Cards Personas) | C08 = Fonctionnalité avec grille emoji, pas des personas | **C08 variant** (adapté personas) |
-| C04 (Enseignants) | C04 n'existe pas dans le DS (Bio/Auteur = à créer) | **C05** (Enseignants) + **C18** (Testimonial) |
-| P12 (Features) | P12 = grille "Inclus dans les formules" (contexte pricing) | **C08** (Fonctionnalité) pour l'aperçu |
-| P13 (Ressources) | P13 = Bandeau stats, pas une grille de 6 détails | **C08** (Fonctionnalité) pour les stats détaillées |
-
-### Problèmes d'ordre / structure
-
-| Problème | Impact | Correction |
-|----------|--------|------------|
-| "Nos offres" en position 3 (avant de montrer le produit) | L'utilisateur voit les prix avant de comprendre la valeur | Déplacé en position 7 (après valeur + personas) |
-| "Pour qui ?" après "Nos offres" | Incohérent : on segmente APRÈS avoir vendu | Déplacé en position 5 (avant les offres) |
-| Stats dupliquées : Hero (25K, 4.8) + Bandeau P13 (25K, 500h, 20, 4.8) + section Ressources (500h, 20, 2000, 400) | Répétitif, dilue l'impact | P13 supprimé, stats hero et ressources différenciées |
-| Pas de C06 Réassurance | Manque de trust près du pricing | Ajouté en position 8 (après offres) |
-| Pas de P11 Comparaison | Pas de différenciation concurrentielle | Ajouté en position 10 (avant testimonials = preuve) |
-| Manuel à 29€ | Prix validé = 24€ barré 29€ | Corrigé |
-| Copyright 2024 | On est en 2026 | Corrigé |
-| Aucun CTA sur les cards "Pour qui ?" | Opportunité de conversion perdue | CTA ajouté par persona |
-| FAQ incomplète (3 réponses manquantes) | SEO et conversion affaiblis | Réponses complétées |
+| # | Section | Bloc DS | Variante / Adaptation |
+|---|---------|---------|----------------------|
+| 0 | Header | **O01** | + barre 3 stats (typo T03 stat) |
+| 1 | Hero | **H01** | Variante homepage + visuel CTA |
+| 2 | Logos | **P09** | Chips universités |
+| 3 | Approche | **C10** | Variante "page courtes" + screenshot intégré |
+| 4 | Contenu chiffré | **C09** | Pattern B — fond sombre, 6 stats |
+| 5 | Pour qui | **C10** | Variante homepage — personas |
+| 6 | Avantages | **C10** | Variante homepage — bénéfices |
+| 7 | Nos offres | **C14** | Pricing comparatif adapté (sans prix, Académie 1 col + 3 dessous) |
+| 8 | Réassurance | **C06** | 4 badges + note Trustpilot |
+| 9 | Steps | **P14** | 4 étapes timeline |
+| 10 | Comparaison | **P11** | Variant 1 — Sans / Avec |
+| 11 | Équipe | **C04** | Bio/Auteur — bloc 1 + bloc 2 mélangés |
+| 12 | Témoignages | **C18** | Bloc 1 — 5 étoiles + CTA |
+| 13 | FAQ | **C07** | Accordéon 5 questions + CTA |
+| 14 | CTA Final | **P10** | Gradient + 2 CTA |
+| 15 | Footer | **O02** | 5 colonnes |
 
 ---
 
-## Structure optimisée (ASCII)
+## Structure complète
 
 ```
-┌─────────────────────────────────────────────────────────┐
-│  O01 - HEADER                                           │
-│  Logo | COURS | NOS OFFRES | PRÉPAS | RESSOURCES |      │
-│  À PROPOS | [S'ABONNER] [SE CONNECTER]                  │
-│  Sticky on scroll                                       │
-└─────────────────────────────────────────────────────────┘
-
-┌─────────────────────────────────────────────────────────┐
-│  #01 — H01 - HERO CONVERSION (variant Homepage)        │
-│                                                         │
-│  [Badge violet] École de droit en ligne                 │
-│                                                         │
-│  La plateforme complète pour                            │
-│  réussir en droit                    ┌───────────────┐  │
-│                                      │  Screenshot   │  │
-│  Cours vidéo, fiches de révision...  │  plateforme   │  │
-│                                      │  ecole.       │  │
-│  [Découvrir nos offres →]            │  jurible.com  │  │
-│  [Essayer gratuitement]              └───────────────┘  │
-│                                                         │
-│  ✓ Sans engagement  ✓ Accès immédiat  ✓ Paiement sécu  │
-│                                                         │
-│  25 000+        4.8/5         94%                       │
-│  Étudiants      Note moy.    Réussite                   │
-└─────────────────────────────────────────────────────────┘
-
-┌─────────────────────────────────────────────────────────┐
-│  #02 — P09 - LOGOS / SOCIAL PROOF                       │
-│                                                         │
-│  Nos cours préparent les étudiants des meilleures       │
-│  universités françaises                                 │
-│                                                         │
-│  [Paris 1] [Paris 2] [Nanterre] [Lyon 3] [Bordeaux]    │
-│  [Aix-Marseille] [Strasbourg] [Clermont] [Côte d'Azur] │
-└─────────────────────────────────────────────────────────┘
-
-┌─────────────────────────────────────────────────────────┐
-│  #03 — C08 - APERÇU PLATEFORME (variant 4 features)    │
-│  fond: bg-light #F8F8F8                                 │
-│                                                         │
-│  [Badge] Aperçu                                         │
-│  Une plateforme pensée pour vous                        │
-│  Interface intuitive, contenus de qualité, accès        │
-│  illimité.                                              │
-│                                                         │
-│  ┌──────────┐ ┌──────────┐ ┌──────────┐ ┌──────────┐   │
-│  │ 🎬       │ │ 📝       │ │ ✅       │ │ 📱       │   │
-│  │ Cours    │ │ Fiches   │ │ QCM &    │ │ Acces-   │   │
-│  │ vidéo HD │ │ révision │ │ Auto-    │ │ sible    │   │
-│  │          │ │          │ │ éval.    │ │ partout  │   │
-│  └──────────┘ └──────────┘ └──────────┘ └──────────┘   │
-│                                                         │
-│  ┌─────────────────────────────────────────────────┐    │
-│  │  Screenshot ecole.jurible.com (interface cours) │    │
-│  └─────────────────────────────────────────────────┘    │
-└─────────────────────────────────────────────────────────┘
-
-┌─────────────────────────────────────────────────────────┐
-│  #04 — C08 - RESSOURCES / CHIFFRES (variant 6 stats)   │
-│  fond: white                                            │
-│                                                         │
-│  [Badge] Ressources                                     │
-│  Des outils pensés pour votre réussite                  │
-│                                                         │
-│  ┌───────────┐ ┌───────────┐ ┌───────────┐             │
-│  │ 500h+     │ │ 20        │ │ 2000+     │             │
-│  │ Cours     │ │ Matières  │ │ QCM &     │             │
-│  │ vidéo     │ │ L1→L3     │ │ Flashcard │             │
-│  └───────────┘ └───────────┘ └───────────┘             │
-│  ┌───────────┐ ┌───────────┐ ┌───────────┐             │
-│  │ 400+      │ │ 45h+      │ │ 🤖        │             │
-│  │ Annales   │ │ Méthodo-  │ │ Outils IA │             │
-│  │ corrigées │ │ logie     │ │ inclus    │             │
-│  └───────────┘ └───────────┘ └───────────┘             │
-└─────────────────────────────────────────────────────────┘
-
-┌─────────────────────────────────────────────────────────┐
-│  #05 — C08 variant - POUR QUI   ★ DÉPLACÉ (était #6)   │
-│  fond: bg-light #F8F8F8                                 │
-│                                                         │
-│  [Badge] Pour qui ?                                     │
-│  Jurible s'adapte à votre profil                        │
-│                                                         │
-│  ┌────────────┐ ┌────────────┐ ┌────────────┐ ┌──────┐ │
-│  │ 📚         │ │ 📖         │ │ 🔄         │ │ 👨‍👩‍👧  │ │
-│  │ Étudiants  │ │ L2-L3      │ │ Reprise    │ │      │ │
-│  │ L1         │ │            │ │ d'études   │ │Parent│ │
-│  │            │ │            │ │            │ │  s   │ │
-│  │ [Voir L1→] │ │ [Voir →]   │ │ [Voir →]   │ │[→]  │ │
-│  └────────────┘ └────────────┘ └────────────┘ └──────┘ │
-└─────────────────────────────────────────────────────────┘
-
-┌─────────────────────────────────────────────────────────┐
-│  #06 — P05 - NOS OFFRES            ★ DÉPLACÉ (était #3)│
-│  fond: white                                            │
-│                                                         │
-│  [Badge] Nos offres                                     │
-│  Choisissez la formule qui vous correspond              │
-│                                                         │
-│  ┌──────────────────────────────────────────────────┐   │
-│  │ ★ POPULAIRE                      L'Académie      │   │
-│  │ Accès complet à toute la         Jurible         │   │
-│  │ plateforme...                                    │   │
-│  │ ✓ 500h+ ✓ 20 matières ✓ 2000+ QCM ✓ 400+ ann.  │   │
-│  │ À partir de 20€/mois    [Découvrir l'Académie →] │   │
-│  └──────────────────────────────────────────────────┘   │
-│                                                         │
-│  ┌───────────────┐ ┌───────────────┐ ┌───────────────┐  │
-│  │ Fiches PDF    │ │ Outils IA     │ │ Manuel Méthodo│  │
-│  │ 19€/matière   │ │ dès 5€        │ │ 24€ (29€)     │  │
-│  │ [Voir →]      │ │ [Voir →]      │ │ [Voir →]      │  │
-│  └───────────────┘ └───────────────┘ └───────────────┘  │
-└─────────────────────────────────────────────────────────┘
-
-┌─────────────────────────────────────────────────────────┐
-│  #07 — C06 - RÉASSURANCE              ★ NOUVEAU         │
-│  fond: bg-light #F8F8F8                                 │
-│                                                         │
-│  ⭐ 4.8/5   👥 +25 000 étudiants   🔒 Paiement        │
-│  (590+ avis)                         sécurisé           │
-│  🎓 Programme officiel              📱 Accès immédiat   │
-│  (logo MEN + logos univs)                               │
-└─────────────────────────────────────────────────────────┘
-
-┌─────────────────────────────────────────────────────────┐
-│  #08 — P14 - STEPS / VOTRE PARCOURS                    │
-│  fond: white                                            │
-│                                                         │
-│  [Badge] Comment ça marche                              │
-│  Rejoins l'Académie en 4 étapes                         │
-│                                                         │
-│  ①──────────②──────────③──────────✓                     │
-│  Choisis    Crée ton   Accède     Révise                │
-│  ta formule compte     au contenu et réussis            │
-└─────────────────────────────────────────────────────────┘
-
-┌─────────────────────────────────────────────────────────┐
-│  #09 — P11 - COMPARAISON               ★ NOUVEAU       │
-│  fond: bg-light #F8F8F8                                 │
-│                                                         │
-│  [Badge] Changement                                     │
-│  Réviser autrement                                      │
-│                                                         │
-│  ┌─── Sans Jurible ───┐  ┌─── Avec Jurible ────┐       │
-│  │ ✗ Cours incomplets │  │ ✓ Cours structurés  │       │
-│  │ ✗ Méthodo floue    │  │ ✓ Méthodo multimédia│       │
-│  │ ✗ Heures perdues   │  │ ✓ Tout au même      │       │
-│  │ ✗ Stress permanent │  │   endroit, gain de  │       │
-│  │ ✗ Aucune idée du   │  │   temps énorme      │       │
-│  │   niveau réel      │  │ ✓ Sérénité          │       │
-│  └────────────────────┘  │ ✓ QCM et flashcards │       │
-│                          └──────────────────────┘       │
-└─────────────────────────────────────────────────────────┘
-
-┌─────────────────────────────────────────────────────────┐
-│  #10 — C05 + C18 - ÉQUIPE & TÉMOIGNAGES ENSEIGNANTS    │
-│  fond: white                                            │
-│                                                         │
-│  [Photo de groupe 11 enseignants]                       │
-│  Une équipe de professionnels diplômés                  │
-│                                                         │
-│  11 Enseignants │ 100% Master 2 │ 7+ ans exp. moy.     │
-│                                                         │
-│  ┌────────────┐ ┌────────────┐ ┌────────────┐ ┌──────┐ │
-│  │ "Une grosse│ │ "Connaître │ │ "Le droit  │ │"Le   │ │
-│  │ pression   │ │ les bases  │ │ pénal est  │ │cours │ │
-│  │ pèse..."   │ │ du droit..."│ │ PARTOUT"  │ │d'IJ."│ │
-│  │ — J.Ramsamy│ │ — R.B-L.   │ │ — M.Léonard│ │—Okpo│ │
-│  └────────────┘ └────────────┘ └────────────┘ └──────┘ │
-│                                                         │
-│  ✓ Cours par des humains ✓ Expertise vérifiée ✓ Péda.  │
-│  [Découvrir tous nos enseignants →]                     │
-└─────────────────────────────────────────────────────────┘
-
-┌─────────────────────────────────────────────────────────┐
-│  #11 — C18 - TÉMOIGNAGES ÉTUDIANTS                     │
-│  fond: bg-light #F8F8F8                                 │
-│                                                         │
-│  [Badge] Témoignages                                    │
-│  Ce que disent nos étudiants                            │
-│  Rejoins les 25 000 étudiants qui nous font confiance   │
-│  depuis 2018.                                           │
-│                                                         │
-│  ┌────────────────┐ ┌────────────────┐ ┌──────────────┐ │
-│  │ ⭐⭐⭐⭐⭐        │ │ ⭐⭐⭐⭐⭐        │ │ ⭐⭐⭐⭐⭐      │ │
-│  │ "J'ai révisé   │ │ "J'ai eu 16/20│ │ "19/20 au    │ │
-│  │ mes partiels   │ │ alors que     │ │ partiel de   │ │
-│  │ uniquement..."  │ │ j'avais 7/20" │ │ droit de la  │ │
-│  │                │ │               │ │ famille !"   │ │
-│  │ ✓ 12.55/20     │ │ ✓ De 7 à 16   │ │ ✓ 19/20      │ │
-│  │ Manon B.       │ │ Karl M.       │ │ Jade B.      │ │
-│  │ L1 Paris Assas │ │ L1 Droit      │ │ L1 Droit     │ │
-│  └────────────────┘ └────────────────┘ └──────────────┘ │
-│                                                         │
-│  [Voir tous les avis →]                                 │
-└─────────────────────────────────────────────────────────┘
-
-┌─────────────────────────────────────────────────────────┐
-│  #12 — C07 - FAQ ACCORDÉON                             │
-│  fond: white                                            │
-│                                                         │
-│  [Badge] FAQ                                            │
-│  Questions fréquentes                                   │
-│                                                         │
-│  [▸] Quelle différence entre Académie et Fiches PDF ?   │
-│  [▸] Est-ce que Jurible couvre ma matière ?              │
-│  [▸] Puis-je essayer avant de m'engager ?               │
-│  [▸] Comment accéder aux cours après inscription ?      │
-│  [▸] Puis-je résilier à tout moment ?                   │
-│                                                         │
-│  [Voir toutes les questions →]                          │
-└─────────────────────────────────────────────────────────┘
-
-┌─────────────────────────────────────────────────────────┐
-│  #13 — P10 - CTA FINAL                                 │
-│  fond: gradient #B0001D → #7C3AED                       │
-│                                                         │
-│  Prêt à réussir vos études de droit ?                   │
-│  Rejoignez les 25 000 étudiants qui ont transformé      │
-│  leurs études avec Jurible.                             │
-│                                                         │
-│  [Découvrir nos offres →]  [Nous contacter]             │
-└─────────────────────────────────────────────────────────┘
-
-┌─────────────────────────────────────────────────────────┐
-│  O02 - FOOTER                                           │
-│  fond: #1A1A1A                                          │
-│                                                         │
-│  Jurible + baseline + réseaux + newsletter              │
-│  Nos offres | Ressources | À propos | Contact | Niveaux │
-│  CGV | Mentions légales | Confidentialité               │
-│  © 2026 Jurible                                         │
-└─────────────────────────────────────────────────────────┘
-```
-
----
-
-## Changements d'ordre vs maquette
-
-| # | Section | Position maquette | Position v2 | Raison |
-|---|---------|-------------------|-------------|--------|
-| 1 | Header | 0 | 0 | — |
-| 2 | Hero H01 | 1 | 1 | — |
-| 3 | Logos P09 | 2 | 2 | — |
-| 4 | **Nos offres** | **3** | **6** | **Trop tôt : l'utilisateur voit les prix avant de comprendre la valeur. Déplacé après la démonstration de valeur et la segmentation.** |
-| 5 | Aperçu plateforme | 5 | 3 | Monter : montrer le produit immédiatement après la crédibilité |
-| 6 | Ressources stats | 6 | 4 | Monte avec l'aperçu (bloc "valeur") |
-| 7 | **Pour qui ?** | **4** | **5** | **Déplacé AVANT les offres : segmenter d'abord, vendre ensuite** |
-| 8 | **C06 Réassurance** | **absent** | **7** | **AJOUTÉ : bloc de confiance après les offres = réduit l'hésitation** |
-| 9 | Steps P14 | 8 | 8 | Légèrement remonté |
-| 10 | **P11 Comparaison** | **absent** | **9** | **AJOUTÉ : différenciation concurrentielle avant les preuves sociales** |
-| 11 | Équipe + enseignants | 7 | 10 | Descend légèrement (autorité avant témoignages) |
-| 12 | Témoignages étudiants | 9 | 11 | — |
-| 13 | **P13 Stats bandeau** | **10** | **supprimé** | **Redondant : mêmes chiffres que hero (25K, 500h, 20, 4.8). Remplacé par C06 réassurance et P11 comparaison.** |
-| 14 | FAQ C07 | 11 | 12 | — |
-| 15 | CTA Final P10 | 12 | 13 | — |
-| 16 | Footer | 13 | 14 | — |
-
-**Logique du funnel optimisé :**
-```
-ATTIRER  →  Hero + Logos
-MONTRER  →  Aperçu + Ressources (montrer le produit, pas juste en parler)
-CIBLER   →  Pour qui ? (l'utilisateur se reconnaît)
-VENDRE   →  Nos offres + Réassurance (prix + confiance)
-RASSURER →  Steps + Comparaison + Équipe + Témoignages
-CONVERTIR→  FAQ (lever les objections) + CTA Final
-```
-
----
-
-## Table composants DS
-
-| # | Section | Composant DS | ID exact | Variante | Fond |
-|---|---------|-------------|----------|----------|------|
-| 0 | Header | Header / Mega Menu | **O01** | Desktop + Mobile | white |
-| 1 | Hero | Hero Conversion | **H01** | Variant 1 (Homepage) | white |
-| 2 | Logos | Logos / Social Proof | **P09** | Chips universités | bg-light |
-| 3 | Aperçu | Fonctionnalité | **C08** | Grille 4 features + screenshot | bg-light |
-| 4 | Ressources | Fonctionnalité | **C08** | Grille 2×3 stats détaillées | white |
-| 5 | Pour qui | Fonctionnalité | **C08** | Grille 4 personas + CTA | bg-light |
-| 6 | Nos offres | Quelle offre choisir | **P05** | 1 card XL (Académie) + 3 cards SM | white |
-| 7 | Réassurance | Bloc Réassurance | **C06** | Version complète (5 éléments) | bg-light |
-| 8 | Steps | Steps / Comment ça marche | **P14** | 4 étapes + timeline | white |
-| 9 | Comparaison | Comparaison Sans/Avec | **P11** | Variant 1 (2 colonnes) | bg-light |
-| 10a | Équipe | Enseignants | **C05** | Photo groupe + 3 mini-stats | white |
-| 10b | Citations enseignants | Testimonial | **C18** | Variant Hero (carousel ×4) | white |
-| 11 | Témoignages étudiants | Testimonial | **C18** | Variant Standard (×3 cards) | bg-light |
-| 12 | FAQ | FAQ Accordéon | **C07** | 5 questions + CTA "voir tout" | white |
-| 13 | CTA Final | CTA Final | **P10** | Gradient + 2 CTA | gradient |
-| 14 | Footer | Footer | **O02** | Desktop 5 colonnes / Mobile accordéon | dark |
-
----
-
-## Détail section par section
-
-### #01 — H01 Hero Conversion
-
-**Composant** : `H01-hero-conversion` — Variant 1 (Homepage)
-
-```
-Structure :
-├── Badge violet : "École de droit en ligne"
-├── H1 : "La plateforme complète pour <span class="text-primary">réussir en droit</span>"
-├── Sous-titre (Body Large) : "Cours vidéo, fiches de révision, annales corrigées, outils IA... Tout ce qu'il vous faut pour valider votre licence, au même endroit."
-├── CTA group :
-│   ├── Primary (A02 btn-primary LG) : "Découvrir nos offres →" → /nos-offres
-│   └── Secondary (A02 btn-outline LG) : "Essayer gratuitement" → /inscription
-├── Trust line (Body Small, text-muted) :
-│   ├── ✓ Sans engagement
-│   ├── ✓ Accès immédiat
-│   └── ✓ Paiement sécurisé
-├── Stats (3 colonnes) :
-│   ├── "25 000+" — Étudiants
-│   ├── "4.8/5" — Note moyenne
-│   └── "94%" — Taux de réussite
-└── Media : Screenshot/vidéo plateforme ecole.jurible.com
-```
-
-**Optimisations :**
-- CTA secondary changé de "Voir la plateforme" → **"Essayer gratuitement"** (plus incitatif, implique une action concrète et gratuite)
-- Stats avec compteur animé au scroll (intersection observer)
-- Screenshot en format WebP, lazy-loaded, avec possibilité de play vidéo overlay
-- Mobile : stats passent sous le screenshot, CTA pleine largeur
-
----
-
-### #02 — P09 Logos / Social Proof
-
-**Composant** : `P09-logos`
-
-```
-Structure :
-├── Texte (H4, centré) : "Nos cours préparent les étudiants des meilleures universités françaises"
-└── Chips (A02 tags) : Paris 1 | Paris 2 | Nanterre | Lyon 3 | Bordeaux | Aix-Marseille | Strasbourg | Clermont-Auvergne | Côte d'Azur
-```
-
-**Optimisations :**
-- Garder tel quel, positionné idéalement juste après le hero
-- Mobile : chips wrappent sur 3 lignes, scroll horizontal optionnel
-
----
-
-### #03 — C08 Aperçu plateforme
-
-**Composant** : `C08-fonctionnalite` — Variant "Aperçu produit"
-
-```
-Structure :
-├── Badge violet : "Aperçu"
-├── H2 : "Une plateforme pensée pour <span class="text-primary">vous</span>"
-├── Sous-titre : "Interface intuitive, contenus de qualité, accès illimité."
-├── Grid 4 features (2×2 desktop, 1 col mobile) :
-│   ├── 🎬 "Cours vidéo HD" — "Explications claires par des enseignants passionnés, à regarder et revoir sans limite."
-│   ├── 📝 "Fiches de révision" — "L'essentiel de chaque matière synthétisé pour des révisions efficaces."
-│   ├── ✅ "QCM & Auto-évaluation" — "Testez vos connaissances et identifiez vos lacunes avant les examens."
-│   └── 📱 "Accessible partout" — "Ordinateur, tablette, smartphone. Révisez où vous voulez, quand vous voulez."
-└── Visuel pleine largeur : Screenshot ecole.jurible.com (interface de cours)
-```
-
-**Optimisations :**
-- Ajout de la mention "Accessible partout" = rassure sur le format mobile (70% du trafic est mobile d'après docs/architecture-ecole.md)
-- Screenshot cliquable pour agrandir (lightbox)
-
----
-
-### #04 — C08 Ressources / Chiffres
-
-**Composant** : `C08-fonctionnalite` — Variant "Stats détaillées"
-
-```
-Structure :
-├── Badge violet : "Ressources"
-├── H2 : "Des outils pensés pour votre <span class="text-primary">réussite</span>"
-├── Sous-titre : "Tout ce qu'il vous faut pour comprendre, mémoriser et réussir vos examens."
-└── Grid 6 cards (3×2 desktop, 2×3 tablet, 1 col mobile) :
-    ├── "500h+" — Cours vidéo — "Le cours expliqué en vidéo pour mieux comprendre chaque notion."
-    ├── "20" — Matières — "Toutes les matières fondamentales de L1 à L3 + Capacité."
-    ├── "2000+" — QCM & Flashcards — "Testez vos connaissances et mémorisez efficacement."
-    ├── "400+" — Annales corrigées — "Entraîne-toi sur des sujets d'examens réels avec corrections."
-    ├── "45h+" — Méthodologie — "Maîtrise les exercices juridiques : cas pratique, dissertation, commentaire."
-    └── "🤖" — Outils IA — "Générateurs intelligents pour vous aider dans vos exercices."
-```
-
-**Note** : Les chiffres (500h, 20, 2000, 400, 45h) sont **différents** des stats hero (25K, 4.8/5, 94%) = pas de redondance. Les stats hero = preuve sociale. Cette section = contenu concret.
-
----
-
-### #05 — C08 variant Pour qui ?
-
-**Composant** : `C08-fonctionnalite` — Variant "Personas"
-
-```
-Structure :
-├── Badge violet : "Pour qui ?"
-├── H2 : "Jurible s'adapte à votre <span class="text-primary">profil</span>"
-├── Sous-titre : "Que vous débutiez ou que vous soyez en fin de licence, nous vous accompagnons."
-└── Grid 4 cards (4 col desktop, 2×2 tablet, 1 col mobile) :
-    ├── 📚 "Étudiants L1" — "Découvrez le droit avec des cours clairs et une méthodologie solide dès le départ."
-    │   └── CTA link : "Voir les cours L1 →" → /cours/l1
-    ├── 📖 "L2-L3" — "Approfondissez vos connaissances et préparez efficacement vos partiels."
-    │   └── CTA link : "Voir les cours →" → /cours/l2
-    ├── 🔄 "Reprise d'études" — "Remettez-vous à niveau à votre rythme avec des contenus accessibles 24h/24."
-    │   └── CTA link : "Découvrir l'Académie →" → /academie
-    └── 👨‍👩‍👧 "Parents" — "Offrez les meilleures ressources à votre enfant pour maximiser ses chances."
-        └── CTA link : "Voir nos offres →" → /nos-offres
-```
-
-**Optimisations :**
-- **CTA ajoutés sur chaque card** (absents de la maquette = conversion perdue)
-- Chaque CTA pointe vers la page la plus pertinente pour le persona
-- Hover : card légèrement surélevée (shadow MD → LG)
-
----
-
-### #06 — P05 Nos Offres
-
-**Composant** : `P05-quelle-offre-choisir` — Adapté en cards verticales
-
-```
-Structure :
-├── Badge violet : "Nos offres"
-├── H2 : "Choisissez la formule qui vous correspond"
-├── Sous-titre : "Que vous cherchiez un accès complet ou des ressources ciblées, nous avons ce qu'il vous faut."
-│
-├── CARD XL — L'Académie Jurible (mise en avant) :
-│   ├── Badge : "Populaire" (violet #EDE9FE + #7C3AED)
-│   ├── Titre : "L'Académie Jurible"
-│   ├── Description : "Accès complet à toute la plateforme..."
-│   ├── Features :
-│   │   ├── ✓ 500h+ de cours vidéo
-│   │   ├── ✓ 20 matières (L1, L2, L3, Capacité)
-│   │   ├── ✓ 2000+ QCM & Flashcards
-│   │   └── ✓ 400+ annales corrigées
-│   ├── Prix : "À partir de 20€/mois"
-│   └── CTA (A02 btn-primary MD) : "Découvrir l'Académie →" → /academie
-│
-└── Grid 3 cards SM (égales) :
-    ├── Fiches PDF :
-    │   ├── Features : Téléchargement illimité, Imprimables, À l'unité
-    │   ├── Prix : "19€/matière"
-    │   └── CTA link : "Voir les fiches →" → /fiches-de-droit
-    │
-    ├── Outils IA :
-    │   ├── Features : Fiches d'arrêt, Dissertation, Cas pratique
-    │   ├── Prix : "Crédits à partir de 5€"
-    │   └── CTA link : "Découvrir les outils →" → /suite-ia
-    │
-    └── Manuel Méthodologie :
-        ├── Features : 4 exercices, Exemples corrigés, PDF
-        ├── Prix : "24€" (barré "29€")
-        └── CTA link : "Voir le manuel →" → /manuel-methodologie
-```
-
-**Optimisations :**
-- **L'Académie en card XL** (pleine largeur, visuellement dominante) + 3 produits secondaires en row dessous = hiérarchie claire. Le produit principal (revenus récurrents) capte l'attention en premier
-- **Manuel : prix corrigé** de "29€" à "24€ barré 29€" (prix validé)
-- Les 3 cards secondaires ont des CTA links (pas des boutons) pour ne pas concurrencer le CTA Académie
-- Hover sur toutes les cards
-
----
-
-### #07 — C06 Réassurance ★ NOUVEAU
-
-**Composant** : `C06-reassurance` — Version complète
-
-```
-Structure :
-└── Row 5 éléments (centré) :
-    ├── ⭐ "4.8/5" — (590+ avis)
-    ├── 👥 "+25 000 étudiants"
-    ├── 🔒 "Paiement sécurisé"
-    ├── 🎓 "Programme officiel"
-    └── ⚡ "Accès immédiat"
-```
-
-**Pourquoi c'est ajouté :**
-- Positionné **juste après les offres/prix** = moment critique de la décision
-- Le composant C06 existe déjà dans le DS et est recommandé pour "Homepage" et "Pages pricing" (voir le PNG C06)
-- Réduit l'anxiété post-prix et pousse vers la conversion
-
----
-
-### #08 — P14 Steps
-
-**Composant** : `P14-steps` — 4 étapes
-
-```
-Structure :
-├── Badge violet : "Comment ça marche"
-├── H2 : "Rejoins l'Académie en <span class="text-primary">4 étapes</span>"
-├── Sous-titre : "Un processus simple pour commencer à réviser efficacement dès aujourd'hui."
-└── Timeline horizontale (desktop) / verticale (mobile) :
-    ├── ① "Choisis ta formule" — "Sélectionne la durée d'abonnement qui correspond à tes besoins." — Emoji link : "6 mois = le + populaire"
-    ├── ② "Crée ton compte" — "Inscris-toi en quelques clics. Paiement 100% sécurisé par Stripe."
-    ├── ③ "Accède au contenu" — "500h+ de cours vidéo, fiches, QCM, flashcards... Tout est disponible 24h/24."
-    └── ✓ "Révise et réussis" — "Prépare tes examens sereinement et valide ton année avec succès." — Badge : "94% de réussite"
-```
-
-**Optimisations :**
-- Badge "Comment ça marche" (au lieu de "Votre parcours") = plus explicite, réduit la friction
-- H2 reformulé avec "4 étapes" = ancrage mental de simplicité
-- Step 4 = cercle vert (check) au lieu de numéro = aboutissement visuel
-- Micro-données ajoutées (step 1 : "6 mois = le + populaire", step 4 : "94% de réussite")
-
----
-
-### #09 — P11 Comparaison ★ NOUVEAU
-
-**Composant** : `P11-comparaison` — Variant 1 (Sans / Avec)
-
-```
-Structure :
-├── Badge violet : "Changement"
-├── H2 : "Réviser <span class="text-primary">autrement</span>"
-│
-├── Colonne GAUCHE — "Sans Jurible" (fond neutre, icône ✗ rouge) :
-│   ├── ✗ Cours incomplets ou difficiles à comprendre
-│   ├── ✗ Méthodologie floue, incertitude aux examens
-│   ├── ✗ Heures perdues à chercher les bonnes ressources
-│   ├── ✗ Stress permanent et peur de l'échec
-│   └── ✗ Aucune idée de ton niveau réel
-│
-└── Colonne DROITE — "Avec Jurible" (fond light, bordure primary, icône ✓ vert) :
-    ├── ✓ Cours clairs et structurés par des pros
-    ├── ✓ Méthodologie multimédia, confiance aux partiels
-    ├── ✓ Tout au même endroit, gain de temps énorme
-    ├── ✓ Sérénité : tu sais que tu es bien préparé
-    └── ✓ QCM et flashcards pour évaluer ta progression
-```
-
-**Pourquoi c'est ajouté :**
-- La comparaison "sans/avec" est un des patterns de conversion les plus efficaces en ed-tech
-- Le composant P11 variant 1 existe déjà dans le DS (2 colonnes sans/avec)
-- Positionné avant l'autorité (enseignants) et les témoignages = renforce le "pourquoi Jurible" juste avant les preuves
-- Répond à l'objection implicite "Est-ce que ça vaut le coup ?"
-
----
-
-### #10 — C05 + C18 Équipe & Témoignages enseignants
-
-**Composants** : `C05-enseignants` + `C18-testimonial` (variant Hero)
-
-```
-Structure :
-├── [BLOC ÉQUIPE — C05]
-│   ├── Visuel : Photo de groupe des 11 enseignants
-│   ├── H2 : "Une équipe de <span class="text-primary">professionnels diplômés</span>"
-│   ├── Body : "Notre équipe pédagogique de 11 enseignants, avocats ou juristes..."
-│   └── Stats (3) :
-│       ├── "11" — Enseignants experts
-│       ├── "100%" — Diplômés Master 2
-│       └── "7+" — Années d'expérience moy.
-│
-├── [BLOC CITATIONS — C18 Hero ×4]
-│   ├── Julie Ramsamy — "Une grosse pression pèse sur vos petites épaules !"
-│   ├── Raphaël B-L. — "Connaître les bases du droit constitutionnel relève de la culture générale !"
-│   ├── Megan Léonard — "Il faut prendre conscience que le droit pénal est PARTOUT"
-│   └── Didier Okpo — "Le cours d'institutions juridictionnelles vous servira tout le long de vos études !"
-│
-├── Trust badges (3, inline) :
-│   ├── ✓ Cours rédigés par des humains
-│   ├── ✓ Expertise juridique vérifiée
-│   └── ✓ Pédagogie éprouvée en université
-│
-└── CTA link : "Découvrir tous nos enseignants →" → /equipe
+┌─────────────────────────────────────────────────────────────┐
+│ O01 - HEADER                                                │
+│ Logo | COURS | NOS OFFRES | PRÉPAS | RESSOURCES | À PROPOS  │
+│                                    [S'abonner] [Se connecter]│
+│ Sticky on scroll                                            │
+│                                                             │
+│ ADAPTATION : ajouter barre 3 stats sous la nav              │
+│ ┌───────────────────────────────────────────────────┐       │
+│ │ 25 000+ étudiants  │  4.8/5 (590+ avis)  │  94%  │       │
+│ │                     │                      │réussite│       │
+│ └───────────────────────────────────────────────────┘       │
+│ Typo : T03 stat (chiffre bold, label small)                 │
+└─────────────────────────────────────────────────────────────┘
+
+┌─────────────────────────────────────────────────────────────┐
+│ H01 - HERO CONVERSION (variante homepage)                   │
+│                                                             │
+│ [Badge violet] École de droit en ligne                      │
+│                                                             │
+│ La plateforme complète pour                                 │
+│ réussir en droit                    ┌───────────────┐       │
+│                                     │  Screenshot   │       │
+│ Cours vidéo, fiches de révision,    │  plateforme   │       │
+│ annales corrigées, outils IA...     │  ecole.       │       │
+│ Tout ce qu'il vous faut pour        │  jurible.com  │       │
+│ valider votre licence.              └───────────────┘       │
+│                                                             │
+│ [Découvrir nos offres →]  [Essayer gratuitement]            │
+│                                                             │
+│ ✓ Sans engagement  ✓ Accès immédiat  ✓ Paiement sécurisé   │
+└─────────────────────────────────────────────────────────────┘
+
+┌─────────────────────────────────────────────────────────────┐
+│ P09 - LOGOS / SOCIAL PROOF              Fond : #F8F8F8      │
+│                                                             │
+│ Nos cours préparent les étudiants des meilleures            │
+│ universités françaises                                      │
+│                                                             │
+│ [Paris 1] [Paris 2] [Nanterre] [Lyon 3] [Bordeaux]         │
+│ [Aix-Marseille] [Strasbourg] [Clermont] [Côte d'Azur]      │
+└─────────────────────────────────────────────────────────────┘
+
+┌─────────────────────────────────────────────────────────────┐
+│ C10 - SOLUTION (variante page courtes)  Fond : #F8F8F8      │
+│                                                             │
+│ [Badge] Aperçu                                              │
+│ Un cours pensé pour votre réussite                          │
+│                                                             │
+│ ADAPTATION : reprendre C10 variante "page courtes"          │
+│ avec 5 cards au lieu de 4, texte adapté homepage            │
+│                                                             │
+│ ┌────────┐ ┌────────┐ ┌────────┐ ┌────────┐ ┌────────┐     │
+│ │ 🎬     │ │ 📝     │ │ ✅     │ │ 📱     │ │ 🤖     │     │
+│ │ Cours  │ │ Fiches │ │ QCM &  │ │Accessi-│ │ Outils │     │
+│ │ vidéo  │ │ révi-  │ │ Auto-  │ │ble     │ │ IA     │     │
+│ │ HD     │ │ sion   │ │ éval.  │ │partout │ │ inclus │     │
+│ └────────┘ └────────┘ └────────┘ └────────┘ └────────┘     │
+│                                                             │
+│ SCREENSHOT INTÉGRÉ DANS LE BLOC :                           │
+│ ┌─────────────────────────────────────────────────────┐     │
+│ │  📷 Screenshot ecole.jurible.com (interface cours)  │     │
+│ │  Format : mockup device (laptop + mobile)           │     │
+│ └─────────────────────────────────────────────────────┘     │
+└─────────────────────────────────────────────────────────────┘
+
+┌─────────────────────────────────────────────────────────────┐
+│ C09 - CONTENU Pattern B (fond sombre)   Fond : dark        │
+│                                                             │
+│ [Badge] Nos contenus                                        │
+│ Tout pour réussir en un seul abonnement                     │
+│                                                             │
+│ ADAPTATION : reprendre C09 Pattern B (stats dark bg)        │
+│ avec les chiffres ci-dessous                                │
+│                                                             │
+│ ┌───────────┐ ┌───────────┐ ┌───────────┐                  │
+│ │  600h+    │ │    20     │ │  2000     │                  │
+│ │ Cours     │ │ Matières  │ │ QCM       │                  │
+│ │ vidéo     │ │ L1 → L3   │ │           │                  │
+│ └───────────┘ └───────────┘ └───────────┘                  │
+│ ┌───────────┐ ┌───────────┐ ┌───────────┐                  │
+│ │  2000     │ │  400+     │ │ 📖       │                  │
+│ │Flashcards │ │ Annales   │ │Programmes │                  │
+│ │           │ │ corrigées │ │ détaillés │                  │
+│ └───────────┘ └───────────┘ └───────────┘                  │
+└─────────────────────────────────────────────────────────────┘
+
+┌─────────────────────────────────────────────────────────────┐
+│ C10 - SOLUTION (variante homepage #1)   Fond : #F8F8F8      │
+│                                                             │
+│ [Badge] Pour qui ?                                          │
+│ Jurible s'adapte à votre profil                             │
+│ Que vous débutiez ou que vous soyez en fin de licence,      │
+│ nous vous accompagnons.                                     │
+│                                                             │
+│ ADAPTATION : reprendre C10 variante homepage                │
+│ avec cards personas colorées + CTA par card                 │
+│                                                             │
+│ ┌────────────┐ ┌────────────┐ ┌────────────┐ ┌──────────┐  │
+│ │ 📚         │ │ 📖         │ │ 🔄         │ │ 👨‍👩‍👧       │  │
+│ │ Étudiants  │ │ L2-L3      │ │ Reprise    │ │ Parents  │  │
+│ │ L1         │ │            │ │ d'études   │ │          │  │
+│ │            │ │ Approfondi-│ │ Remettez-  │ │ Offrez   │  │
+│ │ Découvrez  │ │ ssez vos   │ │ vous à     │ │ les      │  │
+│ │ le droit   │ │ connais-   │ │ niveau à   │ │ meilleu- │  │
+│ │ avec des   │ │ sances...  │ │ votre      │ │ res res- │  │
+│ │ cours      │ │            │ │ rythme...  │ │ sources. │  │
+│ │ clairs...  │ │ [Voir →]   │ │ [Voir →]   │ │ [Voir →] │  │
+│ │ [Voir L1→] │ └────────────┘ └────────────┘ └──────────┘  │
+│ └────────────┘                                              │
+└─────────────────────────────────────────────────────────────┘
+
+┌─────────────────────────────────────────────────────────────┐
+│ C10 - SOLUTION (variante homepage #2)   Fond : #FFFFFF      │
+│                                                             │
+│ [Badge] Pourquoi Jurible                                    │
+│ Des outils pensés pour votre réussite                       │
+│                                                             │
+│ ADAPTATION : reprendre C10 variante homepage                │
+│ avec contenu "avantages/bénéfices"                          │
+│                                                             │
+│ ┌─────────────────┐ ┌─────────────────┐ ┌────────────────┐  │
+│ │ 🎓              │ │ ⚡              │ │ 🏆             │  │
+│ │ Enseignants     │ │ Gain de temps   │ │ Résultats      │  │
+│ │ experts         │ │                 │ │ prouvés        │  │
+│ │                 │ │ Tout au même    │ │                │  │
+│ │ 11 profs,       │ │ endroit, fini   │ │ 94% de taux    │  │
+│ │ 100% Master 2,  │ │ les heures à    │ │ de réussite,   │  │
+│ │ ex-avocats.     │ │ chercher.       │ │ 25 000+        │  │
+│ │                 │ │                 │ │ étudiants.     │  │
+│ └─────────────────┘ └─────────────────┘ └────────────────┘  │
+│                                                             │
+│ [Découvrir nos offres →]                                    │
+└─────────────────────────────────────────────────────────────┘
+
+┌─────────────────────────────────────────────────────────────┐
+│ C14 - PRICING COMPARATIF (adapté)       Fond : #FFFFFF      │
+│                                                             │
+│ [Badge] Nos offres                                          │
+│ Choisissez la formule qui vous correspond                   │
+│                                                             │
+│ ADAPTATION depuis C14 :                                     │
+│ - Supprimer les colonnes de prix                            │
+│ - Académie = 1 card pleine largeur en haut                  │
+│ - 3 produits secondaires en row dessous                     │
+│                                                             │
+│ ┌──────────────────────────────────────────────────────┐    │
+│ │ ★ POPULAIRE                       L'Académie Jurible │    │
+│ │                                                      │    │
+│ │ Accès complet à toute la plateforme...               │    │
+│ │ ✓ 600h+ de cours vidéo                               │    │
+│ │ ✓ 20 matières (L1, L2, L3, Capacité)                 │    │
+│ │ ✓ 2000+ QCM & Flashcards                             │    │
+│ │ ✓ 400+ annales corrigées                              │    │
+│ │ ✓ Cours de méthodologie complets                      │    │
+│ │                                                      │    │
+│ │ À partir de 20€/mois                                  │    │
+│ │ [Découvrir l'Académie →]                              │    │
+│ └──────────────────────────────────────────────────────┘    │
+│                                                             │
+│ ┌───────────────┐ ┌───────────────┐ ┌───────────────┐       │
+│ │ 📄            │ │ 🤖            │ │ 📖            │       │
+│ │ Fiches PDF    │ │ Outils IA     │ │ Manuel Méthodo│       │
+│ │               │ │               │ │               │       │
+│ │ Télécharge-   │ │ Fiches d'arrêt│ │ 4 exercices,  │       │
+│ │ ables,        │ │ Dissertation, │ │ exemples      │       │
+│ │ imprimables,  │ │ Cas pratique  │ │ corrigés, PDF │       │
+│ │ à l'unité     │ │               │ │               │       │
+│ │               │ │               │ │ 24€ (barré 29€│       │
+│ │ 19€/matière   │ │ Dès 5€        │ │               │       │
+│ │ [Voir →]      │ │ [Voir →]      │ │ [Voir →]      │       │
+│ └───────────────┘ └───────────────┘ └───────────────┘       │
+└─────────────────────────────────────────────────────────────┘
+
+┌─────────────────────────────────────────────────────────────┐
+│ C06 - RÉASSURANCE                       Fond : #F8F8F8      │
+│                                                             │
+│ ⭐ 4.8/5      👥 +25 000       🔒 Paiement    ⚡ Accès     │
+│ (590+ avis)   étudiants       sécurisé       immédiat      │
+└─────────────────────────────────────────────────────────────┘
+
+┌─────────────────────────────────────────────────────────────┐
+│ P14 - STEPS                             Fond : #FFFFFF      │
+│                                                             │
+│ [Badge] Comment ça marche                                   │
+│ Rejoins l'Académie en 4 étapes                              │
+│ Un processus simple pour commencer à réviser dès aujourd'hui│
+│                                                             │
+│ ①──────────②──────────③──────────✓                          │
+│ Choisis    Crée ton   Accède     Révise                     │
+│ ta formule compte     au contenu et réussis                 │
+│                                                             │
+│ "6 mois =                                    "94% de       │
+│  le + pop."                                   réussite"     │
+└─────────────────────────────────────────────────────────────┘
+
+┌─────────────────────────────────────────────────────────────┐
+│ P11 - COMPARAISON variant 1             Fond : #F8F8F8      │
+│                                                             │
+│ [Badge] Changement                                          │
+│ Réviser autrement                                           │
+│                                                             │
+│ ┌─── Sans Jurible ───┐  ┌─── Avec Jurible ────┐            │
+│ │ ✗ Cours incomplets │  │ ✓ Cours structurés  │            │
+│ │ ✗ Méthodo floue    │  │ ✓ Méthodo multimédia│            │
+│ │ ✗ Heures perdues   │  │ ✓ Tout au même      │            │
+│ │ ✗ Stress permanent │  │   endroit            │            │
+│ │ ✗ Aucune idée du   │  │ ✓ Sérénité          │            │
+│ │   niveau réel      │  │ ✓ QCM et flashcards │            │
+│ └────────────────────┘  └─────────────────────┘            │
+└─────────────────────────────────────────────────────────────┘
+
+┌─────────────────────────────────────────────────────────────┐
+│ C04 - BIO / AUTEUR (bloc 1 + 2 mélangés) Fond : #FFFFFF    │
+│                                                             │
+│ ADAPTATION : mélanger bloc 1 (grid vidéos/photos)           │
+│ et bloc 2 (avatars + stats) du composant C04                │
+│ Note : C04 = composant Figma only (pas de HTML dans repo)   │
+│                                                             │
+│ Une équipe de professionnels diplômés                       │
+│                                                             │
+│ BLOC 1 : Grid vidéos/citations enseignants                  │
+│ ┌────────────┐ ┌────────────┐ ┌────────────┐ ┌──────────┐  │
+│ │ ▶ Photo    │ │ ▶ Photo    │ │ ▶ Photo    │ │ ▶ Photo  │  │
+│ │ Julie R.   │ │ Raphaël BL │ │ Megan L.   │ │ Didier O.│  │
+│ │ "Une grosse│ │ "Connaître │ │ "Le droit  │ │ "Le cours│  │
+│ │ pression   │ │ les bases  │ │ pénal est  │ │ d'IJ vous│  │
+│ │ pèse..."   │ │ du droit..."│ │ PARTOUT"  │ │ servira" │  │
+│ └────────────┘ └────────────┘ └────────────┘ └──────────┘  │
+│                                                             │
+│ BLOC 2 : Stats équipe                                       │
+│ 11 Enseignants │ 100% Master 2 │ 7+ ans d'exp. moyenne     │
+│                                                             │
+│ ✓ Cours par des humains  ✓ Expertise vérifiée  ✓ Pédagogie │
+│                                                             │
+│ [Découvrir tous nos enseignants →] → /equipe                │
+└─────────────────────────────────────────────────────────────┘
+
+┌─────────────────────────────────────────────────────────────┐
+│ C18 - TÉMOIGNAGES bloc 1 + CTA         Fond : #F8F8F8      │
+│                                                             │
+│ [Badge] Témoignages                                         │
+│ Ce que disent nos étudiants                                 │
+│ Rejoins les 25 000 étudiants qui nous font confiance        │
+│ depuis 2018.                                                │
+│                                                             │
+│ ADAPTATION : C18 bloc 1 (cards 5 étoiles) + ajout CTA      │
+│                                                             │
+│ ┌────────────────┐ ┌────────────────┐ ┌──────────────┐      │
+│ │ ⭐⭐⭐⭐⭐        │ │ ⭐⭐⭐⭐⭐        │ │ ⭐⭐⭐⭐⭐      │      │
+│ │ "J'ai révisé   │ │ "J'ai eu 16/20│ │ "19/20 au    │      │
+│ │ mes partiels   │ │ alors que     │ │ partiel de   │      │
+│ │ uniquement     │ │ j'avais 7/20" │ │ droit de la  │      │
+│ │ avec vos       │ │               │ │ famille !"   │      │
+│ │ fiches..."     │ │ ✓ De 7 à 16   │ │              │      │
+│ │                │ │               │ │ ✓ 19/20      │      │
+│ │ ✓ 12.55/20     │ │ Karl M.       │ │ Jade B.      │      │
+│ │ Manon B.       │ │ L1 Droit      │ │ L1 Droit     │      │
+│ │ L1 Paris Assas │ │               │ │              │      │
+│ └────────────────┘ └────────────────┘ └──────────────┘      │
+│                                                             │
+│ [Voir tous les avis →] → /avis                              │
+└─────────────────────────────────────────────────────────────┘
+
+┌─────────────────────────────────────────────────────────────┐
+│ C07 - FAQ ACCORDÉON                     Fond : #FFFFFF      │
+│                                                             │
+│ [Badge] FAQ                                                 │
+│ Questions fréquentes                                        │
+│                                                             │
+│ [▸] Quelle différence entre Académie et Fiches PDF ?        │
+│     → "L'Académie est un abonnement qui donne accès à      │
+│     TOUTE la plateforme : cours vidéo, fiches en ligne,     │
+│     QCM, flashcards, annales corrigées et méthodologie.     │
+│     Les Fiches PDF sont des achats à l'unité par matière    │
+│     (19€), téléchargeables et imprimables."                 │
+│                                                             │
+│ [▸] Est-ce que Jurible couvre ma matière / mon université ?  │
+│     → "Jurible couvre les 20 matières fondamentales de      │
+│     L1 à L3 + Capacité en droit. Nos cours suivent le      │
+│     programme officiel de toutes les universités françaises."│
+│                                                             │
+│ [▸] Puis-je essayer avant de m'engager ?                    │
+│     → "Oui ! Inscrivez-vous sans engagement et accédez     │
+│     à des contenus gratuits. L'abonnement est sans          │
+│     engagement — résiliable à tout moment."                 │
+│                                                             │
+│ [▸] Comment accéder aux cours après inscription ?            │
+│     → "C'est immédiat ! Dès votre paiement confirmé, vous  │
+│     accédez à tout le contenu. Commencez à réviser en       │
+│     moins de 2 minutes."                                    │
+│                                                             │
+│ [▸] Puis-je résilier à tout moment ?                        │
+│     → "Oui, sans engagement. Résiliez en un clic depuis    │
+│     votre espace membre. Accès conservé jusqu'à la fin      │
+│     de votre période payée."                                │
+│                                                             │
+│ [Voir toutes les questions →] → /faq                        │
+└─────────────────────────────────────────────────────────────┘
+
+┌─────────────────────────────────────────────────────────────┐
+│ P10 - CTA FINAL                         Fond : gradient     │
+│                                    #B0001D → #7C3AED        │
+│                                                             │
+│ Prêt à réussir vos études de droit ?                        │
+│ Rejoignez les 25 000 étudiants qui ont transformé           │
+│ leurs études avec Jurible.                                  │
+│                                                             │
+│ [Découvrir nos offres →]  [Nous contacter]                  │
+└─────────────────────────────────────────────────────────────┘
+
+┌─────────────────────────────────────────────────────────────┐
+│ O02 - FOOTER                            Fond : #1A1A1A      │
+│                                                             │
+│ Jurible + baseline + réseaux sociaux + newsletter           │
+│                                                             │
+│ Nos offres     Ressources    À propos      Niveaux          │
+│ L'Académie     Blog          Notre projet  L1 Droit         │
+│ Fiches PDF     Guides        Nos enseig.   L2 Droit         │
+│ Outils IA      Méthodologie  Avis          L3 Droit         │
+│ Manuel Méthodo Annales       Contact       Capacité         │
+│                                                             │
+│ CGV | Mentions légales | Confidentialité                    │
+│ © 2026 Jurible. Tous droits réservés.                       │
+└─────────────────────────────────────────────────────────────┘
 ```
 
 ---
 
-### #11 — C18 Témoignages étudiants
+## Détail des adaptations par bloc
 
-**Composant** : `C18-testimonial` — Variant Standard (cards)
-
-```
-Structure :
-├── Badge violet : "Témoignages"
-├── H2 : "Ce que disent nos <span class="text-primary">étudiants</span>"
-├── Sous-titre : "Rejoins les 25 000 étudiants qui nous font confiance depuis 2018."
-│
-├── Grid 3 cards (3 col desktop, carousel mobile) :
-│   ├── Manon B. — L1 Droit Paris Assas
-│   │   ├── ⭐⭐⭐⭐⭐
-│   │   ├── "J'ai révisé mes partiels uniquement avec vos fiches et j'ai validé mon année à 12.55/20. Je recommande à tous les L1 !"
-│   │   └── Badge vert : "✓ Année validée"
-│   │
-│   ├── Karl M. — L1 Droit
-│   │   ├── ⭐⭐⭐⭐⭐
-│   │   ├── "J'ai eu 16/20 alors que j'avais eu 7/20 au galop. Je travaille à côté et j'ai appris uniquement avec vos fiches."
-│   │   └── Badge vert : "✓ De 7 à 16/20"
-│   │
-│   └── Jade B. — L1 Droit
-│       ├── ⭐⭐⭐⭐⭐
-│       ├── "Grâce à votre méthodologie du cas pratique, j'ai obtenu 19/20 à mon partiel de droit de la famille !"
-│       └── Badge vert : "✓ 19/20 au partiel"
-│
-└── CTA link : "Voir tous les avis →" → /avis
-```
+### O01 — Header
+**Bloc Figma** : O01 Header / Mega Menu
+**Adaptation** : Ajouter une barre de 3 stats sous la navigation
+- `25 000+` étudiants | `4.8/5` (590+ avis) | `94%` réussite
+- Typo : T03 stat (chiffre bold 20px, label small 12px)
+- Fond : `#F8F8F8` ou transparent
+- Mobile : masqué ou scrollable
 
 ---
 
-### #12 — C07 FAQ Accordéon
+### H01 — Hero Conversion
+**Bloc Figma** : H01 Hero Conversion — variante homepage
+**Adaptation** : aucune majeure
 
-**Composant** : `C07-faq-accordeon`
-
-```
-Structure :
-├── Badge violet : "FAQ"
-├── H2 : "Questions fréquentes"
-│
-├── Accordéon (5 items) :
-│
-│   ├── "Quelle est la différence entre l'Académie et les Fiches PDF ?"
-│   │   └── "L'Académie est un abonnement qui donne accès à TOUTE la plateforme : cours vidéo, fiches en ligne, QCM, flashcards, annales corrigées et méthodologie. Les Fiches PDF sont des achats à l'unité par matière (19€), téléchargeables et imprimables — idéales si vous voulez réviser hors connexion."
-│   │
-│   ├── "Est-ce que Jurible couvre ma matière / mon université ?"
-│   │   └── "Jurible couvre les 20 matières fondamentales de L1 à L3 + Capacité en droit. Nos cours suivent le programme officiel enseigné dans toutes les universités françaises (Paris 1, Paris 2, Bordeaux, Lyon 3, Aix-Marseille, etc.). Vérifiez notre catalogue pour votre matière spécifique."
-│   │
-│   ├── "Puis-je essayer avant de m'engager ?"
-│   │   └── "Oui ! Vous pouvez vous inscrire sans engagement et accéder à des contenus gratuits (extraits de cours, QCM découverte). L'abonnement Académie est sans engagement — vous pouvez résilier à tout moment depuis votre espace membre."
-│   │
-│   ├── "Comment accéder aux cours après mon inscription ?"
-│   │   └── "C'est immédiat ! Dès votre paiement confirmé, vous accédez à tout le contenu de la plateforme ecole.jurible.com : cours vidéo, fiches, QCM, flashcards et annales. Vous pouvez commencer à réviser en moins de 2 minutes."
-│   │
-│   └── "Puis-je résilier à tout moment ?"
-│       └── "Oui, l'abonnement Académie est sans engagement. Vous pouvez résilier en un clic depuis votre espace membre. Vous conservez l'accès jusqu'à la fin de votre période payée."
-│
-└── CTA link : "Voir toutes les questions →" → /faq
-```
-
-**Optimisations :**
-- **5 questions** au lieu de 4 (ajout "Puis-je résilier ?" = objection clé avant conversion)
-- **Toutes les réponses complétées** (3 manquaient dans la v1)
-- Réponses orientées conversion : mettent en avant la facilité, le sans-engagement, l'immédiateté
-- Schema.org FAQPage pour le SEO (rich snippets Google)
+| Élément | Contenu |
+|---------|---------|
+| Badge | "École de droit en ligne" (violet `#EDE9FE`) |
+| H1 | La plateforme complète pour **réussir en droit** |
+| Sous-titre | Cours vidéo, fiches de révision, annales corrigées, outils IA... Tout ce qu'il vous faut pour valider votre licence, au même endroit. |
+| CTA Primary | "Découvrir nos offres →" → `/nos-offres` |
+| CTA Secondary | "Essayer gratuitement" → `/inscription` |
+| Trust line | ✓ Sans engagement · ✓ Accès immédiat · ✓ Paiement sécurisé |
+| Media | Screenshot/vidéo ecole.jurible.com |
 
 ---
 
-### #13 — P10 CTA Final
+### P09 — Logos / Social Proof
+**Bloc Figma** : P09 Logos
+**Adaptation** : aucune
 
-**Composant** : `P10-cta-final` — Variant Homepage
-
-```
-Structure :
-├── Fond : gradient #B0001D → #7C3AED
-├── H2 (blanc) : "Prêt à réussir vos études de droit ?"
-├── Sous-titre (blanc, opacity 0.9) : "Rejoignez les 25 000 étudiants qui ont transformé leurs études avec Jurible."
-├── CTA Primary (A02 btn-white LG) : "Découvrir nos offres →" → /nos-offres
-└── CTA Secondary (A02 btn-outline-white LG) : "Nous contacter" → /contact
-```
+| Élément | Contenu |
+|---------|---------|
+| Texte | "Nos cours préparent les étudiants des meilleures universités françaises" |
+| Chips | Paris 1 · Paris 2 · Nanterre · Lyon 3 · Bordeaux · Aix-Marseille · Strasbourg · Clermont · Côte d'Azur |
 
 ---
 
-### O02 Footer
+### C10 #1 — Solution (variante page courtes)
+**Bloc Figma** : C10 Solution — variante "page courtes"
+**Adaptation** : texte adapté pour la homepage + screenshot ecole.jurible.com intégré en bas du bloc
 
-**Composant** : `O02-footer`
-
-```
-Structure :
-├── Logo + baseline + réseaux sociaux + newsletter
-├── Colonnes liens (5) :
-│   ├── Nos offres : L'Académie | Fiches PDF | Outils IA | Manuel Méthodo
-│   ├── Ressources : Blog | Guides gratuits | Méthodologie | Annales
-│   ├── À propos : Notre projet | Nos enseignants | Avis étudiants | Contact
-│   └── Niveaux : L1 Droit | L2 Droit | L3 Droit | Capacité
-├── Légal : CGV | Mentions légales | Confidentialité
-└── Copyright : © 2026 Jurible. Tous droits réservés.
-```
-
-**Correction** : Copyright mis à jour de 2024 → **2026**.
+| Élément | Contenu |
+|---------|---------|
+| Badge | "Aperçu" |
+| H2 | Un cours pensé pour votre **réussite** |
+| Sous-titre | Interface intuitive, contenus de qualité, accès illimité. |
+| Card 1 | 🎬 **Cours vidéo HD** — Explications claires par des enseignants passionnés, à regarder et revoir sans limite. |
+| Card 2 | 📝 **Fiches de révision** — L'essentiel de chaque matière synthétisé pour des révisions efficaces. |
+| Card 3 | ✅ **QCM & Auto-évaluation** — Testez vos connaissances et identifiez vos lacunes avant les examens. |
+| Card 4 | 📱 **Accessible partout** — Ordinateur, tablette, smartphone. Révisez où vous voulez, quand vous voulez. |
+| Card 5 | 🤖 **Outils IA inclus** — Générateurs intelligents pour vous aider dans vos exercices juridiques. |
+| Screenshot | Mockup ecole.jurible.com (interface de cours) — format device laptop + mobile |
 
 ---
 
-## Récapitulatif des optimisations
+### C09 — Contenu Pattern B (fond sombre)
+**Bloc Figma** : C09 Contenu/Cours — Pattern B (stats dark background)
+**Adaptation** : chiffres adaptés pour la homepage (vue globale plateforme)
 
-### Conversion
+| Stat | Label |
+|------|-------|
+| 600h+ | Cours vidéo |
+| 20 | Matières (L1 → L3) |
+| 2000 | QCM |
+| 2000 | Flashcards |
+| 400+ | Annales corrigées |
+| 📖 | Programmes détaillés |
 
-| # | Optimisation | Impact attendu | Composant |
-|---|-------------|----------------|-----------|
-| 1 | **Offres déplacées après la démonstration de valeur** (position 3→6) | L'utilisateur comprend ce qu'il achète avant de voir le prix | P05 |
-| 2 | **"Pour qui ?" déplacé avant les offres** (position 4→5) | Segmentation → identification → meilleur taux de clic vers l'offre adaptée | C08 |
-| 3 | **C06 Réassurance ajoutée après les offres** | Réduit l'anxiété post-prix, augmente le passage à l'action | C06 |
-| 4 | **P11 Comparaison ajoutée** | Différenciation claire, répond à "pourquoi pas les manuels/gratuit ?" | P11 |
-| 5 | **CTA sur les cards "Pour qui ?"** | Chaque persona a un chemin de conversion ciblé | C08 |
-| 6 | **CTA secondary Hero : "Essayer gratuitement"** (au lieu de "Voir la plateforme") | Verbe d'action + gratuité = meilleur CTR | H01 |
-| 7 | **Académie en card XL dominante** dans la section offres | Hiérarchie visuelle → le produit principal capte l'attention | P05 |
-| 8 | **5e question FAQ : "Puis-je résilier ?"** | Lève la dernière objection avant le CTA final | C07 |
-| 9 | **P13 stats bandeau supprimé** (redondant avec hero) | Page plus fluide, pas de répétition | — |
-
-### UX
-
-| # | Optimisation | Détail |
-|---|-------------|--------|
-| 1 | Alternance fond blanc / bg-light (#F8F8F8) | Rythme visuel, séparation claire des sections |
-| 2 | Funnel logique ATTIRER→MONTRER→CIBLER→VENDRE→RASSURER→CONVERTIR | Parcours cognitif naturel |
-| 3 | Mobile : carousel pour les témoignages, cards empilées, CTA pleine largeur | 70% du trafic est mobile |
-| 4 | Stats hero animées au scroll | Engagement + perception de dynamisme |
-| 5 | FAQ avec animation smooth (accordéon) | Micro-interaction fluide |
-
-### SEO
-
-| # | Optimisation | Détail |
-|---|-------------|--------|
-| 1 | H1 contient "réussir en droit" (intention cible) | Mot-clé principal dans le titre |
-| 2 | Schema.org FAQPage sur la section FAQ | Rich snippets dans les SERP |
-| 3 | Maillage interne renforcé | Cards personas → /cours/l1, /cours/l2. Cards offres → /academie, /fiches-de-droit, /suite-ia, /manuel-methodologie |
-| 4 | Alt text sur tous les visuels | Screenshot, photos enseignants, logos universités |
-| 5 | Contenu H2 avec termes sémantiques | "plateforme", "réussite", "profil", "formule", "étudiants" |
-
-### UI (respect strict du DS)
-
-| Règle DS | Appliquée |
-|----------|-----------|
-| Badges toujours violet (#EDE9FE + #7C3AED) | ✓ Tous les badges section |
-| Pas de SVG checkmarks custom | ✓ Emojis natifs + puces standard |
-| Typo Poppins uniquement | ✓ |
-| Boutons primary = bordeaux #B0001D | ✓ |
-| Boutons secondary = outline bordeaux | ✓ |
-| Gradient limité aux accents premium | ✓ Uniquement P10 CTA Final |
-| Border-radius cards = 12px (lg) | ✓ |
-| Shadows = MD par défaut, LG on hover | ✓ |
+- Fond : dark (`#1A1A1A` ou navy)
+- Typo stats : T03 stat (chiffre 40-52px bold blanc, label body small blanc opacity 0.8)
+- Animation : compteur au scroll (IntersectionObserver)
 
 ---
 
-## Notes pour le développeur
+### C10 #2 — Solution (variante homepage — Personas)
+**Bloc Figma** : C10 Solution — variante homepage
+**Adaptation** : contenu personas avec cards colorées + CTA par card
 
-### Priorité d'implémentation
+| Élément | Contenu |
+|---------|---------|
+| Badge | "Pour qui ?" |
+| H2 | Jurible s'adapte à votre **profil** |
+| Sous-titre | Que vous débutiez ou que vous soyez en fin de licence, nous vous accompagnons. |
+| Card 1 | 📚 **Étudiants L1** — Découvrez le droit avec des cours clairs et une méthodologie solide dès le départ. → [Voir les cours L1 →] `/cours/l1` |
+| Card 2 | 📖 **L2-L3** — Approfondissez vos connaissances et préparez efficacement vos partiels. → [Voir les cours →] `/cours/l2` |
+| Card 3 | 🔄 **Reprise d'études** — Remettez-vous à niveau à votre rythme avec des contenus accessibles 24h/24. → [Découvrir l'Académie →] `/academie` |
+| Card 4 | 👨‍👩‍👧 **Parents** — Offrez les meilleures ressources à votre enfant pour maximiser ses chances. → [Voir nos offres →] `/nos-offres` |
+
+---
+
+### C10 #3 — Solution (variante homepage — Avantages)
+**Bloc Figma** : C10 Solution — variante homepage
+**Adaptation** : contenu bénéfices/avantages Jurible
+
+| Élément | Contenu |
+|---------|---------|
+| Badge | "Pourquoi Jurible" |
+| H2 | Des outils pensés pour votre **réussite** |
+| Sous-titre | Tout ce qu'il vous faut pour comprendre, mémoriser et réussir vos examens. |
+| Card 1 | 🎓 **Enseignants experts** — 11 profs, 100% Master 2, ex-avocats et juristes expérimentés. |
+| Card 2 | ⚡ **Gain de temps** — Tout au même endroit, fini les heures à chercher les bonnes ressources. |
+| Card 3 | 🏆 **Résultats prouvés** — 94% de taux de réussite, 25 000+ étudiants nous font confiance. |
+
+| CTA | "Découvrir nos offres →" → `/nos-offres` |
+
+---
+
+### C14 — Pricing Comparatif (adapté)
+**Bloc Figma** : C14 Pricing Comparatif
+**Adaptation majeure** :
+- Supprimer les colonnes de prix comparatifs
+- Académie = 1 card pleine largeur en haut (mise en avant)
+- 3 produits secondaires en row dessous
+- Garder le layout features/checkmarks du C14
+
+| Élément | Contenu |
+|---------|---------|
+| Badge | "Nos offres" |
+| H2 | Choisissez la formule qui vous correspond |
+| Sous-titre | Que vous cherchiez un accès complet ou des ressources ciblées, nous avons ce qu'il vous faut. |
+
+**Card XL — L'Académie Jurible** (pleine largeur, badge "Populaire") :
+- ✓ 600h+ de cours vidéo
+- ✓ 20 matières (L1, L2, L3, Capacité)
+- ✓ 2000+ QCM & Flashcards
+- ✓ 400+ annales corrigées
+- ✓ Cours de méthodologie complets
+- Prix : "À partir de 20€/mois"
+- CTA Primary : "Découvrir l'Académie →" → `/academie`
+
+**3 cards SM** (row, taille égale) :
+
+| Produit | Features | Prix | CTA |
+|---------|----------|------|-----|
+| Fiches PDF | Téléchargeables, imprimables, à l'unité | 19€/matière | [Voir les fiches →] `/fiches-de-droit` |
+| Outils IA | Fiches d'arrêt, Dissertation, Cas pratique | Dès 5€ | [Découvrir les outils →] `/suite-ia` |
+| Manuel Méthodo | 4 exercices, exemples corrigés, PDF | 24€ (barré 29€) | [Voir le manuel →] `/manuel-methodologie` |
+
+---
+
+### C06 — Réassurance
+**Bloc Figma** : C06 Réassurance
+**Adaptation** : aucune majeure
+
+| Élément | Contenu |
+|---------|---------|
+| Badge 1 | ⭐ 4.8/5 (590+ avis) |
+| Badge 2 | 👥 +25 000 étudiants |
+| Badge 3 | 🔒 Paiement sécurisé |
+| Badge 4 | ⚡ Accès immédiat |
+
+---
+
+### P14 — Steps
+**Bloc Figma** : P14 Steps
+**Adaptation** : texte adapté, step 4 = check vert
+
+| Élément | Contenu |
+|---------|---------|
+| Badge | "Comment ça marche" |
+| H2 | Rejoins l'Académie en **4 étapes** |
+| Sous-titre | Un processus simple pour commencer à réviser efficacement dès aujourd'hui. |
+| Step ① | **Choisis ta formule** — Sélectionne la durée d'abonnement qui correspond à tes besoins. — *"6 mois = le + populaire"* |
+| Step ② | **Crée ton compte** — Inscris-toi en quelques clics. Paiement 100% sécurisé par Stripe. |
+| Step ③ | **Accède au contenu** — 600h+ de cours vidéo, fiches, QCM, flashcards... Tout est disponible 24h/24. |
+| Step ✓ | **Révise et réussis** — Prépare tes examens sereinement et valide ton année avec succès. — *Badge "94% de réussite"* |
+
+---
+
+### P11 — Comparaison variant 1
+**Bloc Figma** : P11 Comparaison — Variant 1 (Sans / Avec)
+**Adaptation** : aucune majeure
+
+| Élément | Contenu |
+|---------|---------|
+| Badge | "Changement" |
+| H2 | Réviser **autrement** |
+
+| Sans Jurible (✗ rouge) | Avec Jurible (✓ vert) |
+|-------------------------|------------------------|
+| Cours incomplets ou difficiles à comprendre | Cours clairs et structurés par des pros |
+| Méthodologie floue, incertitude aux examens | Méthodologie multimédia, confiance aux partiels |
+| Heures perdues à chercher les bonnes ressources | Tout au même endroit, gain de temps énorme |
+| Stress permanent et peur de l'échec | Sérénité : tu sais que tu es bien préparé |
+| Aucune idée de ton niveau réel | QCM et flashcards pour évaluer ta progression |
+
+---
+
+### C04 — Bio / Auteur (bloc 1 + 2 mélangés)
+**Bloc Figma** : C04 Bio/Auteur — bloc 1 + bloc 2 fusionnés
+**Note** : C04 existe en Figma uniquement (pas de HTML/PNG dans le repo). Le dev devra créer le composant.
+
+**Adaptation** : fusionner le bloc 1 (grid vidéos/photos enseignants avec citations) et le bloc 2 (avatars + stats équipe)
+
+| Élément | Contenu |
+|---------|---------|
+| H2 | Une équipe de **professionnels diplômés** |
+| Body | Notre équipe pédagogique de 11 enseignants, avocats ou juristes... |
+
+**Bloc 1 — Grid vidéos enseignants (4 cards)** :
+
+| Enseignant | Citation |
+|------------|----------|
+| Julie Ramsamy | "Une grosse pression pèse sur vos petites épaules !" |
+| Raphaël Briguet-Lamarre | "Connaître les bases du droit constitutionnel relève de la culture générale !" |
+| Megan Léonard | "Il faut prendre conscience que le droit pénal est PARTOUT" |
+| Didier Okpo | "Le cours d'institutions juridictionnelles vous servira tout le long de vos études !" |
+
+Chaque card : photo + bouton play vidéo + citation
+
+**Bloc 2 — Stats équipe** :
+- `11` Enseignants experts
+- `100%` Diplômés Master 2
+- `7+` Années d'expérience moyenne
+
+**Trust badges** :
+- ✓ Cours rédigés par des humains
+- ✓ Expertise juridique vérifiée
+- ✓ Pédagogie éprouvée en université
+
+**CTA** : "Découvrir tous nos enseignants →" → `/equipe`
+
+---
+
+### C18 — Témoignages (bloc 1 + CTA)
+**Bloc Figma** : C18 Testimonial — Bloc 1 (5 étoiles)
+**Adaptation** : ajout CTA en bas du bloc
+
+| Élément | Contenu |
+|---------|---------|
+| Badge | "Témoignages" |
+| H2 | Ce que disent nos **étudiants** |
+| Sous-titre | Rejoins les 25 000 étudiants qui nous font confiance depuis 2018. |
+
+| Étudiant | Note | Citation | Résultat |
+|----------|------|----------|----------|
+| Manon B. — L1 Paris Assas | ⭐⭐⭐⭐⭐ | "J'ai révisé mes partiels uniquement avec vos fiches et j'ai validé mon année à 12.55/20. Je recommande à tous les L1 !" | ✓ Année validée |
+| Karl M. — L1 Droit | ⭐⭐⭐⭐⭐ | "J'ai eu 16/20 alors que j'avais eu 7/20 au galop. Je travaille à côté et j'ai appris uniquement avec vos fiches." | ✓ De 7 à 16/20 |
+| Jade B. — L1 Droit | ⭐⭐⭐⭐⭐ | "Grâce à votre méthodologie du cas pratique, j'ai obtenu 19/20 à mon partiel de droit de la famille !" | ✓ 19/20 au partiel |
+
+**CTA** : "Voir tous les avis →" → `/avis`
+
+---
+
+### C07 — FAQ Accordéon
+**Bloc Figma** : C07 FAQ Accordéon
+**Adaptation** : aucune majeure, CTA conservé
+
+5 questions avec réponses complètes :
+
+| Question | Réponse |
+|----------|---------|
+| Quelle est la différence entre l'Académie et les Fiches PDF ? | L'Académie est un abonnement qui donne accès à TOUTE la plateforme : cours vidéo, fiches en ligne, QCM, flashcards, annales corrigées et méthodologie. Les Fiches PDF sont des achats à l'unité par matière (19€), téléchargeables et imprimables — idéales si vous voulez réviser hors connexion. |
+| Est-ce que Jurible couvre ma matière / mon université ? | Jurible couvre les 20 matières fondamentales de L1 à L3 + Capacité en droit. Nos cours suivent le programme officiel enseigné dans toutes les universités françaises (Paris 1, Paris 2, Bordeaux, Lyon 3, Aix-Marseille, etc.). Vérifiez notre catalogue pour votre matière spécifique. |
+| Puis-je essayer avant de m'engager ? | Oui ! Vous pouvez vous inscrire sans engagement et accéder à des contenus gratuits (extraits de cours, QCM découverte). L'abonnement Académie est sans engagement — vous pouvez résilier à tout moment depuis votre espace membre. |
+| Comment accéder aux cours après mon inscription ? | C'est immédiat ! Dès votre paiement confirmé, vous accédez à tout le contenu de la plateforme ecole.jurible.com : cours vidéo, fiches, QCM, flashcards et annales. Vous pouvez commencer à réviser en moins de 2 minutes. |
+| Puis-je résilier à tout moment ? | Oui, l'abonnement Académie est sans engagement. Vous pouvez résilier en un clic depuis votre espace membre. Vous conservez l'accès jusqu'à la fin de votre période payée. |
+
+Schema : FAQPage (SEO rich snippets)
+
+**CTA** : "Voir toutes les questions →" → `/faq`
+
+---
+
+### P10 — CTA Final
+**Bloc Figma** : P10 CTA Final
+**Adaptation** : aucune
+
+| Élément | Contenu |
+|---------|---------|
+| Fond | Gradient `#B0001D` → `#7C3AED` |
+| H2 | Prêt à réussir vos études de droit ? |
+| Sous-titre | Rejoignez les 25 000 étudiants qui ont transformé leurs études avec Jurible. |
+| CTA Primary | "Découvrir nos offres →" → `/nos-offres` |
+| CTA Secondary | "Nous contacter" → `/contact` |
+
+---
+
+### O02 — Footer
+**Bloc Figma** : O02 Footer
+**Adaptation** : aucune
+
+5 colonnes : Nos offres · Ressources · À propos · Niveaux · Légal
+Copyright : © 2026 Jurible. Tous droits réservés.
+
+---
+
+## Notes pour le dev
+
+### Blocs à créer / adapter
+
+| Bloc | Statut repo | Action |
+|------|-------------|--------|
+| O01 | ✅ HTML + PNG | Ajouter barre stats |
+| H01 | ✅ HTML + PNG | Tel quel |
+| P09 | ✅ HTML + PNG | Tel quel |
+| C10 | ✅ HTML + PNG | 3 instances : adapter texte pour chaque |
+| C09 | ✅ HTML + PNG | Pattern B, adapter chiffres |
+| C14 | ✅ HTML + PNG | Adapter layout (1 XL + 3 SM, sans prix comparatifs) |
+| C06 | ✅ HTML + PNG | Tel quel |
+| P14 | ✅ HTML + PNG | Adapter texte steps |
+| P11 | ✅ HTML + PNG | Variant 1, adapter texte |
+| **C04** | **Figma only** | **À créer en HTML** — bloc 1 + 2 fusionnés |
+| C18 | ✅ HTML + PNG | Bloc 1 + ajout CTA |
+| C07 | ✅ HTML + PNG | Tel quel |
+| P10 | ✅ HTML + PNG | Tel quel |
+| O02 | ✅ HTML + PNG | Tel quel |
+
+### Alternance des fonds
 
 ```
-Phase 1 (structure) : O01 + H01 + P09 + O02
-Phase 2 (contenu)   : C08 (×3 sections) + P05 + C07
-Phase 3 (conversion): P14 + C18 (×2) + C05 + C06 + P11
-Phase 4 (polish)    : P10 + animations + responsive final
+O01  Header     → white
+H01  Hero       → white
+P09  Logos      → #F8F8F8
+C10  Solution   → #F8F8F8
+C09  Contenu    → dark (#1A1A1A)
+C10  Personas   → #F8F8F8
+C10  Avantages  → white
+C14  Offres     → white
+C06  Réassurance→ #F8F8F8
+P14  Steps      → white
+P11  Comparaison→ #F8F8F8
+C04  Équipe     → white
+C18  Témoigna.  → #F8F8F8
+C07  FAQ        → white
+P10  CTA Final  → gradient
+O02  Footer     → #1A1A1A
 ```
 
-### Comportements dynamiques
-
-| Élément | Comportement |
-|---------|-------------|
-| O01 Header | Sticky on scroll, transparent → white au scroll |
-| H01 Stats | Compteur animé (CountUp.js) triggered par IntersectionObserver |
-| C07 FAQ | Accordéon avec `max-height` transition, un seul ouvert à la fois |
-| C18 Testimonials | Carousel swipe sur mobile (3 slides), grid statique desktop |
-| C05 Citations | Carousel autoplay 5s avec pause on hover |
-| P14 Steps | Timeline animation progressive au scroll |
-| Cards hover | `transform: translateY(-4px)` + shadow MD→LG, transition 200ms |
-
-### Responsive breakpoints (du DS - P15)
+### Responsive
 
 | Breakpoint | Layout |
 |-----------|--------|
@@ -805,34 +702,12 @@ Phase 4 (polish)    : P10 + animations + responsive final
 
 ### Performance
 
-- Images : format WebP, lazy-load (sauf hero = eager)
+- Images : WebP, lazy-load (sauf hero = eager)
 - Fonts : Poppins préchargée (400, 500, 600, 700)
 - CLS : dimensions réservées pour images et screenshots
-- LCP cible : < 2.5s (hero image optimisée)
+- LCP cible : < 2.5s
 
 ---
 
-## Contenu à compléter
-
-- [x] Hero — Titre, sous-titre, badges, stats
-- [x] Logos — 9 universités
-- [x] Aperçu — 4 features
-- [x] Ressources — 6 stats
-- [x] Pour qui — 4 personas + CTA
-- [x] Nos offres — 4 produits + prix validés
-- [x] Réassurance — 5 éléments
-- [x] Steps — 4 étapes
-- [x] Comparaison — Sans/Avec
-- [x] Équipe — Photo, stats, citations
-- [x] Témoignages — 3 avec résultats
-- [x] FAQ — 5 questions + réponses complètes
-- [x] CTA Final
-- [x] Footer (copyright 2026)
-- [ ] Screenshot ecole.jurible.com (à capturer)
-- [ ] Photo de groupe enseignants (à obtenir)
-- [ ] Logos universités SVG (à obtenir)
-
----
-
-*Template v2 optimisée — 6 février 2026*
-*Changements majeurs : réordonnancement funnel, +2 sections (C06, P11), corrections mapping DS, prix mis à jour, FAQ complétée*
+*Template v3 — 6 février 2026*
+*Blocs Figma validés par Laura. Le dev pioche le bloc, adapte le layout. Laura ajuste le texte.*
