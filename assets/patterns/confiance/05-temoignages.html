@@ -1,0 +1,700 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>confiance/05-temoignages — Pattern Section Témoignages</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* =========================================
+           TOKENS JURIBLE (DS)
+           ========================================= */
+        :root {
+            /* Colors */
+            --color-primary: #B0001D;
+            --color-secondary: #7C3AED;
+            --color-white: #FFFFFF;
+            --color-black: #1A1A1A;
+            --color-gray-100: #F3F4F6;
+            --color-gray-200: #E5E7EB;
+            --color-gray-400: #9CA3AF;
+            --color-text-dark: #1A1A1A;
+            --color-text-gray: #4A4A4A;
+            --color-text-muted: #9CA3AF;
+            --color-success: #10B981;
+            --color-success-light: #ECFDF5;
+            --color-success-dark: #065F46;
+            --color-warning: #F59E0B;
+            --color-violet-light: #EDE9FE;
+            --gradient: linear-gradient(135deg, #B0001D 0%, #7C3AED 100%);
+
+            /* Spacing */
+            --space-xs: 8px;
+            --space-sm: 16px;
+            --space-md: 24px;
+            --space-lg: 32px;
+            --space-xl: 48px;
+            --space-2xl: 64px;
+            --space-3xl: 80px;
+            --section-padding-y: 80px;
+            --section-padding-y-mobile: 48px;
+
+            /* Radius */
+            --radius-md: 8px;
+            --radius-lg: 12px;
+            --radius-full: 9999px;
+
+            /* Shadows */
+            --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.1), 0 1px 2px rgba(0, 0, 0, 0.06);
+            --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1), 0 4px 6px rgba(0, 0, 0, 0.05);
+
+            /* Transitions */
+            --transition: all 150ms ease;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Poppins', sans-serif; background: #F9FAFB; color: var(--color-text-dark); }
+
+        /* =========================================
+           PAGE DE DOCUMENTATION (pas dans le pattern)
+           ========================================= */
+        .doc-wrapper {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 48px 24px;
+        }
+        .doc-title {
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+        .doc-subtitle {
+            font-size: 14px;
+            color: var(--color-text-muted);
+            margin-bottom: 48px;
+        }
+        .variant-label {
+            font-size: 11px;
+            font-weight: 600;
+            color: var(--color-text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 16px;
+            background: var(--color-gray-100);
+            display: inline-block;
+            padding: 8px 16px;
+            border-radius: var(--radius-md);
+        }
+        .variant-separator {
+            height: 1px;
+            background: var(--color-gray-200);
+            margin: 64px 0;
+        }
+
+        /* =========================================
+           SECTION HEADER (Label + Titre + Sous-titre)
+           Réutilisé dans tous les patterns sections
+           ========================================= */
+        .section-temoignages {
+            padding: var(--section-padding-y) 0;
+            background: var(--color-white);
+        }
+
+        .section-temoignages--gray {
+            background: var(--color-gray-100);
+        }
+
+        .section-temoignages__inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        .section-temoignages__header {
+            text-align: center;
+            margin-bottom: var(--space-xl);
+        }
+
+        /* -----------------------------------------------
+           CUSTOM LABEL VIOLET — DS Token: Label
+           Specs: 12px / 500 / 140% / letter-spacing 0.5px
+           Couleur: #7C3AED texte sur #EDE9FE fond
+           Border-radius: full (pill)
+           Usage: AU-DESSUS de chaque H2 de section
+           NE PAS confondre avec les tags (is-style-tag-*)
+           ----------------------------------------------- */
+        .section-temoignages__label {
+            display: inline-block;
+            font-size: 12px;
+            font-weight: 500;
+            line-height: 140%;
+            letter-spacing: 0.5px;
+            color: var(--color-secondary);           /* #7C3AED */
+            background: var(--color-violet-light);   /* #EDE9FE */
+            padding: 6px 14px;
+            border-radius: var(--radius-full);       /* pill */
+            margin-bottom: var(--space-sm);          /* 16px */
+        }
+
+        /* -----------------------------------------------
+           H2 — DS Token: H2
+           Specs Desktop: 40px / 700 / 120% / letter-spacing -0.5px
+           Specs Mobile:  28px / 700 / 120% / letter-spacing -0.5px
+           Couleur: #1A1A1A (text-dark)
+           Gradient sur <span> : linear-gradient(135deg, #B0001D, #7C3AED)
+           ----------------------------------------------- */
+        .section-temoignages__title {
+            font-size: 40px;
+            font-weight: 700;
+            line-height: 120%;
+            letter-spacing: -0.5px;
+            color: var(--color-text-dark);           /* #1A1A1A */
+            margin-bottom: var(--space-xs);          /* 8px */
+        }
+
+        .section-temoignages__title span {
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* -----------------------------------------------
+           SOUS-TITRE — DS Token: Body Large
+           Specs: 18px / 400 / 160%
+           Couleur: #4A4A4A (text-gray)
+           ----------------------------------------------- */
+        .section-temoignages__subtitle {
+            font-size: 18px;
+            font-weight: 400;
+            line-height: 160%;
+            color: var(--color-text-gray);           /* #4A4A4A */
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* =========================================
+           GRILLE 3 CARDS — VARIANTE 1 (Standard)
+           ========================================= */
+        .section-temoignages__grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: var(--space-md);
+        }
+
+        /* =========================================
+           CARD TESTIMONIAL STANDARD
+           Repris à l'identique de C18-testimonial.html
+           ========================================= */
+        .card-testimonial {
+            background: var(--color-white);
+            border-radius: var(--radius-lg);
+            border: 1px solid var(--color-gray-200);
+            box-shadow: var(--shadow-sm);
+            padding: var(--space-md);
+            transition: var(--transition);
+        }
+
+        .section-temoignages--gray .card-testimonial {
+            background: var(--color-white);
+        }
+
+        .card-testimonial:hover {
+            box-shadow: var(--shadow-lg);
+            transform: translateY(-2px);
+        }
+
+        /* Étoiles */
+        .stars { display: flex; gap: 2px; margin-bottom: 12px; }
+        .star { color: var(--color-warning); font-size: 16px; }
+
+        /* Quote */
+        .card-testimonial__quote {
+            font-size: 15px;
+            line-height: 1.6;
+            color: var(--color-text-dark);
+            margin-bottom: 16px;
+            font-style: italic;
+        }
+        .card-testimonial__quote strong {
+            font-style: normal;
+            font-weight: 600;
+        }
+
+        /* Badge résultat */
+        .badge-result {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--color-success-dark);
+            background: var(--color-success-light);
+            padding: 6px 12px;
+            border-radius: var(--radius-full);
+            margin-bottom: 16px;
+        }
+
+        /* Avatar */
+        .avatar {
+            width: 44px;
+            height: 44px;
+            border-radius: var(--radius-full);
+            flex-shrink: 0;
+            overflow: hidden;
+        }
+        .avatar--photo {
+            background-size: cover;
+            background-position: center;
+            background-color: var(--color-gray-200);
+        }
+        .avatar--initials {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            color: var(--color-white);
+            background: var(--gradient);
+            font-size: 14px;
+        }
+
+        /* Auteur */
+        .author { display: flex; align-items: center; gap: 12px; }
+        .author__info h4 { font-size: 14px; font-weight: 600; color: var(--color-text-dark); margin-bottom: 2px; }
+        .author__info p { font-size: 13px; color: var(--color-text-muted); }
+
+        /* =========================================
+           VARIANTE 2 : HERO CAROUSEL
+           Repris à l'identique de C18-testimonial.html
+           ========================================= */
+        .section-temoignages__hero-wrapper {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .testimonial-hero {
+            background: var(--color-white);
+            border-radius: var(--radius-lg);
+            border: 1px solid var(--color-gray-200);
+            box-shadow: var(--shadow-lg);
+            padding: var(--space-lg) 48px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .section-temoignages--gray .testimonial-hero {
+            background: var(--color-white);
+        }
+
+        .testimonial-hero__carousel { position: relative; min-height: 280px; }
+
+        .testimonial-hero__slide {
+            opacity: 0;
+            visibility: hidden;
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            transition: opacity 0.5s ease, visibility 0.5s ease;
+        }
+        .testimonial-hero__slide.active {
+            opacity: 1;
+            visibility: visible;
+            position: relative;
+        }
+
+        .stars--lg { gap: 4px; margin-bottom: 24px; justify-content: center; }
+        .star--lg { font-size: 24px; }
+
+        .testimonial-hero__quote {
+            font-size: 22px;
+            line-height: 1.6;
+            color: var(--color-text-dark);
+            margin-bottom: 24px;
+            font-style: italic;
+        }
+        .testimonial-hero__quote strong {
+            font-style: normal;
+            font-weight: 600;
+            color: var(--color-primary);
+        }
+
+        .badge-result--lg { font-size: 14px; padding: 8px 16px; margin-bottom: 24px; }
+
+        .avatar--lg { width: 64px; height: 64px; }
+        .avatar--initials.avatar--lg { font-size: 20px; }
+
+        .author--center { justify-content: center; gap: 16px; }
+        .author__info--lg h4 { font-size: 18px; margin-bottom: 4px; }
+        .author__info--lg p { font-size: 14px; }
+
+        .testimonial-hero__dots { display: flex; justify-content: center; gap: 8px; margin-top: 24px; }
+        .testimonial-hero__dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--color-gray-200);
+            border: none;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        .testimonial-hero__dot.active {
+            background: var(--color-primary);
+            width: 24px;
+            border-radius: 4px;
+        }
+
+        .testimonial-hero__progress {
+            position: absolute;
+            bottom: 0; left: 0;
+            height: 3px;
+            background: var(--gradient);
+            animation: progress 4s linear infinite;
+        }
+        @keyframes progress { from { width: 0%; } to { width: 100%; } }
+
+        /* =========================================
+           RESPONSIVE
+           ========================================= */
+        @media (max-width: 768px) {
+            .section-temoignages {
+                padding: var(--section-padding-y-mobile) 0;
+            }
+            .section-temoignages__inner {
+                padding: 0 16px;
+            }
+            /* H2 mobile — DS Token: H2 mobile = 28px */
+            .section-temoignages__title {
+                font-size: 28px;
+            }
+            /* Body Large mobile — DS Token: reste 16px mobile */
+            .section-temoignages__subtitle {
+                font-size: 16px;
+            }
+            .section-temoignages__grid {
+                grid-template-columns: 1fr;
+                gap: var(--space-sm);
+            }
+            .testimonial-hero {
+                padding: var(--space-md) var(--space-sm);
+            }
+            .testimonial-hero__quote {
+                font-size: 18px;
+            }
+            .testimonial-hero__carousel {
+                min-height: 320px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="doc-wrapper">
+        <h1 class="doc-title">confiance/05-temoignages</h1>
+        <p class="doc-subtitle">Pattern Section — Composition de cards C18 Testimonial existantes</p>
+
+        <!-- ===========================================
+             VARIANTE 1 : GRILLE 3 CARDS (fond blanc)
+             =========================================== -->
+        <div class="variant-label">Variante 1 — Grille 3 cards · Fond blanc</div>
+
+        <section class="section-temoignages">
+            <div class="section-temoignages__inner">
+                <div class="section-temoignages__header">
+                    <span class="section-temoignages__label">✨ Témoignages</span>
+                    <h2 class="section-temoignages__title">Ils ont <span>réussi avec Jurible</span></h2>
+                    <p class="section-temoignages__subtitle">Rejoignez les 25 000+ étudiants qui ont validé leur année grâce à nos cours et nos outils.</p>
+                </div>
+
+                <div class="section-temoignages__grid">
+                    <!-- Card 1 — Photo -->
+                    <div class="card-testimonial">
+                        <div class="stars">
+                            <span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span>
+                        </div>
+                        <p class="card-testimonial__quote">
+                            "J'ai validé ma L1 du premier coup grâce à Jurible. Les vidéos sont super claires et les fiches m'ont fait gagner un temps fou."
+                        </p>
+                        <div class="badge-result">✓ L1 validée avec mention</div>
+                        <div class="author">
+                            <div class="avatar avatar--photo" style="background-image: url('https://i.pravatar.cc/100?img=1');"></div>
+                            <div class="author__info">
+                                <h4>Marie L.</h4>
+                                <p>L1 Droit — Paris 1</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Card 2 — Initiales -->
+                    <div class="card-testimonial">
+                        <div class="stars">
+                            <span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span>
+                        </div>
+                        <p class="card-testimonial__quote">
+                            "Les QCM et flashcards sont parfaits pour réviser dans les transports. J'ai eu <strong>15/20</strong> alors que je partais de zéro."
+                        </p>
+                        <div class="badge-result">✓ 15/20 en Droit constit</div>
+                        <div class="author">
+                            <div class="avatar avatar--initials">TC</div>
+                            <div class="author__info">
+                                <h4>Thomas C.</h4>
+                                <p>L1 Droit — Lyon 3</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Card 3 — Photo -->
+                    <div class="card-testimonial">
+                        <div class="stars">
+                            <span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span>
+                        </div>
+                        <p class="card-testimonial__quote">
+                            "En reprise d'études à 32 ans, j'avais peur de ne pas y arriver. <strong>Jurible m'a donné confiance</strong> et une méthode."
+                        </p>
+                        <div class="badge-result">✓ Capacité obtenue</div>
+                        <div class="author">
+                            <div class="avatar avatar--photo" style="background-image: url('https://i.pravatar.cc/100?img=20');"></div>
+                            <div class="author__info">
+                                <h4>Sophie M.</h4>
+                                <p>Capacité — Reconversion</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="variant-separator"></div>
+
+        <!-- ===========================================
+             VARIANTE 2 : GRILLE 3 CARDS (fond gris)
+             =========================================== -->
+        <div class="variant-label">Variante 2 — Grille 3 cards · Fond gris</div>
+
+        <section class="section-temoignages section-temoignages--gray">
+            <div class="section-temoignages__inner">
+                <div class="section-temoignages__header">
+                    <span class="section-temoignages__label">✨ Témoignages</span>
+                    <h2 class="section-temoignages__title">Ils ont <span>réussi avec Jurible</span></h2>
+                    <p class="section-temoignages__subtitle">Rejoignez les 25 000+ étudiants qui ont validé leur année grâce à nos cours et nos outils.</p>
+                </div>
+
+                <div class="section-temoignages__grid">
+                    <div class="card-testimonial">
+                        <div class="stars">
+                            <span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span>
+                        </div>
+                        <p class="card-testimonial__quote">
+                            "J'ai validé ma L1 du premier coup grâce à Jurible. Les vidéos sont super claires et les fiches m'ont fait gagner un temps fou."
+                        </p>
+                        <div class="badge-result">✓ L1 validée avec mention</div>
+                        <div class="author">
+                            <div class="avatar avatar--photo" style="background-image: url('https://i.pravatar.cc/100?img=1');"></div>
+                            <div class="author__info">
+                                <h4>Marie L.</h4>
+                                <p>L1 Droit — Paris 1</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card-testimonial">
+                        <div class="stars">
+                            <span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span>
+                        </div>
+                        <p class="card-testimonial__quote">
+                            "Les QCM et flashcards sont parfaits pour réviser dans les transports. J'ai eu <strong>15/20</strong> alors que je partais de zéro."
+                        </p>
+                        <div class="badge-result">✓ 15/20 en Droit constit</div>
+                        <div class="author">
+                            <div class="avatar avatar--initials">TC</div>
+                            <div class="author__info">
+                                <h4>Thomas C.</h4>
+                                <p>L1 Droit — Lyon 3</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card-testimonial">
+                        <div class="stars">
+                            <span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span>
+                        </div>
+                        <p class="card-testimonial__quote">
+                            "En reprise d'études à 32 ans, j'avais peur de ne pas y arriver. <strong>Jurible m'a donné confiance</strong> et une méthode."
+                        </p>
+                        <div class="badge-result">✓ Capacité obtenue</div>
+                        <div class="author">
+                            <div class="avatar avatar--photo" style="background-image: url('https://i.pravatar.cc/100?img=20');"></div>
+                            <div class="author__info">
+                                <h4>Sophie M.</h4>
+                                <p>Capacité — Reconversion</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="variant-separator"></div>
+
+        <!-- ===========================================
+             VARIANTE 3 : HERO CARROUSEL (fond blanc)
+             =========================================== -->
+        <div class="variant-label">Variante 3 — Hero carrousel · Fond blanc</div>
+
+        <section class="section-temoignages">
+            <div class="section-temoignages__inner">
+                <div class="section-temoignages__header">
+                    <span class="section-temoignages__label">✨ Témoignages</span>
+                    <h2 class="section-temoignages__title">Ils ont <span>réussi avec Jurible</span></h2>
+                    <p class="section-temoignages__subtitle">Rejoignez les 25 000+ étudiants qui ont validé leur année grâce à nos cours et nos outils.</p>
+                </div>
+
+                <div class="section-temoignages__hero-wrapper">
+                    <div class="testimonial-hero">
+                        <div class="testimonial-hero__carousel">
+                            <div class="testimonial-hero__slide active">
+                                <div class="stars stars--lg">
+                                    <span class="star star--lg">★</span><span class="star star--lg">★</span><span class="star star--lg">★</span><span class="star star--lg">★</span><span class="star star--lg">★</span>
+                                </div>
+                                <p class="testimonial-hero__quote">"J'ai révisé mes partiels uniquement avec vos fiches et j'ai validé mon année à <strong>12.55/20</strong>."</p>
+                                <div class="badge-result badge-result--lg">✓ Année validée</div>
+                                <div class="author author--center">
+                                    <div class="avatar avatar--lg avatar--photo" style="background-image: url('https://i.pravatar.cc/100?img=10');"></div>
+                                    <div class="author__info author__info--lg" style="text-align: left;">
+                                        <h4>Manon B.</h4>
+                                        <p>L1 Droit — Paris Assas</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="testimonial-hero__slide">
+                                <div class="stars stars--lg">
+                                    <span class="star star--lg">★</span><span class="star star--lg">★</span><span class="star star--lg">★</span><span class="star star--lg">★</span><span class="star star--lg">★</span>
+                                </div>
+                                <p class="testimonial-hero__quote">"En reconversion à 35 ans, le coaching individuel a fait toute <strong>la différence</strong>."</p>
+                                <div class="badge-result badge-result--lg">✓ Capacité obtenue</div>
+                                <div class="author author--center">
+                                    <div class="avatar avatar--lg avatar--initials">PD</div>
+                                    <div class="author__info author__info--lg" style="text-align: left;">
+                                        <h4>Pierre D.</h4>
+                                        <p>Reconversion — Capacité</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="testimonial-hero__slide">
+                                <div class="stars stars--lg">
+                                    <span class="star star--lg">★</span><span class="star star--lg">★</span><span class="star star--lg">★</span><span class="star star--lg">★</span><span class="star star--lg">★</span>
+                                </div>
+                                <p class="testimonial-hero__quote">"Les Fiches PDF sont parfaites : je les imprime, je surligne. <strong>Format idéal.</strong>"</p>
+                                <div class="badge-result badge-result--lg">✓ 16/20 aux partiels</div>
+                                <div class="author author--center">
+                                    <div class="avatar avatar--lg avatar--photo" style="background-image: url('https://i.pravatar.cc/100?img=20');"></div>
+                                    <div class="author__info author__info--lg" style="text-align: left;">
+                                        <h4>Camille B.</h4>
+                                        <p>L2 Droit — Lyon 3</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="testimonial-hero__dots">
+                            <button class="testimonial-hero__dot active" data-slide="0"></button>
+                            <button class="testimonial-hero__dot" data-slide="1"></button>
+                            <button class="testimonial-hero__dot" data-slide="2"></button>
+                        </div>
+                        <div class="testimonial-hero__progress"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===========================================
+             SPECS
+             =========================================== -->
+        <div style="background: white; border-radius: 12px; padding: 32px; margin-top: 64px; border: 1px solid var(--color-gray-200);">
+            <h3 style="font-size: 18px; font-weight: 700; margin-bottom: 24px;">📐 Specs — confiance/05-temoignages</h3>
+
+            <table style="width: 100%; border-collapse: collapse; font-size: 13px;">
+                <thead>
+                    <tr style="background: var(--color-gray-100);">
+                        <th style="padding: 12px 16px; text-align: left; font-weight: 600;">Élément</th>
+                        <th style="padding: 12px 16px; text-align: left; font-weight: 600;">Desktop</th>
+                        <th style="padding: 12px 16px; text-align: left; font-weight: 600;">Mobile</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr style="border-bottom: 1px solid var(--color-gray-200);">
+                        <td style="padding: 12px 16px;"><strong>Section padding</strong></td>
+                        <td style="padding: 12px 16px;">80px top/bottom · 24px sides</td>
+                        <td style="padding: 12px 16px;">48px top/bottom · 16px sides</td>
+                    </tr>
+                    <tr style="border-bottom: 1px solid var(--color-gray-200);">
+                        <td style="padding: 12px 16px;"><strong>Max-width</strong></td>
+                        <td style="padding: 12px 16px;">1200px</td>
+                        <td style="padding: 12px 16px;">100%</td>
+                    </tr>
+                    <tr style="border-bottom: 1px solid var(--color-gray-200);">
+                        <td style="padding: 12px 16px;"><strong>Label</strong></td>
+                        <td style="padding: 12px 16px;" colspan="2">12px/500/140%/0.5px · #7C3AED sur #EDE9FE · pill</td>
+                    </tr>
+                    <tr style="border-bottom: 1px solid var(--color-gray-200);">
+                        <td style="padding: 12px 16px;"><strong>Titre H2</strong></td>
+                        <td style="padding: 12px 16px;">40px/700/120%/-0.5px</td>
+                        <td style="padding: 12px 16px;">28px/700/120%/-0.5px</td>
+                    </tr>
+                    <tr style="border-bottom: 1px solid var(--color-gray-200);">
+                        <td style="padding: 12px 16px;"><strong>Sous-titre</strong></td>
+                        <td style="padding: 12px 16px;" colspan="2">18px/400/160% · #4A4A4A · max-width 600px</td>
+                    </tr>
+                    <tr style="border-bottom: 1px solid var(--color-gray-200);">
+                        <td style="padding: 12px 16px;"><strong>Header → Grid gap</strong></td>
+                        <td style="padding: 12px 16px;" colspan="2">48px</td>
+                    </tr>
+                    <tr style="border-bottom: 1px solid var(--color-gray-200);">
+                        <td style="padding: 12px 16px;"><strong>Grille</strong></td>
+                        <td style="padding: 12px 16px;">3 colonnes · gap 24px</td>
+                        <td style="padding: 12px 16px;">1 colonne · gap 16px</td>
+                    </tr>
+                    <tr style="border-bottom: 1px solid var(--color-gray-200);">
+                        <td style="padding: 12px 16px;"><strong>Cards</strong></td>
+                        <td style="padding: 12px 16px;" colspan="2">Identiques à C18 Card Testimonial Standard</td>
+                    </tr>
+                    <tr style="border-bottom: 1px solid var(--color-gray-200);">
+                        <td style="padding: 12px 16px;"><strong>Fond</strong></td>
+                        <td style="padding: 12px 16px;" colspan="2">Blanc (#FFF) ou Gris (#F3F4F6)</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 12px 16px;"><strong>3 variantes</strong></td>
+                        <td style="padding: 12px 16px;" colspan="2">Grille blanc · Grille gris · Hero carrousel</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h4 style="font-size: 14px; font-weight: 600; margin-top: 24px; margin-bottom: 12px;">Composants DS utilisés :</h4>
+            <ul style="font-size: 13px; color: var(--color-text-gray); list-style: none; padding: 0;">
+                <li style="margin-bottom: 6px;">→ <strong>C18</strong> Card Testimonial (Standard + Hero)</li>
+                <li style="margin-bottom: 6px;">→ <strong>Label</strong> violet clair (#EDE9FE + #7C3AED)</li>
+                <li style="margin-bottom: 6px;">→ <strong>H2</strong> gradient (DS typo)</li>
+                <li>→ <strong>Body Large</strong> sous-titre (DS typo)</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Carrousel JS -->
+    <script>
+        const slides = document.querySelectorAll('.testimonial-hero__slide');
+        const dots = document.querySelectorAll('.testimonial-hero__dot');
+        const progress = document.querySelector('.testimonial-hero__progress');
+        let currentSlide = 0;
+
+        function showSlide(index) {
+            slides.forEach(s => s.classList.remove('active'));
+            dots.forEach(d => d.classList.remove('active'));
+            slides[index].classList.add('active');
+            dots[index].classList.add('active');
+            progress.style.animation = 'none';
+            progress.offsetHeight;
+            progress.style.animation = 'progress 4s linear';
+        }
+
+        setInterval(() => { currentSlide = (currentSlide + 1) % slides.length; showSlide(currentSlide); }, 4000);
+        dots.forEach((dot, i) => dot.addEventListener('click', () => { currentSlide = i; showSlide(i); }));
+    </script>
+</body>
+</html>

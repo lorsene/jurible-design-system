@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>marketing/03-solution — Pattern Section Solution / Bénéfices</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* =========================================
+           TOKENS JURIBLE (DS)
+           ========================================= */
+        :root {
+            /* Colors */
+            --color-primary: #B0001D;
+            --color-secondary: #7C3AED;
+            --color-white: #FFFFFF;
+            --color-black: #1A1A1A;
+            --color-gray-100: #F3F4F6;
+            --color-gray-200: #E5E7EB;
+            --color-gray-400: #9CA3AF;
+            --color-gray-600: #4B5563;
+            --color-text-dark: #1A1A1A;
+            --color-text-gray: #4A4A4A;
+            --color-text-muted: #9CA3AF;
+            --color-violet-light: #EDE9FE;
+            --gradient: linear-gradient(135deg, #B0001D 0%, #7C3AED 100%);
+
+            /* Spacing */
+            --space-xs: 8px;
+            --space-sm: 16px;
+            --space-md: 24px;
+            --space-lg: 32px;
+            --space-xl: 48px;
+            --space-2xl: 64px;
+            --section-padding-y: 80px;
+            --section-padding-y-mobile: 48px;
+
+            /* Radius */
+            --radius-md: 8px;
+            --radius-lg: 12px;
+            --radius-xl: 16px;
+            --radius-full: 9999px;
+
+            /* Shadows */
+            --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.1), 0 1px 2px rgba(0, 0, 0, 0.06);
+            --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1), 0 2px 4px rgba(0, 0, 0, 0.06);
+
+            /* Transitions */
+            --transition: all 150ms ease;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Poppins', sans-serif; background: #F9FAFB; color: var(--color-text-dark); }
+
+        /* =========================================
+           PAGE DE DOCUMENTATION (pas dans le pattern)
+           ========================================= */
+        .doc-wrapper {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 48px 24px;
+        }
+        .doc-title {
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+        .doc-subtitle {
+            font-size: 14px;
+            color: var(--color-text-muted);
+            margin-bottom: 48px;
+        }
+        .variant-label {
+            font-size: 11px;
+            font-weight: 600;
+            color: var(--color-text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 16px;
+            background: var(--color-gray-100);
+            display: inline-block;
+            padding: 8px 16px;
+            border-radius: var(--radius-md);
+        }
+        .variant-separator {
+            height: 1px;
+            background: var(--color-gray-200);
+            margin: 64px 0;
+        }
+
+        /* =========================================
+           SECTION SOLUTION — WRAPPER
+           ========================================= */
+        .section-solution {
+            padding: var(--section-padding-y) 0;
+            background: var(--color-white);
+        }
+
+        .section-solution--gray {
+            background: var(--color-gray-100);
+        }
+
+        .section-solution__inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* =========================================
+           SECTION HEADER
+           ========================================= */
+        .section-solution__header {
+            text-align: center;
+            margin-bottom: var(--space-xl);       /* 48px */
+        }
+
+        /* -----------------------------------------------
+           CUSTOM LABEL VIOLET — DS Token: Label
+           Specs: 12px / 500 / 140% / letter-spacing 0.5px
+           Couleur: #7C3AED texte sur #EDE9FE fond
+           Border-radius: full (pill)
+           Usage: AU-DESSUS de chaque H2 de section
+           NE PAS confondre avec les tags (is-style-tag-*)
+           ----------------------------------------------- */
+        .section-solution__label {
+            display: inline-block;
+            font-size: 12px;
+            font-weight: 500;
+            line-height: 140%;
+            letter-spacing: 0.5px;
+            color: var(--color-secondary);           /* #7C3AED */
+            background: var(--color-violet-light);   /* #EDE9FE */
+            padding: 6px 14px;
+            border-radius: var(--radius-full);       /* pill */
+            margin-bottom: var(--space-sm);          /* 16px */
+        }
+
+        /* -----------------------------------------------
+           H2 — DS Token: H2
+           Specs Desktop: 40px / 700 / 120% / letter-spacing -0.5px
+           Specs Mobile:  28px / 700 / 120% / letter-spacing -0.5px
+           Couleur: #1A1A1A (text-dark)
+           Gradient sur <span> : linear-gradient(135deg, #B0001D, #7C3AED)
+           ----------------------------------------------- */
+        .section-solution__title {
+            font-size: 40px;
+            font-weight: 700;
+            line-height: 120%;
+            letter-spacing: -0.5px;
+            color: var(--color-text-dark);           /* #1A1A1A */
+            margin-bottom: var(--space-xs);          /* 8px */
+        }
+
+        .section-solution__title span {
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* -----------------------------------------------
+           SOUS-TITRE — DS Token: Body Large
+           Specs: 18px / 400 / 160%
+           Couleur: #4A4A4A (text-gray)
+           ----------------------------------------------- */
+        .section-solution__subtitle {
+            font-size: 18px;
+            font-weight: 400;
+            line-height: 160%;
+            color: var(--color-text-gray);           /* #4A4A4A */
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        /* =========================================
+           VARIANTE 1 : GRILLE 6 SOLUTIONS
+           Layout: 2 colonnes × 3 lignes
+           Card: horizontale (icône à gauche)
+           Usage: Académie, Prépa, Suite IA
+           Repris à l'identique de C10
+           ========================================= */
+        .solution-grid-6 {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: var(--space-md);                    /* 24px */
+        }
+
+        /* Card 6 — Layout horizontal
+           Repris EXACTEMENT de C10-solution-benefices.html */
+        .solution-card-6 {
+            background: var(--color-white);
+            border: 1px solid var(--color-gray-200); /* #E5E7EB */
+            border-radius: var(--radius-lg);         /* 12px */
+            padding: var(--space-md);                /* 24px */
+            display: flex;
+            align-items: flex-start;
+            gap: var(--space-md);                    /* 24px */
+            transition: var(--transition);
+        }
+
+        .solution-card-6:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-md);
+        }
+
+        /* Icône emoji — fond gris clair, 48×48 */
+        .solution-card-6 .solution-card__icon {
+            width: 48px;
+            height: 48px;
+            min-width: 48px;
+            background: var(--color-gray-100);       /* #F3F4F6 */
+            border-radius: var(--radius-md);         /* 8px */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+        }
+
+        .solution-card-6 .solution-card__content {
+            flex: 1;
+        }
+
+        /* -----------------------------------------------
+           Titre card — DS Token: Body Regular Bold
+           Specs: 15px / 600
+           Couleur: #1A1A1A (text-dark)
+           ----------------------------------------------- */
+        .solution-card-6 .solution-card__title {
+            font-size: 15px;
+            font-weight: 600;
+            color: var(--color-text-dark);
+            margin-bottom: 4px;
+        }
+
+        /* -----------------------------------------------
+           Description card — DS Token: Body Small
+           Specs: 13px / 400 / 150%
+           Couleur: #4B5563 (gray-600)
+           ----------------------------------------------- */
+        .solution-card-6 .solution-card__description {
+            font-size: 13px;
+            color: var(--color-gray-600);
+            line-height: 1.5;
+        }
+
+        /* Sur fond gris, cards restent blanches */
+        .section-solution--gray .solution-card-6 {
+            background: var(--color-white);
+        }
+
+        /* =========================================
+           VARIANTE 2 : GRILLE 4 SOLUTIONS
+           Layout: 4 colonnes × 1 ligne
+           Card: centrée (icône en haut)
+           Usage: Homepage, Fiches, Cours, Manuel
+           Repris à l'identique de C10
+           ========================================= */
+        .solution-grid-4 {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: var(--space-md);                    /* 24px */
+        }
+
+        /* Card 4 — Layout centré
+           Repris EXACTEMENT de C10-solution-benefices.html */
+        .solution-card-4 {
+            background: var(--color-white);
+            border: 1px solid var(--color-gray-200); /* #E5E7EB */
+            border-radius: var(--radius-lg);         /* 12px */
+            padding: var(--space-md);                /* 24px */
+            text-align: center;
+            transition: var(--transition);
+        }
+
+        .solution-card-4:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-md);
+        }
+
+        /* Icône emoji — fond gris clair, 56×56, centrée */
+        .solution-card-4 .solution-card__icon {
+            width: 56px;
+            height: 56px;
+            background: var(--color-gray-100);       /* #F3F4F6 */
+            border-radius: var(--radius-lg);         /* 12px */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            margin: 0 auto var(--space-sm);          /* centré + 16px bottom */
+        }
+
+        /* -----------------------------------------------
+           Titre card 4 — DS Token: Body Regular Bold
+           Specs: 15px / 600
+           Couleur: #1A1A1A (text-dark)
+           ----------------------------------------------- */
+        .solution-card-4 .solution-card__title {
+            font-size: 15px;
+            font-weight: 600;
+            color: var(--color-text-dark);
+            margin-bottom: var(--space-xs);          /* 8px */
+        }
+
+        /* -----------------------------------------------
+           Description card 4 — DS Token: Body Small
+           Specs: 13px / 400 / 150%
+           Couleur: #4B5563 (gray-600)
+           ----------------------------------------------- */
+        .solution-card-4 .solution-card__description {
+            font-size: 13px;
+            color: var(--color-gray-600);
+            line-height: 1.5;
+        }
+
+        .section-solution--gray .solution-card-4 {
+            background: var(--color-white);
+        }
+
+        /* =========================================
+           RESPONSIVE
+           ========================================= */
+        @media (max-width: 1000px) {
+            .solution-grid-6 {
+                grid-template-columns: 1fr;
+            }
+            .solution-grid-4 {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .section-solution {
+                padding: var(--section-padding-y-mobile) 0;
+            }
+            .section-solution__inner {
+                padding: 0 16px;
+            }
+            /* H2 mobile — DS Token: H2 mobile = 28px */
+            .section-solution__title {
+                font-size: 28px;
+            }
+            /* Body Large mobile — DS Token: 16px */
+            .section-solution__subtitle {
+                font-size: 16px;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .solution-grid-4 {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="doc-wrapper">
+        <h1 class="doc-title">marketing/03-solution</h1>
+        <p class="doc-subtitle">Pattern Section — Composition de cards C10 Solution/Bénéfices existantes · 2 variantes</p>
+
+        <!-- ===========================================
+             VARIANTE 1 : GRILLE 6 (fond blanc)
+             Usage: Académie, Prépa, Suite IA
+             =========================================== -->
+        <div class="variant-label">Variante 1 — Grille 6 solutions · 2 colonnes · Fond blanc</div>
+
+        <section class="section-solution">
+            <div class="section-solution__inner">
+                <div class="section-solution__header">
+                    <span class="section-solution__label">✨ La solution</span>
+                    <h2 class="section-solution__title">L'Académie a été conçue pour <span>toi</span></h2>
+                    <p class="section-solution__subtitle">Nous avons créé l'Académie Jurible pour aider les étudiants en droit à réussir facilement. Une plateforme complète avec tout ce qu'il te faut.</p>
+                </div>
+
+                <div class="solution-grid-6">
+                    <div class="solution-card-6">
+                        <div class="solution-card__icon">📱</div>
+                        <div class="solution-card__content">
+                            <h3 class="solution-card__title">Toutes tes ressources à portée de clic</h3>
+                            <p class="solution-card__description">Accède à tes cours, fiches, QCM et flashcards depuis ton mobile ou ton ordinateur, 24h/24.</p>
+                        </div>
+                    </div>
+                    <div class="solution-card-6">
+                        <div class="solution-card__icon">🎥</div>
+                        <div class="solution-card__content">
+                            <h3 class="solution-card__title">Des vidéos claires et structurées</h3>
+                            <p class="solution-card__description">Des cours filmés par des enseignants experts, découpés en chapitres pour apprendre à ton rythme.</p>
+                        </div>
+                    </div>
+                    <div class="solution-card-6">
+                        <div class="solution-card__icon">✍️</div>
+                        <div class="solution-card__content">
+                            <h3 class="solution-card__title">Entraîne-toi avec des exercices corrigés</h3>
+                            <p class="solution-card__description">QCM, flashcards, annales corrigées : teste tes connaissances et progresse chaque jour.</p>
+                        </div>
+                    </div>
+                    <div class="solution-card-6">
+                        <div class="solution-card__icon">🧠</div>
+                        <div class="solution-card__content">
+                            <h3 class="solution-card__title">Mémorise efficacement</h3>
+                            <p class="solution-card__description">Nos outils de révision espacée et mindmaps t'aident à retenir sur le long terme.</p>
+                        </div>
+                    </div>
+                    <div class="solution-card-6">
+                        <div class="solution-card__icon">🎯</div>
+                        <div class="solution-card__content">
+                            <h3 class="solution-card__title">Un parcours adapté à ton niveau</h3>
+                            <p class="solution-card__description">Du L1 à la Capacité, chaque contenu est conçu pour ton année et tes matières.</p>
+                        </div>
+                    </div>
+                    <div class="solution-card-6">
+                        <div class="solution-card__icon">💬</div>
+                        <div class="solution-card__content">
+                            <h3 class="solution-card__title">Un accompagnement personnalisé</h3>
+                            <p class="solution-card__description">Pose tes questions à nos enseignants et rejoins une communauté d'étudiants motivés.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="variant-separator"></div>
+
+        <!-- ===========================================
+             VARIANTE 2 : GRILLE 4 (fond gris)
+             Usage: Homepage, Fiches, Cours, Manuel
+             =========================================== -->
+        <div class="variant-label">Variante 2 — Grille 4 solutions · 4 colonnes · Fond gris</div>
+
+        <section class="section-solution section-solution--gray">
+            <div class="section-solution__inner">
+                <div class="section-solution__header">
+                    <span class="section-solution__label">✨ La solution</span>
+                    <h2 class="section-solution__title">Révisez plus efficacement avec <span>moins d'efforts</span></h2>
+                    <p class="section-solution__subtitle">Des fiches prêtes à imprimer, conçues pour faciliter la compréhension et la mémorisation.</p>
+                </div>
+
+                <div class="solution-grid-4">
+                    <div class="solution-card-4">
+                        <div class="solution-card__icon">⚡</div>
+                        <h3 class="solution-card__title">Apprenez plus vite</h3>
+                        <p class="solution-card__description">Des fiches conçues pour faciliter la compréhension et la mémorisation.</p>
+                    </div>
+                    <div class="solution-card-4">
+                        <div class="solution-card__icon">💰</div>
+                        <h3 class="solution-card__title">Économisez du temps</h3>
+                        <p class="solution-card__description">Un cours synthétisé pour le prix d'une place de cinéma. Des heures économisées.</p>
+                    </div>
+                    <div class="solution-card-4">
+                        <div class="solution-card__icon">🎯</div>
+                        <h3 class="solution-card__title">Gagnez des points</h3>
+                        <p class="solution-card__description">Prenez de l'avance dès les prochains TD grâce à des fiches complètes et à jour.</p>
+                    </div>
+                    <div class="solution-card-4">
+                        <div class="solution-card__icon">📥</div>
+                        <h3 class="solution-card__title">PDF téléchargeable</h3>
+                        <p class="solution-card__description">Imprimez vos fiches et révisez sur papier, sans écran. Accès à vie.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="variant-separator"></div>
+
+        <!-- ===========================================
+             VARIANTE 3 : GRILLE 4 (fond blanc)
+             Usage: Cours par niveau, Cours par matière
+             =========================================== -->
+        <div class="variant-label">Variante 3 — Grille 4 solutions · 4 colonnes · Fond blanc</div>
+
+        <section class="section-solution">
+            <div class="section-solution__inner">
+                <div class="section-solution__header">
+                    <span class="section-solution__label">✨ La solution</span>
+                    <h2 class="section-solution__title">Un cours pensé pour votre <span>réussite</span></h2>
+                    <p class="section-solution__subtitle">Tout ce dont vous avez besoin pour comprendre, pratiquer et réussir vos examens.</p>
+                </div>
+
+                <div class="solution-grid-4">
+                    <div class="solution-card-4">
+                        <div class="solution-card__icon">📱</div>
+                        <h3 class="solution-card__title">Apprenez à votre rythme</h3>
+                        <p class="solution-card__description">Vidéos claires et supports variés pour comprendre facilement sur PC ou mobile.</p>
+                    </div>
+                    <div class="solution-card-4">
+                        <div class="solution-card__icon">✍️</div>
+                        <h3 class="solution-card__title">Exercez-vous régulièrement</h3>
+                        <p class="solution-card__description">Exercices corrigés, flashcards et QCM pour tester vos connaissances.</p>
+                    </div>
+                    <div class="solution-card-4">
+                        <div class="solution-card__icon">🎯</div>
+                        <h3 class="solution-card__title">Préparez vos examens</h3>
+                        <p class="solution-card__description">Contenus conçus par des enseignants pour réussir vos TD et partiels du premier coup.</p>
+                    </div>
+                    <div class="solution-card-4">
+                        <div class="solution-card__icon">🏆</div>
+                        <h3 class="solution-card__title">Gagnez des points</h3>
+                        <p class="solution-card__description">Prenez de l'avance sur les autres étudiants dès les prochains partiels.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===========================================
+             SPECS
+             =========================================== -->
+        <div style="background: white; border-radius: 12px; padding: 32px; margin-top: 64px; border: 1px solid var(--color-gray-200);">
+            <h3 style="font-size: 18px; font-weight: 700; margin-bottom: 24px;">📐 Specs — marketing/03-solution</h3>
+
+            <table style="width: 100%; border-collapse: collapse; font-size: 13px;">
+                <thead>
+                    <tr style="background: var(--color-gray-100);">
+                        <th style="padding: 12px 16px; text-align: left; font-weight: 600;">Élément</th>
+                        <th style="padding: 12px 16px; text-align: left; font-weight: 600;">Specs</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr style="border-bottom: 1px solid var(--color-gray-200);">
+                        <td style="padding: 12px 16px;"><strong>Section padding</strong></td>
+                        <td style="padding: 12px 16px;">80px top/bottom desktop · 48px mobile · 24px sides (16px mobile)</td>
+                    </tr>
+                    <tr style="border-bottom: 1px solid var(--color-gray-200);">
+                        <td style="padding: 12px 16px;"><strong>Max-width</strong></td>
+                        <td style="padding: 12px 16px;">1200px</td>
+                    </tr>
+                    <tr style="border-bottom: 1px solid var(--color-gray-200);">
+                        <td style="padding: 12px 16px;"><strong>Custom Label violet</strong></td>
+                        <td style="padding: 12px 16px;">DS Label: 12px/500/140%/0.5px · #7C3AED sur #EDE9FE · pill</td>
+                    </tr>
+                    <tr style="border-bottom: 1px solid var(--color-gray-200);">
+                        <td style="padding: 12px 16px;"><strong>Titre H2</strong></td>
+                        <td style="padding: 12px 16px;">DS H2: 40px/700/120%/-0.5px desktop → 28px mobile · mot-clé en gradient</td>
+                    </tr>
+                    <tr style="border-bottom: 1px solid var(--color-gray-200);">
+                        <td style="padding: 12px 16px;"><strong>Sous-titre</strong></td>
+                        <td style="padding: 12px 16px;">DS Body Large: 18px/400/160% · #4A4A4A · max-width 700px</td>
+                    </tr>
+                    <tr style="border-bottom: 1px solid var(--color-gray-200);">
+                        <td style="padding: 12px 16px;"><strong>Header → Grid gap</strong></td>
+                        <td style="padding: 12px 16px;">48px</td>
+                    </tr>
+                    <tr style="border-bottom: 1px solid var(--color-gray-200);">
+                        <td style="padding: 12px 16px;"><strong>Grille 6</strong></td>
+                        <td style="padding: 12px 16px;">2 colonnes · gap 24px · → 1 col &lt;1000px</td>
+                    </tr>
+                    <tr style="border-bottom: 1px solid var(--color-gray-200);">
+                        <td style="padding: 12px 16px;"><strong>Grille 4</strong></td>
+                        <td style="padding: 12px 16px;">4 colonnes · gap 24px · → 2 col &lt;1000px → 1 col &lt;600px</td>
+                    </tr>
+                    <tr style="border-bottom: 1px solid var(--color-gray-200);">
+                        <td style="padding: 12px 16px;"><strong>Card 6 (horizontal)</strong></td>
+                        <td style="padding: 12px 16px;">Icône 48×48 · radius 8px · fond gris #F3F4F6 · emoji 24px</td>
+                    </tr>
+                    <tr style="border-bottom: 1px solid var(--color-gray-200);">
+                        <td style="padding: 12px 16px;"><strong>Card 4 (centré)</strong></td>
+                        <td style="padding: 12px 16px;">Icône 56×56 · radius 12px · fond gris #F3F4F6 · emoji 28px</td>
+                    </tr>
+                    <tr style="border-bottom: 1px solid var(--color-gray-200);">
+                        <td style="padding: 12px 16px;"><strong>Titre card</strong></td>
+                        <td style="padding: 12px 16px;">15px/600 · #1A1A1A</td>
+                    </tr>
+                    <tr style="border-bottom: 1px solid var(--color-gray-200);">
+                        <td style="padding: 12px 16px;"><strong>Description card</strong></td>
+                        <td style="padding: 12px 16px;">13px/400/150% · #4B5563</td>
+                    </tr>
+                    <tr style="border-bottom: 1px solid var(--color-gray-200);">
+                        <td style="padding: 12px 16px;"><strong>Card border</strong></td>
+                        <td style="padding: 12px 16px;">1px solid #E5E7EB · radius 12px · padding 24px</td>
+                    </tr>
+                    <tr style="border-bottom: 1px solid var(--color-gray-200);">
+                        <td style="padding: 12px 16px;"><strong>Hover</strong></td>
+                        <td style="padding: 12px 16px;">translateY(-4px) + shadow-md</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 12px 16px;"><strong>Fond section</strong></td>
+                        <td style="padding: 12px 16px;">Blanc (#FFF) ou Gris (#F3F4F6) · Cards toujours blanches</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h4 style="font-size: 14px; font-weight: 600; margin-top: 24px; margin-bottom: 12px;">Composants DS utilisés :</h4>
+            <ul style="font-size: 13px; color: var(--color-text-gray); list-style: none; padding: 0;">
+                <li style="margin-bottom: 6px;">→ <strong>C10</strong> Card Solution/Bénéfices (variante 6 horizontal + variante 4 centré)</li>
+                <li style="margin-bottom: 6px;">→ <strong>Custom Label violet</strong> (#EDE9FE + #7C3AED) — PAS de badge vert dans la section</li>
+                <li style="margin-bottom: 6px;">→ <strong>H2</strong> gradient (DS typo)</li>
+                <li>→ <strong>Body Large</strong> sous-titre (DS typo)</li>
+            </ul>
+
+            <h4 style="font-size: 14px; font-weight: 600; margin-top: 24px; margin-bottom: 12px;">Usage par page :</h4>
+            <table style="width: 100%; border-collapse: collapse; font-size: 13px;">
+                <thead>
+                    <tr style="background: var(--color-gray-100);">
+                        <th style="padding: 10px 16px; text-align: left; font-weight: 600;">Page</th>
+                        <th style="padding: 10px 16px; text-align: left; font-weight: 600;">Variante</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr style="border-bottom: 1px solid var(--color-gray-200);"><td style="padding: 10px 16px;">Académie</td><td style="padding: 10px 16px;">Grille 6</td></tr>
+                    <tr style="border-bottom: 1px solid var(--color-gray-200);"><td style="padding: 10px 16px;">Prépas</td><td style="padding: 10px 16px;">Grille 6</td></tr>
+                    <tr style="border-bottom: 1px solid var(--color-gray-200);"><td style="padding: 10px 16px;">Suite IA Hub / Outil</td><td style="padding: 10px 16px;">Grille 6</td></tr>
+                    <tr style="border-bottom: 1px solid var(--color-gray-200);"><td style="padding: 10px 16px;">Homepage</td><td style="padding: 10px 16px;">Grille 4</td></tr>
+                    <tr style="border-bottom: 1px solid var(--color-gray-200);"><td style="padding: 10px 16px;">Fiches (générale + matière)</td><td style="padding: 10px 16px;">Grille 4</td></tr>
+                    <tr style="border-bottom: 1px solid var(--color-gray-200);"><td style="padding: 10px 16px;">Cours (niveau + matière)</td><td style="padding: 10px 16px;">Grille 4</td></tr>
+                    <tr><td style="padding: 10px 16px;">Page Support</td><td style="padding: 10px 16px;">Grille 4</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+</html>

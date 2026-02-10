@@ -1,0 +1,1134 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>structure/07-catalogue-matieres — Pattern Section Catalogue Matières</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* =========================================
+           TOKENS JURIBLE (DS)
+           ========================================= */
+        :root {
+            /* Colors */
+            --color-primary: #B0001D;
+            --color-secondary: #7C3AED;
+            --color-white: #FFFFFF;
+            --color-black: #1A1A1A;
+            --color-gray-100: #F3F4F6;
+            --color-gray-200: #E5E7EB;
+            --color-gray-400: #9CA3AF;
+            --color-gray-700: #374151;
+            --color-text-dark: #1A1A1A;
+            --color-text-gray: #4A4A4A;
+            --color-text-muted: #9CA3AF;
+            --color-success: #10B981;
+            --color-success-dark: #065F46;
+            --color-violet-light: #EDE9FE;
+            --gradient: linear-gradient(135deg, #B0001D 0%, #7C3AED 100%);
+
+            /* Spacing */
+            --space-xs: 8px;
+            --space-sm: 16px;
+            --space-md: 24px;
+            --space-lg: 32px;
+            --space-xl: 48px;
+            --section-padding-y: 80px;
+            --section-padding-y-mobile: 48px;
+
+            /* Radius */
+            --radius-md: 8px;
+            --radius-lg: 12px;
+            --radius-full: 9999px;
+
+            /* Shadows */
+            --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.1), 0 1px 2px rgba(0, 0, 0, 0.06);
+            --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1), 0 4px 6px rgba(0, 0, 0, 0.05);
+
+            /* Transitions */
+            --transition: all 150ms ease;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Poppins', sans-serif; background: #F9FAFB; color: var(--color-text-dark); }
+
+        /* =========================================
+           PAGE DE DOCUMENTATION (pas dans le pattern)
+           ========================================= */
+        .doc-wrapper {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 48px 24px;
+        }
+        .doc-title { font-size: 32px; font-weight: 700; margin-bottom: 8px; }
+        .doc-subtitle { font-size: 14px; color: var(--color-text-muted); margin-bottom: 48px; }
+        .variant-label {
+            font-size: 11px; font-weight: 600; color: var(--color-text-muted);
+            text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 16px;
+            background: var(--color-gray-100); display: inline-block;
+            padding: 8px 16px; border-radius: var(--radius-md);
+        }
+        .variant-separator { height: 1px; background: var(--color-gray-200); margin: 64px 0; }
+
+        /* =========================================
+           SECTION CATALOGUE MATIÈRES — WRAPPER
+           ========================================= */
+        .section-catalogue {
+            padding: var(--section-padding-y) 0;
+            background: var(--color-white);
+        }
+
+        .section-catalogue--gray {
+            background: var(--color-gray-100);
+        }
+
+        .section-catalogue__inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* =========================================
+           SECTION HEADER
+           ========================================= */
+        .section-catalogue__header {
+            text-align: center;
+            margin-bottom: var(--space-lg);          /* 32px */
+        }
+
+        /* -----------------------------------------------
+           CUSTOM LABEL VIOLET — DS Token: Label
+           Specs: 12px / 500 / 140% / letter-spacing 0.5px
+           Couleur: #7C3AED texte sur #EDE9FE fond
+           Border-radius: full (pill)
+           Usage: AU-DESSUS de chaque H2 de section
+           NE PAS confondre avec les tags (is-style-tag-*)
+           ----------------------------------------------- */
+        .section-catalogue__label {
+            display: inline-block;
+            font-size: 12px;
+            font-weight: 500;
+            line-height: 140%;
+            letter-spacing: 0.5px;
+            color: var(--color-secondary);           /* #7C3AED */
+            background: var(--color-violet-light);   /* #EDE9FE */
+            padding: 6px 14px;
+            border-radius: var(--radius-full);       /* pill */
+            margin-bottom: var(--space-sm);          /* 16px */
+        }
+
+        /* -----------------------------------------------
+           H2 — DS Token: H2
+           Specs Desktop: 40px / 700 / 120% / letter-spacing -0.5px
+           Specs Mobile:  28px / 700 / 120% / letter-spacing -0.5px
+           Couleur: #1A1A1A (text-dark)
+           Gradient sur <span> : linear-gradient(135deg, #B0001D, #7C3AED)
+           ----------------------------------------------- */
+        .section-catalogue__title {
+            font-size: 40px;
+            font-weight: 700;
+            line-height: 120%;
+            letter-spacing: -0.5px;
+            color: var(--color-text-dark);           /* #1A1A1A */
+            margin-bottom: var(--space-xs);          /* 8px */
+        }
+
+        .section-catalogue__title span {
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* -----------------------------------------------
+           SOUS-TITRE — DS Token: Body Large
+           Specs: 18px / 400 / 160%
+           Couleur: #4A4A4A (text-gray)
+           ----------------------------------------------- */
+        .section-catalogue__subtitle {
+            font-size: 18px;
+            font-weight: 400;
+            line-height: 160%;
+            color: var(--color-text-gray);           /* #4A4A4A */
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* =========================================
+           ONGLETS / TABS NAVIGATION
+           ========================================= */
+        .section-catalogue__tabs {
+            display: flex;
+            justify-content: center;
+            gap: var(--space-xs);                    /* 8px */
+            margin-bottom: var(--space-xl);          /* 48px */
+            flex-wrap: wrap;
+        }
+
+        .section-catalogue__tab {
+            font-family: 'Poppins', sans-serif;
+            font-size: 14px;
+            font-weight: 500;
+            line-height: 140%;
+            letter-spacing: 0.5px;
+            color: var(--color-text-gray);           /* #4A4A4A */
+            background: var(--color-gray-100);       /* #F3F4F6 */
+            border: 1px solid var(--color-gray-200); /* #E5E7EB */
+            padding: 10px 20px;
+            border-radius: var(--radius-full);       /* pill */
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .section-catalogue__tab:hover {
+            background: var(--color-white);
+            border-color: var(--color-secondary);
+            color: var(--color-secondary);
+        }
+
+        .section-catalogue__tab.active {
+            background: var(--color-secondary);      /* #7C3AED */
+            color: var(--color-white);
+            border-color: var(--color-secondary);
+            font-weight: 600;
+        }
+
+        /* =========================================
+           GRILLE DE CARDS
+           3 colonnes desktop, 2 tablette, 1 mobile
+           ========================================= */
+        .section-catalogue__grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: var(--space-md);                    /* 24px */
+        }
+
+        /* Tab panels — show/hide */
+        .section-catalogue__panel {
+            display: none;
+        }
+        .section-catalogue__panel.active {
+            display: block;
+        }
+
+        /* =========================================
+           CARD COURS (HORIZONTALE)
+           Repris EXACTEMENT de C19-catalogue.html
+           Utilisé pour cours ET fiches (format uniforme)
+           ========================================= */
+        .card-cours {
+            background: var(--color-white);
+            border-radius: var(--radius-lg);         /* 12px */
+            border: 1px solid var(--color-gray-200); /* #E5E7EB */
+            box-shadow: var(--shadow-sm);
+            overflow: hidden;
+            transition: var(--transition);
+            cursor: pointer;
+        }
+
+        .section-catalogue--gray .card-cours {
+            background: var(--color-white);
+        }
+
+        .card-cours:hover {
+            box-shadow: var(--shadow-lg);
+            transform: translateY(-2px);
+        }
+
+        .card-cours:hover .card-cours__link {
+            color: var(--color-primary);
+        }
+
+        /* Image — fond sombre, 180px, placeholder */
+        .card-cours__image {
+            position: relative;
+            width: 100%;
+            height: 180px;
+            background: #2D2D2D;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+        }
+
+        .card-cours__image-icon {
+            font-size: 48px;
+            opacity: 0.5;
+        }
+
+        /* Badge populaire — en haut à gauche */
+        .card-cours__badge {
+            position: absolute;
+            top: 12px;
+            left: 12px;
+            background: var(--color-primary);        /* #B0001D */
+            color: var(--color-white);
+            font-size: 20px;
+            width: 40px;
+            height: 40px;
+            border-radius: var(--radius-md);         /* 8px */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Content */
+        .card-cours__content {
+            padding: var(--space-sm);                /* 16px */
+        }
+
+        /* -----------------------------------------------
+           Titre card — 18px / 600
+           Couleur: #1A1A1A (text-dark)
+           ----------------------------------------------- */
+        .card-cours__title {
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--color-text-dark);
+            margin-bottom: 12px;
+            line-height: 1.3;
+        }
+
+        /* Stats emoji */
+        .card-cours__stats {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px 16px;
+            margin-bottom: 16px;
+        }
+
+        .card-cours__stat {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 13px;
+            color: var(--color-text-muted);          /* #9CA3AF */
+        }
+
+        .card-cours__stat-icon {
+            font-size: 14px;
+        }
+
+        /* Label inclus — vert */
+        .card-cours__included {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 12px;
+            font-weight: 500;
+            color: var(--color-success);             /* #10B981 */
+            background: #ECFDF5;
+            padding: 6px 12px;
+            border-radius: var(--radius-full);       /* pill */
+            margin-bottom: 16px;
+        }
+
+        /* Footer */
+        .card-cours__footer {
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            padding-top: 12px;
+            border-top: 1px solid var(--color-gray-200);
+        }
+
+        .card-cours__link {
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--color-text-dark);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            transition: var(--transition);
+        }
+
+        .card-cours__link:hover {
+            color: var(--color-primary);
+        }
+
+        /* =========================================
+           CARD FICHES — CTA ACHETER
+           Ajouté dans le footer des cards fiches
+           ========================================= */
+        .card-cours__cta {
+            font-family: 'Poppins', sans-serif;
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--color-white);
+            background: var(--gradient);
+            border: none;
+            padding: 8px 16px;
+            border-radius: var(--radius-md);         /* 8px */
+            cursor: pointer;
+            transition: var(--transition);
+            white-space: nowrap;
+        }
+
+        .card-cours__cta:hover {
+            filter: brightness(1.1);
+            transform: translateY(-1px);
+        }
+
+        /* Footer fiches : prix à gauche, CTA + lien à droite */
+        .card-cours__footer--fiches {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 12px;
+            border-top: 1px solid var(--color-gray-200);
+            gap: var(--space-sm);
+        }
+
+        .card-cours__price-block {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .card-cours__price {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--color-text-dark);           /* #1A1A1A */
+        }
+
+        .card-cours__price-old {
+            font-size: 14px;
+            color: var(--color-text-muted);
+            text-decoration: line-through;
+        }
+
+        .card-cours__actions {
+            display: flex;
+            align-items: center;
+            gap: var(--space-xs);
+        }
+
+        /* =========================================
+           PACK-CARD
+           Repris EXACTEMENT de C12-pricing-fiches.html
+           Affiché en haut de la variante fiches
+           ========================================= */
+        .section-catalogue__pack {
+            margin-bottom: var(--space-xl);          /* 48px */
+        }
+
+        .pack-card {
+            display: grid;
+            grid-template-columns: 1fr 1.2fr;
+            background: var(--color-white);
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            box-shadow: var(--shadow-sm);
+            transition: var(--transition);
+        }
+
+        .pack-card:hover {
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1), 0 2px 4px rgba(0,0,0,0.06);
+            transform: translateY(-4px);
+        }
+
+        .pack-card__visual {
+            position: relative;
+            padding: var(--space-md);
+            background: #F9FAFB;
+            display: flex;
+            flex-direction: column;
+            min-height: 450px;
+        }
+
+        .pack-card__badge-promo {
+            position: absolute;
+            top: var(--space-sm);
+            left: var(--space-sm);
+            background: var(--color-primary);
+            color: var(--color-white);
+            font-size: 12px;
+            font-weight: 600;
+            padding: 6px 12px;
+            border-radius: var(--radius-md);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            z-index: 2;
+        }
+
+        .pack-card__mockup {
+            background: var(--color-white);
+            border-radius: var(--radius-lg);
+            padding: var(--space-md);
+            box-shadow: var(--shadow-sm);
+            margin-bottom: var(--space-sm);
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .pack-card__mockup-header {
+            height: 60px;
+            background: var(--gradient);
+            border-radius: var(--radius-md) var(--radius-md) 0 0;
+            margin: calc(-1 * var(--space-md));
+            margin-bottom: var(--space-md);
+        }
+
+        .pack-card__mockup-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            flex: 1;
+            padding: var(--space-md) 0;
+        }
+
+        .pack-card__mockup-icon { font-size: 48px; margin-bottom: var(--space-xs); }
+        .pack-card__mockup-label { font-size: 14px; color: var(--color-text-muted); }
+
+        .pack-card__mockup-lines {
+            width: 80%;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            margin-top: var(--space-md);
+        }
+
+        .pack-card__mockup-line {
+            height: 8px;
+            background: var(--color-gray-200);
+            border-radius: 4px;
+        }
+        .pack-card__mockup-line:nth-child(2) { width: 85%; }
+        .pack-card__mockup-line:nth-child(3) { width: 70%; }
+        .pack-card__mockup-line:nth-child(4) { width: 90%; }
+        .pack-card__mockup-line:nth-child(5) { width: 60%; }
+
+        .pack-card__thumbnails {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 8px;
+        }
+
+        .pack-card__thumbnail {
+            background: var(--color-white);
+            border: 1px solid var(--color-gray-200);
+            border-radius: 6px;
+            padding: 10px 6px;
+            text-align: center;
+            font-size: 10px;
+            color: #4B5563;
+            transition: var(--transition);
+        }
+
+        .pack-card__thumbnail:hover {
+            border-color: var(--color-success);
+            background: #ECFDF5;
+        }
+
+        .pack-card__info {
+            padding: var(--space-lg);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .pack-card__tags {
+            display: flex;
+            gap: var(--space-xs);
+            margin-bottom: var(--space-sm);
+        }
+
+        .pack-card__tag {
+            padding: 5px 12px;
+            border-radius: var(--radius-full);
+            font-size: 12px;
+            font-weight: 600;
+        }
+        .pack-card__tag--pack { background: var(--color-success); color: var(--color-white); }
+        .pack-card__tag--level { background: var(--color-white); color: #4B5563; border: 1px solid var(--color-gray-200); }
+
+        .pack-card__title { font-size: 24px; font-weight: 700; color: var(--color-text-dark); margin-bottom: var(--space-xs); }
+        .pack-card__description { font-size: 14px; color: #4B5563; margin-bottom: var(--space-sm); }
+
+        .pack-card__rating {
+            display: flex;
+            align-items: center;
+            gap: var(--space-xs);
+            margin-bottom: var(--space-md);
+            font-size: 14px;
+            color: #4B5563;
+        }
+        .pack-card__stars { color: #F59E0B; }
+        .pack-card__rating-score { font-weight: 600; color: var(--color-text-dark); }
+
+        .pack-card__pricing {
+            background: #F9FAFB;
+            border-radius: var(--radius-lg);
+            padding: var(--space-md);
+            margin-bottom: var(--space-md);
+        }
+
+        .pack-card__price-row { display: flex; align-items: center; gap: var(--space-sm); margin-bottom: var(--space-xs); }
+        .pack-card__price { font-size: 36px; font-weight: 700; color: var(--color-text-dark); }
+        .pack-card__price-old { font-size: 18px; color: var(--color-text-muted); text-decoration: line-through; }
+        .pack-card__price-discount { background: #ECFDF5; color: #065F46; font-size: 14px; font-weight: 700; padding: 4px 10px; border-radius: var(--radius-md); }
+        .pack-card__savings { font-size: 14px; color: var(--color-success); font-weight: 600; margin-bottom: 4px; }
+        .pack-card__payment-info { font-size: 12px; color: var(--color-text-muted); }
+
+        .pack-card__cta {
+            width: 100%;
+            padding: 14px var(--space-md);
+            font-family: 'Poppins', sans-serif;
+            font-size: 15px;
+            font-weight: 600;
+            border-radius: var(--radius-md);
+            cursor: pointer;
+            transition: var(--transition);
+            text-align: center;
+            background: var(--gradient);
+            color: var(--color-white);
+            border: none;
+            margin-bottom: var(--space-xs);
+        }
+        .pack-card__cta:hover { filter: brightness(1.1); transform: translateY(-1px); }
+        .pack-card__secure { font-size: 12px; color: var(--color-text-muted); text-align: center; margin-bottom: var(--space-md); }
+
+        .pack-card__reassurance { display: flex; flex-direction: column; gap: var(--space-xs); margin-top: auto; }
+
+        .pack-card__guarantee {
+            display: flex;
+            align-items: center;
+            gap: var(--space-sm);
+            border-radius: var(--radius-md);
+            padding: var(--space-sm);
+            background: #ECFDF5;
+        }
+        .pack-card__guarantee--author { background: var(--color-violet-light); }
+
+        .pack-card__guarantee-icon {
+            width: 40px; height: 40px;
+            background: var(--color-success);
+            border-radius: var(--radius-md);
+            display: flex; align-items: center; justify-content: center;
+            font-size: 20px; flex-shrink: 0;
+        }
+        .pack-card__guarantee-icon--violet { background: var(--color-secondary); }
+
+        .pack-card__guarantee-text { font-size: 13px; }
+        .pack-card__guarantee-title { font-weight: 600; color: #065F46; }
+        .pack-card__guarantee-title--violet { color: #5B21B6; }
+        .pack-card__guarantee-desc { color: #065F46; opacity: 0.8; }
+        .pack-card__guarantee--author .pack-card__guarantee-desc { color: #5B21B6; }
+
+        /* =========================================
+           RESPONSIVE
+           ========================================= */
+        @media (max-width: 1000px) {
+            .section-catalogue__grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .pack-card {
+                grid-template-columns: 1fr;
+            }
+            .pack-card__visual {
+                min-height: 300px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .section-catalogue {
+                padding: var(--section-padding-y-mobile) 0;
+            }
+            .section-catalogue__inner {
+                padding: 0 16px;
+            }
+            /* H2 mobile — DS Token: H2 mobile = 28px */
+            .section-catalogue__title {
+                font-size: 28px;
+            }
+            /* Body Large mobile — DS Token: 16px */
+            .section-catalogue__subtitle {
+                font-size: 16px;
+            }
+            .section-catalogue__tabs {
+                gap: 6px;
+            }
+            .section-catalogue__tab {
+                font-size: 13px;
+                padding: 8px 16px;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .section-catalogue__grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="doc-wrapper">
+        <h1 class="doc-title">structure/07-catalogue-matieres</h1>
+        <p class="doc-subtitle">Pattern Section — Tabs navigation par niveau + grille de cards C19 Catalogue · 2 variantes (cours / fiches)</p>
+
+        <!-- ===========================================
+             VARIANTE 1 : CATALOGUE COURS (fond blanc)
+             Usage: Pages Cours Niveaux, Cours Matière
+             =========================================== -->
+        <div class="variant-label">Variante 1 — Catalogue Cours · Tabs + grille 3 col · Fond blanc</div>
+
+        <section class="section-catalogue">
+            <div class="section-catalogue__inner">
+                <div class="section-catalogue__header">
+                    <span class="section-catalogue__label">📚 Nos cours</span>
+                    <h2 class="section-catalogue__title">Explore nos cours par <span>niveau</span></h2>
+                    <p class="section-catalogue__subtitle">+20 matières couvrant tout le programme de la L1 au Master. Vidéos, fiches, QCM et exercices corrigés.</p>
+                </div>
+
+                <!-- TABS -->
+                <div class="section-catalogue__tabs">
+                    <button class="section-catalogue__tab active" data-tab="l1">L1 Droit</button>
+                    <button class="section-catalogue__tab" data-tab="l2">L2 Droit</button>
+                    <button class="section-catalogue__tab" data-tab="l3">L3 Droit</button>
+                    <button class="section-catalogue__tab" data-tab="capacite">Capacité</button>
+                    <button class="section-catalogue__tab" data-tab="master">Master</button>
+                </div>
+
+                <!-- PANEL L1 -->
+                <div class="section-catalogue__panel active" data-panel="l1">
+                    <div class="section-catalogue__grid">
+                        <!-- Card 1 -->
+                        <div class="card-cours">
+                            <div class="card-cours__image">
+                                <span class="card-cours__image-icon">🎬</span>
+                                <div class="card-cours__badge">🔥</div>
+                            </div>
+                            <div class="card-cours__content">
+                                <h3 class="card-cours__title">Droit constitutionnel</h3>
+                                <div class="card-cours__stats">
+                                    <span class="card-cours__stat"><span class="card-cours__stat-icon">🎬</span> 32 vidéos</span>
+                                    <span class="card-cours__stat"><span class="card-cours__stat-icon">📄</span> 45 fiches</span>
+                                    <span class="card-cours__stat"><span class="card-cours__stat-icon">❓</span> 120 QCM</span>
+                                    <span class="card-cours__stat"><span class="card-cours__stat-icon">🎴</span> 80 flashcards</span>
+                                    <span class="card-cours__stat"><span class="card-cours__stat-icon">📝</span> 15 annales</span>
+                                    <span class="card-cours__stat"><span class="card-cours__stat-icon">🧠</span> 8 mindmaps</span>
+                                </div>
+                                <div class="card-cours__included">✓ Inclus dans l'Académie</div>
+                                <div class="card-cours__footer">
+                                    <a href="#" class="card-cours__link">Voir le cours →</a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Card 2 -->
+                        <div class="card-cours">
+                            <div class="card-cours__image">
+                                <span class="card-cours__image-icon">🎬</span>
+                            </div>
+                            <div class="card-cours__content">
+                                <h3 class="card-cours__title">Introduction au droit</h3>
+                                <div class="card-cours__stats">
+                                    <span class="card-cours__stat"><span class="card-cours__stat-icon">🎬</span> 28 vidéos</span>
+                                    <span class="card-cours__stat"><span class="card-cours__stat-icon">📄</span> 38 fiches</span>
+                                    <span class="card-cours__stat"><span class="card-cours__stat-icon">❓</span> 95 QCM</span>
+                                    <span class="card-cours__stat"><span class="card-cours__stat-icon">🎴</span> 60 flashcards</span>
+                                </div>
+                                <div class="card-cours__included">✓ Inclus dans l'Académie</div>
+                                <div class="card-cours__footer">
+                                    <a href="#" class="card-cours__link">Voir le cours →</a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Card 3 -->
+                        <div class="card-cours">
+                            <div class="card-cours__image">
+                                <span class="card-cours__image-icon">🎬</span>
+                                <div class="card-cours__badge">🔥</div>
+                            </div>
+                            <div class="card-cours__content">
+                                <h3 class="card-cours__title">Droit de la famille</h3>
+                                <div class="card-cours__stats">
+                                    <span class="card-cours__stat"><span class="card-cours__stat-icon">🎬</span> 25 vidéos</span>
+                                    <span class="card-cours__stat"><span class="card-cours__stat-icon">📄</span> 35 fiches</span>
+                                    <span class="card-cours__stat"><span class="card-cours__stat-icon">❓</span> 80 QCM</span>
+                                    <span class="card-cours__stat"><span class="card-cours__stat-icon">🧠</span> 5 mindmaps</span>
+                                </div>
+                                <div class="card-cours__included">✓ Inclus dans l'Académie</div>
+                                <div class="card-cours__footer">
+                                    <a href="#" class="card-cours__link">Voir le cours →</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- PANEL L2 (exemple avec contenu) -->
+                <div class="section-catalogue__panel" data-panel="l2">
+                    <div class="section-catalogue__grid">
+                        <div class="card-cours">
+                            <div class="card-cours__image">
+                                <span class="card-cours__image-icon">🎬</span>
+                            </div>
+                            <div class="card-cours__content">
+                                <h3 class="card-cours__title">Droit des obligations</h3>
+                                <div class="card-cours__stats">
+                                    <span class="card-cours__stat"><span class="card-cours__stat-icon">🎬</span> 40 vidéos</span>
+                                    <span class="card-cours__stat"><span class="card-cours__stat-icon">📄</span> 52 fiches</span>
+                                    <span class="card-cours__stat"><span class="card-cours__stat-icon">❓</span> 150 QCM</span>
+                                </div>
+                                <div class="card-cours__included">✓ Inclus dans l'Académie</div>
+                                <div class="card-cours__footer">
+                                    <a href="#" class="card-cours__link">Voir le cours →</a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card-cours">
+                            <div class="card-cours__image">
+                                <span class="card-cours__image-icon">🎬</span>
+                                <div class="card-cours__badge">🔥</div>
+                            </div>
+                            <div class="card-cours__content">
+                                <h3 class="card-cours__title">Droit administratif</h3>
+                                <div class="card-cours__stats">
+                                    <span class="card-cours__stat"><span class="card-cours__stat-icon">🎬</span> 35 vidéos</span>
+                                    <span class="card-cours__stat"><span class="card-cours__stat-icon">📄</span> 48 fiches</span>
+                                    <span class="card-cours__stat"><span class="card-cours__stat-icon">❓</span> 130 QCM</span>
+                                </div>
+                                <div class="card-cours__included">✓ Inclus dans l'Académie</div>
+                                <div class="card-cours__footer">
+                                    <a href="#" class="card-cours__link">Voir le cours →</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- PANELS L3, Capacité, Master (vides — peuplés dynamiquement en WP) -->
+                <div class="section-catalogue__panel" data-panel="l3">
+                    <div class="section-catalogue__grid">
+                        <p style="grid-column: 1/-1; text-align: center; color: var(--color-text-muted); padding: 48px 0;">Contenu L3 chargé dynamiquement via WP</p>
+                    </div>
+                </div>
+                <div class="section-catalogue__panel" data-panel="capacite">
+                    <div class="section-catalogue__grid">
+                        <p style="grid-column: 1/-1; text-align: center; color: var(--color-text-muted); padding: 48px 0;">Contenu Capacité chargé dynamiquement via WP</p>
+                    </div>
+                </div>
+                <div class="section-catalogue__panel" data-panel="master">
+                    <div class="section-catalogue__grid">
+                        <p style="grid-column: 1/-1; text-align: center; color: var(--color-text-muted); padding: 48px 0;">Contenu Master chargé dynamiquement via WP</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="variant-separator"></div>
+
+        <!-- ===========================================
+             VARIANTE 2 : CATALOGUE FICHES (fond gris)
+             Usage: Page Fiches (SureCart)
+             Pack-card en haut + grille cards horizontales avec CTA
+             =========================================== -->
+        <div class="variant-label">Variante 2 — Catalogue Fiches · Pack en haut + Tabs + grille avec CTA Acheter · Fond gris</div>
+
+        <section class="section-catalogue section-catalogue--gray">
+            <div class="section-catalogue__inner">
+                <div class="section-catalogue__header">
+                    <span class="section-catalogue__label">📄 Nos fiches</span>
+                    <h2 class="section-catalogue__title">Trouvez vos fiches par <span>matière</span></h2>
+                    <p class="section-catalogue__subtitle">Des fiches PDF prêtes à imprimer, rédigées par des enseignants en droit. Tout le programme synthétisé.</p>
+                </div>
+
+                <!-- TABS -->
+                <div class="section-catalogue__tabs">
+                    <button class="section-catalogue__tab active" data-tab="f-l1">L1 Droit</button>
+                    <button class="section-catalogue__tab" data-tab="f-l2">L2 Droit</button>
+                    <button class="section-catalogue__tab" data-tab="f-l3">L3 Droit</button>
+                    <button class="section-catalogue__tab" data-tab="f-capacite">Capacité</button>
+                </div>
+
+                <!-- PANEL FICHES L1 -->
+                <div class="section-catalogue__panel active" data-panel="f-l1">
+
+                    <!-- ★ PACK-CARD EN HAUT (C12)
+                         Repris exactement de C12-pricing-fiches.html -->
+                    <div class="section-catalogue__pack">
+                        <div class="pack-card">
+                            <div class="pack-card__visual">
+                                <span class="pack-card__badge-promo">🎁 1 matière offerte</span>
+                                <div class="pack-card__mockup">
+                                    <div class="pack-card__mockup-header"></div>
+                                    <div class="pack-card__mockup-content">
+                                        <span class="pack-card__mockup-icon">📚</span>
+                                        <span class="pack-card__mockup-label">Pack Fiches L1</span>
+                                        <div class="pack-card__mockup-lines">
+                                            <div class="pack-card__mockup-line"></div>
+                                            <div class="pack-card__mockup-line"></div>
+                                            <div class="pack-card__mockup-line"></div>
+                                            <div class="pack-card__mockup-line"></div>
+                                            <div class="pack-card__mockup-line"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="pack-card__thumbnails">
+                                    <div class="pack-card__thumbnail">Constit S1</div>
+                                    <div class="pack-card__thumbnail">Constit S2</div>
+                                    <div class="pack-card__thumbnail">Intro</div>
+                                    <div class="pack-card__thumbnail">Famille</div>
+                                    <div class="pack-card__thumbnail">Personnes</div>
+                                    <div class="pack-card__thumbnail">Instit.</div>
+                                    <div class="pack-card__thumbnail">Biens</div>
+                                    <div class="pack-card__thumbnail">Histoire</div>
+                                </div>
+                            </div>
+                            <div class="pack-card__info">
+                                <div class="pack-card__tags">
+                                    <span class="pack-card__tag pack-card__tag--pack">Pack complet</span>
+                                    <span class="pack-card__tag pack-card__tag--level">L1 Droit</span>
+                                </div>
+                                <h2 class="pack-card__title">Pack Fiches L1 Droit</h2>
+                                <p class="pack-card__description">8 matières complètes pour réussir vos partiels.</p>
+                                <div class="pack-card__rating">
+                                    <span class="pack-card__stars">⭐⭐⭐⭐⭐</span>
+                                    <span class="pack-card__rating-score">4,7/5</span>
+                                    <span>— 150+ avis vérifiés</span>
+                                </div>
+                                <div class="pack-card__pricing">
+                                    <div class="pack-card__price-row">
+                                        <span class="pack-card__price">133€</span>
+                                        <span class="pack-card__price-old">152€</span>
+                                        <span class="pack-card__price-discount">-19€</span>
+                                    </div>
+                                    <p class="pack-card__savings">✨ Économisez 19€ (1 matière offerte)</p>
+                                    <p class="pack-card__payment-info">Paiement unique · Accès à vie · 📥 PDF téléchargeables</p>
+                                </div>
+                                <button class="pack-card__cta">📚 Acheter le Pack — 133€</button>
+                                <p class="pack-card__secure">🔒 Paiement sécurisé</p>
+                                <div class="pack-card__reassurance">
+                                    <div class="pack-card__guarantee">
+                                        <div class="pack-card__guarantee-icon">🛡️</div>
+                                        <div class="pack-card__guarantee-text">
+                                            <p class="pack-card__guarantee-title">Garantie "Réussite ou Remboursé"</p>
+                                            <p class="pack-card__guarantee-desc">Pas la moyenne ? On vous rembourse.</p>
+                                        </div>
+                                    </div>
+                                    <div class="pack-card__guarantee pack-card__guarantee--author">
+                                        <div class="pack-card__guarantee-icon pack-card__guarantee-icon--violet">👨‍🏫</div>
+                                        <div class="pack-card__guarantee-text">
+                                            <p class="pack-card__guarantee-title pack-card__guarantee-title--violet">Rédigé par des enseignants en droit</p>
+                                            <p class="pack-card__guarantee-desc">Contenu vérifié et à jour.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- ★ GRILLE FICHES UNITÉ avec CTA Acheter -->
+                    <div class="section-catalogue__grid">
+                        <!-- Card fiche 1 -->
+                        <div class="card-cours">
+                            <div class="card-cours__image" style="background: var(--color-gray-100);">
+                                <span class="card-cours__image-icon" style="opacity: 1;">📘</span>
+                            </div>
+                            <div class="card-cours__content">
+                                <h3 class="card-cours__title">Droit Constitutionnel S1</h3>
+                                <div class="card-cours__stats">
+                                    <span class="card-cours__stat"><span class="card-cours__stat-icon">📄</span> 50 pages PDF</span>
+                                    <span class="card-cours__stat"><span class="card-cours__stat-icon">🧠</span> 5 mindmaps</span>
+                                </div>
+                                <div class="card-cours__included">✓ Consultable dans l'Académie</div>
+                                <div class="card-cours__footer--fiches">
+                                    <div class="card-cours__price-block">
+                                        <span class="card-cours__price">19€</span>
+                                    </div>
+                                    <div class="card-cours__actions">
+                                        <button class="card-cours__cta">Acheter</button>
+                                        <a href="#" class="card-cours__link">Voir →</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Card fiche 2 -->
+                        <div class="card-cours">
+                            <div class="card-cours__image" style="background: var(--color-gray-100);">
+                                <span class="card-cours__image-icon" style="opacity: 1;">📘</span>
+                            </div>
+                            <div class="card-cours__content">
+                                <h3 class="card-cours__title">Droit Constitutionnel S2</h3>
+                                <div class="card-cours__stats">
+                                    <span class="card-cours__stat"><span class="card-cours__stat-icon">📄</span> 45 pages PDF</span>
+                                    <span class="card-cours__stat"><span class="card-cours__stat-icon">🧠</span> 4 mindmaps</span>
+                                </div>
+                                <div class="card-cours__included">✓ Consultable dans l'Académie</div>
+                                <div class="card-cours__footer--fiches">
+                                    <div class="card-cours__price-block">
+                                        <span class="card-cours__price">19€</span>
+                                    </div>
+                                    <div class="card-cours__actions">
+                                        <button class="card-cours__cta">Acheter</button>
+                                        <a href="#" class="card-cours__link">Voir →</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Card fiche 3 — avec réduction -->
+                        <div class="card-cours">
+                            <div class="card-cours__image" style="background: var(--color-gray-100);">
+                                <span class="card-cours__image-icon" style="opacity: 1;">📘</span>
+                            </div>
+                            <div class="card-cours__content">
+                                <h3 class="card-cours__title">Introduction au droit</h3>
+                                <div class="card-cours__stats">
+                                    <span class="card-cours__stat"><span class="card-cours__stat-icon">📄</span> 42 pages PDF</span>
+                                    <span class="card-cours__stat"><span class="card-cours__stat-icon">🧠</span> 4 mindmaps</span>
+                                </div>
+                                <div class="card-cours__included">✓ Consultable dans l'Académie</div>
+                                <div class="card-cours__footer--fiches">
+                                    <div class="card-cours__price-block">
+                                        <span class="card-cours__price">14€</span>
+                                        <span class="card-cours__price-old">19€</span>
+                                    </div>
+                                    <div class="card-cours__actions">
+                                        <button class="card-cours__cta">Acheter</button>
+                                        <a href="#" class="card-cours__link">Voir →</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Panels vides -->
+                <div class="section-catalogue__panel" data-panel="f-l2">
+                    <div class="section-catalogue__grid">
+                        <p style="grid-column: 1/-1; text-align: center; color: var(--color-text-muted); padding: 48px 0;">Pack L2 + fiches chargés dynamiquement via SureCart</p>
+                    </div>
+                </div>
+                <div class="section-catalogue__panel" data-panel="f-l3">
+                    <div class="section-catalogue__grid">
+                        <p style="grid-column: 1/-1; text-align: center; color: var(--color-text-muted); padding: 48px 0;">Pack L3 + fiches chargés dynamiquement via SureCart</p>
+                    </div>
+                </div>
+                <div class="section-catalogue__panel" data-panel="f-capacite">
+                    <div class="section-catalogue__grid">
+                        <p style="grid-column: 1/-1; text-align: center; color: var(--color-text-muted); padding: 48px 0;">Fiches Capacité chargées dynamiquement via SureCart</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===========================================
+             SPECS
+             =========================================== -->
+        <div style="background: white; border-radius: 12px; padding: 32px; margin-top: 64px; border: 1px solid var(--color-gray-200);">
+            <h3 style="font-size: 18px; font-weight: 700; margin-bottom: 24px;">📐 Specs — structure/07-catalogue-matieres</h3>
+
+            <table style="width: 100%; border-collapse: collapse; font-size: 13px;">
+                <thead>
+                    <tr style="background: var(--color-gray-100);">
+                        <th style="padding: 12px 16px; text-align: left; font-weight: 600;">Élément</th>
+                        <th style="padding: 12px 16px; text-align: left; font-weight: 600;">Specs</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr style="border-bottom: 1px solid var(--color-gray-200);">
+                        <td style="padding: 12px 16px;"><strong>Section padding</strong></td>
+                        <td style="padding: 12px 16px;">80px top/bottom desktop · 48px mobile · 24px sides (16px mobile)</td>
+                    </tr>
+                    <tr style="border-bottom: 1px solid var(--color-gray-200);">
+                        <td style="padding: 12px 16px;"><strong>Max-width</strong></td>
+                        <td style="padding: 12px 16px;">1200px</td>
+                    </tr>
+                    <tr style="border-bottom: 1px solid var(--color-gray-200);">
+                        <td style="padding: 12px 16px;"><strong>Custom Label violet</strong></td>
+                        <td style="padding: 12px 16px;">DS Label: 12px/500/140%/0.5px · #7C3AED sur #EDE9FE · pill</td>
+                    </tr>
+                    <tr style="border-bottom: 1px solid var(--color-gray-200);">
+                        <td style="padding: 12px 16px;"><strong>Titre H2</strong></td>
+                        <td style="padding: 12px 16px;">DS H2: 40px/700/120%/-0.5px → 28px mobile · mot gradient</td>
+                    </tr>
+                    <tr style="border-bottom: 1px solid var(--color-gray-200);">
+                        <td style="padding: 12px 16px;"><strong>Sous-titre</strong></td>
+                        <td style="padding: 12px 16px;">DS Body Large: 18px/400/160% · #4A4A4A · max-width 600px</td>
+                    </tr>
+                    <tr style="border-bottom: 1px solid var(--color-gray-200);">
+                        <td style="padding: 12px 16px;"><strong>Tabs</strong></td>
+                        <td style="padding: 12px 16px;">14px/500 · pill · bg gris #F3F4F6 · border #E5E7EB · Active: bg #7C3AED + white</td>
+                    </tr>
+                    <tr style="border-bottom: 1px solid var(--color-gray-200);">
+                        <td style="padding: 12px 16px;"><strong>Tabs → Grid gap</strong></td>
+                        <td style="padding: 12px 16px;">48px</td>
+                    </tr>
+                    <tr style="border-bottom: 1px solid var(--color-gray-200);">
+                        <td style="padding: 12px 16px;"><strong>Grille</strong></td>
+                        <td style="padding: 12px 16px;">3 colonnes · gap 24px · → 2 col &lt;1000px → 1 col &lt;600px</td>
+                    </tr>
+                    <tr style="border-bottom: 1px solid var(--color-gray-200);">
+                        <td style="padding: 12px 16px;"><strong>Card</strong></td>
+                        <td style="padding: 12px 16px;">Identique C19 Card Cours (horizontale) · format uniforme cours + fiches</td>
+                    </tr>
+                    <tr style="border-bottom: 1px solid var(--color-gray-200);">
+                        <td style="padding: 12px 16px;"><strong>Différence fiches</strong></td>
+                        <td style="padding: 12px 16px;">Image fond gris (mockup) + prix vert en footer · sinon même layout</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 12px 16px;"><strong>Fond section</strong></td>
+                        <td style="padding: 12px 16px;">Blanc (#FFF) ou Gris (#F3F4F6)</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h4 style="font-size: 14px; font-weight: 600; margin-top: 24px; margin-bottom: 12px;">Composants DS utilisés :</h4>
+            <ul style="font-size: 13px; color: var(--color-text-gray); list-style: none; padding: 0;">
+                <li style="margin-bottom: 6px;">→ <strong>C19</strong> Card Cours (format horizontal uniquement)</li>
+                <li style="margin-bottom: 6px;">→ <strong>Custom Label violet</strong> (#EDE9FE + #7C3AED)</li>
+                <li style="margin-bottom: 6px;">→ <strong>H2</strong> gradient (DS typo)</li>
+                <li style="margin-bottom: 6px;">→ <strong>Body Large</strong> sous-titre (DS typo)</li>
+                <li>→ <strong>Tabs navigation</strong> (nouveau composant — pill, active violet)</li>
+            </ul>
+
+            <h4 style="font-size: 14px; font-weight: 600; margin-top: 24px; margin-bottom: 12px;">Usage par page :</h4>
+            <table style="width: 100%; border-collapse: collapse; font-size: 13px;">
+                <thead>
+                    <tr style="background: var(--color-gray-100);">
+                        <th style="padding: 10px 16px; text-align: left; font-weight: 600;">Page</th>
+                        <th style="padding: 10px 16px; text-align: left; font-weight: 600;">Template</th>
+                        <th style="padding: 10px 16px; text-align: left; font-weight: 600;">Variante</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr style="border-bottom: 1px solid var(--color-gray-200);"><td style="padding: 10px 16px;">Cours par niveau</td><td style="padding: 10px 16px;">FSE</td><td style="padding: 10px 16px;">Catalogue Cours</td></tr>
+                    <tr style="border-bottom: 1px solid var(--color-gray-200);"><td style="padding: 10px 16px;">Cours par matière</td><td style="padding: 10px 16px;">FSE</td><td style="padding: 10px 16px;">Catalogue Cours</td></tr>
+                    <tr><td style="padding: 10px 16px;">Fiches</td><td style="padding: 10px 16px;">SureCart</td><td style="padding: 10px 16px;">Catalogue Fiches (même format horizontal)</td></tr>
+                </tbody>
+            </table>
+
+            <div style="margin-top: 24px; padding: 16px; background: #FEF9C3; border-radius: 8px; font-size: 13px; color: #854D0E;">
+                ⚠️ <strong>Note dev :</strong> Le contenu des cards sera dynamique (WP query pour les cours, SureCart pour les fiches). Les tabs filtrent par taxonomy "niveau". Le JS ci-dessous est un exemple statique pour la maquette uniquement.
+            </div>
+        </div>
+    </div>
+
+    <!-- Tabs JS (exemple maquette) -->
+    <script>
+        document.querySelectorAll('.section-catalogue__tab').forEach(tab => {
+            tab.addEventListener('click', () => {
+                const tabGroup = tab.closest('.section-catalogue__inner');
+                const targetPanel = tab.dataset.tab;
+
+                // Reset tabs
+                tabGroup.querySelectorAll('.section-catalogue__tab').forEach(t => t.classList.remove('active'));
+                tab.classList.add('active');
+
+                // Reset panels
+                tabGroup.querySelectorAll('.section-catalogue__panel').forEach(p => p.classList.remove('active'));
+                const panel = tabGroup.querySelector(`[data-panel="${targetPanel}"]`);
+                if (panel) panel.classList.add('active');
+            });
+        });
+    </script>
+</body>
+</html>

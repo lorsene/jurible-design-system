@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>structure/03-articles-grid — Grille articles</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* =========================================
+           TOKENS JURIBLE (DS)
+           ========================================= */
+        :root {
+            --color-primary: #B0001D;
+            --color-primary-hover: #8B0016;
+            --color-secondary: #7C3AED;
+            --color-white: #FFFFFF;
+            --color-black: #1A1A1A;
+            --color-gray-50: #F9FAFB;
+            --color-gray-100: #F3F4F6;
+            --color-gray-200: #E5E7EB;
+            --color-gray-400: #9CA3AF;
+            --color-text-dark: #1A1A1A;
+            --color-text-gray: #4A4A4A;
+            --color-text-muted: #6B7280;
+            --color-text-light: #9CA3AF;
+            --color-violet-light: #EDE9FE;
+            --gradient: linear-gradient(135deg, #B0001D 0%, #7C3AED 100%);
+
+            /* -----------------------------------------------
+               TAG CATÉGORIES BLOG — Système couleurs dev
+               Classe CSS: .card-article__tag--{slug}
+               Toutes les matières juridiques = 1 couleur (violet secondary)
+               ----------------------------------------------- */
+            --tag-methodologie: #10B981;          /* Vert */
+            --tag-conseils: #3B82F6;              /* Bleu */
+            --tag-culture: #F59E0B;               /* Ambre */
+            --tag-matiere: #7C3AED;               /* Violet — TOUTES matières juridiques */
+            --tag-orientation: #EF4444;           /* Rouge */
+            --tag-examens: #8B5CF6;               /* Violet clair */
+            --tag-vie-etudiante: #3B82F6;         /* Bleu (Info DS) — même que Conseils */
+            --tag-actualites: #F59E0B;            /* Ambre (Warning DS) — même que Culture */
+
+            /* Spacing */
+            --space-xs: 8px;
+            --space-sm: 16px;
+            --space-md: 24px;
+            --space-lg: 32px;
+            --space-xl: 48px;
+            --section-padding-y: 80px;
+            --section-padding-y-mobile: 48px;
+
+            /* Radius */
+            --radius-sm: 8px;
+            --radius-md: 12px;
+            --radius-lg: 16px;
+            --radius-full: 9999px;
+
+            /* Shadows */
+            --shadow-sm: 0 1px 3px rgba(0,0,0,0.1), 0 1px 2px rgba(0,0,0,0.06);
+            --shadow-md: 0 4px 6px rgba(0,0,0,0.07);
+            --shadow-lg: 0 10px 15px rgba(0,0,0,0.1), 0 4px 6px rgba(0,0,0,0.05);
+
+            --transition: all 200ms ease;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Poppins', sans-serif; background: #F9FAFB; color: var(--color-text-dark); }
+
+        /* Doc wrapper */
+        .doc-wrapper { max-width: 1400px; margin: 0 auto; padding: 48px 24px; }
+        .doc-title { font-size: 32px; font-weight: 700; margin-bottom: 8px; }
+        .doc-subtitle { font-size: 14px; color: var(--color-text-muted); margin-bottom: 48px; }
+        .variant-label {
+            font-size: 11px; font-weight: 600; color: var(--color-text-muted);
+            text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 16px;
+            background: var(--color-gray-100); display: inline-block;
+            padding: 8px 16px; border-radius: var(--radius-sm);
+        }
+        .variant-separator { height: 1px; background: var(--color-gray-200); margin: 64px 0; }
+
+        /* =========================================
+           SECTION WRAPPER (commun aux 3 patterns)
+           ========================================= */
+        .section-blog {
+            padding: var(--section-padding-y) 0;
+            background: var(--color-white);
+        }
+        .section-blog--gray { background: var(--color-gray-100); }
+
+        .section-blog__inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        .section-blog__header {
+            text-align: center;
+            margin-bottom: var(--space-xl);           /* 48px */
+        }
+
+        /* -----------------------------------------------
+           CUSTOM LABEL VIOLET — DS Token: Label
+           12px / 500 / 140% / 0.5px · #7C3AED sur #EDE9FE
+           ----------------------------------------------- */
+        .section-blog__label {
+            display: inline-block;
+            font-size: 12px;
+            font-weight: 500;
+            line-height: 140%;
+            letter-spacing: 0.5px;
+            color: var(--color-secondary);
+            background: var(--color-violet-light);
+            padding: 6px 14px;
+            border-radius: var(--radius-full);
+            margin-bottom: var(--space-sm);
+        }
+
+        /* -----------------------------------------------
+           H2 — DS Token: H2
+           40px / 700 / 120% / -0.5px → 28px mobile
+           ----------------------------------------------- */
+        .section-blog__title {
+            font-size: 40px;
+            font-weight: 700;
+            line-height: 120%;
+            letter-spacing: -0.5px;
+            color: var(--color-text-dark);
+            margin-bottom: var(--space-xs);
+        }
+        .section-blog__title span {
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* -----------------------------------------------
+           SOUS-TITRE — DS Token: Body Large
+           18px / 400 / 160% · #4A4A4A
+           ----------------------------------------------- */
+        .section-blog__subtitle {
+            font-size: 18px;
+            font-weight: 400;
+            line-height: 160%;
+            color: var(--color-text-gray);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* =========================================
+           CARD ARTICLE BLOG
+           Repris EXACTEMENT de C03-article-blog.html
+           ========================================= */
+        .card-article {
+            background: var(--color-white);
+            border-radius: var(--radius-lg);          /* 16px */
+            box-shadow: var(--shadow-sm);
+            overflow: hidden;
+            transition: var(--transition);
+            cursor: pointer;
+        }
+        .card-article:hover {
+            box-shadow: var(--shadow-lg);
+            transform: translateY(-4px);
+        }
+
+        /* Image */
+        .card-article__image {
+            width: 100%;
+            height: 180px;
+            background: var(--color-gray-100);
+            position: relative;
+            overflow: hidden;
+        }
+        .card-article__image-placeholder {
+            width: 100%; height: 100%;
+            display: flex; align-items: center; justify-content: center;
+            background: linear-gradient(135deg, var(--color-gray-100) 0%, var(--color-gray-200) 100%);
+        }
+        .card-article__image-placeholder svg {
+            width: 48px; height: 48px; color: var(--color-text-light); opacity: 0.5;
+        }
+
+        /* Content */
+        .card-article__content { padding: var(--space-md); }
+
+        /* Tag catégorie — 12px/600 · pill · fond couleur + texte blanc */
+        .card-article__tag {
+            display: inline-block;
+            padding: 6px 14px;
+            border-radius: var(--radius-full);
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--color-white);
+            margin-bottom: 12px;
+        }
+        .card-article__tag--methodologie { background: var(--tag-methodologie); }   /* Méthodologie */
+        .card-article__tag--conseils { background: var(--tag-conseils); }           /* Conseils études de droit */
+        .card-article__tag--culture { background: var(--tag-culture); }             /* Culture juridique */
+        .card-article__tag--matiere { background: var(--tag-matiere); }             /* Droit constit, civil, pénal, admin... */
+        .card-article__tag--orientation { background: var(--tag-orientation); }     /* Orientation */
+        .card-article__tag--examens { background: var(--tag-examens); }             /* Examens & Concours */
+        .card-article__tag--vie-etudiante { background: var(--tag-vie-etudiante); } /* Vie étudiante */
+        .card-article__tag--actualites { background: var(--tag-actualites); }       /* Actualités juridiques */
+
+        /* Titre card — 16px/600 · #1A1A1A · clamp 2 lignes */
+        .card-article__title {
+            font-size: 16px; font-weight: 600; color: var(--color-text-dark);
+            line-height: 1.4; margin-bottom: 8px;
+            display: -webkit-box; -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical; overflow: hidden;
+        }
+
+        /* Extrait — 14px/400 · #4A4A4A · clamp 2 lignes */
+        .card-article__excerpt {
+            font-size: 14px; font-weight: 400; color: var(--color-text-gray);
+            line-height: 1.6; margin-bottom: 16px;
+            display: -webkit-box; -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical; overflow: hidden;
+        }
+
+        /* Footer */
+        .card-article__footer {
+            display: flex; align-items: center; justify-content: space-between;
+        }
+        .card-article__meta {
+            font-size: 13px; font-weight: 400; color: var(--color-text-muted);
+        }
+        .card-article__link {
+            font-size: 14px; font-weight: 500; color: var(--color-primary);
+            text-decoration: none; display: flex; align-items: center; gap: 6px;
+            transition: all 150ms ease;
+        }
+        .card-article__link:hover { color: var(--color-primary-hover); gap: 10px; }
+        .card-article__link svg { width: 16px; height: 16px; }
+        .card-article:hover .card-article__link svg { transform: translateX(4px); }
+
+        /* Variante simple (sans extrait) */
+        .card-article--simple .card-article__content { padding: var(--space-sm) var(--space-md) var(--space-md); }
+        .card-article--simple .card-article__title { margin-bottom: 12px; }
+        .card-article--simple .card-article__meta { color: var(--tag-methodologie); font-size: 13px; }
+
+        /* SVG arrow réutilisable */
+        .arrow-svg { width: 16px; height: 16px; transition: transform 150ms ease; }
+
+        /* =========================================
+           PATTERN 1 : ARTICLE FEATURED
+           1 article mis en avant en grand format
+           ========================================= */
+        .article-featured {
+            display: grid;
+            grid-template-columns: 1.2fr 1fr;
+            gap: var(--space-lg);
+            background: var(--color-white);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-sm);
+            overflow: hidden;
+            transition: var(--transition);
+            cursor: pointer;
+        }
+        .article-featured:hover {
+            box-shadow: var(--shadow-lg);
+            transform: translateY(-4px);
+        }
+
+        .article-featured__image {
+            min-height: 320px;
+            background: linear-gradient(135deg, var(--color-gray-100), var(--color-gray-200));
+            display: flex; align-items: center; justify-content: center;
+        }
+        .article-featured__image svg {
+            width: 64px; height: 64px; color: var(--color-text-light); opacity: 0.4;
+        }
+
+        .article-featured__content {
+            padding: var(--space-lg);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .article-featured__tag {
+            display: inline-block;
+            padding: 6px 14px;
+            border-radius: var(--radius-full);
+            font-size: 12px; font-weight: 600;
+            color: var(--color-white);
+            margin-bottom: var(--space-sm);
+            width: fit-content;
+        }
+
+        /* -----------------------------------------------
+           Titre featured — DS Token: H3
+           30px / 600 / 140% / -0.5px
+           ----------------------------------------------- */
+        .article-featured__title {
+            font-size: 30px;
+            font-weight: 600;
+            line-height: 140%;
+            letter-spacing: -0.5px;
+            color: var(--color-text-dark);
+            margin-bottom: var(--space-sm);
+        }
+
+        /* -----------------------------------------------
+           Extrait featured — DS Token: Body Regular
+           16px / 400 / 160% · #4A4A4A
+           ----------------------------------------------- */
+        .article-featured__excerpt {
+            font-size: 16px;
+            font-weight: 400;
+            line-height: 160%;
+            color: var(--color-text-gray);
+            margin-bottom: var(--space-md);
+        }
+
+        .article-featured__meta {
+            font-size: 13px; color: var(--color-text-muted); margin-bottom: var(--space-sm);
+        }
+
+        /* -----------------------------------------------
+           CTA featured — DS Token: Button MD
+           14px / 500 / 140% / 0.5px · padding 10px 20px
+           ----------------------------------------------- */
+        .article-featured__link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 14px;
+            font-weight: 500;
+            line-height: 140%;
+            letter-spacing: 0.5px;
+            color: var(--color-white);
+            background: var(--gradient);
+            border: none;
+            padding: 10px 20px;                       /* DS Button MD */
+            border-radius: var(--radius-sm);          /* 8px */
+            text-decoration: none;
+            transition: var(--transition);
+            width: fit-content;
+        }
+        .article-featured__link:hover { filter: brightness(1.1); transform: translateY(-1px); }
+
+        /* =========================================
+           PATTERN 2 : ARTICLES GRID
+           Grille 3 colonnes de cards C03
+           ========================================= */
+        .articles-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: var(--space-md);
+        }
+
+        /* Lien "Voir tous les articles" — DS Button SM outline */
+        .section-blog__footer {
+            text-align: center;
+            margin-top: var(--space-xl);
+        }
+        .section-blog__more {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 14px;
+            font-weight: 500;
+            line-height: 140%;
+            letter-spacing: 0.5px;
+            color: var(--color-text-dark);
+            background: var(--color-white);
+            border: 1px solid var(--color-gray-200);
+            padding: 10px 20px;
+            border-radius: var(--radius-sm);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+        .section-blog__more:hover {
+            background: var(--gradient);
+            color: var(--color-white);
+            border-color: transparent;
+        }
+
+        /* =========================================
+           PATTERN 3 : ARTICLES LIÉS (similaires)
+           Grille 3 cards simples (sans extrait)
+           ========================================= */
+        .articles-lies-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: var(--space-md);
+        }
+
+        /* =========================================
+           RESPONSIVE
+           ========================================= */
+        @media (max-width: 1000px) {
+            .articles-grid, .articles-lies-grid { grid-template-columns: repeat(2, 1fr); }
+            .article-featured { grid-template-columns: 1fr; }
+            .article-featured__image { min-height: 220px; }
+        }
+
+        @media (max-width: 768px) {
+            .section-blog { padding: var(--section-padding-y-mobile) 0; }
+            .section-blog__inner { padding: 0 16px; }
+            .section-blog__title { font-size: 28px; }
+            .section-blog__subtitle { font-size: 16px; }
+            .article-featured__title { font-size: 20px; }
+        }
+
+        @media (max-width: 600px) {
+            .articles-grid, .articles-lies-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <div class="doc-wrapper">
+        <h1 class="doc-title">structure/03-articles-grid</h1>
+        <p class="doc-subtitle">Pattern Section — Grille 3 colonnes d'articles · C03 Card Article Blog · Homepage, Blog listing, Blog catégorie</p>
+
+        <section class="section-blog section-blog--gray">
+            <div class="section-blog__inner">
+                <div class="section-blog__header">
+                    <span class="section-blog__label">📝 Tous les articles</span>
+                    <h2 class="section-blog__title">Ressources pour <span>réussir en droit</span></h2>
+                    <p class="section-blog__subtitle">Méthodologie, orientation, vie étudiante et actualités juridiques.</p>
+                </div>
+
+                <div class="articles-grid">
+                    <article class="card-article">
+                        <div class="card-article__image"><div class="card-article__image-placeholder"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg></div></div>
+                        <div class="card-article__content">
+                            <span class="card-article__tag card-article__tag--methodologie">Méthodologie</span>
+                            <h3 class="card-article__title">L'introduction de la dissertation juridique</h3>
+                            <p class="card-article__excerpt">Les clés d'une introduction réussie : accroche, définitions, problématique.</p>
+                            <div class="card-article__footer">
+                                <span class="card-article__meta">22 nov. 2024 • 9 min</span>
+                                <a href="#" class="card-article__link">Lire <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg></a>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="card-article">
+                        <div class="card-article__image"><div class="card-article__image-placeholder"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg></div></div>
+                        <div class="card-article__content">
+                            <span class="card-article__tag card-article__tag--orientation">Orientation</span>
+                            <h3 class="card-article__title">Que faire après une licence de droit ?</h3>
+                            <p class="card-article__excerpt">Les différentes voies et débouchés pour les diplômés en droit.</p>
+                            <div class="card-article__footer">
+                                <span class="card-article__meta">12 nov. 2024 • 10 min</span>
+                                <a href="#" class="card-article__link">Lire <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg></a>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="card-article">
+                        <div class="card-article__image"><div class="card-article__image-placeholder"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg></div></div>
+                        <div class="card-article__content">
+                            <span class="card-article__tag card-article__tag--examens">Examens & Concours</span>
+                            <h3 class="card-article__title">Se préparer au CRFPA : guide complet</h3>
+                            <p class="card-article__excerpt">Planning, ressources et conseils pour réussir l'examen d'entrée.</p>
+                            <div class="card-article__footer">
+                                <span class="card-article__meta">1 nov. 2024 • 15 min</span>
+                                <a href="#" class="card-article__link">Lire <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg></a>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+
+                <div class="section-blog__footer">
+                    <a href="#" class="section-blog__more">Voir tous les articles →</a>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- =====================================================
+         📋 RÉFÉRENCE DEV — Catégories Blog & Couleurs Tags
+         ===================================================== -->
+    <div style="max-width: 1200px; margin: 64px auto 0; padding: 0 24px;">
+        <div style="background: white; border-radius: 12px; padding: 32px; border: 1px solid #E5E7EB;">
+            <h3 style="font-family: Poppins, sans-serif; font-size: 18px; font-weight: 700; margin-bottom: 24px; color: #1A1A1A;">📋 Référence Dev — Catégories Blog & Couleurs Tags</h3>
+            
+            <p style="font-family: Poppins, sans-serif; font-size: 14px; color: #4A4A4A; margin-bottom: 24px; line-height: 1.6;">
+                Chaque article a 1 tag catégorie. Utiliser la classe <code style="background:#F3F4F6; padding:2px 6px; border-radius:4px; font-size:12px;">.card-article__tag--{slug}</code>. 
+                <strong>Toutes les matières juridiques partagent la même couleur violet</strong> (peu importe la matière : Droit constit, civil, pénal, admin, etc.)
+            </p>
+
+            <table style="width: 100%; border-collapse: collapse; font-family: Poppins, sans-serif; font-size: 13px;">
+                <thead>
+                    <tr style="background: #F3F4F6;">
+                        <th style="padding: 12px 16px; text-align: left; font-weight: 600;">Catégorie</th>
+                        <th style="padding: 12px 16px; text-align: left; font-weight: 600;">Slug CSS</th>
+                        <th style="padding: 12px 16px; text-align: left; font-weight: 600;">Couleur fond</th>
+                        <th style="padding: 12px 16px; text-align: left; font-weight: 600;">Aperçu</th>
+                        <th style="padding: 12px 16px; text-align: left; font-weight: 600;">Exemples contenus</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr style="border-bottom: 1px solid #E5E7EB;">
+                        <td style="padding: 12px 16px; font-weight: 600;">Méthodologie</td>
+                        <td style="padding: 12px 16px;"><code style="background:#F3F4F6; padding:2px 6px; border-radius:4px; font-size:11px;">--methodologie</code></td>
+                        <td style="padding: 12px 16px;"><code style="background:#F3F4F6; padding:2px 6px; border-radius:4px; font-size:11px;">#10B981</code></td>
+                        <td style="padding: 12px 16px;"><span style="display:inline-block; padding:4px 12px; border-radius:9999px; font-size:11px; font-weight:600; color:white; background:#10B981;">Méthodologie</span></td>
+                        <td style="padding: 12px 16px; color: #4A4A4A;">Fiche d'arrêt, dissertation, cas pratique, commentaire</td>
+                    </tr>
+                    <tr style="border-bottom: 1px solid #E5E7EB;">
+                        <td style="padding: 12px 16px; font-weight: 600;">Conseils études de droit</td>
+                        <td style="padding: 12px 16px;"><code style="background:#F3F4F6; padding:2px 6px; border-radius:4px; font-size:11px;">--conseils</code></td>
+                        <td style="padding: 12px 16px;"><code style="background:#F3F4F6; padding:2px 6px; border-radius:4px; font-size:11px;">#3B82F6</code></td>
+                        <td style="padding: 12px 16px;"><span style="display:inline-block; padding:4px 12px; border-radius:9999px; font-size:11px; font-weight:600; color:white; background:#3B82F6;">Conseils études</span></td>
+                        <td style="padding: 12px 16px; color: #4A4A4A;">Organisation, révisions, prise de notes, réussite</td>
+                    </tr>
+                    <tr style="border-bottom: 1px solid #E5E7EB;">
+                        <td style="padding: 12px 16px; font-weight: 600;">Culture juridique</td>
+                        <td style="padding: 12px 16px;"><code style="background:#F3F4F6; padding:2px 6px; border-radius:4px; font-size:11px;">--culture</code></td>
+                        <td style="padding: 12px 16px;"><code style="background:#F3F4F6; padding:2px 6px; border-radius:4px; font-size:11px;">#F59E0B</code></td>
+                        <td style="padding: 12px 16px;"><span style="display:inline-block; padding:4px 12px; border-radius:9999px; font-size:11px; font-weight:600; color:white; background:#F59E0B;">Culture juridique</span></td>
+                        <td style="padding: 12px 16px; color: #4A4A4A;">Histoire du droit, grands arrêts, jurisprudence</td>
+                    </tr>
+                    <tr style="border-bottom: 1px solid #E5E7EB; background: #FAFAFE;">
+                        <td style="padding: 12px 16px; font-weight: 600;">Matières juridiques ⭐</td>
+                        <td style="padding: 12px 16px;"><code style="background:#F3F4F6; padding:2px 6px; border-radius:4px; font-size:11px;">--matiere</code></td>
+                        <td style="padding: 12px 16px;"><code style="background:#F3F4F6; padding:2px 6px; border-radius:4px; font-size:11px;">#7C3AED</code></td>
+                        <td style="padding: 12px 16px;"><span style="display:inline-block; padding:4px 12px; border-radius:9999px; font-size:11px; font-weight:600; color:white; background:#7C3AED;">Droit constitutionnel</span></td>
+                        <td style="padding: 12px 16px; color: #4A4A4A;"><strong>1 couleur unique pour TOUTES les matières :</strong> Droit constit, civil, pénal, admin, obligations, famille, commercial, travail, international, européen, fiscal, etc.</td>
+                    </tr>
+                    <tr style="border-bottom: 1px solid #E5E7EB;">
+                        <td style="padding: 12px 16px; font-weight: 600;">Orientation</td>
+                        <td style="padding: 12px 16px;"><code style="background:#F3F4F6; padding:2px 6px; border-radius:4px; font-size:11px;">--orientation</code></td>
+                        <td style="padding: 12px 16px;"><code style="background:#F3F4F6; padding:2px 6px; border-radius:4px; font-size:11px;">#EF4444</code></td>
+                        <td style="padding: 12px 16px;"><span style="display:inline-block; padding:4px 12px; border-radius:9999px; font-size:11px; font-weight:600; color:white; background:#EF4444;">Orientation</span></td>
+                        <td style="padding: 12px 16px; color: #4A4A4A;">Débouchés, parcours, masters, spécialisations</td>
+                    </tr>
+                    <tr style="border-bottom: 1px solid #E5E7EB;">
+                        <td style="padding: 12px 16px; font-weight: 600;">Examens & Concours</td>
+                        <td style="padding: 12px 16px;"><code style="background:#F3F4F6; padding:2px 6px; border-radius:4px; font-size:11px;">--examens</code></td>
+                        <td style="padding: 12px 16px;"><code style="background:#F3F4F6; padding:2px 6px; border-radius:4px; font-size:11px;">#8B5CF6</code></td>
+                        <td style="padding: 12px 16px;"><span style="display:inline-block; padding:4px 12px; border-radius:9999px; font-size:11px; font-weight:600; color:white; background:#8B5CF6;">Examens</span></td>
+                        <td style="padding: 12px 16px; color: #4A4A4A;">CRFPA, ENM, partiels, galop d'essai</td>
+                    </tr>
+                    <tr style="border-bottom: 1px solid #E5E7EB;">
+                        <td style="padding: 12px 16px; font-weight: 600;">Vie étudiante</td>
+                        <td style="padding: 12px 16px;"><code style="background:#F3F4F6; padding:2px 6px; border-radius:4px; font-size:11px;">--vie-etudiante</code></td>
+                        <td style="padding: 12px 16px;"><code style="background:#F3F4F6; padding:2px 6px; border-radius:4px; font-size:11px;">#3B82F6</code></td>
+                        <td style="padding: 12px 16px;"><span style="display:inline-block; padding:4px 12px; border-radius:9999px; font-size:11px; font-weight:600; color:white; background:#3B82F6;">Vie étudiante</span></td>
+                        <td style="padding: 12px 16px; color: #4A4A4A;">Budget, logement, associations, stages <em style="color:#9CA3AF;">(même bleu que Conseils)</em></td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 12px 16px; font-weight: 600;">Actualités juridiques</td>
+                        <td style="padding: 12px 16px;"><code style="background:#F3F4F6; padding:2px 6px; border-radius:4px; font-size:11px;">--actualites</code></td>
+                        <td style="padding: 12px 16px;"><code style="background:#F3F4F6; padding:2px 6px; border-radius:4px; font-size:11px;">#F59E0B</code></td>
+                        <td style="padding: 12px 16px;"><span style="display:inline-block; padding:4px 12px; border-radius:9999px; font-size:11px; font-weight:600; color:white; background:#F59E0B;">Actualités</span></td>
+                        <td style="padding: 12px 16px; color: #4A4A4A;">Réformes, nouvelles lois, jurisprudence récente <em style="color:#9CA3AF;">(même ambre que Culture)</em></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div style="margin-top: 24px; padding: 16px; background: #F9FAFB; border-radius: 8px; border: 1px solid #E5E7EB;">
+                <p style="font-family: Poppins, sans-serif; font-size: 13px; color: #4A4A4A; line-height: 1.6;">
+                    <strong>⚠️ Note dev :</strong> Les matières juridiques (Droit constit, civil, pénal, admin, obligations, famille, etc.) utilisent <strong>toutes</strong> la classe <code style="background:#F3F4F6; padding:2px 6px; border-radius:4px; font-size:11px;">.card-article__tag--matiere</code> avec la couleur violet <code style="background:#F3F4F6; padding:2px 6px; border-radius:4px; font-size:11px;">#7C3AED</code>. Le texte du tag affiche le nom de la matière (ex: "Droit constitutionnel") mais la couleur reste identique. Pas besoin de créer une classe par matière.
+                </p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
