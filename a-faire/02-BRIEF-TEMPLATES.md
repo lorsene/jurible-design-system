@@ -178,7 +178,7 @@ Template avec contenu contraint à 880px. Pour les pages de texte juridique.
 
 ### 5. `single.html` — Article de blog
 
-Template pour un article individuel. Contenu à 880px avec métadonnées (auteur, date, catégorie) et patterns en bas (bio auteur + articles liés).
+Template pour un article individuel. **Layout 2 colonnes** sur desktop : contenu principal (880px) + sidebar sticky (300px). Sur mobile, la sidebar passe sous le contenu. Les patterns bio auteur et articles liés sont en pleine largeur sous les 2 colonnes.
 
 ```html
 <!-- wp:template-part {"slug":"header","area":"header"} /-->
@@ -186,7 +186,7 @@ Template pour un article individuel. Contenu à 880px avec métadonnées (auteur
 <!-- wp:group {"tagName":"main","layout":{"type":"default"}} -->
 <main class="wp-block-group">
 
-    <!-- wp:group {"layout":{"type":"constrained","contentSize":"880px"},"style":{"spacing":{"padding":{"top":"var:preset|spacing|xl","bottom":"var:preset|spacing|l"}}}} -->
+    <!-- wp:group {"layout":{"type":"constrained","contentSize":"1200px"},"style":{"spacing":{"padding":{"top":"var:preset|spacing|xl","bottom":"var:preset|spacing|l"}}}} -->
     <div class="wp-block-group">
 
         <!-- wp:group {"style":{"spacing":{"blockGap":"var:preset|spacing|xs"}},"layout":{"type":"flex","flexWrap":"nowrap"}} -->
@@ -210,13 +210,38 @@ Template pour un article individuel. Contenu à 880px avec métadonnées (auteur
 
         <!-- wp:post-featured-image {"style":{"border":{"radius":"12px"},"spacing":{"margin":{"bottom":"var:preset|spacing|l"}}}} /-->
 
-        <!-- wp:post-content {"layout":{"type":"constrained","contentSize":"880px"}} /-->
+        <!-- wp:columns {"style":{"spacing":{"blockGap":"var:preset|spacing|xl"}}} -->
+        <div class="wp-block-columns">
 
-        <!-- wp:group {"style":{"spacing":{"padding":{"top":"var:preset|spacing|l"}}},"layout":{"type":"flex","flexWrap":"wrap"}} -->
-        <div class="wp-block-group">
-            <!-- wp:post-terms {"term":"post_tag","style":{"typography":{"fontSize":"13px"}}} /-->
+            <!-- wp:column {"width":"880px"} -->
+            <div class="wp-block-column" style="flex-basis:880px">
+
+                <!-- wp:post-content {"layout":{"type":"constrained","contentSize":"880px"}} /-->
+
+                <!-- wp:group {"style":{"spacing":{"padding":{"top":"var:preset|spacing|l"}}},"layout":{"type":"flex","flexWrap":"wrap"}} -->
+                <div class="wp-block-group">
+                    <!-- wp:post-terms {"term":"post_tag","style":{"typography":{"fontSize":"13px"}}} /-->
+                </div>
+                <!-- /wp:group -->
+
+            </div>
+            <!-- /wp:column -->
+
+            <!-- wp:column {"width":"300px","className":"sidebar-sticky"} -->
+            <div class="wp-block-column sidebar-sticky" style="flex-basis:300px">
+
+                <!-- wp:group {"style":{"position":{"type":"sticky","top":"100px"},"spacing":{"blockGap":"var:preset|spacing|l"}}} -->
+                <div class="wp-block-group">
+                    <!-- Le bloc jurible/newsletter est inséré ici par le rédacteur -->
+                    <!-- wp:pattern {"slug":"jurible/commerce-03-cta-cross-sell"} /-->
+                </div>
+                <!-- /wp:group -->
+
+            </div>
+            <!-- /wp:column -->
+
         </div>
-        <!-- /wp:group -->
+        <!-- /wp:columns -->
 
     </div>
     <!-- /wp:group -->
@@ -235,9 +260,12 @@ Template pour un article individuel. Contenu à 880px avec métadonnées (auteur
 <!-- wp:template-part {"slug":"footer","area":"footer"} /-->
 ```
 
+> **Layout** : 2 colonnes sur desktop (880px + 300px), 1 colonne sur mobile (sidebar sous le contenu)
+> **Sidebar sticky** : Le bloc newsletter (`jurible/newsletter`) + CTA Académie (`commerce/03-cta-cross-sell`) suivent le scroll
 > **Patterns intégrés au template** :
-> - [`equipe/05-bio-auteur`](../assets/patterns/equipe/05-bio-auteur.html) — Card bio de l'auteur (existant, renommé depuis C04)
+> - [`equipe/05-bio-auteur`](../assets/patterns/equipe/05-bio-auteur.html) — Card bio de l'auteur
 > - [`structure/04-articles-lies`](../assets/patterns/structure/04-articles-lies.html) — 3 articles recommandés
+> **Note dev** : Le bloc `jurible/newsletter` doit fonctionner en largeur 300px. Vérifier et adapter si nécessaire.
 
 ---
 
@@ -409,7 +437,7 @@ Template pour la page blog principale, les catégories et les tags. Query Loop e
 | 2 | `front-page.html` | default (full-width) | — | Homepage |
 | 3 | `page.html` | default (full-width) | — | Toutes pages sauf texte |
 | 4 | `page-texte.html` | constrained 880px | — | CGV, Mentions, Confidentialité |
-| 5 | `single.html` | constrained 880px | `equipe/05-bio-auteur` + `structure/04-articles-lies` | Articles blog |
+| 5 | `single.html` | 2 colonnes (880px + sidebar 300px) | `equipe/05-bio-auteur` + `structure/04-articles-lies` + `commerce/03-cta-cross-sell` + bloc `jurible/newsletter` | Articles blog |
 | 6 | `archive.html` | default | `hero/05-archive-blog` | Blog, catégories, tags |
 | 7 | `404.html` | default | `structure/06-page-404` | Page 404 |
 | 8 | `search.html` | default | — | Recherche |
