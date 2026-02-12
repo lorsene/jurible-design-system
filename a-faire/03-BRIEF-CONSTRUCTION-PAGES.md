@@ -1,10 +1,11 @@
-# 📋 BRIEF DEV — Construction des Pages
+# 📋 BRIEF DEV — Construction des Pages (v2)
 
 > **Pour** : Dev WordPress FSE
 > **De** : Laura
 > **Date** : Février 2026
 > **Objectif** : Assembler les patterns dans l'éditeur WordPress pour construire chaque page du site
 > **Prérequis** : Brief 01 (patterns renommés/créés) + Brief 02 (templates créés)
+> **Mise à jour v2** : Slugs corrigés selon l'inventaire FSE réel, variantes assignées, sections modifiées
 
 ---
 
@@ -17,6 +18,21 @@ Chaque page = une liste ordonnée de patterns. Le dev :
 4. Adapte le contenu texte (titres, descriptions, CTA) selon les indications
 
 **Convention** : Chaque ligne = 1 pattern ou 1 bloc custom. Le slug est exact et correspond au brief 01.
+
+---
+
+## INVENTAIRE DES VARIANTES DISPONIBLES
+
+Certains patterns ont plusieurs variantes. Ce tableau récapitule les variantes existantes et leur usage :
+
+| Pattern de base | Variantes | Usage |
+|---|---|---|
+| `marketing-03-solution` | `03-solution-4` / `03-solution-4-gris` / `03-solution-6` | Assigné page par page (voir tableaux) |
+| `commerce-09-pricing-comparatif` | `09-pricing-comparatif` / `09-pricing-comparatif-homepage` | Homepage = variante homepage, Nos Offres = standard |
+| `confiance-05-temoignages` | `05-temoignages` / `05-temoignages-gris` | Gris disponible, non assigné pour l'instant |
+| `equipe-06-citation` | `06-citation` / `06-citation-hero` | Notre Projet = citation-hero, reste = classique |
+
+**Pattern en réserve** : `commerce-07-cta-final-promo` — disponible mais non utilisé actuellement.
 
 ---
 
@@ -75,14 +91,14 @@ Chaque page = une liste ordonnée de patterns. Le dev :
 | 2 | Hero Conversion | `jurible/hero-01-conversion-homepage` | 1 CTA, vidéo sous texte, badges 2 lignes |
 | 3 | Réassurance | `jurible/confiance-01-reassurance-full` | — |
 | 4 | Logos universités | `jurible/confiance-03-logos-partenaires` | Scroll horizontal auto |
-| 5 | Solution / Bénéfices | `jurible/marketing-03-solution` | Cards empilées |
+| 5 | Solution / Bénéfices | `jurible/marketing-03-solution-4-gris` | Cards empilées |
 | 6 | Ressources chiffrées | `jurible/contenu-08-chiffres-cles` | 4 → 2×2 |
 | 7 | Pour qui — CTA | `jurible/commerce-04-quelle-offre` | Cards empilées |
-| 8 | Pricing comparatif offres | `jurible/commerce-09-pricing-comparatif` | Cards empilées, Académie first |
+| 8 | Pricing comparatif offres | `jurible/commerce-09-pricing-comparatif-homepage` | Cards empilées, Académie first |
 | 9 | Réassurance (Trust bar) | `jurible/confiance-02-reassurance-minimal` | — |
 | 10 | Steps | `jurible/marketing-08-steps` | Empilés verticalement |
 | 11 | Comparaison | `jurible/marketing-09-comparaison-cards` | Empilées |
-| 12 | Équipe / Citation | `jurible/equipe-06-citation` | Image au-dessus, texte centré |
+| 12 | Enseignants vidéo | `jurible/equipe-04-enseignants-video` | Carousel swipe |
 | 13 | Témoignages | `jurible/confiance-05-temoignages` | Carousel swipe |
 | 14 | FAQ | `jurible/confiance-04-faq` | — |
 | 15 | CTA Final | `jurible/commerce-06-cta-final-basique` | — |
@@ -92,6 +108,11 @@ Chaque page = une liste ordonnée de patterns. Le dev :
 - CTA Hero : "Découvrir nos offres" (pas "S'abonner" — on oriente, on ne vend pas)
 - Section 7 : 4 profils (L1/L2/L3/Capacité ou Étudiant/Redoublant/Prépa/Professionnel) → chaque card renvoie vers le bon produit
 - Section 11 : "Sans Jurible / Avec Jurible" (angle général, pas spécifique Académie)
+
+**Changements v2** :
+- Section 5 : `marketing-03-solution` → `marketing-03-solution-4-gris`
+- Section 8 : `commerce-09-pricing-comparatif` → `commerce-09-pricing-comparatif-homepage`
+- Section 12 : `equipe-06-citation` → `equipe-04-enseignants-video`
 
 ---
 
@@ -108,7 +129,7 @@ Chaque page = une liste ordonnée de patterns. Le dev :
 | 3 | Réassurance | `jurible/confiance-01-reassurance-full` | — |
 | 4 | Logos | `jurible/confiance-03-logos-partenaires` | Scroll horizontal |
 | 5 | Pain Points | `jurible/marketing-02-pain-points-6` | 6 → 2×3 |
-| 6 | Solution | `jurible/marketing-03-solution` | Cards empilées |
+| 6 | Solution | `jurible/marketing-03-solution-4` | Cards empilées |
 | 7 | Features (6) | `jurible/marketing-04-features-6` | 6 → 2×3 → empilées |
 | 8 | Méthode (onglets) | `jurible/contenu-14-methode-onglets` | Onglets scroll horizontal, vidéo full-width |
 | 9 | Enseignants | `jurible/equipe-04-enseignants-video` | Carousel swipe |
@@ -127,6 +148,9 @@ Chaque page = une liste ordonnée de patterns. Le dev :
 - CTA Hero : "S'abonner" / "Voir les formules" → ancre #pricing
 - Section 12 : "Sans l'Académie / Avec l'Académie" (spécifique, pas générique)
 - Section 14 : Rappel compact des features juste sous le pricing pour rassurer avant le clic
+
+**Changements v2** :
+- Section 6 : `marketing-03-solution` → `marketing-03-solution-4`
 
 ---
 
@@ -150,6 +174,7 @@ Chaque page = une liste ordonnée de patterns. Le dev :
 **Notes contenu** :
 - Hero : "Trouvez la formule pour réussir en droit"
 - Pas de témoignages/pain points — page utilitaire, pas de vente
+- Section 3 utilise la variante standard du pricing comparatif (pas homepage)
 
 ---
 
@@ -164,7 +189,7 @@ Chaque page = une liste ordonnée de patterns. Le dev :
 | 1 | Header | `parts/header` | Hamburger |
 | 2 | Hero | `jurible/hero-03-conversion-prepa` | Vidéo sous texte, 1 CTA |
 | 3 | Pain Points | `jurible/marketing-01-pain-points-4` | 2×2 |
-| 4 | Solution | `jurible/marketing-03-solution` | Cards empilées |
+| 4 | Solution | `jurible/marketing-03-solution-4` | Cards empilées |
 | 5 | Features (6) | `jurible/marketing-04-features-6` | 6 → 2×3 → empilées |
 | 6 | Programme détaillé | `jurible/contenu-10-programme` | Accordéon |
 | 7 | Enseignants (2 cards) | `jurible/equipe-04-enseignants-video` | 2 cards → empilées |
@@ -180,6 +205,9 @@ Chaque page = une liste ordonnée de patterns. Le dev :
 - CTA Hero : "S'inscrire" / "Voir le programme" → ancre #programme
 - Section 9 : Comparaison dark "Sans préparation / Avec la Prépa Jurible"
 - Section 13 : CTA urgence — "Places limitées", "Prochaine session : septembre 2026"
+
+**Changements v2** :
+- Section 4 : `marketing-03-solution` → `marketing-03-solution-4`
 
 ---
 
@@ -222,7 +250,7 @@ Chaque page = une liste ordonnée de patterns. Le dev :
 | 2 | Hero | `jurible/hero-10-produit-support` | Image sous texte |
 | 3 | Réassurance | `jurible/confiance-01-reassurance-full` | — |
 | 4 | Pain Points | `jurible/marketing-01-pain-points-4` | 2×2 |
-| 5 | Solution | `jurible/marketing-03-solution` | Cards empilées |
+| 5 | Solution | `jurible/marketing-03-solution-6` | Cards empilées |
 | 6 | Aperçu produit (mockup) | `jurible/contenu-05-texte-image` | Image sous texte |
 | 7 | Features | `jurible/marketing-05-features-4` | 2×2 → empilées |
 | 8 | Catalogue matières du pack | `jurible/structure-05-catalogue-matieres` | 2 col → 1 col |
@@ -232,6 +260,9 @@ Chaque page = une liste ordonnée de patterns. Le dev :
 | 12 | Cross-sell Académie | `jurible/commerce-03-cta-cross-sell` | Cards empilées |
 | 13 | CTA Final | `jurible/commerce-06-cta-final-basique` | — |
 | 14 | Footer | `parts/footer` | — |
+
+**Changements v2** :
+- Section 5 : `marketing-03-solution` → `marketing-03-solution-6`
 
 ---
 
@@ -246,7 +277,7 @@ Chaque page = une liste ordonnée de patterns. Le dev :
 | 1 | Header | `parts/header` | Hamburger |
 | 2 | Hero | `jurible/hero-10-produit-support` | Image sous texte |
 | 3 | Pain Points | `jurible/marketing-01-pain-points-4` | 2×2 |
-| 4 | Solution | `jurible/marketing-03-solution` | Cards empilées |
+| 4 | Solution | `jurible/marketing-03-solution-6` | Cards empilées |
 | 5 | Aperçu produit (mockup) | `jurible/contenu-05-texte-image` | Image sous texte |
 | 6 | Features | `jurible/marketing-05-features-4` | 2×2 → empilées |
 | 7 | Témoignages | `jurible/confiance-05-temoignages` | Carousel swipe |
@@ -258,6 +289,9 @@ Chaque page = une liste ordonnée de patterns. Le dev :
 
 **Notes contenu** :
 - Cross-sell : pousse vers le Pack (économie) ou l'Académie (accès complet)
+
+**Changements v2** :
+- Section 4 : `marketing-03-solution` → `marketing-03-solution-6`
 
 ---
 
@@ -273,7 +307,7 @@ Chaque page = une liste ordonnée de patterns. Le dev :
 | 2 | Hero | `jurible/hero-04-conversion-suite-ia` | 1 CTA |
 | 3 | Réassurance | `jurible/confiance-01-reassurance-full` | — |
 | 4 | Pain Points | `jurible/marketing-01-pain-points-4` | 2×2 |
-| 5 | Solution | `jurible/marketing-03-solution` | Cards empilées |
+| 5 | Solution | `jurible/marketing-03-solution-4-gris` | Cards empilées |
 | 6 | 4 outils (cards crédits) | `jurible/commerce-02-offre-suite-ia` | 2×2 → empilées |
 | 7 | Démo outil phare (vidéo) | `jurible/contenu-07-texte-video` | Vidéo au-dessus |
 | 8 | Témoignages | `jurible/confiance-05-temoignages` | Carousel swipe |
@@ -281,6 +315,9 @@ Chaque page = une liste ordonnée de patterns. Le dev :
 | 10 | FAQ | `jurible/confiance-04-faq` | — |
 | 11 | CTA Final | `jurible/commerce-06-cta-final-basique` | — |
 | 12 | Footer | `parts/footer` | — |
+
+**Changements v2** :
+- Section 5 : `marketing-03-solution` → `marketing-03-solution-4-gris`
 
 ---
 
@@ -295,7 +332,7 @@ Chaque page = une liste ordonnée de patterns. Le dev :
 | 1 | Header | `parts/header` | Hamburger |
 | 2 | Hero | `jurible/hero-10-produit-support` | Image sous texte |
 | 3 | Pain Points | `jurible/marketing-01-pain-points-4` | 2×2 |
-| 4 | Solution | `jurible/marketing-03-solution` | Cards empilées |
+| 4 | Solution | `jurible/marketing-03-solution-6` | Cards empilées |
 | 5 | Features de l'outil | `jurible/marketing-06-features-detailed` | 2×2 → empilées |
 | 6 | Démo vidéo | `jurible/contenu-07-texte-video` | Vidéo au-dessus |
 | 7 | Témoignages | `jurible/confiance-05-temoignages` | Carousel swipe |
@@ -304,6 +341,9 @@ Chaque page = une liste ordonnée de patterns. Le dev :
 | 10 | FAQ | `jurible/confiance-04-faq` | — |
 | 11 | CTA Final | `jurible/commerce-06-cta-final-basique` | — |
 | 12 | Footer | `parts/footer` | — |
+
+**Changements v2** :
+- Section 4 : `marketing-03-solution` → `marketing-03-solution-6`
 
 ---
 
@@ -318,7 +358,7 @@ Chaque page = une liste ordonnée de patterns. Le dev :
 | 1 | Header | `parts/header` | Hamburger |
 | 2 | Hero | `jurible/hero-10-produit-support` | Image sous texte |
 | 3 | Pain Points | `jurible/marketing-01-pain-points-4` | 2×2 |
-| 4 | Solution | `jurible/marketing-03-solution` | Cards empilées |
+| 4 | Solution | `jurible/marketing-03-solution-6` | Cards empilées |
 | 5 | Aperçu (mockup manuel) | `jurible/contenu-05-texte-image` | Image sous texte |
 | 6 | Sommaire / Contenu | `jurible/contenu-11-sommaire` | — |
 | 7 | Features | `jurible/marketing-05-features-4` | 2×2 → empilées |
@@ -328,6 +368,9 @@ Chaque page = une liste ordonnée de patterns. Le dev :
 | 11 | Footer | `parts/footer` | — |
 
 **Notes** : Le bouton d'achat/pricing est géré par SureCart (intégré dans le hero ou en sticky). Pas de pattern pricing dans ce template.
+
+**Changements v2** :
+- Section 4 : `marketing-03-solution` → `marketing-03-solution-6`
 
 ---
 
@@ -347,7 +390,7 @@ Chaque page = une liste ordonnée de patterns. Le dev :
 | 2 | Hero matière | `jurible/hero-09-produit-cours` | Image sous texte |
 | 3 | Réassurance | `jurible/confiance-01-reassurance-full` | — |
 | 4 | Pain Points | `jurible/marketing-01-pain-points-4` | 2×2 |
-| 5 | Solution | `jurible/marketing-03-solution` | Cards empilées |
+| 5 | Solution | `jurible/marketing-03-solution-4` | Cards empilées |
 | 6 | Aperçu contenu (onglets) | `jurible/contenu-14-methode-onglets` | Onglets scroll horizontal |
 | 7 | Témoignages | `jurible/confiance-05-temoignages` | Carousel swipe |
 | 8 | Stats + Sommaire | `jurible/contenu-12-stats-sommaire` | Stats 2×2, sommaire accordéon |
@@ -357,6 +400,9 @@ Chaque page = une liste ordonnée de patterns. Le dev :
 | 12 | Réassurance | `jurible/confiance-02-reassurance-minimal` | — |
 | 13 | CTA Inscription | `jurible/commerce-06-cta-final-basique` | — |
 | 14 | Footer | `parts/footer` | — |
+
+**Changements v2** :
+- Section 5 : `marketing-03-solution` → `marketing-03-solution-4`
 
 ---
 
@@ -372,7 +418,7 @@ Chaque page = une liste ordonnée de patterns. Le dev :
 | 2 | Hero | `jurible/hero-09-produit-cours` | Image sous texte |
 | 3 | Réassurance | `jurible/confiance-01-reassurance-full` | — |
 | 4 | Pain Points | `jurible/marketing-01-pain-points-4` | 2×2 |
-| 5 | Solution | `jurible/marketing-03-solution` | Cards empilées |
+| 5 | Solution | `jurible/marketing-03-solution-4` | Cards empilées |
 | 6 | Programme (modules) | `jurible/contenu-10-programme` | Accordéon |
 | 7 | Extrait vidéo gratuit | `jurible/contenu-07-texte-video` | Vidéo au-dessus |
 | 8 | Témoignages | `jurible/confiance-05-temoignages` | Carousel swipe |
@@ -389,6 +435,9 @@ Chaque page = une liste ordonnée de patterns. Le dev :
 - Programme remonté + extrait vidéo gratuit
 - Comparaison avant/après ("Sans méthode / Avec la méthode Jurible")
 - Cross-sell Académie au lieu de ressources liées
+
+**Changements v2** :
+- Section 5 : `marketing-03-solution` → `marketing-03-solution-4`
 
 ---
 
@@ -437,6 +486,10 @@ Chaque page = une liste ordonnée de patterns. Le dev :
 
 **Note** : Les sections 3-4 sont gérées par la Query Loop dans le template `archive.html`. Le texte SEO et le cross-sell sont ajoutés après la boucle.
 
+**Changements v2** :
+- Section 3 : `structure-02-article-featured` → `structure-02-article-featured` (numérotation confirmée)
+- Section 4 : `structure-03-articles-grid` → `structure-03-articles-grid` (numérotation confirmée)
+
 ---
 
 ### 15. Blog Catégorie
@@ -451,12 +504,15 @@ Chaque page = une liste ordonnée de patterns. Le dev :
 | 2 | Hero catégorie | `jurible/hero-05-archive-blog` | — |
 | 3 | Articles grille | `jurible/structure-03-articles-grid` | 3 col → 1 col |
 | 4 | Texte SEO | `jurible/contenu-05-texte-image` | Image sous texte |
-| 5 | Cross-sell Académie | `jurible/commerce-03-cta-cross-sell` | — |
-| 6 | CTA Final | `jurible/commerce-06-cta-final-basique` | — |
-| 7 | Footer | `parts/footer` | — |
+| 5 | CTA Final | `jurible/commerce-06-cta-final-basique` | — |
+| 6 | Footer | `parts/footer` | — |
 
 **Notes contenu** :
 - Texte SEO (#4) : contenu unique et long par catégorie (ex: 300-500 mots pour "méthodologie juridique"). Positionnement après la grille pour ne pas bloquer l'accès aux articles.
+
+**Changements v2** :
+- Section 3 : `structure-03-articles-grid` (numérotation confirmée)
+- Section cross-sell supprimée (était #5 dans v1)
 
 ---
 
@@ -511,9 +567,11 @@ Chaque page = une liste ordonnée de patterns. Le dev :
 | 2 | Hero | `jurible/hero-11-simple-about` | — |
 | 3 | Texte présentation | `jurible/contenu-05-texte-image` | Image sous texte |
 | 4 | Grille enseignants | `jurible/equipe-01-enseignants-grille` | 3 col → 2 col → 1 col |
-| 5 | Citation fondateur | `jurible/equipe-06-citation` | Image au-dessus |
-| 6 | CTA Final | `jurible/commerce-06-cta-final-basique` | — |
-| 7 | Footer | `parts/footer` | — |
+| 5 | CTA Final | `jurible/commerce-06-cta-final-basique` | — |
+| 6 | Footer | `parts/footer` | — |
+
+**Changements v2** :
+- Section citation fondateur supprimée (était #5 dans v1)
 
 ---
 
@@ -532,7 +590,7 @@ Chaque page = une liste ordonnée de patterns. Le dev :
 | 5 | Nos valeurs (cards) | `jurible/marketing-05-features-4` | 2×2 → empilées |
 | 6 | Stats clés | `jurible/contenu-13-stats` | 2×2 |
 | 7 | Enseignants teaser | `jurible/equipe-03-enseignants-teaser` | Cards empilées |
-| 8 | Citation fondateur | `jurible/equipe-06-citation` | Image au-dessus |
+| 8 | Citation fondateur | `jurible/equipe-06-citation-hero` | 2 colonnes photo + quote |
 | 9 | Témoignages | `jurible/confiance-05-temoignages` | Carousel swipe |
 | 10 | CTA Final | `jurible/commerce-06-cta-final-basique` | — |
 | 11 | Footer | `parts/footer` | — |
@@ -541,6 +599,9 @@ Chaque page = une liste ordonnée de patterns. Le dev :
 - Sections 3-4 : Alterner texte-image / image-texte pour le rythme visuel
 - Les blocs paragraphes (contenu/01 à 04) peuvent être utilisés dans l'éditeur pour enrichir les sections texte
 - Section 7 : Teaser avec CTA "Découvrir l'équipe" → `/enseignants`
+
+**Changements v2** :
+- Section 8 : `equipe-06-citation` → `equipe-06-citation-hero`
 
 ---
 
@@ -649,17 +710,30 @@ Géré automatiquement par le template `404.html` qui appelle :
 
 ## ANNEXE — INVENTAIRE COMPLET DES SLUGS UTILISÉS
 
-### Patterns (56 au total, 55 utilisés, 1 en réserve)
+### Patterns utilisés dans les pages (60 slugs uniques)
 
-| Catégorie | Utilisés | En réserve |
-|---|---|---|
-| hero/ | 11 sur 15 | hero/08 (search), hero/13 (faq), hero/14 (legal), hero/15 (article) — gérés dans les templates |
-| contenu/ | 12 sur 14 | — |
-| commerce/ | 11 sur 12 | — |
-| confiance/ | 5 sur 5 | — |
-| marketing/ | 11 sur 12 | marketing/11-comparaison-multi (réserve) |
-| equipe/ | 6 sur 6 | — |
-| structure/ | 6 sur 6 | — |
+| Catégorie | Slugs utilisés |
+|---|---|
+| hero/ | 01, 02, 03, 04, 05, 06, 07, 09, 10, 11, 12 (11 patterns) |
+| contenu/ | 01, 02, 03, 04, 05, 06, 07, 08, 09, 10, 11, 12, 13, 14 (14 patterns) |
+| commerce/ | 01, 02, 03, 04, 05, 06, 08, 09, 09-homepage, 10, 11, 12 (12 patterns) |
+| confiance/ | 01, 02, 03, 04, 05 (5 patterns) |
+| marketing/ | 01, 02, 03-solution-4, 03-solution-4-gris, 03-solution-6, 04, 05, 06, 07, 08, 09, 10, 12 (13 patterns) |
+| equipe/ | 01, 02, 03, 04, 05, 06-citation-hero (6 patterns) |
+| structure/ | 01, 02, 03, 04, 05, 06 (6 patterns) |
+
+### Patterns disponibles non utilisés (en réserve)
+
+| Slug | Statut |
+|---|---|
+| `hero-08-archive-search` | Géré dans le template |
+| `hero-13-simple-faq` | Géré dans le template |
+| `hero-14-simple-legal` | Géré dans le template |
+| `hero-15-article` | Géré dans le template |
+| `commerce-07-cta-final-promo` | En réserve (promos ponctuelles) |
+| `confiance-05-temoignages-gris` | Disponible, non assigné |
+| `equipe-06-citation` | Disponible (classique, remplacé par citation-hero sur Notre Projet) |
+| `marketing-11-comparaison-multi` | En réserve |
 
 ### Blocs custom utilisés (hors patterns)
 
@@ -686,7 +760,33 @@ Géré automatiquement par le template `404.html` qui appelle :
 
 ## ⚠️ ACTIONS REQUISES AVANT CONSTRUCTION
 
-1. **Brief 01 terminé** : Patterns renommés + 13 nouveaux créés
+1. **Brief 01 terminé** : Patterns renommés + variantes créées ✅
 2. **Brief 02 terminé** : 8 templates créés (dont `single.html` mis à jour en 2 colonnes)
 3. **Vérifier le bloc `jurible/newsletter`** : Doit fonctionner en sidebar 300px et accepter un champ "année d'études" en plus de l'email
 4. **Pages SureCart** : Brief séparé à venir pour le checkout, tunnels Académie/Prépa, et pages e-commerce
+
+---
+
+## CHANGELOG v1 → v2
+
+| Page | Section | Modification |
+|---|---|---|
+| Homepage | #5 | `marketing-03-solution` → `marketing-03-solution-4-gris` |
+| Homepage | #8 | `commerce-09-pricing-comparatif` → `commerce-09-pricing-comparatif-homepage` |
+| Homepage | #12 | `equipe-06-citation` → `equipe-04-enseignants-video` |
+| Académie | #6 | `marketing-03-solution` → `marketing-03-solution-4` |
+| Prépa | #4 | `marketing-03-solution` → `marketing-03-solution-4` |
+| Fiches Pack | #5 | `marketing-03-solution` → `marketing-03-solution-6` |
+| Fiches Matière | #4 | `marketing-03-solution` → `marketing-03-solution-6` |
+| Suite IA Hub | #5 | `marketing-03-solution` → `marketing-03-solution-4-gris` |
+| Suite IA Outil | #4 | `marketing-03-solution` → `marketing-03-solution-6` |
+| Manuel | #4 | `marketing-03-solution` → `marketing-03-solution-6` |
+| Cours Matière | #5 | `marketing-03-solution` → `marketing-03-solution-4` |
+| Cours Méthodo | #5 | `marketing-03-solution` → `marketing-03-solution-4` |
+| Blog Archive | #3 | `structure-02-article-featured` (numérotation confirmée) |
+| Blog Archive | #4 | `structure-03-articles-grid` (numérotation confirmée) |
+| Blog Catégorie | #3 | `structure-03-articles-grid` (numérotation confirmée) |
+| Blog Catégorie | #5 | Section cross-sell supprimée |
+| Enseignants | #5 | Section citation fondateur supprimée |
+| Notre Projet | #8 | `equipe-06-citation` → `equipe-06-citation-hero` |
+| Toutes pages | structure/ | Numérotation mise à jour : 01-formulaire, 02-article-featured, 03-articles-grid, 04-articles-lies, 05-catalogue-matieres, 06-page-404 |
