@@ -2,7 +2,7 @@
 
 > **Pour** : Dev WordPress FSE
 > **De** : Laura
-> **Date** : Février 2026
+> **Date** : Février 2026 (v2 — ajout breadcrumbs)
 > **Objectif** : Créer les 8 templates dans `/themes/jurible/templates/`
 > **Prérequis** : Les template parts `parts/header.html` et `parts/footer.html` doivent exister
 
@@ -32,20 +32,79 @@ Les blocs choisissent leur largeur via les alignements WordPress :
 
 ---
 
+## BREADCRUMBS — RÈGLE PAR TEMPLATE
+
+### Principe
+
+Les breadcrumbs servent à l'orientation utilisateur ("où suis-je ?") et au SEO (maillage interne + rich snippets Google). On les ajoute uniquement là où une hiérarchie de navigation existe.
+
+### Règle par template
+
+| # | Template | Breadcrumbs | Exemple de fil d'Ariane |
+|---|---|---|---|
+| 1 | `index.html` | ❌ Non | — |
+| 2 | `front-page.html` | ❌ Non | — (c'est la racine) |
+| 3 | `page.html` | ✅ Oui | Accueil → Nos Offres → Académie |
+| 4 | `page-texte.html` | ✅ Oui | Accueil → Mentions légales |
+| 5 | `single.html` | ✅ Oui | Accueil → Blog → Méthodologie → Titre article |
+| 6 | `archive.html` | ✅ Oui | Accueil → Blog → Catégorie |
+| 7 | `404.html` | ❌ Non | — (page hors arborescence) |
+| 8 | `search.html` | ✅ Oui | Accueil → Résultats de recherche |
+
+### Implémentation technique
+
+Le breadcrumb est placé **entre le header et le contenu principal**, dans un groupe `constrained` :
+
+```html
+<!-- wp:template-part {"slug":"header","area":"header"} /-->
+
+<!-- wp:group {"layout":{"type":"constrained"},"style":{"spacing":{"padding":{"top":"var:preset|spacing|s","bottom":"0"}}}} -->
+<div class="wp-block-group">
+    <!-- wp:group {"layout":{"type":"flex","flexWrap":"nowrap","verticalAlignment":"center"},"style":{"spacing":{"blockGap":"var:preset|spacing|xs"},"typography":{"fontSize":"13px"}}} -->
+    <div class="wp-block-group">
+        <!-- wp:paragraph {"style":{"color":{"text":"var:preset|color|text-muted"}}} -->
+        <p><a href="/" style="text-decoration:none;color:inherit">Accueil</a></p>
+        <!-- /wp:paragraph -->
+        <!-- wp:paragraph {"style":{"color":{"text":"var:preset|color|text-muted"}}} -->
+        <p>›</p>
+        <!-- /wp:paragraph -->
+        <!-- wp:paragraph {"style":{"color":{"text":"var:preset|color|text-muted"}}} -->
+        <p><a href="/blog" style="text-decoration:none;color:inherit">Blog</a></p>
+        <!-- /wp:paragraph -->
+        <!-- wp:paragraph {"style":{"color":{"text":"var:preset|color|text-muted"}}} -->
+        <p>›</p>
+        <!-- /wp:paragraph -->
+        <!-- wp:paragraph {"style":{"color":{"text":"var:preset|color|text-dark"},"typography":{"fontWeight":"500"}}} -->
+        <p>Titre de la page</p>
+        <!-- /wp:paragraph -->
+    </div>
+    <!-- /wp:group -->
+</div>
+<!-- /wp:group -->
+
+<!-- wp:group {"tagName":"main", ...} -->
+```
+
+> **Note** : Sur `single.html` et `archive.html`, les breadcrumbs utilisent les blocs dynamiques WordPress (`post-terms` pour la catégorie, `post-title` pour le titre). Le dev peut aussi utiliser un plugin SEO type Yoast/RankMath qui génère automatiquement les breadcrumbs avec le balisage Schema.org. Si un plugin est utilisé, remplacer le bloc ci-dessus par le shortcode du plugin.
+
+> **Alternative recommandée** : Si Yoast SEO ou Rank Math est installé, utiliser leur bloc breadcrumb natif (`[wpseo_breadcrumb]` pour Yoast ou le bloc Rank Math) qui gère automatiquement la hiérarchie + le balisage Schema.org. Dans ce cas, le code ci-dessus sert de fallback si aucun plugin SEO n'est actif.
+
+---
+
 ## LES 8 TEMPLATES
 
 ### Vue d'ensemble
 
-| # | Fichier | Layout | Rôle | Pages concernées |
-|---|---|---|---|---|
-| 1 | `index.html` | default | Fallback obligatoire | Toute page sans template |
-| 2 | `front-page.html` | default | Homepage | Page d'accueil uniquement |
-| 3 | `page.html` | default | Pages full-width | Académie, Prépa, Nos Offres, Contact, Enseignants... |
-| 4 | `page-texte.html` | constrained 880px | Pages texte pur | CGV, Mentions légales, Confidentialité |
-| 5 | `single.html` | constrained 880px | Article de blog | Tous les articles |
-| 6 | `archive.html` | default | Archive blog | Blog, catégories, tags |
-| 7 | `404.html` | default | Page erreur | URLs introuvables |
-| 8 | `search.html` | default | Résultats recherche | Page de recherche |
+| # | Fichier | Layout | Rôle | Breadcrumbs | Pages concernées |
+|---|---|---|---|---|---|
+| 1 | `index.html` | default | Fallback obligatoire | ❌ | Toute page sans template |
+| 2 | `front-page.html` | default | Homepage | ❌ | Page d'accueil uniquement |
+| 3 | `page.html` | default | Pages full-width | ✅ | Académie, Prépa, Nos Offres, Contact, Enseignants... |
+| 4 | `page-texte.html` | constrained 880px | Pages texte pur | ✅ | CGV, Mentions légales, Confidentialité |
+| 5 | `single.html` | constrained 880px | Article de blog | ✅ | Tous les articles |
+| 6 | `archive.html` | default | Archive blog | ✅ | Blog, catégories, tags |
+| 7 | `404.html` | default | Page erreur | ❌ | URLs introuvables |
+| 8 | `search.html` | default | Résultats recherche | ✅ | Page de recherche |
 
 ### Pourquoi 2 templates de pages ?
 
@@ -59,7 +118,7 @@ Les blocs choisissent leur largeur via les alignements WordPress :
 
 ### 1. `index.html` — Fallback
 
-Template par défaut obligatoire. Affiche une grille d'articles.
+Template par défaut obligatoire. Affiche une grille d'articles. **Pas de breadcrumbs.**
 
 ```html
 <!-- wp:template-part {"slug":"header","area":"header"} /-->
@@ -102,7 +161,7 @@ Template par défaut obligatoire. Affiche une grille d'articles.
 
 ### 2. `front-page.html` — Homepage
 
-Page d'accueil. Le contenu est géré dans l'éditeur de la page définie dans Réglages > Lecture > Page d'accueil statique.
+Page d'accueil. **Pas de breadcrumbs** (c'est la racine).
 
 ```html
 <!-- wp:template-part {"slug":"header","area":"header"} /-->
@@ -124,10 +183,26 @@ Page d'accueil. Le contenu est géré dans l'éditeur de la page définie dans R
 
 ### 3. `page.html` — Pages full-width
 
-Template pour toutes les pages sauf les pages texte. Structurellement identique à `front-page.html` — WordPress les distingue automatiquement (front-page = page d'accueil, page = les autres).
+Template pour toutes les pages sauf les pages texte. **Breadcrumbs inclus.**
 
 ```html
 <!-- wp:template-part {"slug":"header","area":"header"} /-->
+
+<!-- wp:group {"layout":{"type":"constrained"},"style":{"spacing":{"padding":{"top":"var:preset|spacing|s","bottom":"0"}}}} -->
+<div class="wp-block-group">
+    <!-- wp:group {"layout":{"type":"flex","flexWrap":"nowrap","verticalAlignment":"center"},"style":{"spacing":{"blockGap":"4px"},"typography":{"fontSize":"13px"}}} -->
+    <div class="wp-block-group">
+        <!-- wp:paragraph {"style":{"color":{"text":"var:preset|color|text-muted"}}} -->
+        <p><a href="/" style="text-decoration:none;color:inherit">Accueil</a></p>
+        <!-- /wp:paragraph -->
+        <!-- wp:paragraph {"style":{"color":{"text":"var:preset|color|text-muted"}}} -->
+        <p>›</p>
+        <!-- /wp:paragraph -->
+        <!-- wp:post-title {"level":0,"style":{"color":{"text":"var:preset|color|text-dark"},"typography":{"fontSize":"13px","fontWeight":"500"}}} /-->
+    </div>
+    <!-- /wp:group -->
+</div>
+<!-- /wp:group -->
 
 <!-- wp:group {"tagName":"main","layout":{"type":"default"}} -->
 <main class="wp-block-group">
@@ -146,13 +221,25 @@ Template pour toutes les pages sauf les pages texte. Structurellement identique 
 
 ### 4. `page-texte.html` — Pages texte pur
 
-Template avec contenu contraint à 880px. Pour les pages de texte juridique.
+Template avec contenu contraint à 880px. **Breadcrumbs inclus.**
 
 ```html
 <!-- wp:template-part {"slug":"header","area":"header"} /-->
 
 <!-- wp:group {"tagName":"main","style":{"spacing":{"padding":{"top":"var:preset|spacing|xl","bottom":"var:preset|spacing|xl"}}},"layout":{"type":"constrained","contentSize":"880px"}} -->
 <main class="wp-block-group">
+
+    <!-- wp:group {"layout":{"type":"flex","flexWrap":"nowrap","verticalAlignment":"center"},"style":{"spacing":{"blockGap":"4px","margin":{"bottom":"var:preset|spacing|l"}},"typography":{"fontSize":"13px"}}} -->
+    <div class="wp-block-group">
+        <!-- wp:paragraph {"style":{"color":{"text":"var:preset|color|text-muted"}}} -->
+        <p><a href="/" style="text-decoration:none;color:inherit">Accueil</a></p>
+        <!-- /wp:paragraph -->
+        <!-- wp:paragraph {"style":{"color":{"text":"var:preset|color|text-muted"}}} -->
+        <p>›</p>
+        <!-- /wp:paragraph -->
+        <!-- wp:post-title {"level":0,"style":{"color":{"text":"var:preset|color|text-dark"},"typography":{"fontSize":"13px","fontWeight":"500"}}} /-->
+    </div>
+    <!-- /wp:group -->
 
     <!-- wp:post-title {"level":1} /-->
 
@@ -178,15 +265,41 @@ Template avec contenu contraint à 880px. Pour les pages de texte juridique.
 
 ### 5. `single.html` — Article de blog
 
-Template pour un article individuel. **Layout 2 colonnes** sur desktop : contenu principal (880px) + sidebar sticky (300px). Sur mobile, la sidebar passe sous le contenu. Les patterns bio auteur et articles liés sont en pleine largeur sous les 2 colonnes.
+Template pour un article individuel. **Breadcrumbs inclus** (Accueil → Blog → Catégorie → Titre).
 
 ```html
 <!-- wp:template-part {"slug":"header","area":"header"} /-->
 
+<!-- wp:group {"layout":{"type":"constrained","contentSize":"880px"},"style":{"spacing":{"padding":{"top":"var:preset|spacing|s","bottom":"0"}}}} -->
+<div class="wp-block-group">
+    <!-- wp:group {"layout":{"type":"flex","flexWrap":"nowrap","verticalAlignment":"center"},"style":{"spacing":{"blockGap":"4px"},"typography":{"fontSize":"13px"}}} -->
+    <div class="wp-block-group">
+        <!-- wp:paragraph {"style":{"color":{"text":"var:preset|color|text-muted"}}} -->
+        <p><a href="/" style="text-decoration:none;color:inherit">Accueil</a></p>
+        <!-- /wp:paragraph -->
+        <!-- wp:paragraph {"style":{"color":{"text":"var:preset|color|text-muted"}}} -->
+        <p>›</p>
+        <!-- /wp:paragraph -->
+        <!-- wp:paragraph {"style":{"color":{"text":"var:preset|color|text-muted"}}} -->
+        <p><a href="/blog" style="text-decoration:none;color:inherit">Blog</a></p>
+        <!-- /wp:paragraph -->
+        <!-- wp:paragraph {"style":{"color":{"text":"var:preset|color|text-muted"}}} -->
+        <p>›</p>
+        <!-- /wp:paragraph -->
+        <!-- wp:post-terms {"term":"category","style":{"typography":{"fontSize":"13px"},"color":{"text":"var:preset|color|text-muted"}},"isLink":true} /-->
+        <!-- wp:paragraph {"style":{"color":{"text":"var:preset|color|text-muted"}}} -->
+        <p>›</p>
+        <!-- /wp:paragraph -->
+        <!-- wp:post-title {"level":0,"style":{"color":{"text":"var:preset|color|text-dark"},"typography":{"fontSize":"13px","fontWeight":"500"}}} /-->
+    </div>
+    <!-- /wp:group -->
+</div>
+<!-- /wp:group -->
+
 <!-- wp:group {"tagName":"main","layout":{"type":"default"}} -->
 <main class="wp-block-group">
 
-    <!-- wp:group {"layout":{"type":"constrained","contentSize":"1200px"},"style":{"spacing":{"padding":{"top":"var:preset|spacing|xl","bottom":"var:preset|spacing|l"}}}} -->
+    <!-- wp:group {"layout":{"type":"constrained","contentSize":"880px"},"style":{"spacing":{"padding":{"top":"var:preset|spacing|xl","bottom":"var:preset|spacing|l"}}}} -->
     <div class="wp-block-group">
 
         <!-- wp:group {"style":{"spacing":{"blockGap":"var:preset|spacing|xs"}},"layout":{"type":"flex","flexWrap":"nowrap"}} -->
@@ -210,38 +323,13 @@ Template pour un article individuel. **Layout 2 colonnes** sur desktop : contenu
 
         <!-- wp:post-featured-image {"style":{"border":{"radius":"12px"},"spacing":{"margin":{"bottom":"var:preset|spacing|l"}}}} /-->
 
-        <!-- wp:columns {"style":{"spacing":{"blockGap":"var:preset|spacing|xl"}}} -->
-        <div class="wp-block-columns">
+        <!-- wp:post-content {"layout":{"type":"constrained","contentSize":"880px"}} /-->
 
-            <!-- wp:column {"width":"880px"} -->
-            <div class="wp-block-column" style="flex-basis:880px">
-
-                <!-- wp:post-content {"layout":{"type":"constrained","contentSize":"880px"}} /-->
-
-                <!-- wp:group {"style":{"spacing":{"padding":{"top":"var:preset|spacing|l"}}},"layout":{"type":"flex","flexWrap":"wrap"}} -->
-                <div class="wp-block-group">
-                    <!-- wp:post-terms {"term":"post_tag","style":{"typography":{"fontSize":"13px"}}} /-->
-                </div>
-                <!-- /wp:group -->
-
-            </div>
-            <!-- /wp:column -->
-
-            <!-- wp:column {"width":"300px","className":"sidebar-sticky"} -->
-            <div class="wp-block-column sidebar-sticky" style="flex-basis:300px">
-
-                <!-- wp:group {"style":{"position":{"type":"sticky","top":"100px"},"spacing":{"blockGap":"var:preset|spacing|l"}}} -->
-                <div class="wp-block-group">
-                    <!-- Le bloc jurible/newsletter est inséré ici par le rédacteur -->
-                    <!-- wp:pattern {"slug":"jurible/commerce-03-cta-cross-sell"} /-->
-                </div>
-                <!-- /wp:group -->
-
-            </div>
-            <!-- /wp:column -->
-
+        <!-- wp:group {"style":{"spacing":{"padding":{"top":"var:preset|spacing|l"}}},"layout":{"type":"flex","flexWrap":"wrap"}} -->
+        <div class="wp-block-group">
+            <!-- wp:post-terms {"term":"post_tag","style":{"typography":{"fontSize":"13px"}}} /-->
         </div>
-        <!-- /wp:columns -->
+        <!-- /wp:group -->
 
     </div>
     <!-- /wp:group -->
@@ -260,21 +348,34 @@ Template pour un article individuel. **Layout 2 colonnes** sur desktop : contenu
 <!-- wp:template-part {"slug":"footer","area":"footer"} /-->
 ```
 
-> **Layout** : 2 colonnes sur desktop (880px + 300px), 1 colonne sur mobile (sidebar sous le contenu)
-> **Sidebar sticky** : Le bloc newsletter (`jurible/newsletter`) + CTA Académie (`commerce/03-cta-cross-sell`) suivent le scroll
 > **Patterns intégrés au template** :
-> - [`equipe/05-bio-auteur`](../assets/patterns/equipe/05-bio-auteur.html) — Card bio de l'auteur
+> - [`equipe/05-bio-auteur`](../assets/patterns/equipe/05-bio-auteur.html) — Card bio de l'auteur (existant, renommé depuis C04)
 > - [`structure/04-articles-lies`](../assets/patterns/structure/04-articles-lies.html) — 3 articles recommandés
-> **Note dev** : Le bloc `jurible/newsletter` doit fonctionner en largeur 300px. Vérifier et adapter si nécessaire.
 
 ---
 
 ### 6. `archive.html` — Archive blog
 
-Template pour la page blog principale, les catégories et les tags. Query Loop en grille 3 colonnes avec pagination.
+Template pour la page blog principale, les catégories et les tags. **Breadcrumbs inclus.**
 
 ```html
 <!-- wp:template-part {"slug":"header","area":"header"} /-->
+
+<!-- wp:group {"layout":{"type":"constrained"},"style":{"spacing":{"padding":{"top":"var:preset|spacing|s","bottom":"0"}}}} -->
+<div class="wp-block-group">
+    <!-- wp:group {"layout":{"type":"flex","flexWrap":"nowrap","verticalAlignment":"center"},"style":{"spacing":{"blockGap":"4px"},"typography":{"fontSize":"13px"}}} -->
+    <div class="wp-block-group">
+        <!-- wp:paragraph {"style":{"color":{"text":"var:preset|color|text-muted"}}} -->
+        <p><a href="/" style="text-decoration:none;color:inherit">Accueil</a></p>
+        <!-- /wp:paragraph -->
+        <!-- wp:paragraph {"style":{"color":{"text":"var:preset|color|text-muted"}}} -->
+        <p>›</p>
+        <!-- /wp:paragraph -->
+        <!-- wp:query-title {"type":"archive","style":{"color":{"text":"var:preset|color|text-dark"},"typography":{"fontSize":"13px","fontWeight":"500"}}} /-->
+    </div>
+    <!-- /wp:group -->
+</div>
+<!-- /wp:group -->
 
 <!-- wp:group {"tagName":"main","layout":{"type":"default"}} -->
 <main class="wp-block-group">
@@ -336,6 +437,8 @@ Template pour la page blog principale, les catégories et les tags. Query Loop e
 
 ### 7. `404.html` — Page erreur
 
+**Pas de breadcrumbs** (la page n'existe pas dans l'arborescence).
+
 ```html
 <!-- wp:template-part {"slug":"header","area":"header"} /-->
 
@@ -356,8 +459,28 @@ Template pour la page blog principale, les catégories et les tags. Query Loop e
 
 ### 8. `search.html` — Résultats de recherche
 
+**Breadcrumbs inclus.**
+
 ```html
 <!-- wp:template-part {"slug":"header","area":"header"} /-->
+
+<!-- wp:group {"layout":{"type":"constrained"},"style":{"spacing":{"padding":{"top":"var:preset|spacing|s","bottom":"0"}}}} -->
+<div class="wp-block-group">
+    <!-- wp:group {"layout":{"type":"flex","flexWrap":"nowrap","verticalAlignment":"center"},"style":{"spacing":{"blockGap":"4px"},"typography":{"fontSize":"13px"}}} -->
+    <div class="wp-block-group">
+        <!-- wp:paragraph {"style":{"color":{"text":"var:preset|color|text-muted"}}} -->
+        <p><a href="/" style="text-decoration:none;color:inherit">Accueil</a></p>
+        <!-- /wp:paragraph -->
+        <!-- wp:paragraph {"style":{"color":{"text":"var:preset|color|text-muted"}}} -->
+        <p>›</p>
+        <!-- /wp:paragraph -->
+        <!-- wp:paragraph {"style":{"color":{"text":"var:preset|color|text-dark"},"typography":{"fontWeight":"500"}}} -->
+        <p>Résultats de recherche</p>
+        <!-- /wp:paragraph -->
+    </div>
+    <!-- /wp:group -->
+</div>
+<!-- /wp:group -->
 
 <!-- wp:group {"tagName":"main","layout":{"type":"default"}} -->
 <main class="wp-block-group">
@@ -431,16 +554,16 @@ Template pour la page blog principale, les catégories et les tags. Query Loop e
 
 ## RÉSUMÉ
 
-| # | Fichier | Layout | Patterns intégrés | Pages |
-|---|---|---|---|---|
-| 1 | `index.html` | constrained | — | Fallback |
-| 2 | `front-page.html` | default (full-width) | — | Homepage |
-| 3 | `page.html` | default (full-width) | — | Toutes pages sauf texte |
-| 4 | `page-texte.html` | constrained 880px | — | CGV, Mentions, Confidentialité |
-| 5 | `single.html` | 2 colonnes (880px + sidebar 300px) | `equipe/05-bio-auteur` + `structure/04-articles-lies` + `commerce/03-cta-cross-sell` + bloc `jurible/newsletter` | Articles blog |
-| 6 | `archive.html` | default | `hero/05-archive-blog` | Blog, catégories, tags |
-| 7 | `404.html` | default | `structure/06-page-404` | Page 404 |
-| 8 | `search.html` | default | — | Recherche |
+| # | Fichier | Layout | Breadcrumbs | Patterns intégrés | Pages |
+|---|---|---|---|---|---|
+| 1 | `index.html` | constrained | ❌ | — | Fallback |
+| 2 | `front-page.html` | default (full-width) | ❌ | — | Homepage |
+| 3 | `page.html` | default (full-width) | ✅ | — | Toutes pages sauf texte |
+| 4 | `page-texte.html` | constrained 880px | ✅ | — | CGV, Mentions, Confidentialité |
+| 5 | `single.html` | constrained 880px | ✅ | `equipe/05-bio-auteur` + `structure/04-articles-lies` | Articles blog |
+| 6 | `archive.html` | default | ✅ | `hero/05-archive-blog` | Blog, catégories, tags |
+| 7 | `404.html` | default | ❌ | `structure/06-page-404` | Page 404 |
+| 8 | `search.html` | default | ✅ | — | Recherche |
 
 ## TEMPLATE PARTS REQUIS
 
