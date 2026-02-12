@@ -1,0 +1,788 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jurible — Mockup Dashboard (visuel hero)</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bordeaux: #B0001D;
+    --violet: #7C3AED;
+    --violet-light: #EDE9FE;
+    --text-dark: #1A1A1A;
+    --text-gray: #4A4A4A;
+    --text-muted: #9CA3AF;
+    --white: #FFFFFF;
+    --bg-light: #FAFAFA;
+    --bg-card: #FFFFFF;
+    --shadow-sm: 0 1px 3px rgba(0,0,0,0.06);
+    --shadow-md: 0 4px 16px rgba(0,0,0,0.08);
+    --shadow-lg: 0 12px 40px rgba(0,0,0,0.12);
+    --shadow-xl: 0 24px 60px rgba(0,0,0,0.15);
+    --radius: 16px;
+    --radius-sm: 10px;
+    --radius-xs: 6px;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Poppins', sans-serif;
+    background: transparent;
+    color: var(--text-dark);
+    overflow-x: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 60px 40px;
+  }
+
+  /* ═══════════════════════════════════════════ */
+  /* DASHBOARD VISUAL WRAPPER                    */
+  /* ═══════════════════════════════════════════ */
+  .hero-visual {
+    position: relative;
+    perspective: 1200px;
+    max-width: 640px;
+    width: 100%;
+    opacity: 0;
+    animation: fadeInSlow 1s 0.3s forwards;
+  }
+
+  .dashboard-wrapper {
+    position: relative;
+    transform: rotateY(-4deg) rotateX(2deg);
+    transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .hero-visual:hover .dashboard-wrapper {
+    transform: rotateY(-1deg) rotateX(0.5deg);
+  }
+
+  /* Main Dashboard */
+  .dashboard {
+    background: var(--bg-card);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-xl);
+    overflow: hidden;
+    border: 1px solid rgba(0,0,0,0.06);
+  }
+
+  /* Dashboard Top Bar */
+  .dash-topbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 14px 20px;
+    border-bottom: 1px solid #F3F4F6;
+    background: #FCFCFD;
+  }
+
+  .dash-topbar-left {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .dash-logo {
+    width: 26px;
+    height: 26px;
+    background: linear-gradient(135deg, var(--violet) 0%, var(--bordeaux) 100%);
+    border-radius: 7px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-weight: 700;
+    font-size: 13px;
+  }
+
+  .dash-brand {
+    font-weight: 600;
+    font-size: 14px;
+    color: var(--text-dark);
+  }
+
+  .dash-nav {
+    display: flex;
+    gap: 4px;
+  }
+
+  .dash-nav-item {
+    font-size: 11.5px;
+    padding: 5px 10px;
+    border-radius: 6px;
+    color: var(--text-muted);
+    font-weight: 500;
+    cursor: default;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+
+  .dash-nav-item.active {
+    background: var(--violet-light);
+    color: var(--violet);
+  }
+
+  .dash-topbar-right {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .dash-action-btn {
+    width: 28px;
+    height: 28px;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    background: transparent;
+    border: 1px solid #F3F4F6;
+    cursor: default;
+  }
+
+  .dash-user {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #C4B5FD 0%, #7C3AED 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 11px;
+    font-weight: 600;
+    color: white;
+  }
+
+  /* Dashboard Body */
+  .dash-body {
+    display: grid;
+    grid-template-columns: 190px 1fr;
+    min-height: 320px;
+  }
+
+  /* Sidebar */
+  .dash-sidebar {
+    background: #F9FAFB;
+    border-right: 1px solid #F3F4F6;
+    padding: 16px 12px;
+  }
+
+  .dash-sidebar-title {
+    font-size: 10px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    color: var(--text-muted);
+    margin-bottom: 10px;
+    padding-left: 8px;
+  }
+
+  .dash-sidebar-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 7px 8px;
+    border-radius: 7px;
+    font-size: 11.5px;
+    color: var(--text-gray);
+    font-weight: 400;
+    margin-bottom: 2px;
+    cursor: default;
+    transition: all 0.2s;
+  }
+
+  .dash-sidebar-item.active {
+    background: var(--white);
+    color: var(--violet);
+    font-weight: 500;
+    box-shadow: var(--shadow-sm);
+  }
+
+  .dash-sidebar-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  .dash-sidebar-section {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 7px 8px;
+    font-size: 10px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    color: var(--text-muted);
+    cursor: default;
+  }
+
+  .dash-sidebar-section span {
+    font-size: 11px;
+    color: #D1D5DB;
+  }
+
+  /* Main Content */
+  .dash-main {
+    padding: 18px 20px;
+  }
+
+  .dash-welcome {
+    margin-bottom: 16px;
+  }
+
+  .dash-welcome h3 {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--text-dark);
+    margin-bottom: 3px;
+  }
+
+  .dash-welcome p {
+    font-size: 11.5px;
+    color: var(--text-muted);
+  }
+
+  /* Stats Row */
+  .dash-stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    margin-bottom: 16px;
+  }
+
+  .dash-stat {
+    background: var(--bg-light);
+    border-radius: var(--radius-sm);
+    padding: 12px;
+    border: 1px solid #F3F4F6;
+  }
+
+  .dash-stat-label {
+    font-size: 10px;
+    color: var(--text-muted);
+    font-weight: 500;
+    margin-bottom: 4px;
+  }
+
+  .dash-stat-value {
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--text-dark);
+    line-height: 1;
+  }
+
+  .dash-stat-change {
+    font-size: 10px;
+    color: #10B981;
+    font-weight: 500;
+    margin-top: 3px;
+  }
+
+  /* Course Card */
+  .dash-course {
+    background: var(--bg-light);
+    border-radius: var(--radius-sm);
+    padding: 12px;
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    border: 1px solid #F3F4F6;
+  }
+
+  .dash-course-thumb {
+    width: 80px;
+    height: 52px;
+    border-radius: var(--radius-xs);
+    background: linear-gradient(135deg, var(--violet) 0%, #8B5CF6 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .dash-course-thumb::after {
+    content: '▶';
+    color: white;
+    font-size: 16px;
+    opacity: 0.9;
+  }
+
+  .dash-course-info { flex: 1; min-width: 0; }
+
+  .dash-course-title {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--text-dark);
+    margin-bottom: 4px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .dash-course-meta {
+    font-size: 10px;
+    color: var(--text-muted);
+    margin-bottom: 6px;
+  }
+
+  .dash-progress-bar {
+    width: 100%;
+    height: 4px;
+    background: #E5E7EB;
+    border-radius: 2px;
+    overflow: hidden;
+  }
+
+  .dash-progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--violet), #8B5CF6);
+    border-radius: 2px;
+    width: 0%;
+    transition: width 1.5s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  /* ═══════════════════════════════════════════ */
+  /* FLOATING CARDS                              */
+  /* ═══════════════════════════════════════════ */
+  .float-card {
+    position: absolute;
+    background: var(--bg-card);
+    border-radius: var(--radius-sm);
+    box-shadow: var(--shadow-lg);
+    border: 1px solid rgba(0,0,0,0.05);
+    z-index: 10;
+    opacity: 0;
+    transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .float-card:hover {
+    transform: translateY(-4px) scale(1.02) !important;
+  }
+
+  /* QCM Card */
+  .float-qcm {
+    top: -20px;
+    right: -30px;
+    padding: 14px 16px;
+    width: 210px;
+    animation: floatIn1 0.8s 0.7s cubic-bezier(0.22, 1, 0.36, 1) forwards, floatIdle1 4s 2s ease-in-out infinite;
+  }
+
+  .float-qcm-title {
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--text-dark);
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .float-qcm-title::before { content: '🧠'; font-size: 13px; }
+
+  .float-qcm-option {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 8px;
+    border-radius: 6px;
+    font-size: 10.5px;
+    color: var(--text-gray);
+    margin-bottom: 3px;
+    background: var(--bg-light);
+    border: 1px solid #F3F4F6;
+    cursor: default;
+  }
+
+  .float-qcm-option.correct {
+    background: #ECFDF5;
+    border-color: #A7F3D0;
+    color: #065F46;
+  }
+
+  .float-qcm-radio {
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    border: 2px solid #D1D5DB;
+    flex-shrink: 0;
+  }
+
+  .float-qcm-option.correct .float-qcm-radio {
+    border-color: #10B981;
+    background: #10B981;
+    position: relative;
+  }
+
+  .float-qcm-option.correct .float-qcm-radio::after {
+    content: '✓';
+    color: white;
+    font-size: 9px;
+    font-weight: 700;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  /* Flashcard — Real design */
+  .float-flash {
+    bottom: 30px;
+    right: -40px;
+    padding: 0;
+    width: 210px;
+    overflow: hidden;
+    animation: floatIn2 0.8s 1s cubic-bezier(0.22, 1, 0.36, 1) forwards, floatIdle2 5s 2.5s ease-in-out infinite;
+  }
+
+  .float-flash-header {
+    background: linear-gradient(135deg, var(--bordeaux) 0%, var(--violet) 100%);
+    padding: 8px 12px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .float-flash-header-label {
+    font-size: 9px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    color: rgba(255,255,255,0.9);
+  }
+
+  .float-flash-header-count {
+    font-size: 9px;
+    font-weight: 500;
+    color: rgba(255,255,255,0.7);
+  }
+
+  .float-flash-question {
+    padding: 12px;
+    text-align: center;
+  }
+
+  .float-flash-q {
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--text-dark);
+    line-height: 1.4;
+    margin-bottom: 6px;
+  }
+
+  .float-flash-hint {
+    font-size: 9px;
+    color: var(--text-muted);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+  }
+
+  .float-flash-hint::before { content: '👆'; font-size: 10px; }
+
+  .float-flash-answer {
+    background: #F9FAFB;
+    border-top: 1px solid #F3F4F6;
+    padding: 10px 12px;
+  }
+
+  .float-flash-answer-label {
+    font-size: 8px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    color: var(--violet);
+    margin-bottom: 5px;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+
+  .float-flash-answer-label::before { content: '💡'; font-size: 9px; }
+
+  .float-flash-a {
+    font-size: 10px;
+    color: var(--text-gray);
+    line-height: 1.45;
+  }
+
+  .float-flash-a strong { color: var(--text-dark); }
+
+  /* Note/Grade card */
+  .float-grade {
+    top: 60px;
+    left: -40px;
+    padding: 14px 16px;
+    width: 160px;
+    animation: floatIn3 0.8s 1.3s cubic-bezier(0.22, 1, 0.36, 1) forwards, floatIdle3 4.5s 3s ease-in-out infinite;
+  }
+
+  .float-grade-icon {
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+    background: linear-gradient(135deg, #FDE68A, #F59E0B);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    margin-bottom: 8px;
+  }
+
+  .float-grade-label {
+    font-size: 10px;
+    color: var(--text-muted);
+    font-weight: 500;
+    margin-bottom: 2px;
+  }
+
+  .float-grade-value {
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--text-dark);
+    line-height: 1;
+  }
+
+  .float-grade-sub {
+    font-size: 10px;
+    color: #10B981;
+    font-weight: 500;
+    margin-top: 4px;
+  }
+
+  /* ═══════════════════════════════════════════ */
+  /* ANIMATIONS                                  */
+  /* ═══════════════════════════════════════════ */
+  @keyframes fadeInSlow { to { opacity: 1; } }
+
+  @keyframes floatIn1 {
+    from { opacity: 0; transform: translateY(20px) translateX(10px) scale(0.95); }
+    to { opacity: 1; transform: translateY(0) translateX(0) scale(1); }
+  }
+
+  @keyframes floatIn2 {
+    from { opacity: 0; transform: translateY(20px) translateX(-10px) scale(0.95); }
+    to { opacity: 1; transform: translateY(0) translateX(0) scale(1); }
+  }
+
+  @keyframes floatIn3 {
+    from { opacity: 0; transform: translateY(15px) translateX(10px) scale(0.95); }
+    to { opacity: 1; transform: translateY(0) translateX(0) scale(1); }
+  }
+
+  @keyframes floatIdle1 { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-6px); } }
+  @keyframes floatIdle2 { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
+  @keyframes floatIdle3 { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-5px); } }
+
+  /* ═══════════════════════════════════════════ */
+  /* RESPONSIVE                                  */
+  /* ═══════════════════════════════════════════ */
+  @media (max-width: 640px) {
+    body { padding: 40px 20px; }
+    .dash-body { grid-template-columns: 1fr; }
+    .dash-sidebar { display: none; }
+    .float-card { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- VISUEL SEUL — À insérer dans le slot "visuel" du pattern hero -->
+<div class="hero-visual" id="heroVisual">
+  <div class="dashboard-wrapper" id="dashWrapper">
+
+    <!-- Floating QCM Card -->
+    <div class="float-card float-qcm" data-parallax-speed="0.03">
+      <div class="float-qcm-title">QCM — Droit civil</div>
+      <div class="float-qcm-option">
+        <div class="float-qcm-radio"></div>
+        Le dol est un vice du consentement
+      </div>
+      <div class="float-qcm-option correct">
+        <div class="float-qcm-radio"></div>
+        L'erreur sur la substance est toujours excusable
+      </div>
+      <div class="float-qcm-option">
+        <div class="float-qcm-radio"></div>
+        La violence économique n'est pas reconnue
+      </div>
+    </div>
+
+    <!-- Floating Flashcard -->
+    <div class="float-card float-flash" data-parallax-speed="-0.04">
+      <div class="float-flash-header">
+        <span class="float-flash-header-label">Question</span>
+        <span class="float-flash-header-count">1 / 10</span>
+      </div>
+      <div class="float-flash-question">
+        <div class="float-flash-q">Quels sont les quatre caractères de la règle de droit ?</div>
+        <div class="float-flash-hint">Cliquez pour voir la réponse</div>
+      </div>
+      <div class="float-flash-answer">
+        <div class="float-flash-answer-label">Réponse</div>
+        <div class="float-flash-a">La règle de droit est <strong>générale</strong>, <strong>impersonnelle</strong>, <strong>obligatoire</strong> et <strong>coercitive</strong>.</div>
+      </div>
+    </div>
+
+    <!-- Floating Grade Card -->
+    <div class="float-card float-grade" data-parallax-speed="0.025">
+      <div class="float-grade-icon">🏆</div>
+      <div class="float-grade-label">Dernier partiel</div>
+      <div class="float-grade-value" id="gradeCounter">15<span style="font-size:14px;color:var(--text-muted)">/20</span></div>
+      <div class="float-grade-sub">↑ +3 pts vs dernier semestre</div>
+    </div>
+
+    <!-- Main Dashboard -->
+    <div class="dashboard">
+      <div class="dash-topbar">
+        <div class="dash-topbar-left">
+          <div class="dash-logo">J</div>
+          <span class="dash-brand">Jurible</span>
+        </div>
+        <div class="dash-nav">
+          <div class="dash-nav-item active"><span>🏠</span> Accueil</div>
+          <div class="dash-nav-item"><span>🎓</span> Cours</div>
+          <div class="dash-nav-item"><span>🤖</span> Outils IA</div>
+          <div class="dash-nav-item"><span>💬</span> Communauté</div>
+        </div>
+        <div class="dash-topbar-right">
+          <div class="dash-action-btn">🌙</div>
+          <div class="dash-action-btn">🔍</div>
+          <div class="dash-user">ML</div>
+        </div>
+      </div>
+
+      <div class="dash-body">
+        <!-- Sidebar -->
+        <div class="dash-sidebar">
+          <div class="dash-sidebar-title">Matières L1</div>
+          <div class="dash-sidebar-item active">
+            <div class="dash-sidebar-dot" style="background:#7C3AED;"></div>
+            Droit constitutionnel
+          </div>
+          <div class="dash-sidebar-item">
+            <div class="dash-sidebar-dot" style="background:#3B82F6;"></div>
+            Droit de la famille
+          </div>
+          <div class="dash-sidebar-item">
+            <div class="dash-sidebar-dot" style="background:#16A34A;"></div>
+            Introduction au droit
+          </div>
+          <div class="dash-sidebar-item">
+            <div class="dash-sidebar-dot" style="background:#F59E0B;"></div>
+            Droit des personnes
+          </div>
+          <div class="dash-sidebar-item">
+            <div class="dash-sidebar-dot" style="background:#EC4899;"></div>
+            Institutions juridictionnelles
+          </div>
+          <div class="dash-sidebar-section">Méthodologie <span>›</span></div>
+          <div class="dash-sidebar-section">Organisation <span>›</span></div>
+          <div class="dash-sidebar-section">Communauté <span>›</span></div>
+        </div>
+
+        <!-- Main -->
+        <div class="dash-main">
+          <div class="dash-welcome">
+            <h3>Bonjour Marie 👋</h3>
+            <p>Continuez votre progression en Droit constitutionnel</p>
+          </div>
+
+          <div class="dash-stats">
+            <div class="dash-stat">
+              <div class="dash-stat-label">Progression</div>
+              <div class="dash-stat-value" id="statProgress">67%</div>
+              <div class="dash-stat-change">↑ +12% ce mois</div>
+            </div>
+            <div class="dash-stat">
+              <div class="dash-stat-label">QCM réussis</div>
+              <div class="dash-stat-value" id="statQcm">84</div>
+              <div class="dash-stat-change">↑ 92% de bonnes réponses</div>
+            </div>
+            <div class="dash-stat">
+              <div class="dash-stat-label">Fiches lues</div>
+              <div class="dash-stat-value" id="statFiches">12</div>
+              <div class="dash-stat-change">sur 16 fiches</div>
+            </div>
+          </div>
+
+          <div class="dash-course">
+            <div class="dash-course-thumb"></div>
+            <div class="dash-course-info">
+              <div class="dash-course-title">La séparation des pouvoirs</div>
+              <div class="dash-course-meta">Leçon 8 · 18 min · Raphaël Briguet-Lamarre</div>
+              <div class="dash-progress-bar">
+                <div class="dash-progress-fill" id="progressBar"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  const heroVisual = document.getElementById('heroVisual');
+  const dashWrapper = document.getElementById('dashWrapper');
+  const floatCards = document.querySelectorAll('.float-card');
+
+  // Parallax on mouse move
+  document.addEventListener('mousemove', (e) => {
+    const x = (e.clientX / window.innerWidth - 0.5) * 2;
+    const y = (e.clientY / window.innerHeight - 0.5) * 2;
+    dashWrapper.style.transform = `rotateY(${-4 + x * 3}deg) rotateX(${2 + y * -2}deg)`;
+    floatCards.forEach(card => {
+      const speed = parseFloat(card.dataset.parallaxSpeed) || 0.02;
+      card.style.transform = `translate(${x * speed * 100}px, ${y * speed * 80}px)`;
+    });
+  });
+
+  // Animate on load
+  window.addEventListener('load', () => {
+    setTimeout(() => {
+      document.getElementById('progressBar').style.width = '67%';
+    }, 1500);
+    setTimeout(() => animateCounter('statProgress', 0, 67, '%'), 1000);
+    setTimeout(() => animateCounter('statQcm', 0, 84, ''), 1100);
+    setTimeout(() => animateCounter('statFiches', 0, 12, ''), 1200);
+  });
+
+  function animateCounter(id, start, end, suffix) {
+    const el = document.getElementById(id);
+    const duration = 1200;
+    const startTime = performance.now();
+    function update(currentTime) {
+      const elapsed = currentTime - startTime;
+      const progress = Math.min(elapsed / duration, 1);
+      const eased = 1 - Math.pow(1 - progress, 3);
+      el.textContent = Math.round(start + (end - start) * eased) + suffix;
+      if (progress < 1) requestAnimationFrame(update);
+    }
+    requestAnimationFrame(update);
+  }
+
+  // Scroll parallax
+  window.addEventListener('scroll', () => {
+    const scrollY = window.scrollY;
+    floatCards.forEach(card => {
+      const fadeStart = 100, fadeEnd = 400;
+      if (scrollY > fadeStart) {
+        card.style.opacity = Math.max(0, 1 - (scrollY - fadeStart) / (fadeEnd - fadeStart));
+      }
+    });
+  });
+</script>
+
+</body>
+</html>
